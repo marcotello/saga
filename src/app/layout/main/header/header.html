@@ -1,1 +1,16 @@
-<p>header works!</p>
+<header class="header">
+  <div class="header__left">
+    <span class="header__logo">Saga</span>
+    <!-- Add logo image here -->
+  </div>
+  <div class="header__right">
+    <input type="search" placeholder="Search books..." class="header__search" />
+    <a routerLink="/my-books" class="header__link">My Books</a>
+    @if (!isLoggedIn()) {
+      <a routerLink="/login" class="header__button" (click)="login()">Login</a>
+    } @else {
+      <a routerLink="/" class="header__button" (click)="logout()">Logout</a>
+    }
+  </div>
+</header>
+
