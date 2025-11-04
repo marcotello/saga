@@ -1,0 +1,58 @@
+/* Header layout leverages Pico defaults; scoped tweaks live here */
+.app-header {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #fff;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--pico-primary, #0d6efd);
+  color: #fff;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.app-name {
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.search-input {
+  min-width: 12rem;
+}
+
+.nav-links {
+  display: inline-flex;
+  list-style: none;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+/* Responsive behavior */
+@media (max-width: 767px) {
+  .app-header {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+  }
+
+  .search-input {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+}
+

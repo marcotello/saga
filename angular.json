@@ -31,7 +31,8 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/@picocss/pico/css/pico.min.css"
             ]
           },
           "configurations": {
@@ -89,7 +90,8 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/@picocss/pico/css/pico.min.css"
             ]
           }
         }

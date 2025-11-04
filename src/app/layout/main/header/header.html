@@ -1,1 +1,25 @@
-<p>header works!</p>
+<nav class="app-header" aria-label="Main Navigation">
+  <div class="brand">
+    <span class="logo" aria-hidden="true">S</span>
+    <a routerLink="/" class="app-name" aria-label="Go to home">Saga</a>
+  </div>
+
+  <input
+    type="search"
+    class="search-input"
+    placeholder="Search"
+    aria-label="Search"
+  />
+
+  <ul class="nav-links">
+    <li><a routerLink="/my-books">My Books</a></li>
+    <li>
+      <button *ngIf="!isLoggedIn()" routerLink="/login" class="contrast">
+        Login
+      </button>
+      <button *ngIf="isLoggedIn()" (click)="logout()" class="secondary">
+        Logout
+      </button>
+    </li>
+  </ul>
+</nav>
