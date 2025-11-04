@@ -1,0 +1,97 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--pico-background-color);
+  border-bottom: 1px solid var(--pico-border-color);
+  gap: 1rem;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.app-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--pico-primary);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.search-input {
+  min-width: 200px;
+}
+
+.my-books-link {
+  text-decoration: none;
+  color: var(--pico-primary);
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.login-button,
+.logout-button {
+  margin: 0;
+}
+
+// Responsive styles
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .header-right {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .search-input {
+    min-width: 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-container {
+    padding: 0.75rem;
+  }
+
+  .logo-container {
+    gap: 0.5rem;
+  }
+
+  .logo {
+    width: 24px;
+    height: 24px;
+  }
+
+  .app-name {
+    font-size: 1.25rem;
+  }
+
+  .header-right {
+    gap: 0.5rem;
+  }
+}
