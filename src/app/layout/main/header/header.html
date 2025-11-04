@@ -1,1 +1,29 @@
-<p>header works!</p>
+<nav class="container-fluid">
+  <ul>
+    <li>
+      <a href="/" class="brand">
+        <img src="/favicon.ico" alt="Saga Logo" class="logo" />
+        <strong>Saga</strong>
+      </a>
+    </li>
+  </ul>
+  <ul>
+    <li>
+      <input
+        type="search"
+        name="search"
+        placeholder="Search books..."
+        aria-label="Search"
+        class="search-input"
+      />
+    </li>
+  </ul>
+  <ul>
+    <li><a routerLink="/my-books">My Books</a></li>
+    @if (isLoggedIn()) {
+      <li><button (click)="logout()" type="button">Logout</button></li>
+    } @else {
+      <li><a routerLink="/login" role="button">Login</a></li>
+    }
+  </ul>
+</nav>
