@@ -1,1 +1,17 @@
-<p>header works!</p>
+<header class="header">
+  <div class="header-left">
+    <div class="brand">
+      <img src="/favicon.ico" alt="Saga Logo" class="logo">
+      <span class="app-name">Saga</span>
+    </div>
+  </div>
+  <div class="header-right">
+    <input type="search" placeholder="Search..." class="search-input">
+    <a routerLink="/my-books" class="my-books-link">My Books</a>
+    @if (!isLoggedIn()) {
+      <button routerLink="/login" class="login-btn">Login</button>
+    } @else {
+      <button class="logout-btn">Logout</button>
+    }
+  </div>
+</header>
