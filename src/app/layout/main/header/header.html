@@ -1,1 +1,27 @@
-<p>header works!</p>
+<header class="container">
+  <nav class="container">
+    <div class="row">
+      <div class="col">
+        <h1>
+          <a routerLink="/" class="contrast">
+            <img src="assets/logo.svg" alt="Saga Logo" width="32" height="32">
+            Saga
+          </a>
+        </h1>
+      </div>
+      <div class="col col-auto">
+        <input type="search" placeholder="Search...">
+      </div>
+      <div class="col col-auto">
+        <a routerLink="/my-books" class="secondary">My Books</a>
+      </div>
+      <div class="col col-auto">
+        @if (isLoggedIn()) {
+          <button (click)="logout()" class="outline">Logout</button>
+        } @else {
+          <a routerLink="/auth/login" class="outline">Login</a>
+        }
+      </div>
+    </div>
+  </nav>
+</header>

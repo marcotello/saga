@@ -1,0 +1,47 @@
+header {
+  padding: 1rem 0;
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+
+      a {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+
+        img {
+          vertical-align: middle;
+        }
+      }
+    }
+
+    input[type="search"] {
+      max-width: 200px;
+    }
+
+    > div {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  header nav {
+    flex-direction: column;
+    gap: 0.5rem;
+
+    > div {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+}

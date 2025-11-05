@@ -14,6 +14,10 @@ export const routes: Routes = [
           {
             path: 'landing',
             loadComponent: () => import('./features/landing/landing').then(m => m.Landing)
+          },
+          {
+            path: 'my-books',
+            loadComponent: () => import('./features/landing/landing').then(m => m.Landing) // TODO: Replace with actual my-books component
           }
         ]
       },
