@@ -9,5 +9,5 @@ import { RouterLink } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Header {
-  isLoggedIn = signal(false); // For now, hardcoded to false. In a real app, this would come from an auth service.
+  isLoggedIn = signal(false); 
 }
