@@ -41,6 +41,9 @@
   border-radius: var(--pico-border-radius);
   background-color: var(--pico-background-color);
   color: var(--pico-color);
+  min-width: 200px;
+  margin-bottom: 0;
+  height: 50px;
 }
 
 .my-books-link {
@@ -49,10 +52,11 @@
   padding: 0.5rem 1rem;
   border-radius: var(--pico-border-radius);
   transition: background-color 0.2s;
+  white-space: nowrap;
 }
 
 .my-books-link:hover {
-  color: var(--pico-text-inverse);
+  color: var(--pico-primary-hover-background);
 }
 
 .login-btn {
@@ -94,9 +98,6 @@
   .header-left,
   .header-right {
     width: 100%;
-  }
-
-  .header-right {
     justify-content: center;
   }
 
