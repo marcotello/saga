@@ -1,0 +1,62 @@
+footer {
+  // Base styles
+  background: #fff;
+  color: var(--pico-primary);
+  padding: 2rem;
+  
+  // Grid layout
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+  
+  // Desktop layout (≥1024px): 1fr 2fr 1fr
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+  
+  // Tablet layout (601-1023px): 1fr 1fr 1fr
+  @media (min-width: 601px) and (max-width: 1023px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  
+  // Mobile layout (≤600px): stacked
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  
+  // Column styles
+  .footer-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    
+    p {
+      margin: 0 0 0.5rem 0;
+    }
+  }
+  
+  // Link styles
+  a {
+    color: var(--pico-primary);
+    text-decoration: underline;
+    
+    &:hover,
+    &:focus {
+      opacity: 0.8;
+    }
+    
+    &:focus {
+      outline: 2px solid var(--pico-primary);
+      outline-offset: 2px;
+    }
+  }
+}
+

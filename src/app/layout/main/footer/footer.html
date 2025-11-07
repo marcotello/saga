@@ -1,1 +1,25 @@
-<p>footer works!</p>
+<footer>
+  <div class="footer-column footer-logo">
+    <img 
+      [ngSrc]="logoSrc" 
+      [alt]="logoAlt"
+      width="120"
+      height="120"
+    />
+  </div>
+  
+  <div class="footer-column footer-illustration">
+    <img 
+      [ngSrc]="illustrationSrc" 
+      [alt]="illustrationAlt"
+      priority
+      width="925"
+      height="641"
+    />
+  </div>
+  
+  <div class="footer-column footer-text">
+    <p>Made with love for the Angular Community</p>
+    <a [href]="githubUrl" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+</footer>
