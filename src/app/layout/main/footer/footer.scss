@@ -1,0 +1,93 @@
+footer {
+  background: #fff;
+  color: var(--pico-primary);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  
+  // Three-column grid section
+  .footer-columns {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+    
+    // Desktop layout (≥1024px): 1fr 2fr 1fr
+    @media (min-width: 1024px) {
+      grid-template-columns: 1fr 2fr 1fr;
+    }
+    
+    // Tablet layout (601-1023px): 1fr 1fr 1fr
+    @media (min-width: 601px) and (max-width: 1023px) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    
+    // Mobile layout (≤600px): stacked
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+  
+  // Column styles
+  .footer-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+  
+  // Bottom section with text and link
+  .footer-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    
+    p {
+      margin: 0;
+
+      .footer-heart {
+        width: 25px;
+        height: auto;
+        margin-bottom: 4px;
+      }
+    }
+  }
+  
+  // Link styles
+  a {
+    color: var(--pico-primary);
+    text-decoration: underline;
+    
+    &:hover,
+    &:focus {
+        color: var(--pico-color-amber-400);
+    }
+    
+    &:focus {
+      outline-offset: 2px;
+    }
+
+    img {
+      width: 30px;
+      height: 30px;
+
+      &:hover,
+      &:focus {
+        filter: none;
+        filter: brightness(0) saturate(100%) invert(50%) sepia(90%) saturate(600%) hue-rotate(10deg) brightness(85%) contrast(97%);
+      }
+    }
+  }
+}
+
