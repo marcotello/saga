@@ -9,14 +9,15 @@ import { NgOptimizedImage } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Footer {
-  // Image source constants
+  
   readonly logoSrc = '/images/saga_logo_bottom.png';
   readonly illustrationSrc = '/images/reading2.svg';
+  readonly angularLogoSrc = '/images/LogoAngularity-Footer-light.png';
   
-  // Alt text constants
+  
   readonly logoAlt = 'Saga';
   readonly illustrationAlt = 'Saga - Book Tracker';
+  readonly angularLogoAlt = 'Angularity';
   
-  // GitHub repository URL
   readonly githubUrl = 'https://github.com/marcotello/saga';
 }
