@@ -3,5 +3,9 @@
 @import '@picocss/pico/css/pico.colors.min.css';
 
 html {
-  background-color: #f2f2f2;
+  background-color: var(--pico-color-slate-50);
+}
+
+body {
+  background-color: var(--pico-color-slate-50);
 }

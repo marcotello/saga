@@ -1,1 +1,158 @@
-<p>landing works!</p>
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>Discover Your Next Great Read</h1>
+        <p class="hero-description">
+          Saga helps you organize your reading life and find new literary adventures. Track your progress, 
+          discover books that match your taste, and build your perfect digital library.
+        </p>
+        <button class="cta-button" (click)="navigateToSignup()">
+          Sign Up Now - It's Free
+        </button>
+      </div>
+      <div class="hero-image">
+        <img src="images/reading4.svg" alt="Reading illustration" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section">
+  <div class="container">
+    <h2 class="section-title">All Your Books, Perfectly Organized</h2>
+    
+    <div class="features-grid">
+      <article class="feature-card">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+          </svg>
+        </div>
+        <h3>Track Your Progress</h3>
+        <p>See how far you are in any book, from page one to the final chapter.</p>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+        </div>
+        <h3>Find Any Book</h3>
+        <p>Search a vast library, read synopses, and check ratings instantly.</p>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          </svg>
+        </div>
+        <h3>Create Custom Bookshelves</h3>
+        <p>Organize your collection your way—by genre, author, or mood.</p>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+          </svg>
+        </div>
+        <h3>Manage Your Reading Status</h3>
+        <p>Easily mark books as 'Want to Read', 'Reading', or 'Finished'.</p>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+        </div>
+        <h3>Tag and Filter</h3>
+        <p>Add custom tags to find the exact book you're looking for.</p>
+      </article>
+
+      <article class="feature-card">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+        </div>
+        <h3>Rate and Review</h3>
+        <p>Share your thoughts and add personal comments to the books you've read.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section">
+  <div class="container">
+    <h2 class="section-title">Hear from Fellow Book Lovers</h2>
+    
+    <div class="testimonials-grid">
+      <article class="testimonial-card">
+        <p class="testimonial-text">
+          "Saga has completely transformed my reading habits. I've discovered so many amazing books 
+          through its recommendation engine. A must-have for any serious reader!"
+        </p>
+        <div class="testimonial-author">
+          <div class="author-avatar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <div class="author-info">
+            <div class="author-name">Alex Johnson</div>
+            <div class="author-title">Avid Reader</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="testimonial-card">
+        <p class="testimonial-text">
+          "I love how I can organize my virtual bookshelves. It's so satisfying to see all my read 
+          books in one place and my to-read list neatly arranged."
+        </p>
+        <div class="testimonial-author">
+          <div class="author-avatar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <div class="author-info">
+            <div class="author-name">Maria Garcia</div>
+            <div class="author-title">Book Club President</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="testimonial-card">
+        <p class="testimonial-text">
+          "The search and filter functions are incredibly powerful. Being able to tag books with my own 
+          system has made finding exactly what I'm in the mood for so much easier."
+        </p>
+        <div class="testimonial-author">
+          <div class="author-avatar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </div>
+          <div class="author-info">
+            <div class="author-name">David Chen</div>
+            <div class="author-title">Fantasy Enthusiast</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
