@@ -1,0 +1,196 @@
+/**
+ * Login component styles
+ * Leverages Pico CSS with minimal custom overrides
+ */
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: var(--pico-background-color);
+}
+
+.login-content {
+  max-width: 1200px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+}
+
+// Logo Section
+.logo-container {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-bottom: 1rem;
+
+  @media (min-width: 768px) {
+    grid-column: 1;
+    grid-row: 1;
+    text-align: left;
+    margin-bottom: 0;
+  }
+
+  img {
+    max-width: 200px;
+    height: auto;
+  }
+}
+
+// Illustration Section
+.illustration-container {
+  display: none;
+
+  @media (min-width: 768px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+// Form Section
+.form-container {
+  grid-column: 1 / -1;
+
+  @media (min-width: 768px) {
+    grid-column: 2;
+    grid-row: 1 / -1;
+  }
+
+  h1 {
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  .subtitle {
+    margin-bottom: 2rem;
+    color: var(--pico-muted-color);
+  }
+}
+
+// Error Banner
+.error-banner {
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  background-color: var(--pico-del-color);
+  color: var(--pico-contrast);
+  border-radius: var(--pico-border-radius);
+  border-left: 4px solid var(--pico-color-red-500, #dc2626);
+}
+
+// Form Fields
+.form-field {
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  input[aria-invalid='true'] {
+    border-color: var(--pico-color-red-500, #dc2626);
+    
+    &:focus {
+      border-color: var(--pico-color-red-500, #dc2626);
+      box-shadow: 0 0 0 0.2rem rgba(220, 38, 38, 0.25);
+    }
+  }
+}
+
+// Password Input Wrapper
+.password-input-wrapper {
+  position: relative;
+
+  input {
+    padding-right: 3rem;
+  }
+}
+
+// Password Toggle Button
+.password-toggle {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--pico-muted-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--pico-color);
+  }
+
+  &:focus {
+    outline: 2px solid var(--pico-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  svg {
+    display: block;
+  }
+}
+
+// Error Messages
+.error-message {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--pico-color-red-500, #dc2626);
+  font-size: 0.875rem;
+}
+
+// Primary Button
+.primary-button {
+  width: 100%;
+  margin-top: 1rem;
+  
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+// Signup Link
+.signup-link {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: var(--pico-muted-color);
+
+  a {
+    color: var(--pico-primary);
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+

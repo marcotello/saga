@@ -1,1 +1,143 @@
-<p>login works!</p>
+<div class="login-container">
+  <div class="login-content">
+    <!-- Logo -->
+    <div class="logo-container">
+      <img
+        ngSrc="images/saga_logo_bottom.png"
+        alt="Saga logo"
+        width="200"
+        height="60"
+        priority
+      />
+    </div>
+
+    <!-- Illustration -->
+    <div class="illustration-container">
+      <img
+        ngSrc="images/reading3.svg"
+        alt="Reading illustration"
+        width="300"
+        height="250"
+      />
+    </div>
+
+    <!-- Login Form -->
+    <div class="form-container">
+      <h1>Welcome Back</h1>
+      <p class="subtitle">Sign in to continue to your account</p>
+
+      <!-- Error Banner -->
+      @if (errorMessage()) {
+        <div class="error-banner" role="alert" aria-live="polite">
+          {{ errorMessage() }}
+        </div>
+      }
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+        <!-- Credential Field -->
+        <div class="form-field">
+          <label for="credential">Email or Username</label>
+          <input
+            type="text"
+            id="credential"
+            name="credential"
+            formControlName="credential"
+            placeholder="Enter your email or username"
+            autocomplete="off"
+            [attr.aria-invalid]="hasCredentialError() ? 'true' : null"
+            [attr.aria-describedby]="hasCredentialError() ? 'credential-error' : null"
+          />
+          @if (hasCredentialError()) {
+            <small id="credential-error" class="error-message" role="alert">
+              {{ getCredentialError() }}
+            </small>
+          }
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-field">
+          <label for="password">Password</label>
+          <div class="password-input-wrapper">
+            <input
+              [type]="getPasswordType()"
+              id="password"
+              name="password"
+              formControlName="password"
+              placeholder="Enter your password"
+              autocomplete="off"
+              [attr.aria-invalid]="hasPasswordError() ? 'true' : null"
+              [attr.aria-describedby]="hasPasswordError() ? 'password-error' : null"
+            />
+            <button
+              type="button"
+              class="password-toggle"
+              (click)="togglePasswordVisibility()"
+              [attr.aria-pressed]="passwordVisible()"
+              [attr.aria-label]="getPasswordToggleLabel()"
+              [title]="getPasswordToggleLabel()"
+            >
+              @if (passwordVisible()) {
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                  <line x1="1" y1="1" x2="23" y2="23"></line>
+                </svg>
+              } @else {
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              }
+            </button>
+          </div>
+          @if (hasPasswordError()) {
+            <small id="password-error" class="error-message" role="alert">
+              {{ getPasswordError() }}
+            </small>
+          }
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="primary-button"
+          [disabled]="isLoading()"
+          [attr.aria-busy]="isLoading() ? 'true' : null"
+        >
+          @if (isLoading()) {
+            <span>Signing in...</span>
+          } @else {
+            <span>Sign In</span>
+          }
+        </button>
+      </form>
+
+      <!-- Signup Link -->
+      <p class="signup-link">
+        Don't have an account?
+        <a routerLink="/auth/signup">Sign up</a>
+      </p>
+    </div>
+  </div>
+</div>
