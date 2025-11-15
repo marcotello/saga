@@ -4,7 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 import { LoginService } from './login-service';
 import { passwordStrength } from '../validators/auth-validators';
-import { ErrorEnvelope } from './login.models';
+import { ErrorEnvelope } from './login-models';
 
 @Component({
   selector: 'app-login',

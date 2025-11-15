@@ -4,7 +4,7 @@ import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { Login } from './login';
 import { AUTH_SERVICE, LoginService } from './login-service';
-import { AuthSuccessEnvelope, ErrorEnvelope } from './login.models';
+import { AuthSuccessEnvelope, ErrorEnvelope } from './login-models';
 
 describe('Login', () => {
   let component: Login;

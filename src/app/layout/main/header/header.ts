@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { LoginService } from '../../../features/auth/login/login-service';
 
 @Component({
   selector: 'app-header',
@@ -9,5 +10,13 @@ import { RouterLink } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Header {
-  isLoggedIn = signal(false); 
+  private readonly loginService = inject(LoginService);
+  private readonly router = inject(Router);
+
+  readonly isLoggedIn = this.loginService.isLoggedIn;
+
+  logout(): void {
+    this.loginService.logout();
+    this.router.navigate(['/landing']);
+  }
 }

@@ -1,5 +1,5 @@
 import { Injectable, signal, computed, inject, Signal } from '@angular/core';
-import { User, ErrorEnvelope, AuthSuccessEnvelope } from './login.models';
+import { User, ErrorEnvelope, AuthSuccessEnvelope } from './login-models';
 import { AuthHttpMockService } from '../services/auth-http-mock-service';
 import { Subscription } from 'rxjs';
 
@@ -15,12 +15,14 @@ export class LoginService {
   private readonly _expiresAt = signal<number | null>(null);
   private readonly _user = signal<User | null>(null);
   private readonly _error = signal<ErrorEnvelope | null>(null);
+  private readonly _isLoggedIn = signal<boolean>(false);
 
   readonly accessToken = this._accessToken.asReadonly();
   readonly tokenType = this._tokenType.asReadonly();
   readonly expiresAt = this._expiresAt.asReadonly();
   readonly user = this._user.asReadonly();
   readonly error = this._error.asReadonly();
+  readonly isLoggedIn = this._isLoggedIn.asReadonly();
 
   readonly isAuthenticated = computed(() => !!this._accessToken());
   readonly authHeader = computed(() => {
@@ -44,10 +46,11 @@ export class LoginService {
         });
 
         this._user.set(response.data.user);
+        this._isLoggedIn.set(true);
       },
       error: (error: unknown) => {
-        
         this._user.set(null);
+        this._isLoggedIn.set(false);
         
         if (this.isErrorEnvelope(error)) {
           this._error.set(error);
@@ -95,6 +98,7 @@ export class LoginService {
     this._expiresAt.set(null);
     this._user.set(null);
     this._error.set(null);
+    this._isLoggedIn.set(false);
   }
 }
 

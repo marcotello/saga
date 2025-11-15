@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import userData from '../../../mocks/users.json';
-import { User, ErrorEnvelope, AuthSuccessEnvelope } from '../login/login.models';
+import { User, ErrorEnvelope, AuthSuccessEnvelope } from '../login/login-models';
 import { Observable, of, throwError } from 'rxjs';
 
 @Injectable({
