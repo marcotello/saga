@@ -14,13 +14,15 @@
     <div class="form-container">
       <!-- Logo -->
       <div class="logo-container">
-        <img
-          ngSrc="images/saga_logo_full.png"
-          alt="Saga logo"
-          width="300"
-          height="60"
-          priority
-        />
+        <a routerLink="/landing">
+          <img
+            ngSrc="images/saga_logo_full.png"
+            alt="Saga logo"
+            width="300"
+            height="60"
+            [priority]="true"
+          />
+        </a>
       </div>
 
       <h1>Welcome Back</h1>
