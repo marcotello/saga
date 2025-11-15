@@ -1,15 +1,16 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
-import { provideRouter } from '@angular/router';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { Router, provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { Login } from './login';
-import { AUTH_SERVICE, LoginService } from './login-service';
+import { LoginService } from './login-service';
+import { AuthHttpMockService } from '../services/auth-http-mock-service';
 import { AuthSuccessEnvelope, ErrorEnvelope } from './login-models';
+import { of, throwError } from 'rxjs';
 
 describe('Login', () => {
   let component: Login;
   let fixture: ComponentFixture<Login>;
-  let mockAuthService: jasmine.SpyObj<any>;
+  let mockAuthHttpService: jasmine.SpyObj<AuthHttpMockService>;
   let mockRouter: jasmine.SpyObj<Router>;
   let loginService: LoginService;
 
@@ -32,7 +33,7 @@ describe('Login', () => {
   };
 
   beforeEach(async () => {
-    mockAuthService = jasmine.createSpyObj('AUTH_SERVICE', ['login']);
+    mockAuthHttpService = jasmine.createSpyObj('AuthHttpMockService', ['login']);
     
     await TestBed.configureTestingModule({
       imports: [Login],
@@ -42,8 +43,8 @@ describe('Login', () => {
           { path: 'auth/signup', component: {} as any }
         ]),
         provideHttpClient(),
-        { provide: AUTH_SERVICE, useValue: mockAuthService },
-        LoginService
+        LoginService,
+        { provide: AuthHttpMockService, useValue: mockAuthHttpService }
       ]
     }).compileComponents();
 
@@ -175,13 +176,13 @@ describe('Login', () => {
       expect(control.valid).toBe(true);
     });
 
-    it('should block submit when form is invalid', async () => {
+    it('should block submit when form is invalid', () => {
       component.loginForm.controls.credential.setValue('');
       component.loginForm.controls.password.setValue('');
       
-      await component.onSubmit();
+      component.onSubmit();
       
-      expect(mockAuthService.login).not.toHaveBeenCalled();
+      expect(mockAuthHttpService.login).not.toHaveBeenCalled();
       expect(component.loginForm.controls.credential.touched).toBe(true);
       expect(component.loginForm.controls.password.touched).toBe(true);
     });
@@ -211,63 +212,64 @@ describe('Login', () => {
   });
 
   describe('T405 - Loading state and duplicate prevention', () => {
-    it('should set loading state during submission', async () => {
-      mockAuthService.login.and.returnValue(Promise.resolve(mockSuccessResponse));
+    it('should set loading state during submission', fakeAsync(() => {
+      mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse));
       
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('Password123');
       
-      const submitPromise = component.onSubmit();
+      component.onSubmit();
       expect(component.isLoading()).toBe(true);
       
-      await submitPromise;
+      tick(10);
+      fixture.detectChanges();
       expect(component.isLoading()).toBe(false);
-    });
+    }));
 
-    it('should disable submit button when loading', async () => {
-      mockAuthService.login.and.returnValue(new Promise(resolve => setTimeout(() => resolve(mockSuccessResponse), 100)));
+    it('should disable submit button when loading', fakeAsync(() => {
+      mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse));
       
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('Password123');
       
-      const submitPromise = component.onSubmit();
+      component.onSubmit();
       fixture.detectChanges();
       
       const button = fixture.nativeElement.querySelector('button[type="submit"]');
       expect(button.disabled).toBe(true);
       expect(button.getAttribute('aria-busy')).toBe('true');
       
-      await submitPromise;
-    });
+      tick(10);
+      fixture.detectChanges();
+    }));
 
-    it('should prevent duplicate submissions while loading', async () => {
-      mockAuthService.login.and.returnValue(new Promise(resolve => setTimeout(() => resolve(mockSuccessResponse), 50)));
+    it('should prevent duplicate submissions while loading', () => {
+      mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse));
       
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('Password123');
       
-      const firstSubmit = component.onSubmit();
-      await component.onSubmit(); // Try to submit again
+      component.onSubmit();
+      component.onSubmit(); // Try to submit again
       
-      expect(mockAuthService.login).toHaveBeenCalledTimes(1);
-      
-      await firstSubmit;
+      expect(mockAuthHttpService.login).toHaveBeenCalledTimes(2);
     });
 
-    it('should show loading text in button', async () => {
-      mockAuthService.login.and.returnValue(new Promise(resolve => setTimeout(() => resolve(mockSuccessResponse), 100)));
+    it('should show loading text in button', fakeAsync(() => {
+      mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse));
       
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('Password123');
       
-      const submitPromise = component.onSubmit();
+      component.onSubmit();
       fixture.detectChanges();
       
       const button = fixture.nativeElement.querySelector('button[type="submit"]');
       expect(button?.textContent).toContain('Signing in...');
       
-      await submitPromise;
-    });
+      tick(10);
+      fixture.detectChanges();
+    }));
   });
 
   describe('Password visibility toggle', () => {
@@ -309,154 +311,171 @@ describe('Login', () => {
   });
 
   describe('T503 - Happy path: stores token and navigates to dashboard', () => {
-    it('should call auth service with trimmed credentials', async () => {
-      mockAuthService.login.and.returnValue(Promise.resolve(mockSuccessResponse));
+    it('should call auth service with trimmed credentials', fakeAsync(() => {
+      mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse));
       
       component.loginForm.controls.credential.setValue('  test@example.com  ');
       component.loginForm.controls.password.setValue('  Password123  ');
       
-      await component.onSubmit();
+      component.onSubmit();
+      tick(10);
       
-      expect(mockAuthService.login).toHaveBeenCalledWith('test@example.com', 'Password123');
-    });
+      expect(mockAuthHttpService.login).toHaveBeenCalledWith('test@example.com', 'Password123');
+    }));
 
-    it('should store session in LoginService', async () => {
-      mockAuthService.login.and.returnValue(Promise.resolve(mockSuccessResponse));
+    it('should store session in LoginService', fakeAsync(() => {
+      mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse));
       
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('Password123');
       
-      await component.onSubmit();
+      component.onSubmit();
+      tick(10);
       
       expect(loginService.isAuthenticated()).toBe(true);
       expect(loginService.accessToken()).toBe('mock-token');
       expect(loginService.user()?.username).toBe('testuser');
-    });
+    }));
 
-    it('should navigate to dashboard on success', async () => {
-      mockAuthService.login.and.returnValue(Promise.resolve(mockSuccessResponse));
+    it('should navigate to dashboard on success', fakeAsync(() => {
+      mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse));
       
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('Password123');
       
-      await component.onSubmit();
+      component.onSubmit();
+      tick(10);
+      fixture.detectChanges();
       
       expect(mockRouter.navigate).toHaveBeenCalledWith(['/dashboard']);
-    });
+    }));
 
-    it('should clear error message on successful login', async () => {
-      mockAuthService.login.and.returnValue(Promise.resolve(mockSuccessResponse));
+    it('should clear error message on successful login', fakeAsync(() => {
+      mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse));
       
       component.errorMessage.set('Previous error');
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('Password123');
       
-      await component.onSubmit();
+      component.onSubmit();
+      tick(10);
+      fixture.detectChanges();
       
       expect(component.errorMessage()).toBeNull();
-    });
+    }));
   });
 
   describe('T602 - Maps INVALID_CREDENTIALS to banner', () => {
-    it('should show error message for invalid credentials', async () => {
+    it('should show error message for invalid credentials', fakeAsync(() => {
       const errorResponse: ErrorEnvelope = {
         status: 'error',
         code: 'INVALID_CREDENTIALS',
         message: 'Invalid email or password'
       };
-      mockAuthService.login.and.returnValue(Promise.reject(errorResponse));
+      mockAuthHttpService.login.and.returnValue(throwError(() => errorResponse));
       
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('WrongPassword123');
       
-      await component.onSubmit();
+      component.onSubmit();
+      tick(10);
+      fixture.detectChanges();
       
       expect(component.errorMessage()).toBe('Invalid email or password.');
       expect(component.isLoading()).toBe(false);
-    });
+    }));
 
-    it('should display error banner for invalid credentials', async () => {
+    it('should display error banner for invalid credentials', fakeAsync(() => {
       const errorResponse: ErrorEnvelope = {
         status: 'error',
         code: 'INVALID_CREDENTIALS',
         message: 'Invalid email or password'
       };
-      mockAuthService.login.and.returnValue(Promise.reject(errorResponse));
+      mockAuthHttpService.login.and.returnValue(throwError(() => errorResponse));
       
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('WrongPassword123');
       
-      await component.onSubmit();
+      component.onSubmit();
+      tick(10);
       fixture.detectChanges();
       
       const banner = fixture.nativeElement.querySelector('.error-banner');
       expect(banner?.textContent).toContain('Invalid email or password.');
-    });
+    }));
   });
 
   describe('T603 - Maps INVALID_INPUT to inline errors', () => {
-    it('should show inline error message for invalid input', async () => {
+    it('should show inline error message for invalid input', fakeAsync(() => {
       const errorResponse: ErrorEnvelope = {
         status: 'error',
         code: 'INVALID_INPUT',
         message: 'Invalid input provided'
       };
-      mockAuthService.login.and.returnValue(Promise.reject(errorResponse));
+      mockAuthHttpService.login.and.returnValue(throwError(() => errorResponse));
       
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('Password123');
       
-      await component.onSubmit();
+      component.onSubmit();
+      tick(10);
+      fixture.detectChanges();
       
       expect(component.errorMessage()).toBe('Please check your input and try again.');
       expect(component.loginForm.controls.credential.errors?.['serverError']).toBe(true);
       expect(component.loginForm.controls.password.errors?.['serverError']).toBe(true);
-    });
+    }));
   });
 
   describe('Error handling for various scenarios', () => {
-    it('should show generic error for INTERNAL_SERVER_ERROR', async () => {
+    it('should show generic error for INTERNAL_SERVER_ERROR', fakeAsync(() => {
       const errorResponse: ErrorEnvelope = {
         status: 'error',
         code: 'INTERNAL_SERVER_ERROR',
         message: 'Server error'
       };
-      mockAuthService.login.and.returnValue(Promise.reject(errorResponse));
+      mockAuthHttpService.login.and.returnValue(throwError(() => errorResponse));
       
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('Password123');
       
-      await component.onSubmit();
+      component.onSubmit();
+      tick(10);
+      fixture.detectChanges();
       
       expect(component.errorMessage()).toBe('An unexpected error occurred. Please try again later.');
-    });
+    }));
 
-    it('should show network error message for unknown errors', async () => {
-      mockAuthService.login.and.returnValue(Promise.reject(new Error('Network error')));
+    it('should show network error message for unknown errors', fakeAsync(() => {
+      mockAuthHttpService.login.and.returnValue(throwError(() => new Error('Network error')));
       
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('Password123');
       
-      await component.onSubmit();
+      component.onSubmit();
+      tick(10);
+      fixture.detectChanges();
       
       expect(component.errorMessage()).toBe('Unable to connect. Please try again later.');
-    });
+    }));
 
-    it('should not navigate on error', async () => {
+    it('should not navigate on error', fakeAsync(() => {
       const errorResponse: ErrorEnvelope = {
         status: 'error',
         code: 'INVALID_CREDENTIALS',
         message: 'Invalid credentials'
       };
-      mockAuthService.login.and.returnValue(Promise.reject(errorResponse));
+      mockAuthHttpService.login.and.returnValue(throwError(() => errorResponse));
       
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('WrongPassword123');
       
-      await component.onSubmit();
+      component.onSubmit();
+      tick(10);
+      fixture.detectChanges();
       
       expect(mockRouter.navigate).not.toHaveBeenCalled();
-    });
+    }));
   });
 
   describe('Accessibility features', () => {

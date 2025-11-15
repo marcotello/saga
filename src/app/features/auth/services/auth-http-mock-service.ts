@@ -9,7 +9,9 @@ import { Observable, of, throwError } from 'rxjs';
 export class AuthHttpMockService {
 
   login(credential: string, password: string): Observable<AuthSuccessEnvelope> {
-    const foundUser = userData.find(user => user.email === credential && user.password === password);
+    const foundUser = userData.find(
+      user => user.email === credential || user.username === credential 
+      && user.password === password);
     
     if (!foundUser) {
       const error: ErrorEnvelope = {
