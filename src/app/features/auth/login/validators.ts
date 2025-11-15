@@ -1,19 +1,7 @@
-/**
- * Custom validators for login form
- * Aligned with specs/006-refactor-login/data-model.md validation rules
- */
-
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-/**
- * Password strength regex pattern
- * Must contain: at least 8 chars, one uppercase, one lowercase, one number
- */
 export const PASSWORD_STRENGTH_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,128}$/;
 
-/**
- * Validator for required fields that trims whitespace
- */
 export function credentialRequiredTrimmed(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
@@ -28,10 +16,6 @@ export function credentialRequiredTrimmed(): ValidatorFn {
   };
 }
 
-/**
- * Validator for password strength
- * Enforces: 8-128 chars, one uppercase, one lowercase, one number
- */
 export function passwordStrength(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
@@ -53,9 +37,6 @@ export function passwordStrength(): ValidatorFn {
   };
 }
 
-/**
- * Validator for maximum length
- */
 export function maxLength(max: number): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
@@ -65,7 +46,7 @@ export function maxLength(max: number): ValidatorFn {
     const trimmed = value.trim();
     if (trimmed.length > max) {
       return { 
-        maxlength: {
+        maxLength: {
           requiredLength: max,
           actualLength: trimmed.length
         }

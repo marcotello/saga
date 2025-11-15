@@ -5,8 +5,8 @@
       <img
         ngSrc="images/reading3.svg"
         alt="Reading illustration"
-        width="500"
-        height="500"
+        width="900"
+        height="900"
       />
     </div>
 
@@ -15,9 +15,9 @@
       <!-- Logo -->
       <div class="logo-container">
         <img
-          ngSrc="images/saga_logo_bottom.png"
+          ngSrc="images/saga_logo_full.png"
           alt="Saga logo"
-          width="200"
+          width="300"
           height="60"
           priority
         />
@@ -26,7 +26,6 @@
       <h1>Welcome Back</h1>
       <p class="subtitle">Sign in to continue to your account</p>
 
-      <!-- Error Banner -->
       @if (errorMessage()) {
         <div class="error-banner" role="alert" aria-live="polite">
           {{ errorMessage() }}
@@ -34,7 +33,6 @@
       }
 
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
-        <!-- Credential Field -->
         <div class="form-field">
           <label for="credential">Email or Username</label>
           <input
