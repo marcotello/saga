@@ -10,7 +10,7 @@ export class AuthHttpMockService {
 
   login(credential: string, password: string): Observable<AuthSuccessEnvelope> {
     const foundUser = userData.find(
-      user => user.email === credential || user.username === credential 
+      user => (user.email === credential || user.username === credential) 
       && user.password === password);
     
     if (!foundUser) {
