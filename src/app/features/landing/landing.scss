@@ -144,7 +144,7 @@
       margin: 0 auto 1.5rem;
       background-color: var(--pico-primary-focus);
       border-radius: 50%;
-      color: var(--pico-primary);
+      color: #0172ad;
 
       svg {
         width: 48px;
@@ -156,7 +156,7 @@
       font-size: 1.25rem;
       font-weight: 600;
       margin-bottom: 1rem;
-      color: var(--pico-color);
+      color: #424751;
     }
 
     p {
@@ -185,7 +185,7 @@
     font-weight: 700;
     text-align: center;
     margin-bottom: 3rem;
-    color: var(--pico-color);
+    color: #373c44;
 
     @media (max-width: 768px) {
       font-size: 1.875rem;

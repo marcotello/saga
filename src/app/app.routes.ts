@@ -1,5 +1,6 @@
-import { Routes } from '@angular/router';
-import { MainLayout } from './layout/main/main-layout/main-layout';
+import {Routes} from '@angular/router';
+import {MainLayout} from './layout/main/main-layout/main-layout';
+import {DashboardView} from "./features/dashboard/dashboard-view/dashboard-view";
 
 export const routes: Routes = [
     {
@@ -11,18 +12,22 @@ export const routes: Routes = [
         path: '',
         component: MainLayout,
         children: [
-          {
-            path: 'landing',
-            loadComponent: () => import('./features/landing/landing').then(m => m.Landing)
-          }
+            {
+                path: 'landing',
+                loadComponent: () => import('./features/landing/landing').then(m => m.Landing)
+            },
+            {
+                path: 'dashboard',
+                loadComponent: () => import('./features/dashboard/dashboard-view/dashboard-view').then(m => m.DashboardView)
+            },
         ]
-      },
-      {
+    },
+    {
         path: 'auth',
         loadChildren: () => import('./features/auth/auth.routes').then(m => m.authRoutes)
-      },
-      {
+    },
+    {
         path: '**',
         redirectTo: '/landing'
-      }
+    }
 ];
