@@ -1,0 +1,22 @@
+[
+    {
+      "id": 1,
+      "name": "John",
+      "lastName": "Smith",
+      "email": "johnsmith@saga.com",
+      "username": "johnsmith",
+      "password": "Password@123",
+      "bio": "I'm the admin",
+      "role": 1
+    },
+    {
+      "id": 2,
+      "name": "James",
+      "lastName": "Dixon",
+      "email": "jamesldixon@dayrep.com",
+      "username": "Teen1976",
+      "password": "meive4Lei",
+      "bio": "I love to read.",
+      "role": 2
+    }
+]

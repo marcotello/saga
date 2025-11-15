@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, effect } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
-import { AUTH_SERVICE, LoginService } from './login-service';
-import { LoginHttpService } from './login-http-service';
-import { credentialRequiredTrimmed, passwordStrength, maxLength } from './validators';
+import { LoginService } from './login-service';
+import { passwordStrength } from '../validators/auth-validators';
 import { ErrorEnvelope } from './login.models';
 
 @Component({
@@ -13,24 +12,46 @@ import { ErrorEnvelope } from './login.models';
   templateUrl: './login.html',
   styleUrl: './login.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    { provide: AUTH_SERVICE, useClass: LoginHttpService }
-  ]
 })
 export class Login {
   private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
-  private readonly authService = inject(AUTH_SERVICE);
   private readonly loginService = inject(LoginService);
 
   readonly isLoading = signal(false);
   readonly errorMessage = signal<string | null>(null);
   readonly passwordVisible = signal(false);
+  private readonly isSubmitting = signal(false);
 
   readonly loginForm = this.fb.nonNullable.group({
-    credential: ['', [credentialRequiredTrimmed(), Validators.max(254)]],
-    password: ['', [credentialRequiredTrimmed(), maxLength(128), passwordStrength()]]
+    credential: ['', [Validators.required, Validators.max(254)]],
+    password: ['', [Validators.required, Validators.max(128), passwordStrength()]]
   });
+
+  constructor() {
+    // Watch for login success/error from service
+    effect(() => {
+      if (!this.isSubmitting()) {
+        return;
+      }
+
+      const user = this.loginService.user();
+      const error = this.loginService.error();
+
+      if (user) {
+        // Login successful
+        this.isLoading.set(false);
+        this.isSubmitting.set(false);
+        this.errorMessage.set(null);
+        this.router.navigate(['/dashboard']);
+      } else if (error) {
+        // Login failed
+        this.isLoading.set(false);
+        this.isSubmitting.set(false);
+        this.handleLoginError(error);
+      }
+    });
+  }
 
   togglePasswordVisibility(): void {
     this.passwordVisible.update(visible => !visible);
@@ -44,7 +65,7 @@ export class Login {
     return this.passwordVisible() ? 'Hide password' : 'Show password';
   }
 
-  async onSubmit(): Promise<void> {
+  onSubmit(): void {
     this.errorMessage.set(null);
 
     if (this.loginForm.invalid) {
@@ -58,20 +79,14 @@ export class Login {
     }
 
     this.isLoading.set(true);
+    this.isSubmitting.set(true);
 
-    try {
-      const { credential, password } = this.loginForm.getRawValue();
-      
-      const response = await this.authService.login(credential, password);
-      
-      this.loginService.setSession(response.data);
-      
-      await this.router.navigate(['/dashboard']);
-    } catch (error) {
-      this.handleLoginError(error);
-    } finally {
-      this.isLoading.set(false);
-    }
+    const { credential, password } = this.loginForm.getRawValue();
+    
+    const trimmedCredential = credential.trim();
+    const trimmedPassword = password.trim();
+
+    this.loginService.login(trimmedCredential, trimmedPassword);
   }
 
   private handleLoginError(error: unknown): void {
