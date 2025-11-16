@@ -89,51 +89,6 @@ export class Login {
     this.loginService.login(trimmedCredential, trimmedPassword);
   }
 
-  private handleLoginError(error: unknown): void {
-    if (this.isErrorEnvelope(error)) {
-      switch (error.code) {
-        case 'INVALID_INPUT':
-          this.errorMessage.set('Please check your input and try again.');
-          this.loginForm.controls.credential.setErrors({ serverError: true });
-          this.loginForm.controls.password.setErrors({ serverError: true });
-          this.focusFirstInvalidField();
-          break;
-        
-        case 'INVALID_CREDENTIALS':
-          this.errorMessage.set('Invalid email or password.');
-          break;
-        
-        case 'INTERNAL_SERVER_ERROR':
-          this.errorMessage.set('An unexpected error occurred. Please try again later.');
-          break;
-        
-        default:
-          this.errorMessage.set('An unexpected error occurred. Please try again later.');
-      }
-    } else {
-      this.errorMessage.set('Unable to connect. Please try again later.');
-    }
-  }
-
-  private isErrorEnvelope(error: unknown): error is ErrorEnvelope {
-    return (
-      typeof error === 'object' &&
-      error !== null &&
-      'status' in error &&
-      'code' in error &&
-      'message' in error
-    );
-  }
-
-  private focusFirstInvalidField(): void {  
-    setTimeout(() => {
-      const firstInvalid = document.querySelector('[aria-invalid="true"]') as HTMLElement;
-      if (firstInvalid) {
-        firstInvalid.focus();
-      }
-    }, 0);
-  }
-
   getCredentialError(): string | null {
     const control = this.loginForm.controls.credential;
     if (!control.touched || !control.errors) {
@@ -183,5 +138,50 @@ export class Login {
 
   hasPasswordError(): boolean {
     return this.loginForm.controls.password.invalid && this.loginForm.controls.password.touched;
+  }
+
+  private handleLoginError(error: unknown): void {
+    if (this.isErrorEnvelope(error)) {
+      switch (error.code) {
+        case 'INVALID_INPUT':
+          this.errorMessage.set('Please check your input and try again.');
+          this.loginForm.controls.credential.setErrors({ serverError: true });
+          this.loginForm.controls.password.setErrors({ serverError: true });
+          this.focusFirstInvalidField();
+          break;
+        
+        case 'INVALID_CREDENTIALS':
+          this.errorMessage.set('Invalid email or password.');
+          break;
+        
+        case 'INTERNAL_SERVER_ERROR':
+          this.errorMessage.set('An unexpected error occurred. Please try again later.');
+          break;
+        
+        default:
+          this.errorMessage.set('An unexpected error occurred. Please try again later.');
+      }
+    } else {
+      this.errorMessage.set('Unable to connect. Please try again later.');
+    }
+  }
+
+  private isErrorEnvelope(error: unknown): error is ErrorEnvelope {
+    return (
+      typeof error === 'object' &&
+      error !== null &&
+      'status' in error &&
+      'code' in error &&
+      'message' in error
+    );
+  }
+
+  private focusFirstInvalidField(): void {  
+    setTimeout(() => {
+      const firstInvalid = document.querySelector('[aria-invalid="true"]') as HTMLElement;
+      if (firstInvalid) {
+        firstInvalid.focus();
+      }
+    }, 0);
   }
 }
