@@ -152,7 +152,7 @@ describe('Login Page', () => {
     });
 
     it('should successfully login with second user credentials', () => {
-      cy.get('#credential').type('jamesldixon@dayrep.com');
+      cy.get('#credential').type('jenadixon@dayrep.com');
       cy.get('#password').type('meive4Lei');
       cy.get('button[type="submit"]').click();
       

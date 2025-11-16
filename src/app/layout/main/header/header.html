@@ -15,9 +15,9 @@
         <img src="/images/avatar3.svg" alt="User Avatar" class="avatar">
         @if (isMenuVisible()) {
           <div class="user-menu">
-            <a href="#" class="menu-item">My Profile</a>
-            <a href="#" class="menu-item">My Shelves</a>
-            <a href="#" class="menu-item">Account Settings</a>
+            <a href="#" class="menu-item" (click)="$event.preventDefault()">My Profile</a>
+            <a href="#" class="menu-item" (click)="$event.preventDefault()">My Shelves</a>
+            <a href="#" class="menu-item" (click)="$event.preventDefault()">Account Settings</a>
             <div class="menu-divider"></div>
             <a href="#" class="menu-item" (click)="logout(); $event.preventDefault()">Logout</a>
           </div>
