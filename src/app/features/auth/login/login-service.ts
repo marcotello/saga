@@ -15,7 +15,7 @@ export class LoginService {
   private readonly _expiresAt = signal<number | null>(null);
   private readonly _user = signal<User | null>(null);
   private readonly _error = signal<ErrorEnvelope | null>(null);
-  private readonly _isLoggedIn = signal<boolean>(false);
+  private readonly _isLoggedIn = signal<boolean>(true);
 
   readonly accessToken = this._accessToken.asReadonly();
   readonly tokenType = this._tokenType.asReadonly();

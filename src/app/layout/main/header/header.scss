@@ -73,18 +73,71 @@
   background-color: var(--pico-primary-hover-background);
 }
 
-.logout-btn {
-  background-color: var(--pico-secondary-background);
-  color: var(--pico-secondary-inverse);
-  border: 1px solid var(--pico-secondary-border);
-  padding: 0.5rem 1rem;
-  border-radius: var(--pico-border-radius);
-  cursor: pointer;
-  transition: background-color 0.2s;
+.avatar-container {
+  position: relative;
+  display: inline-block;
 }
 
-.logout-btn:hover {
-  background-color: var(--pico-secondary-hover-background);
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 2px solid var(--pico-border-color);
+}
+
+.avatar:hover {
+  transform: scale(1.08);
+}
+
+.user-menu {
+  position: absolute;
+  top: calc(100% - 1rem);
+  right: 0;
+  background-color: var(--pico-background-color);
+  border: 1px solid var(--pico-border-color);
+  border-radius: var(--pico-border-radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 220px;
+  z-index: 1000;
+  padding: 0.5rem 0;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menu-item {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: var(--pico-color);
+  text-decoration: none;
+  transition: background-color 0.2s;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.menu-item:hover {
+  color: var(--pico-color-amber-400);
+}
+
+.menu-divider {
+  height: 1px;
+  background-color: var(--pico-form-element-border-color);
+  margin: 0.5rem 0;
 }
 
 // Responsive styles
@@ -122,5 +175,15 @@
   .login-btn {
     width: 100%;
     text-align: center;
+  }
+
+  .avatar-container {
+    align-self: center;
+  }
+
+  .user-menu {
+    right: auto;
+    left: 50%;
+    margin-left: -90px; // Half of min-width (180px)
   }
 }

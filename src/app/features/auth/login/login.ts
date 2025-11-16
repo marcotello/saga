@@ -29,7 +29,6 @@ export class Login {
   });
 
   constructor() {
-    // Watch for login success/error from service
     effect(() => {
       if (!this.isSubmitting()) {
         return;
@@ -39,13 +38,11 @@ export class Login {
       const error = this.loginService.error();
 
       if (user) {
-        // Login successful
         this.isLoading.set(false);
         this.isSubmitting.set(false);
         this.errorMessage.set(null);
         this.router.navigate(['/dashboard']);
       } else if (error) {
-        // Login failed
         this.isLoading.set(false);
         this.isSubmitting.set(false);
         this.handleLoginError(error);

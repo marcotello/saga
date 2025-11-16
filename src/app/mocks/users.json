@@ -7,16 +7,24 @@
       "username": "johnsmith",
       "password": "Password@123",
       "bio": "I'm the admin",
-      "role": 1
+      "role": 1,
+      "isActive": true,
+      "createdAt": "2025-01-01",
+      "updatedAt": "2025-01-01",
+      "profilePicture": "avatar1.svg"
     },
     {
       "id": 2,
-      "name": "James",
+      "name": "Jena",
       "lastName": "Dixon",
-      "email": "jamesldixon@dayrep.com",
+      "email": "jenadixon@dayrep.com",
       "username": "Teen1976",
       "password": "meive4Lei",
       "bio": "I love to read.",
-      "role": 2
+      "role": 2,
+      "isActive": true,
+      "createdAt": "2025-01-01",
+      "updatedAt": "2025-01-01",
+      "profilePicture": "avatar2.svg"
     }
 ]

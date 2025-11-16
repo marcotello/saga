@@ -11,7 +11,18 @@
       <button routerLink="/auth/login" class="login-btn">Login</button>
     } @else {
       <a routerLink="/my-books" class="my-books-link">My Books</a>
-      <button class="logout-btn" (click)="logout()">Logout</button>
+      <div class="avatar-container" (mouseenter)="showMenu()" (mouseleave)="hideMenu()">
+        <img src="/images/avatar3.svg" alt="User Avatar" class="avatar">
+        @if (isMenuVisible()) {
+          <div class="user-menu">
+            <a href="#" class="menu-item">My Profile</a>
+            <a href="#" class="menu-item">My Shelves</a>
+            <a href="#" class="menu-item">Account Settings</a>
+            <div class="menu-divider"></div>
+            <a href="#" class="menu-item" (click)="logout(); $event.preventDefault()">Logout</a>
+          </div>
+        }
+      </div>
     }
   </div>
 </header>
