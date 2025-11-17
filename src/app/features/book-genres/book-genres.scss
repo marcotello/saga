@@ -1,0 +1,100 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #f2f2f2;
+  min-height: calc(100vh - 200px);
+}
+
+h1 {
+  margin-bottom: 2rem;
+  color: var(--pico-color);
+}
+
+.filter-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.filter-input {
+  flex: 1;
+  max-width: 400px;
+}
+
+.add-button {
+  background-color: var(--pico-primary);
+  color: var(--pico-primary-inverse);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--pico-border-radius);
+  cursor: pointer;
+  font-weight: 500;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.table-container {
+  background-color: white;
+  border-radius: var(--pico-border-radius);
+  overflow: hidden;
+  box-shadow: var(--pico-box-shadow);
+}
+
+table.striped {
+  width: 100%;
+  margin: 0;
+
+  thead {
+    background-color: var(--pico-background-color);
+  }
+
+  tbody {
+    tr {
+      &:nth-child(odd) {
+        background-color: rgba(0, 0, 0, 0.02);
+      }
+    }
+  }
+
+  td {
+    vertical-align: middle;
+  }
+}
+
+.update-button {
+  background-color: var(--pico-primary);
+  color: var(--pico-primary-inverse);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--pico-border-radius);
+  cursor: pointer;
+  margin-right: 0.5rem;
+  font-size: 0.875rem;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.delete-button {
+  background-color: var(--pico-color-red-500);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--pico-border-radius);
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+

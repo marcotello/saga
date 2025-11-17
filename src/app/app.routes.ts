@@ -20,6 +20,10 @@ export const routes: Routes = [
                 path: 'dashboard',
                 loadComponent: () => import('./features/dashboard/dashboard-view/dashboard-view').then(m => m.DashboardView)
             },
+            {
+                path: 'genre',
+                loadComponent: () => import('./features/book-genres/book-genres').then(m => m.BookGenres)
+            },
         ]
     },
     {

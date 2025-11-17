@@ -1,0 +1,58 @@
+<div class="container">
+  <h1>Genres</h1>
+  
+  <div class="filter-row">
+    <input
+      type="text"
+      [value]="filterText()"
+      (input)="onFilterInput($event)"
+      placeholder="Start typing to filter ..."
+      class="filter-input"
+    />
+    <button
+      type="button"
+      (click)="onAddGenre()"
+      class="add-button"
+    >
+      Add New Genre
+    </button>
+  </div>
+
+  <div class="table-container">
+    <table class="striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Created At</th>
+          <th>Last Updated</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (genre of filteredAndSortedGenres(); track genre.id) {
+          <tr>
+            <td>{{ genre.name }}</td>
+            <td>{{ genre.createdAt | date: 'short' }}</td>
+            <td>{{ genre.lastUpdated | date: 'short' }}</td>
+            <td>
+              <button
+                type="button"
+                (click)="onUpdateGenre(genre)"
+                class="update-button"
+              >
+                Update
+              </button>
+              <button
+                type="button"
+                (click)="onDeleteGenre(genre)"
+                class="delete-button"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
