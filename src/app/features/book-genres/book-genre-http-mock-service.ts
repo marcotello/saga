@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import genresData from '../../mocks/genres.json';
-import { Genre } from './book-genre-models';
+import { Genre } from './book-genre-model';
 import { SuccessEnvelope, ErrorEnvelope } from '../../core/models/envelope';
 
 @Injectable({

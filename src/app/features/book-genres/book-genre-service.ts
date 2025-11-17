@@ -1,6 +1,6 @@
 import { Injectable, signal, inject, computed } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Genre } from './book-genre-models';
+import { Genre } from './book-genre-model';
 import { BookGenreHttpMockService } from './book-genre-http-mock-service';
 import { ErrorEnvelope } from '../../core/models/envelope';
 

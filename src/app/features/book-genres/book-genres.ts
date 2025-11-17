@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, signal, computed, OnInit } 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BookGenreService } from './book-genre-service';
-import { Genre } from './book-genre-models';
+import { Genre } from './book-genre-model';
 
 @Component({
   selector: 'app-book-genres',
