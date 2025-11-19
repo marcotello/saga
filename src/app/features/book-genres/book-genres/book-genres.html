@@ -11,7 +11,6 @@
     <table class="striped">
       <thead>
         <tr>
-          <th>ID</th>
           <th>Name</th>
           <th>Created At</th>
           <th>Last Updated</th>
@@ -21,8 +20,7 @@
       <tbody>
         @for (genre of filteredAndSortedGenres(); track genre.id) {
         <tr>
-          <td>{{ genre.id }}</td>
-          <td>{{ genre.name }}</td>
+          <td class="name">{{ genre.name }}</td>
           <td>{{ genre.createdAt | date: 'short' }}</td>
           <td>{{ genre.lastUpdated | date: 'short' }}</td>
           <td>

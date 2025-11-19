@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import userData from '../../../mocks/users.json';
-import { User, ErrorEnvelope, AuthSuccessEnvelope } from '../login/login-models';
+import { User, ErrorEnvelope, AuthSuccessEnvelope } from '../login/models/login-models';
 import { Observable, of, throwError } from 'rxjs';
 
 @Injectable({
@@ -10,9 +10,9 @@ export class AuthHttpMockService {
 
   login(credential: string, password: string): Observable<AuthSuccessEnvelope> {
     const foundUser = userData.find(
-      user => (user.email === credential || user.username === credential) 
-      && user.password === password);
-    
+      user => (user.email === credential || user.username === credential)
+        && user.password === password);
+
     if (!foundUser) {
       const error: ErrorEnvelope = {
         status: 'error',
@@ -34,7 +34,7 @@ export class AuthHttpMockService {
 
     const accessToken = `mock-token-${foundUser.id}-${Date.now()}`;
     const tokenType = 'Bearer' as const;
-    const expiresIn = 3600; 
+    const expiresIn = 3600;
 
     const authSuccessEnvelope: AuthSuccessEnvelope = {
       status: 'success',
@@ -49,5 +49,5 @@ export class AuthHttpMockService {
 
     return of(authSuccessEnvelope);
   }
-  
+
 }

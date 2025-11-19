@@ -1,5 +1,5 @@
-import {Routes} from '@angular/router';
-import {MainLayout} from './layout/main/main-layout/main-layout';
+import { Routes } from '@angular/router';
+import { MainLayout } from './layout/main/main-layout/main-layout';
 
 export const routes: Routes = [
     {
@@ -20,8 +20,8 @@ export const routes: Routes = [
                 loadComponent: () => import('./features/dashboard/dashboard-view/dashboard-view').then(m => m.DashboardView)
             },
             {
-                path: 'genre',
-                loadComponent: () => import('./features/book-genres/book-genres').then(m => m.BookGenres)
+                path: 'genres',
+                loadComponent: () => import('./features/book-genres/book-genres/book-genres').then(m => m.BookGenres)
             },
         ]
     },

@@ -67,6 +67,14 @@
           opacity: 0.9;
         }
       }
+
+      &.name {
+        padding-left: 2rem;
+      }
+    }
+
+    .name {
+      padding-left: 20px;
     }
   }
 }

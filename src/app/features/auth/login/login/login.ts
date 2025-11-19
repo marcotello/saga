@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, inject, signal, effect, untracked }
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
-import { LoginService } from './login-service';
-import { passwordStrength } from '../validators/auth-validators';
-import { ErrorEnvelope } from './login-models';
+import { LoginService } from '../services/login-service';
+import { passwordStrength } from '../../validators/auth-validators';
+import { ErrorEnvelope } from '../models/login-models';
 
 @Component({
   selector: 'app-login',

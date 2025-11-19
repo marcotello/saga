@@ -1,8 +1,8 @@
 import { Injectable, signal, inject, computed } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Genre } from './book-genre-model';
+import { Genre } from '../models/book-genre-model';
 import { BookGenreHttpMockService } from './book-genre-http-mock-service';
-import { ErrorEnvelope } from '../../core/models/envelope';
+import { ErrorEnvelope } from '../../../core/models/envelope';
 
 @Injectable({
   providedIn: 'root'

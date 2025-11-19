@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BookGenreService } from './book-genre-service';
-import { Genre } from './book-genre-model';
-import { AddGenre } from './add-genre';
+import { BookGenreService } from '../services/book-genre-service';
+import { Genre } from '../models/book-genre-model';
+import { AddGenre } from '../add-genre/add-genre';
 
 @Component({
   selector: 'app-book-genres',

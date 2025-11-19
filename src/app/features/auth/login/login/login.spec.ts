@@ -2,9 +2,9 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 import { Router, provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { Login } from './login';
-import { LoginService } from './login-service';
-import { AuthHttpMockService } from '../services/auth-http-mock-service';
-import { AuthSuccessEnvelope, ErrorEnvelope } from './login-models';
+import { LoginService } from '../login-service';
+import { AuthHttpMockService } from '../../services/auth-http-mock-service';
+import { AuthSuccessEnvelope, ErrorEnvelope } from '../models/login-models';
 import { of, throwError } from 'rxjs';
 
 describe('Login', () => {
@@ -34,7 +34,7 @@ describe('Login', () => {
 
   beforeEach(async () => {
     mockAuthHttpService = jasmine.createSpyObj('AuthHttpMockService', ['login']);
-    
+
     await TestBed.configureTestingModule({
       imports: [Login],
       providers: [
@@ -53,7 +53,7 @@ describe('Login', () => {
     mockRouter = TestBed.inject(Router) as jasmine.SpyObj<Router>;
     loginService = TestBed.inject(LoginService);
     spyOn(mockRouter, 'navigate');
-    
+
     fixture.detectChanges();
   });
 
@@ -179,9 +179,9 @@ describe('Login', () => {
     it('should block submit when form is invalid', () => {
       component.loginForm.controls.credential.setValue('');
       component.loginForm.controls.password.setValue('');
-      
+
       component.onSubmit();
-      
+
       expect(mockAuthHttpService.login).not.toHaveBeenCalled();
       expect(component.loginForm.controls.credential.touched).toBe(true);
       expect(component.loginForm.controls.password.touched).toBe(true);
@@ -192,10 +192,10 @@ describe('Login', () => {
       control.setValue('');
       control.markAsTouched();
       fixture.detectChanges();
-      
+
       const errorMsg = component.getCredentialError();
       expect(errorMsg).toBe('Email or username is required');
-      
+
       const errorElement = fixture.nativeElement.querySelector('#credential-error');
       expect(errorElement?.textContent).toContain('Email or username is required');
     });
@@ -205,7 +205,7 @@ describe('Login', () => {
       control.setValue('weak');
       control.markAsTouched();
       fixture.detectChanges();
-      
+
       const errorMsg = component.getPasswordError();
       expect(errorMsg).toContain('Password must be');
     });
@@ -214,13 +214,13 @@ describe('Login', () => {
   describe('T405 - Loading state and duplicate prevention', () => {
     it('should set loading state during submission', fakeAsync(() => {
       mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse));
-      
+
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('Password123');
-      
+
       component.onSubmit();
       expect(component.isLoading()).toBe(true);
-      
+
       tick(10);
       fixture.detectChanges();
       expect(component.isLoading()).toBe(false);
@@ -228,45 +228,45 @@ describe('Login', () => {
 
     it('should disable submit button when loading', fakeAsync(() => {
       mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse));
-      
+
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('Password123');
-      
+
       component.onSubmit();
       fixture.detectChanges();
-      
+
       const button = fixture.nativeElement.querySelector('button[type="submit"]');
       expect(button.disabled).toBe(true);
       expect(button.getAttribute('aria-busy')).toBe('true');
-      
+
       tick(10);
       fixture.detectChanges();
     }));
 
     it('should prevent duplicate submissions while loading', () => {
       mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse));
-      
+
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('Password123');
-      
+
       component.onSubmit();
       component.onSubmit(); // Try to submit again
-      
+
       expect(mockAuthHttpService.login).toHaveBeenCalledTimes(2);
     });
 
     it('should show loading text in button', fakeAsync(() => {
       mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse));
-      
+
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('Password123');
-      
+
       component.onSubmit();
       fixture.detectChanges();
-      
+
       const button = fixture.nativeElement.querySelector('button[type="submit"]');
       expect(button?.textContent).toContain('Signing in...');
-      
+
       tick(10);
       fixture.detectChanges();
     }));
@@ -275,17 +275,17 @@ describe('Login', () => {
   describe('Password visibility toggle', () => {
     it('should toggle password visibility', () => {
       expect(component.passwordVisible()).toBe(false);
-      
+
       component.togglePasswordVisibility();
       expect(component.passwordVisible()).toBe(true);
-      
+
       component.togglePasswordVisibility();
       expect(component.passwordVisible()).toBe(false);
     });
 
     it('should change input type based on visibility', () => {
       expect(component.getPasswordType()).toBe('password');
-      
+
       component.togglePasswordVisibility();
       expect(component.getPasswordType()).toBe('text');
     });
@@ -293,18 +293,18 @@ describe('Login', () => {
     it('should update button aria-pressed attribute', () => {
       fixture.detectChanges();
       const toggle = fixture.nativeElement.querySelector('.password-toggle');
-      
+
       expect(toggle.getAttribute('aria-pressed')).toBe('false');
-      
+
       component.togglePasswordVisibility();
       fixture.detectChanges();
-      
+
       expect(toggle.getAttribute('aria-pressed')).toBe('true');
     });
 
     it('should provide accessible labels', () => {
       expect(component.getPasswordToggleLabel()).toBe('Show password');
-      
+
       component.togglePasswordVisibility();
       expect(component.getPasswordToggleLabel()).toBe('Hide password');
     });
@@ -313,25 +313,25 @@ describe('Login', () => {
   describe('T503 - Happy path: stores token and navigates to dashboard', () => {
     it('should call auth service with trimmed credentials', fakeAsync(() => {
       mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse));
-      
+
       component.loginForm.controls.credential.setValue('  test@example.com  ');
       component.loginForm.controls.password.setValue('  Password123  ');
-      
+
       component.onSubmit();
       tick(10);
-      
+
       expect(mockAuthHttpService.login).toHaveBeenCalledWith('test@example.com', 'Password123');
     }));
 
     it('should store session in LoginService', fakeAsync(() => {
       mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse));
-      
+
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('Password123');
-      
+
       component.onSubmit();
       tick(10);
-      
+
       expect(loginService.isAuthenticated()).toBe(true);
       expect(loginService.accessToken()).toBe('mock-token');
       expect(loginService.user()?.username).toBe('testuser');
@@ -339,28 +339,28 @@ describe('Login', () => {
 
     it('should navigate to dashboard on success', fakeAsync(() => {
       mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse));
-      
+
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('Password123');
-      
+
       component.onSubmit();
       tick(10);
       fixture.detectChanges();
-      
+
       expect(mockRouter.navigate).toHaveBeenCalledWith(['/dashboard']);
     }));
 
     it('should clear error message on successful login', fakeAsync(() => {
       mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse));
-      
+
       component.errorMessage.set('Previous error');
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('Password123');
-      
+
       component.onSubmit();
       tick(10);
       fixture.detectChanges();
-      
+
       expect(component.errorMessage()).toBeNull();
     }));
   });
@@ -373,14 +373,14 @@ describe('Login', () => {
         message: 'Invalid email or password'
       };
       mockAuthHttpService.login.and.returnValue(throwError(() => errorResponse));
-      
+
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('WrongPassword123');
-      
+
       component.onSubmit();
       tick(10);
       fixture.detectChanges();
-      
+
       expect(component.errorMessage()).toBe('Invalid email or password.');
       expect(component.isLoading()).toBe(false);
     }));
@@ -392,14 +392,14 @@ describe('Login', () => {
         message: 'Invalid email or password'
       };
       mockAuthHttpService.login.and.returnValue(throwError(() => errorResponse));
-      
+
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('WrongPassword123');
-      
+
       component.onSubmit();
       tick(10);
       fixture.detectChanges();
-      
+
       const banner = fixture.nativeElement.querySelector('.error-banner');
       expect(banner?.textContent).toContain('Invalid email or password.');
     }));
@@ -413,14 +413,14 @@ describe('Login', () => {
         message: 'Invalid input provided'
       };
       mockAuthHttpService.login.and.returnValue(throwError(() => errorResponse));
-      
+
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('Password123');
-      
+
       component.onSubmit();
       tick(10);
       fixture.detectChanges();
-      
+
       expect(component.errorMessage()).toBe('Please check your input and try again.');
       expect(component.loginForm.controls.credential.errors?.['serverError']).toBe(true);
       expect(component.loginForm.controls.password.errors?.['serverError']).toBe(true);
@@ -435,27 +435,27 @@ describe('Login', () => {
         message: 'Server error'
       };
       mockAuthHttpService.login.and.returnValue(throwError(() => errorResponse));
-      
+
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('Password123');
-      
+
       component.onSubmit();
       tick(10);
       fixture.detectChanges();
-      
+
       expect(component.errorMessage()).toBe('An unexpected error occurred. Please try again later.');
     }));
 
     it('should show network error message for unknown errors', fakeAsync(() => {
       mockAuthHttpService.login.and.returnValue(throwError(() => new Error('Network error')));
-      
+
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('Password123');
-      
+
       component.onSubmit();
       tick(10);
       fixture.detectChanges();
-      
+
       expect(component.errorMessage()).toBe('Unable to connect. Please try again later.');
     }));
 
@@ -466,14 +466,14 @@ describe('Login', () => {
         message: 'Invalid credentials'
       };
       mockAuthHttpService.login.and.returnValue(throwError(() => errorResponse));
-      
+
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('WrongPassword123');
-      
+
       component.onSubmit();
       tick(10);
       fixture.detectChanges();
-      
+
       expect(mockRouter.navigate).not.toHaveBeenCalled();
     }));
   });
@@ -482,7 +482,7 @@ describe('Login', () => {
     it('should have proper labels associated with inputs', () => {
       const credentialLabel = fixture.nativeElement.querySelector('label[for="credential"]');
       const passwordLabel = fixture.nativeElement.querySelector('label[for="password"]');
-      
+
       expect(credentialLabel).toBeTruthy();
       expect(passwordLabel).toBeTruthy();
     });
@@ -491,7 +491,7 @@ describe('Login', () => {
       component.loginForm.controls.credential.setValue('');
       component.loginForm.controls.credential.markAsTouched();
       fixture.detectChanges();
-      
+
       const input = fixture.nativeElement.querySelector('#credential');
       expect(input.getAttribute('aria-invalid')).toBe('true');
     });
@@ -500,7 +500,7 @@ describe('Login', () => {
       component.loginForm.controls.credential.setValue('');
       component.loginForm.controls.credential.markAsTouched();
       fixture.detectChanges();
-      
+
       const input = fixture.nativeElement.querySelector('#credential');
       expect(input.getAttribute('aria-describedby')).toBe('credential-error');
     });
@@ -508,7 +508,7 @@ describe('Login', () => {
     it('should have aria-live region for errors', () => {
       component.errorMessage.set('Test error');
       fixture.detectChanges();
-      
+
       const banner = fixture.nativeElement.querySelector('.error-banner');
       expect(banner.getAttribute('aria-live')).toBe('polite');
     });
@@ -516,7 +516,7 @@ describe('Login', () => {
     it('should have proper alt text for images', () => {
       const logo = fixture.nativeElement.querySelector('img[alt="Saga logo"]');
       const illustration = fixture.nativeElement.querySelector('img[alt="Reading illustration"]');
-      
+
       expect(logo).toBeTruthy();
       expect(illustration).toBeTruthy();
     });

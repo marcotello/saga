@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { BookGenreService } from './book-genre-service';
-import { Dialog } from '../../shared/dialog/dialog';
+import { BookGenreService } from '../services/book-genre-service';
+import { Dialog } from '../../../shared/dialog/dialog';
 
 @Component({
   selector: 'app-add-genre',

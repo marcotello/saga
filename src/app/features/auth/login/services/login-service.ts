@@ -1,6 +1,6 @@
 import { Injectable, signal, computed, inject, Signal } from '@angular/core';
-import { User, ErrorEnvelope, AuthSuccessEnvelope } from './login-models';
-import { AuthHttpMockService } from '../services/auth-http-mock-service';
+import { User, ErrorEnvelope, AuthSuccessEnvelope } from '../models/login-models';
+import { AuthHttpMockService } from '../../services/auth-http-mock-service';
 import { Subscription } from 'rxjs';
 
 @Injectable({
@@ -32,12 +32,12 @@ export class LoginService {
   });
 
   login(credential: string, password: string): Signal<User | null> | Signal<ErrorEnvelope> {
-    
+
     this._error.set(null);
 
     this.subscription = this.authHttpMockService.login(credential, password).subscribe({
       next: (response: AuthSuccessEnvelope) => {
-        
+
         this.setSession({
           accessToken: response.data.accessToken,
           tokenType: response.data.tokenType,
@@ -51,7 +51,7 @@ export class LoginService {
       error: (error: unknown) => {
         this._user.set(null);
         this._isLoggedIn.set(false);
-        
+
         if (this.isErrorEnvelope(error)) {
           this._error.set(error);
         } else {
@@ -85,10 +85,10 @@ export class LoginService {
   private setSession(payload: { accessToken: string; tokenType: 'Bearer'; expiresIn: number; user: User }): void {
     this._accessToken.set(payload.accessToken);
     this._tokenType.set(payload.tokenType);
-    
+
     const expiresAtMs = Date.now() + (payload.expiresIn * 1000);
     this._expiresAt.set(expiresAtMs);
-    
+
     this._user.set(payload.user);
   }
 
