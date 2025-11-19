@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal, effect } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, effect, untracked } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
@@ -37,16 +37,18 @@ export class Login {
       const user = this.loginService.user();
       const error = this.loginService.error();
 
-      if (user) {
-        this.isLoading.set(false);
-        this.isSubmitting.set(false);
-        this.errorMessage.set(null);
-        this.router.navigate(['/dashboard']);
-      } else if (error) {
-        this.isLoading.set(false);
-        this.isSubmitting.set(false);
-        this.handleLoginError(error);
-      }
+      untracked(() => {
+        if (user) {
+          this.isLoading.set(false);
+          this.isSubmitting.set(false);
+          this.errorMessage.set(null);
+          this.router.navigate(['/dashboard']);
+        } else if (error) {
+          this.isLoading.set(false);
+          this.isSubmitting.set(false);
+          this.handleLoginError(error);
+        }
+      });
     });
   }
 
@@ -79,7 +81,7 @@ export class Login {
     this.isSubmitting.set(true);
 
     const { credential, password } = this.loginForm.getRawValue();
-    
+
     const trimmedCredential = credential.trim();
     const trimmedPassword = password.trim();
 
@@ -91,7 +93,7 @@ export class Login {
     if (!control.touched || !control.errors) {
       return null;
     }
-    
+
     if (control.errors['required']) {
       return 'Email or username is required';
     }
@@ -109,7 +111,7 @@ export class Login {
     if (!control.touched || !control.errors) {
       return null;
     }
-    
+
     if (control.errors['required']) {
       return 'Password is required';
     }
@@ -146,15 +148,15 @@ export class Login {
           this.loginForm.controls.password.setErrors({ serverError: true });
           this.focusFirstInvalidField();
           break;
-        
+
         case 'INVALID_CREDENTIALS':
           this.errorMessage.set('Invalid email or password.');
           break;
-        
+
         case 'INTERNAL_SERVER_ERROR':
           this.errorMessage.set('An unexpected error occurred. Please try again later.');
           break;
-        
+
         default:
           this.errorMessage.set('An unexpected error occurred. Please try again later.');
       }
@@ -173,7 +175,7 @@ export class Login {
     );
   }
 
-  private focusFirstInvalidField(): void {  
+  private focusFirstInvalidField(): void {
     setTimeout(() => {
       const firstInvalid = document.querySelector('[aria-invalid="true"]') as HTMLElement;
       if (firstInvalid) {
