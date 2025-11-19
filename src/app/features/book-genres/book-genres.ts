@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal, computed, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BookGenreService } from './book-genre-service';
@@ -11,36 +11,47 @@ import { Genre } from './book-genre-model';
   styleUrl: './book-genres.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BookGenres implements OnInit {
+export class BookGenres {
   private readonly bookGenreService = inject(BookGenreService);
 
   readonly filterText = signal<string>('');
-  
+
   readonly genres = this.bookGenreService.genres;
-  
+
   readonly filteredAndSortedGenres = computed(() => {
     const filter = this.filterText().toLowerCase();
-    const filtered = this.genres()
-      .filter(genre => !genre.deleted)
-      .filter(genre => genre.name.toLowerCase().includes(filter));
-    
-    return filtered.sort((a, b) => a.name.localeCompare(b.name));
+    const allGenres = this.genres();
+
+    // Filter genres based on search text
+    const filtered = filter
+      ? allGenres.filter(genre => genre.name.toLowerCase().includes(filter))
+      : allGenres;
+
+    // Create a new array and sort - keep original object references for proper tracking
+    const sorted = [...filtered];
+    sorted.sort((a, b) => a.name.localeCompare(b.name));
+    return sorted;
   });
 
-  ngOnInit(): void {
+  constructor() {
     this.bookGenreService.getAllGenres();
   }
 
   onFilterInput(event: Event): void {
     const input = event.target as HTMLInputElement;
     const value = input.value;
-    // Only allow a-z and A-Z characters
+
     const filteredValue = Array.from(value)
       .filter(char => /[a-zA-Z\s]/.test(char))
       .join('');
+
+    // Update the signal - signals automatically trigger change detection
     this.filterText.set(filteredValue);
-    // Update the input value to reflect the filtered value
-    input.value = filteredValue;
+
+    // Update the input value to reflect the filtered value if it changed
+    if (input.value !== filteredValue) {
+      input.value = filteredValue;
+    }
   }
 
   onAddGenre(): void {
