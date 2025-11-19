@@ -4,9 +4,7 @@
   <div class="filter-row">
     <input type="text" [value]="filterText()" (input)="onFilterInput($event)" placeholder="Start typing to filter ..."
       class="filter-input" />
-    <button type="button" (click)="onAddGenre()">
-      Add New Genre
-    </button>
+    <app-add-genre></app-add-genre>
   </div>
 
   <div class="table-container">

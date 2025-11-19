@@ -46,8 +46,8 @@ export class BookGenreService {
     this._error.set(null);
 
     this.subscription = this.bookGenreHttpMockService.addGenre(name).subscribe({
-      next: (response) => {
-        this._genres.update(genres => [...genres, response.data]);
+      next: (genre) => {
+        this._genres.update(genres => [...genres, genre]);
       },
       error: (error: unknown) => {
         if (this.isErrorEnvelope(error)) {

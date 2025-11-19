@@ -25,7 +25,7 @@ export class BookGenreHttpMockService {
     return of(envelope).pipe(delay(300));
   }
 
-  addGenre(name: string): Observable<SuccessEnvelope<Genre>> {
+  addGenre(name: string): Observable<Genre> {
     if (name.toLowerCase().includes('error')) {
       const error: ErrorEnvelope = {
         status: 'error',
@@ -49,12 +49,7 @@ export class BookGenreHttpMockService {
 
     this.genres.push(newGenre);
 
-    const envelope: SuccessEnvelope<Genre> = {
-      status: 'success',
-      message: 'Genre added successfully',
-      data: newGenre
-    };
-    return of(envelope).pipe(delay(300));
+    return of(newGenre).pipe(delay(300));
   }
 
   updateGenreById(id: number, name: string): Observable<SuccessEnvelope<Genre>> {

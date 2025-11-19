@@ -1,0 +1,41 @@
+.add-genre {
+  &__trigger {
+    background-color: var(--pico-primary);
+    border-color: var(--pico-primary);
+    color: white;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  &__error {
+    color: var(--pico-color-red-500);
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+  }
+
+  &__cancel {
+    background-color: var(--pico-color-red-500);
+    border-color: var(--pico-color-red-500);
+    color: white;
+  }
+
+  &__save {
+    background-color: var(--pico-primary);
+    border-color: var(--pico-primary);
+    color: white;
+  }
+}
+

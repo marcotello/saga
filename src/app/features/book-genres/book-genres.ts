@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { BookGenreService } from './book-genre-service';
 import { Genre } from './book-genre-model';
+import { AddGenre } from './add-genre';
 
 @Component({
   selector: 'app-book-genres',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, AddGenre],
   templateUrl: './book-genres.html',
   styleUrl: './book-genres.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -52,10 +52,6 @@ export class BookGenres {
     if (input.value !== filteredValue) {
       input.value = filteredValue;
     }
-  }
-
-  onAddGenre(): void {
-    // Placeholder - won't do anything at this moment
   }
 
   onUpdateGenre(genre: Genre): void {

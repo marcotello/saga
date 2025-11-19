@@ -1,10 +1,13 @@
 .container {
-  margin: 0 auto;
+  margin: 2rem auto;
   padding: 2rem;
   min-height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 
   h1 {
-    margin-bottom: 2rem;
+    margin: 0;
     color: var(--pico-color);
   }
 
@@ -13,7 +16,6 @@
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 2rem;
 
     .filter-input {
       flex: 1;
@@ -33,7 +35,7 @@
     margin: 0;
 
     thead {
-      background-color: var(--pico-background-color);
+      background-color: white;
     }
 
     tbody {
