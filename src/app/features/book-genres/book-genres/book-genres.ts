@@ -4,10 +4,11 @@ import { BookGenreService } from '../services/book-genre-service';
 import { Genre } from '../models/book-genre-model';
 import { AddGenre } from '../add-genre/add-genre';
 import { UpdateGenre } from '../update-genre/update-genre';
+import { DeleteRecord } from '../../../shared/delete-record/delete-record';
 
 @Component({
   selector: 'app-book-genres',
-  imports: [CommonModule, AddGenre, UpdateGenre],
+  imports: [CommonModule, AddGenre, UpdateGenre, DeleteRecord],
   templateUrl: './book-genres.html',
   styleUrl: './book-genres.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,7 +18,9 @@ export class BookGenres {
 
   protected readonly isAddGenreDialogOpen = signal(false);
   protected readonly isUpdateGenreDialogOpen = signal(false);
+  protected readonly isDeleteGenreDialogOpen = signal(false);
   protected readonly selectedGenre = signal<Genre | null>(null);
+  protected readonly genreToDelete = signal<Genre | null>(null);
 
   readonly filterText = signal<string>('');
 
@@ -27,12 +30,12 @@ export class BookGenres {
     const filter = this.filterText().toLowerCase();
     const allGenres = this.genres();
 
-    // Filter genres based on search text
-    const filtered = filter
-      ? allGenres.filter(genre => genre.name.toLowerCase().includes(filter))
-      : allGenres;
+    const nonDeletedGenres = allGenres.filter(genre => !genre.deleted);
 
-    // Create a new array and sort - keep original object references for proper tracking
+    const filtered = filter
+      ? nonDeletedGenres.filter(genre => genre.name.toLowerCase().includes(filter))
+      : nonDeletedGenres;
+
     const sorted = [...filtered];
     sorted.sort((a, b) => a.name.localeCompare(b.name));
     return sorted;
@@ -50,10 +53,8 @@ export class BookGenres {
       .filter(char => /[a-zA-Z\s]/.test(char))
       .join('');
 
-    // Update the signal - signals automatically trigger change detection
     this.filterText.set(filteredValue);
 
-    // Update the input value to reflect the filtered value if it changed
     if (input.value !== filteredValue) {
       input.value = filteredValue;
     }
@@ -78,6 +79,24 @@ export class BookGenres {
   }
 
   onDeleteGenre(genre: Genre): void {
-    // Placeholder - won't do anything at this moment
+    this.genreToDelete.set(genre);
+    this.isDeleteGenreDialogOpen.set(true);
+  }
+
+  onDeleteGenreDialogClosed(): void {
+    this.isDeleteGenreDialogOpen.set(false);
+    this.genreToDelete.set(null);
+  }
+
+  onDeleteGenreConfirmed(): void {
+    const genre = this.genreToDelete();
+    if (genre) {
+      this.bookGenreService.deleteGenreById(genre.id);
+    }
+    this.onDeleteGenreDialogClosed();
+  }
+
+  onDeleteGenreCanceled(): void {
+    this.onDeleteGenreDialogClosed();
   }
 }

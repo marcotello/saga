@@ -12,6 +12,8 @@ import { Dialog } from '../dialog/dialog';
 export class DeleteRecord {
   readonly isOpen: InputSignal<boolean> = input<boolean>(false);
   readonly closed: OutputEmitterRef<void> = output<void>();
+  readonly deleteConfirmed: OutputEmitterRef<void> = output<void>();
+  readonly canceled: OutputEmitterRef<void> = output<void>();
 
   readonly dialogTitle = 'Delete Record';
   readonly dialogBody = 'Are you sure you want to delete this record?';
@@ -21,10 +23,12 @@ export class DeleteRecord {
   }
 
   onCancel(): void {
+    this.canceled.emit();
     this.closed.emit();
   }
 
   onDelete(): void {
+    this.deleteConfirmed.emit();
     this.closed.emit();
   }
 }

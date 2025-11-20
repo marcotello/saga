@@ -46,4 +46,6 @@
     (requestClose)="onAddGenreDialogRequestClose()"></app-add-genre>
   <app-update-genre [isDialogOpen]="isUpdateGenreDialogOpen()" [genre]="selectedGenre()"
     (requestClose)="onUpdateGenreDialogRequestClose()"></app-update-genre>
+  <app-delete-record [isOpen]="isDeleteGenreDialogOpen()" (deleteConfirmed)="onDeleteGenreConfirmed()"
+    (canceled)="onDeleteGenreCanceled()" (closed)="onDeleteGenreDialogClosed()"></app-delete-record>
 </div>
