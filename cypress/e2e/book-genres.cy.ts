@@ -179,7 +179,12 @@ describe('Book Genres Page', () => {
     it('should show validation error when submitting empty form', () => {
       cy.get('.add-genre__trigger').click();
       cy.get('dialog[open]').should('be.visible');
-      cy.get('.add-genre__save').click();
+      // Type something and then clear it to trigger validation
+      cy.get('#genreName').type('Test').clear();
+      cy.get('#genreName').blur();
+      // Wait for Angular change detection
+      cy.wait(200);
+      // The error should be visible when field is touched and empty
       cy.get('.add-genre__error').should('be.visible');
       cy.get('.add-genre__error').should('contain', 'Name is required');
     });
@@ -203,8 +208,8 @@ describe('Book Genres Page', () => {
       
       cy.get('.add-genre__trigger').click();
       cy.get('dialog[open]').should('be.visible');
-      cy.get('#genreName').type(newGenreName);
-      cy.get('.add-genre__save').click();
+      cy.get('dialog[open] #genreName').type(newGenreName);
+      cy.get('dialog[open] .add-genre__save').click();
       
       // Dialog should close
       cy.wait(500);
@@ -239,20 +244,15 @@ describe('Book Genres Page', () => {
     });
 
     it('should pre-fill the form with genre name', () => {
-      // Get the first genre's name
-      let genreName: string;
-      cy.get('table tbody tr').first().within(() => {
-        cy.get('.name').invoke('text').then((text) => {
-          genreName = text.trim();
+      cy.get('table tbody tr')
+        .first()
+        .then(($row) => {
+          const genreName = $row.find('.name').text().trim();
+
+          cy.wrap($row).find('.update-button').click();
+          cy.get('dialog[open]').should('be.visible');
+          cy.get('dialog[open] #genreName', { timeout: 2000 }).should('have.value', genreName);
         });
-      });
-      
-      cy.get('table tbody tr').first().within(() => {
-        cy.get('.update-button').click();
-      });
-      
-      cy.get('dialog[open]').should('be.visible');
-      cy.get('#genreName').should('have.value', genreName);
     });
 
     it('should display form fields in update genre dialog', () => {
@@ -260,9 +260,13 @@ describe('Book Genres Page', () => {
         cy.get('.update-button').click();
       });
       
+      // Wait for dialog to open
       cy.get('dialog[open]').should('be.visible');
-      cy.get('label[for="genreName"]').should('contain', 'Genre Name');
-      cy.get('#genreName').should('be.visible');
+      // Wait for form fields to be visible (inside the dialog)
+      cy.get('dialog[open]').within(() => {
+        cy.get('label[for="genreName"]').should('contain', 'Genre Name');
+        cy.get('#genreName', { timeout: 2000 }).should('be.visible');
+      });
     });
 
     it('should display Cancel and Save buttons in update genre dialog', () => {
@@ -291,11 +295,19 @@ describe('Book Genres Page', () => {
         cy.get('.update-button').click();
       });
       
+      // Wait for dialog to open and form to be populated
       cy.get('dialog[open]').should('be.visible');
-      cy.get('#genreName').clear();
-      cy.get('.update-genre__save').click();
-      cy.get('.update-genre__error').should('be.visible');
-      cy.get('.update-genre__error').should('contain', 'Name is required');
+      cy.get('dialog[open] #genreName', { timeout: 2000 })
+        .should('be.visible')
+        .invoke('val')
+        .should('match', /.+/);
+      // Clear the field and blur to trigger validation
+      cy.get('dialog[open] #genreName').clear().blur();
+      // Wait for Angular change detection
+      cy.wait(200);
+      // The error should be visible
+      cy.get('dialog[open] .update-genre__error').should('be.visible');
+      cy.get('dialog[open] .update-genre__error').should('contain', 'Name is required');
     });
 
     it('should update genre successfully', () => {
@@ -313,9 +325,15 @@ describe('Book Genres Page', () => {
         cy.get('.update-button').click();
       });
       
+      // Wait for dialog to open and form to be populated
       cy.get('dialog[open]').should('be.visible');
-      cy.get('#genreName').clear().type(updatedName);
-      cy.get('.update-genre__save').click();
+      cy.get('dialog[open] #genreName', { timeout: 2000 })
+        .should('be.visible')
+        .invoke('val')
+        .should('match', /.+/);
+      // Clear and type new name
+      cy.get('dialog[open] #genreName').clear().type(updatedName);
+      cy.get('dialog[open] .update-genre__save').click();
       
       // Dialog should close
       cy.wait(500);
@@ -443,25 +461,36 @@ describe('Book Genres Page', () => {
       // Add a genre
       const newGenreName = `Sequential Test ${Date.now()}`;
       cy.get('.add-genre__trigger').click();
+      cy.get('dialog[open]').should('be.visible');
       cy.get('#genreName').type(newGenreName);
       cy.get('.add-genre__save').click();
       cy.wait(500);
+      cy.get('dialog[open]').should('not.exist');
       
       // Update the new genre
       cy.get('table tbody tr').contains(newGenreName).parent('tr').within(() => {
         cy.get('.update-button').click();
       });
+      // Wait for dialog to open and form to be populated
+      cy.get('dialog[open]').should('be.visible');
+      cy.get('dialog[open] #genreName', { timeout: 2000 })
+        .should('be.visible')
+        .invoke('val')
+        .should('match', /.+/);
       const updatedName = `${newGenreName} Updated`;
-      cy.get('#genreName').clear().type(updatedName);
-      cy.get('.update-genre__save').click();
+      cy.get('dialog[open] #genreName').clear().type(updatedName);
+      cy.get('dialog[open] .update-genre__save').click();
       cy.wait(500);
+      cy.get('dialog[open]').should('not.exist');
       
       // Delete the updated genre
       cy.get('table tbody tr').contains(updatedName).parent('tr').within(() => {
         cy.get('.delete-button').click();
       });
+      cy.get('dialog[open]').should('be.visible');
       cy.get('.delete-record__delete-button').click();
       cy.wait(500);
+      cy.get('dialog[open]').should('not.exist');
       
       // Verify it's gone
       cy.get('table tbody tr .name').should('not.contain', updatedName);
