@@ -1,0 +1,80 @@
+.container {
+  margin: 2rem auto;
+  padding: 2rem;
+  min-height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  h1 {
+    margin: 0;
+    color: var(--pico-color);
+  }
+
+  .filter-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+    .filter-input {
+      flex: 1;
+      max-width: 400px;
+    }
+  }
+
+  .table-container {
+    background-color: white;
+    border-radius: var(--pico-border-radius);
+    overflow: hidden;
+    box-shadow: var(--pico-box-shadow);
+  }
+
+  table.striped {
+    width: 100%;
+    margin: 0;
+
+    thead {
+      background-color: white;
+    }
+
+    tbody {
+      tr {
+        &:nth-child(odd) {
+          background-color: rgba(0, 0, 0, 0.02);
+        }
+      }
+    }
+
+    td {
+      vertical-align: middle;
+
+      .update-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+        margin: 0.9rem 0.5rem 0 0;
+      }
+
+      .delete-button {
+        background-color: var(--pico-color-amber-400);
+        border-color: var(--pico-color-amber-400);
+        color: white;
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+        transition: darken 0.2s;
+
+        &:hover {
+          background-color: var(--pico-color-amber-450);
+        }
+      }
+
+      &.name {
+        padding-left: 2rem;
+      }
+    }
+
+    .name {
+      padding-left: 20px;
+    }
+  }
+}

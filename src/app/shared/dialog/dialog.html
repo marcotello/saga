@@ -1,0 +1,20 @@
+<dialog
+  class="dialog"
+  [open]="isOpen()"
+  (click)="onBackdropClick($event)"
+  (cancel)="onDialogCancel($event)"
+  (keydown)="onKeydown($event)"
+>
+  <article class="dialog__panel">
+    <h2 class="dialog__title">{{ title() }}</h2>
+
+    <section class="dialog__body">
+      <ng-content select="[body]"></ng-content>
+    </section>
+
+    <footer class="dialog__footer">
+      <ng-content select="[footer]"></ng-content>
+    </footer>
+  </article>
+</dialog>
+

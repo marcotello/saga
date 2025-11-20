@@ -1,0 +1,14 @@
+.delete-record {
+  &__cancel-button {
+    background-color: var(--pico-color-amber-400);
+    border-color: var(--pico-color-amber-400);
+    color: white;
+
+    &:hover,
+    &:focus {
+      background-color: var(--pico-color-amber-500);
+      border-color: var(--pico-color-amber-500);
+    }
+  }
+}
+

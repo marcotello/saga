@@ -76,3 +76,6 @@ GEMINI.md
 .env.*
 !.env.example
 *.log
+
+# Google AntiGravity
+.agent/

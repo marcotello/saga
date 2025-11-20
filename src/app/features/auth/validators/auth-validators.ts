@@ -5,10 +5,10 @@ export function passwordStrength(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
     if (!value || typeof value !== 'string') {
-      return null; 
+      return null;
     }
     if (!PASSWORD_STRENGTH_REGEX.test(value)) {
-      return { 
+      return {
         passwordStrength: {
           message: 'Password must be 8-128 characters with at least one uppercase letter, one lowercase letter, and one number'
         }
@@ -18,3 +18,10 @@ export function passwordStrength(): ValidatorFn {
   };
 }
 
+export function notOnlyWhitespace(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { required: true };
+  };
+}
