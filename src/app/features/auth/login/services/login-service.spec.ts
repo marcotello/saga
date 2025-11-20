@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { LoginService } from './login-service';
 import { AuthHttpMockService } from '../../services/auth-http-mock-service';
 import { AuthSuccessEnvelope, ErrorEnvelope, User } from '../models/login-models';
-import { of, throwError } from 'rxjs';
+import { of, throwError, delay, Subject } from 'rxjs';
 
 describe('LoginService', () => {
   let service: LoginService;
@@ -256,25 +256,29 @@ describe('LoginService', () => {
       }, 10);
     });
 
-    it('should clear previous error before new login attempt', (done) => {
+    it('should clear previous error before new login attempt', fakeAsync(() => {
       // Set an error first
       service['_error'].set(mockErrorResponse);
 
-      mockAuthHttpService.login.and.returnValue(throwError(() => ({
-        ...mockErrorResponse,
-        message: 'New error'
-      })));
+      // Use a Subject to control the response timing precisely
+      const errorSubject = new Subject<AuthSuccessEnvelope>();
+      mockAuthHttpService.login.and.returnValue(errorSubject.asObservable());
 
       service.login('test@example.com', 'wrongpassword');
 
-      // Error should be cleared immediately
+      // Error should be cleared immediately upon calling login
       expect(service.error()).toBeNull();
 
-      setTimeout(() => {
-        expect(service.error()?.message).toBe('New error');
-        done();
-      }, 10);
-    });
+      // Emit the error
+      errorSubject.error({
+        ...mockErrorResponse,
+        message: 'New error'
+      });
+
+      tick();
+
+      expect(service.error()?.message).toBe('New error');
+    }));
   });
 
   describe('logout', () => {

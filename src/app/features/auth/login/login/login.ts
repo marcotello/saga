@@ -3,7 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 import { LoginService } from '../services/login-service';
-import { passwordStrength } from '../../validators/auth-validators';
+import { passwordStrength, notOnlyWhitespace } from '../../validators/auth-validators';
 import { ErrorEnvelope } from '../models/login-models';
 
 @Component({
@@ -24,8 +24,8 @@ export class Login {
   private readonly isSubmitting = signal(false);
 
   readonly loginForm = this.fb.nonNullable.group({
-    credential: ['', [Validators.required, Validators.max(254)]],
-    password: ['', [Validators.required, Validators.max(128), passwordStrength()]]
+    credential: ['', [Validators.required, Validators.maxLength(254), notOnlyWhitespace()]],
+    password: ['', [Validators.required, Validators.maxLength(128), passwordStrength()]]
   });
 
   constructor() {

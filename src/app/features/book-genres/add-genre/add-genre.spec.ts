@@ -25,6 +25,7 @@ describe('AddGenre', () => {
     fixture = TestBed.createComponent(AddGenre);
     component = fixture.componentInstance;
     bookGenreService = TestBed.inject(BookGenreService);
+    spyOn(component.requestClose, 'emit');
     fixture.detectChanges();
   });
 
@@ -53,24 +54,19 @@ describe('AddGenre', () => {
   });
 
   describe('Dialog management', () => {
-    it('should open dialog when openDialog is called', () => {
-      component.openDialog();
-      expect(component.isDialogOpen()).toBe(true);
-    });
-
     it('should close dialog when closeDialog is called', () => {
-      component.openDialog();
-      expect(component.isDialogOpen()).toBe(true);
-      
+      fixture.componentRef.setInput('isDialogOpen', true);
+      fixture.detectChanges();
+
       component.closeDialog();
-      expect(component.isDialogOpen()).toBe(false);
+      expect(component.requestClose.emit).toHaveBeenCalled();
     });
 
     it('should reset form when dialog is closed', () => {
-      component.openDialog();
+      fixture.componentRef.setInput('isDialogOpen', true);
       component.genreForm.patchValue({ name: 'Test Genre' });
       expect(component.genreForm.get('name')?.value).toBe('Test Genre');
-      
+
       component.closeDialog();
       expect(component.genreForm.get('name')?.value).toBe('');
       expect(component.genreForm.pristine).toBe(true);
@@ -82,7 +78,7 @@ describe('AddGenre', () => {
       const nameControl = component.genreForm.get('name');
       nameControl?.markAsTouched();
       nameControl?.setValue('');
-      
+
       fixture.detectChanges();
       expect(component.nameHasError()).toBe(true);
     });
@@ -91,7 +87,7 @@ describe('AddGenre', () => {
       const nameControl = component.genreForm.get('name');
       nameControl?.markAsDirty();
       nameControl?.setValue('');
-      
+
       fixture.detectChanges();
       expect(component.nameHasError()).toBe(true);
     });
@@ -99,7 +95,7 @@ describe('AddGenre', () => {
     it('should not show error when name is valid', () => {
       const nameControl = component.genreForm.get('name');
       nameControl?.setValue('Mystery');
-      
+
       fixture.detectChanges();
       expect(component.nameHasError()).toBe(false);
     });
@@ -107,7 +103,7 @@ describe('AddGenre', () => {
     it('should not show error when name is empty but not touched or dirty', () => {
       const nameControl = component.genreForm.get('name');
       nameControl?.setValue('');
-      
+
       fixture.detectChanges();
       expect(component.nameHasError()).toBe(false);
     });
@@ -128,110 +124,95 @@ describe('AddGenre', () => {
   describe('Form submission', () => {
 
     it('should not submit when form is invalid', () => {
-      component.openDialog();
+      fixture.componentRef.setInput('isDialogOpen', true);
       const nameControl = component.genreForm.get('name');
       nameControl?.setValue('');
-      
+
       component.onSave();
-      
+
       expect(mockBookGenreHttpService.addGenre).not.toHaveBeenCalled();
-      expect(component.isDialogOpen()).toBe(true);
     });
 
     it('should mark all fields as touched when form is invalid on submit', () => {
-      component.openDialog();
+      fixture.componentRef.setInput('isDialogOpen', true);
       const nameControl = component.genreForm.get('name');
       nameControl?.setValue('');
-      
+
       component.onSave();
-      
+
       expect(nameControl?.touched).toBe(true);
     });
 
     it('should not submit when name is only whitespace', () => {
-      component.openDialog();
+      fixture.componentRef.setInput('isDialogOpen', true);
       const nameControl = component.genreForm.get('name');
       nameControl?.setValue('   ');
-      
+
       component.onSave();
-      
+
       expect(mockBookGenreHttpService.addGenre).not.toHaveBeenCalled();
       expect(nameControl?.hasError('required')).toBe(true);
     });
 
     it('should call bookGenreService.addGenre with trimmed name when form is valid', () => {
       spyOn(bookGenreService, 'addGenre');
-      component.openDialog();
+      fixture.componentRef.setInput('isDialogOpen', true);
       const nameControl = component.genreForm.get('name');
       nameControl?.setValue('  Mystery  ');
-      
+
       component.onSave();
-      
+
       expect(bookGenreService.addGenre).toHaveBeenCalledWith('Mystery');
     });
 
     it('should close dialog after successful save', () => {
       spyOn(bookGenreService, 'addGenre');
-      component.openDialog();
+      fixture.componentRef.setInput('isDialogOpen', true);
       const nameControl = component.genreForm.get('name');
       nameControl?.setValue('Mystery');
-      
+
       component.onSave();
-      
-      expect(component.isDialogOpen()).toBe(false);
+
+      expect(component.requestClose.emit).toHaveBeenCalled();
     });
 
     it('should reset form after successful save', () => {
       spyOn(bookGenreService, 'addGenre');
-      component.openDialog();
+      fixture.componentRef.setInput('isDialogOpen', true);
       const nameControl = component.genreForm.get('name');
       nameControl?.setValue('Mystery');
-      
+
       component.onSave();
-      
+
       expect(nameControl?.value).toBe('');
       expect(component.genreForm.pristine).toBe(true);
     });
 
     it('should handle service call with valid genre name', () => {
       spyOn(bookGenreService, 'addGenre');
-      component.openDialog();
+      fixture.componentRef.setInput('isDialogOpen', true);
       component.genreForm.patchValue({ name: 'Science Fiction' });
-      
+
       component.onSave();
-      
+
       expect(bookGenreService.addGenre).toHaveBeenCalledWith('Science Fiction');
       expect(bookGenreService.addGenre).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('Template rendering', () => {
-    it('should render Add New Genre button', () => {
-      const button = fixture.nativeElement.querySelector('.add-genre__trigger');
-      expect(button).toBeTruthy();
-      expect(button.textContent.trim()).toBe('Add New Genre');
-    });
-
-    it('should open dialog when trigger button is clicked', () => {
-      const button = fixture.nativeElement.querySelector('.add-genre__trigger');
-      button.click();
-      fixture.detectChanges();
-      
-      expect(component.isDialogOpen()).toBe(true);
-    });
-
     it('should render dialog when isDialogOpen is true', () => {
-      component.openDialog();
+      fixture.componentRef.setInput('isDialogOpen', true);
       fixture.detectChanges();
-      
+
       const dialog = fixture.nativeElement.querySelector('app-dialog');
       expect(dialog).toBeTruthy();
     });
 
     it('should render form with genre name input', () => {
-      component.openDialog();
+      fixture.componentRef.setInput('isDialogOpen', true);
       fixture.detectChanges();
-      
+
       const input = fixture.nativeElement.querySelector('#genreName');
       expect(input).toBeTruthy();
       expect(input.getAttribute('type')).toBe('text');
@@ -239,94 +220,94 @@ describe('AddGenre', () => {
     });
 
     it('should render error message when name has error', () => {
-      component.openDialog();
+      fixture.componentRef.setInput('isDialogOpen', true);
       const nameControl = component.genreForm.get('name');
       nameControl?.markAsTouched();
       nameControl?.setValue('');
       fixture.detectChanges();
-      
+
       const errorMessage = fixture.nativeElement.querySelector('.add-genre__error');
       expect(errorMessage).toBeTruthy();
       expect(errorMessage.textContent.trim()).toBe('Name is required.');
     });
 
     it('should not render error message when name is valid', () => {
-      component.openDialog();
+      fixture.componentRef.setInput('isDialogOpen', true);
       const nameControl = component.genreForm.get('name');
       nameControl?.setValue('Mystery');
       fixture.detectChanges();
-      
+
       const errorMessage = fixture.nativeElement.querySelector('.add-genre__error');
       expect(errorMessage).toBeFalsy();
     });
 
     it('should render Cancel button', () => {
-      component.openDialog();
+      fixture.componentRef.setInput('isDialogOpen', true);
       fixture.detectChanges();
-      
+
       const cancelButton = fixture.nativeElement.querySelector('.add-genre__cancel');
       expect(cancelButton).toBeTruthy();
       expect(cancelButton.textContent.trim()).toBe('Cancel');
     });
 
     it('should close dialog when Cancel button is clicked', () => {
-      component.openDialog();
+      fixture.componentRef.setInput('isDialogOpen', true);
       fixture.detectChanges();
-      
+
       const cancelButton = fixture.nativeElement.querySelector('.add-genre__cancel');
       cancelButton.click();
       fixture.detectChanges();
-      
-      expect(component.isDialogOpen()).toBe(false);
+
+      expect(component.requestClose.emit).toHaveBeenCalled();
     });
 
     it('should render Save button', () => {
-      component.openDialog();
+      fixture.componentRef.setInput('isDialogOpen', true);
       fixture.detectChanges();
-      
+
       const saveButton = fixture.nativeElement.querySelector('.add-genre__save');
       expect(saveButton).toBeTruthy();
       expect(saveButton.textContent.trim()).toBe('Save');
     });
 
     it('should disable Save button when form is invalid', () => {
-      component.openDialog();
+      fixture.componentRef.setInput('isDialogOpen', true);
       fixture.detectChanges();
-      
+
       const saveButton = fixture.nativeElement.querySelector('.add-genre__save');
       expect(saveButton.disabled).toBe(true);
     });
 
     it('should enable Save button when form is valid', () => {
-      component.openDialog();
+      fixture.componentRef.setInput('isDialogOpen', true);
       const nameControl = component.genreForm.get('name');
       nameControl?.setValue('Mystery');
       fixture.detectChanges();
-      
+
       const saveButton = fixture.nativeElement.querySelector('.add-genre__save');
       expect(saveButton.disabled).toBe(false);
     });
 
     it('should submit form when Save button is clicked', () => {
       spyOn(bookGenreService, 'addGenre');
-      component.openDialog();
+      fixture.componentRef.setInput('isDialogOpen', true);
       const nameControl = component.genreForm.get('name');
       nameControl?.setValue('Mystery');
       fixture.detectChanges();
-      
+
       const saveButton = fixture.nativeElement.querySelector('.add-genre__save');
       saveButton.click();
       fixture.detectChanges();
-      
+
       expect(bookGenreService.addGenre).toHaveBeenCalledWith('Mystery');
     });
   });
 
   describe('Dialog component integration', () => {
     it('should pass correct title to dialog', () => {
-      component.openDialog();
+      fixture.componentRef.setInput('isDialogOpen', true);
       fixture.detectChanges();
-      
+
       const dialog = fixture.nativeElement.querySelector('app-dialog');
       expect(dialog).toBeTruthy();
       // The dialog component receives the title via input signal
@@ -335,20 +316,19 @@ describe('AddGenre', () => {
 
     it('should pass isOpen signal to dialog', () => {
       expect(component.isDialogOpen()).toBe(false);
-      
-      component.openDialog();
+
+      fixture.componentRef.setInput('isDialogOpen', true);
       fixture.detectChanges();
       expect(component.isDialogOpen()).toBe(true);
     });
 
     it('should close dialog when requestClose event is emitted', () => {
-      component.openDialog();
+      fixture.componentRef.setInput('isDialogOpen', true);
       fixture.detectChanges();
-      expect(component.isDialogOpen()).toBe(true);
-      
+
       component.closeDialog();
       fixture.detectChanges();
-      expect(component.isDialogOpen()).toBe(false);
+      expect(component.requestClose.emit).toHaveBeenCalled();
     });
   });
 });

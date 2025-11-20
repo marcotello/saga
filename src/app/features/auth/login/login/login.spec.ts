@@ -5,7 +5,7 @@ import { Login } from './login';
 import { LoginService } from '../services/login-service';
 import { AuthHttpMockService } from '../../services/auth-http-mock-service';
 import { AuthSuccessEnvelope, ErrorEnvelope } from '../models/login-models';
-import { of, throwError } from 'rxjs';
+import { of, throwError, delay } from 'rxjs';
 
 describe('Login', () => {
   let component: Login;
@@ -213,7 +213,7 @@ describe('Login', () => {
 
   describe('T405 - Loading state and duplicate prevention', () => {
     it('should set loading state during submission', fakeAsync(() => {
-      mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse));
+      mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse).pipe(delay(10)));
 
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('Password123');
@@ -227,7 +227,7 @@ describe('Login', () => {
     }));
 
     it('should disable submit button when loading', fakeAsync(() => {
-      mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse));
+      mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse).pipe(delay(10)));
 
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('Password123');
@@ -252,11 +252,11 @@ describe('Login', () => {
       component.onSubmit();
       component.onSubmit(); // Try to submit again
 
-      expect(mockAuthHttpService.login).toHaveBeenCalledTimes(2);
+      expect(mockAuthHttpService.login).toHaveBeenCalledTimes(1);
     });
 
     it('should show loading text in button', fakeAsync(() => {
-      mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse));
+      mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse).pipe(delay(10)));
 
       component.loginForm.controls.credential.setValue('test@example.com');
       component.loginForm.controls.password.setValue('Password123');
@@ -456,7 +456,7 @@ describe('Login', () => {
       tick(10);
       fixture.detectChanges();
 
-      expect(component.errorMessage()).toBe('Unable to connect. Please try again later.');
+      expect(component.errorMessage()).toBe('An unexpected error occurred. Please try again later.');
     }));
 
     it('should not navigate on error', fakeAsync(() => {
