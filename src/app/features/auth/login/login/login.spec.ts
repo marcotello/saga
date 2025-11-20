@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 import { Router, provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { Login } from './login';
-import { LoginService } from '../login-service';
+import { LoginService } from '../services/login-service';
 import { AuthHttpMockService } from '../../services/auth-http-mock-service';
 import { AuthSuccessEnvelope, ErrorEnvelope } from '../models/login-models';
 import { of, throwError } from 'rxjs';

@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { LoginService } from './login-service';
-import { AuthHttpMockService } from '../services/auth-http-mock-service';
-import { AuthSuccessEnvelope, ErrorEnvelope, User } from './models/login-models';
+import { AuthHttpMockService } from '../../services/auth-http-mock-service';
+import { AuthSuccessEnvelope, ErrorEnvelope, User } from '../models/login-models';
 import { of, throwError } from 'rxjs';
 
 describe('LoginService', () => {
