@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input, InputSignal, output, OutputEmitterRef, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, InputSignal, output, OutputEmitterRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BookGenreService } from '../services/book-genre-service';
@@ -27,7 +27,9 @@ export class AddGenre {
 
   private readonly nameControl = this.genreForm.controls.name;
 
-  readonly nameHasError: Signal<boolean> = computed(() => this.nameControl.invalid && (this.nameControl.touched || this.nameControl.dirty));
+  nameHasError(): boolean {
+    return this.nameControl.invalid && (this.nameControl.touched || this.nameControl.dirty);
+  }
 
   closeDialog(): void {
     this.requestClose.emit();
