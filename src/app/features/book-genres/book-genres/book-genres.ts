@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { BookGenreService } from '../services/book-genre-service';
 import { Genre } from '../models/book-genre-model';
 import { AddGenre } from '../add-genre/add-genre';
+import { UpdateGenre } from '../update-genre/update-genre';
 
 @Component({
   selector: 'app-book-genres',
-  imports: [CommonModule, AddGenre],
+  imports: [CommonModule, AddGenre, UpdateGenre],
   templateUrl: './book-genres.html',
   styleUrl: './book-genres.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,6 +16,8 @@ export class BookGenres {
   private readonly bookGenreService = inject(BookGenreService);
 
   protected readonly isAddGenreDialogOpen = signal(false);
+  protected readonly isUpdateGenreDialogOpen = signal(false);
+  protected readonly selectedGenre = signal<Genre | null>(null);
 
   readonly filterText = signal<string>('');
 
@@ -65,7 +68,13 @@ export class BookGenres {
   }
 
   onUpdateGenre(genre: Genre): void {
-    // Placeholder - won't do anything at this moment
+    this.selectedGenre.set(genre);
+    this.isUpdateGenreDialogOpen.set(true);
+  }
+
+  onUpdateGenreDialogRequestClose(): void {
+    this.isUpdateGenreDialogOpen.set(false);
+    this.selectedGenre.set(null);
   }
 
   onDeleteGenre(genre: Genre): void {
