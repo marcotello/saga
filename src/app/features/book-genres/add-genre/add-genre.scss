@@ -27,9 +27,14 @@
   }
 
   &__cancel {
-    background-color: var(--pico-color-red-500);
-    border-color: var(--pico-color-red-500);
+    background-color: var(--pico-color-amber-400);
+    border-color: var(--pico-color-amber-400);
     color: white;
+    transition: darken 0.2s;
+
+    &:hover {
+      background-color: var(--pico-color-amber-450);
+    }
   }
 
   &__save {

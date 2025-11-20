@@ -14,6 +14,8 @@ import { AddGenre } from '../add-genre/add-genre';
 export class BookGenres {
   private readonly bookGenreService = inject(BookGenreService);
 
+  protected readonly isAddGenreDialogOpen = signal(false);
+
   readonly filterText = signal<string>('');
 
   readonly genres = this.bookGenreService.genres;
@@ -52,6 +54,14 @@ export class BookGenres {
     if (input.value !== filteredValue) {
       input.value = filteredValue;
     }
+  }
+
+  openAddGenreDialog(): void {
+    this.isAddGenreDialogOpen.set(true);
+  }
+
+  onAddGenreDialogRequestClose(): void {
+    this.isAddGenreDialogOpen.set(false);
   }
 
   onUpdateGenre(genre: Genre): void {

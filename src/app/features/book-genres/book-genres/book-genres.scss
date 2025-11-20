@@ -56,15 +56,15 @@
       }
 
       .delete-button {
-        background-color: var(--pico-color-red-500);
-        border-color: var(--pico-color-red-500);
+        background-color: var(--pico-color-amber-400);
+        border-color: var(--pico-color-amber-400);
         color: white;
         padding: 0.5rem 1rem;
         font-size: 0.875rem;
-        transition: opacity 0.2s;
+        transition: darken 0.2s;
 
         &:hover {
-          opacity: 0.9;
+          background-color: var(--pico-color-amber-450);
         }
       }
 

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, InputSignal, output, OutputEmitterRef, Signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BookGenreService } from '../services/book-genre-service';
@@ -15,8 +15,9 @@ export class AddGenre {
   private readonly fb = inject(NonNullableFormBuilder);
   private readonly bookGenreService = inject(BookGenreService);
 
-  private readonly _isDialogOpen = signal(false);
-  readonly isDialogOpen = this._isDialogOpen.asReadonly();
+  readonly isDialogOpen: InputSignal<boolean> = input<boolean>(false);
+  readonly requestClose: OutputEmitterRef<void> = output<void>();
+
 
   readonly dialogTitle = 'Add Genre';
 
@@ -28,12 +29,8 @@ export class AddGenre {
 
   readonly nameHasError: Signal<boolean> = computed(() => this.nameControl.invalid && (this.nameControl.touched || this.nameControl.dirty));
 
-  openDialog(): void {
-    this._isDialogOpen.set(true);
-  }
-
   closeDialog(): void {
-    this._isDialogOpen.set(false);
+    this.requestClose.emit();
     this.genreForm.reset();
   }
 

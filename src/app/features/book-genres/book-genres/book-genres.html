@@ -4,7 +4,9 @@
   <div class="filter-row">
     <input type="text" [value]="filterText()" (input)="onFilterInput($event)" placeholder="Start typing to filter ..."
       class="filter-input" />
-    <app-add-genre></app-add-genre>
+      <button type="button" class="add-genre__trigger" (click)="openAddGenreDialog()">
+        Add New Genre
+      </button>
   </div>
 
   <div class="table-container">
@@ -40,4 +42,5 @@
       </tbody>
     </table>
   </div>
+  <app-add-genre [isDialogOpen]="isAddGenreDialogOpen()" (requestClose)="onAddGenreDialogRequestClose()"></app-add-genre>
 </div>
