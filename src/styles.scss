@@ -9,3 +9,12 @@ html {
 body {
   background-color: #f2f2f2;
 }
+
+.container {
+  margin: 2rem auto;
+  padding: 2rem;
+  min-height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
