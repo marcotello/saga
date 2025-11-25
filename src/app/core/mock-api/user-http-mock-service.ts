@@ -51,4 +51,41 @@ export class UserHttpMockService {
     return of(authSuccessEnvelope);
   }
 
+  updateProfileById(id: number, updatedFields: Partial<User>): Observable<User> {
+    const userIndex = userData.findIndex(user => user.id === id);
+    
+    if (userIndex === -1) {
+      const error: ErrorEnvelope = {
+        status: 'error',
+        code: 'INTERNAL_SERVER_ERROR',
+        message: 'User not found'
+      };
+      return throwError(() => error);
+    }
+
+    // Update the user in the array
+    const existingUser = userData[userIndex];
+    const bioValue = updatedFields.bio === undefined ? existingUser.bio : (updatedFields.bio || '');
+    const updatedUser = { 
+      ...existingUser, 
+      name: updatedFields.name ?? existingUser.name,
+      lastName: updatedFields.lastName ?? existingUser.lastName,
+      email: updatedFields.email ?? existingUser.email,
+      bio: bioValue
+    };
+    userData[userIndex] = updatedUser;
+
+    const user: User = {
+      id: updatedUser.id,
+      username: updatedUser.username,
+      name: updatedUser.name,
+      lastName: updatedUser.lastName,
+      email: updatedUser.email,
+      bio: updatedUser.bio || null,
+      role: updatedUser.role.toString()
+    };
+
+    return of(user);
+  }
+
 }

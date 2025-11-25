@@ -8,38 +8,101 @@
         <div class="avatar-section">
           <img src="/images/avatar1.svg" alt="Profile avatar" class="avatar" />
           <div class="user-info">
-            <small>Teen1976</small>
-            <h3>James Dixon</h3>
+            @if (userService.user(); as user) {
+              <small>{{ user.username }}</small>
+              <h3>{{ user.name }} {{ user.lastName }}</h3>
+            }
           </div>
         </div>
         <button type="button" class="outline">Upload new picture</button>
       </div>
 
-      <form class="profile-form">
+      @if (errorMessage()) {
+        <div class="error-banner" role="alert" aria-live="polite">
+          {{ errorMessage() }}
+        </div>
+      }
+
+      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profile-form" novalidate>
         <div class="form-row">
           <div class="form-group">
             <label for="firstName">First Name</label>
-            <input type="text" id="firstName" name="firstName" placeholder="John" />
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              formControlName="firstName"
+              placeholder="John"
+              [attr.aria-invalid]="hasFirstNameError() ? 'true' : null"
+              [attr.aria-describedby]="hasFirstNameError() ? 'firstName-error' : null"
+            />
+            @if (hasFirstNameError()) {
+              <small id="firstName-error" class="error-message" role="alert">
+                {{ getFirstNameError() }}
+              </small>
+            }
           </div>
 
           <div class="form-group">
             <label for="lastName">Last Name</label>
-            <input type="text" id="lastName" name="lastName" placeholder="Doe" />
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              formControlName="lastName"
+              placeholder="Doe"
+              [attr.aria-invalid]="hasLastNameError() ? 'true' : null"
+              [attr.aria-describedby]="hasLastNameError() ? 'lastName-error' : null"
+            />
+            @if (hasLastNameError()) {
+              <small id="lastName-error" class="error-message" role="alert">
+                {{ getLastNameError() }}
+              </small>
+            }
           </div>
         </div>
 
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="johndoe@saga.com" />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            formControlName="email"
+            placeholder="johndoe@saga.com"
+            [attr.aria-invalid]="hasEmailError() ? 'true' : null"
+            [attr.aria-describedby]="hasEmailError() ? 'email-error' : null"
+          />
+          @if (hasEmailError()) {
+            <small id="email-error" class="error-message" role="alert">
+              {{ getEmailError() }}
+            </small>
+          }
         </div>
 
         <div class="form-group">
           <label for="bio">Bio</label>
-          <textarea id="bio" name="bio" rows="4" placeholder="I love to read."></textarea>
+          <textarea
+            id="bio"
+            name="bio"
+            formControlName="bio"
+            rows="4"
+            placeholder="I love to read."
+          ></textarea>
         </div>
 
         <div class="form-actions">
-          <button type="submit">Save Changes</button>
+          <button
+            type="submit"
+            [disabled]="isLoading()"
+            [attr.aria-busy]="isLoading() ? 'true' : null"
+          >
+            @if (isLoading()) {
+              <span>Saving...</span>
+            } @else {
+              <span>Save Changes</span>
+            }
+          </button>
         </div>
       </form>
     </article>
