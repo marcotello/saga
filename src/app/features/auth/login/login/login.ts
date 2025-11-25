@@ -5,6 +5,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { LoginService } from '../services/login-service';
 import { passwordStrength, notOnlyWhitespace } from '../../validators/auth-validators';
 import { ErrorEnvelope } from '../models/login-models';
+import { UserService } from '../../../../core/services/user-service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class Login {
   private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
   private readonly loginService = inject(LoginService);
+  private readonly userService = inject(UserService);
 
   readonly isLoading = signal(false);
   readonly errorMessage = signal<string | null>(null);
@@ -34,7 +36,7 @@ export class Login {
         return;
       }
 
-      const user = this.loginService.user();
+      const user = this.userService.user();
       const error = this.loginService.error();
 
       untracked(() => {

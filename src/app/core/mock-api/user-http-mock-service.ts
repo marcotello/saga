@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import userData from '../../../mocks/users.json';
-import { User, ErrorEnvelope, AuthSuccessEnvelope } from '../login/models/login-models';
+import userData from '../../mocks/users.json';
+import { ErrorEnvelope, AuthSuccessEnvelope } from '../../features/auth/login/models/login-models';
 import { Observable, of, throwError } from 'rxjs';
+import { User } from '../models/models';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthHttpMockService {
+export class UserHttpMockService {
 
   login(credential: string, password: string): Observable<AuthSuccessEnvelope> {
     const foundUser = userData.find(

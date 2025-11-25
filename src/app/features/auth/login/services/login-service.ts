@@ -1,26 +1,28 @@
 import { Injectable, signal, computed, inject, Signal } from '@angular/core';
-import { User, ErrorEnvelope, AuthSuccessEnvelope } from '../models/login-models';
-import { AuthHttpMockService } from '../../services/auth-http-mock-service';
+import { ErrorEnvelope, AuthSuccessEnvelope } from '../models/login-models';
 import { Subscription } from 'rxjs';
+import { User } from '../../../../core/models/models';
+import { UserHttpMockService } from '../../../../core/mock-api/user-http-mock-service';
+import { UserService } from '../../../../core/services/user-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  private readonly authHttpMockService = inject(AuthHttpMockService);
+  private readonly authHttpMockService = inject(UserHttpMockService);
+  private readonly userService = inject(UserService);
+
   private subscription: Subscription | null = null;
 
   private readonly _accessToken = signal<string | null>(null);
   private readonly _tokenType = signal<'Bearer' | null>(null);
   private readonly _expiresAt = signal<number | null>(null);
-  private readonly _user = signal<User | null>(null);
   private readonly _error = signal<ErrorEnvelope | null>(null);
   private readonly _isLoggedIn = signal<boolean>(false);
 
   readonly accessToken = this._accessToken.asReadonly();
   readonly tokenType = this._tokenType.asReadonly();
   readonly expiresAt = this._expiresAt.asReadonly();
-  readonly user = this._user.asReadonly();
   readonly error = this._error.asReadonly();
   readonly isLoggedIn = this._isLoggedIn.asReadonly();
 
@@ -31,7 +33,7 @@ export class LoginService {
     return token && type ? `${type} ${token}` : null;
   });
 
-  login(credential: string, password: string): Signal<User | null> | Signal<ErrorEnvelope> {
+  login(credential: string, password: string): void {
 
     this._error.set(null);
 
@@ -45,11 +47,11 @@ export class LoginService {
           user: response.data.user
         });
 
-        this._user.set(response.data.user);
+        this.userService.setUser(response.data.user);
         this._isLoggedIn.set(true);
       },
       error: (error: unknown) => {
-        this._user.set(null);
+        this.userService.setUser(null);
         this._isLoggedIn.set(false);
 
         if (this.isErrorEnvelope(error)) {
@@ -63,8 +65,6 @@ export class LoginService {
         }
       }
     });
-
-    return this.user;
   }
 
   private isErrorEnvelope(error: unknown): error is ErrorEnvelope {
@@ -89,14 +89,14 @@ export class LoginService {
     const expiresAtMs = Date.now() + (payload.expiresIn * 1000);
     this._expiresAt.set(expiresAtMs);
 
-    this._user.set(payload.user);
+    this.userService.setUser(payload.user ?? null);
   }
 
   private clearSession(): void {
     this._accessToken.set(null);
     this._tokenType.set(null);
     this._expiresAt.set(null);
-    this._user.set(null);
+    this.userService.setUser(null);
     this._error.set(null);
     this._isLoggedIn.set(false);
   }
