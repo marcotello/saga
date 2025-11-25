@@ -3,10 +3,11 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../../core/services/user-service';
 import { User } from '../../../core/models/models';
 import { ErrorEnvelope } from '../../auth/login/models/login-models';
+import { WithLoadingState } from '../../../core/directives/with-loading-state';
 
 @Component({
   selector: 'app-profile',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, WithLoadingState],
   templateUrl: './profile.html',
   styleUrl: './profile.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,7 +18,7 @@ export class Profile {
 
   readonly isLoading = signal(false);
   readonly errorMessage = signal<string | null>(null);
-  private readonly updatingUserId = signal<number | null>(null);
+  readonly updatingUserId = signal<number | null>(null);
 
   readonly profileForm = this.fb.group({
     firstName: ['', [Validators.required]],
@@ -40,17 +41,12 @@ export class Profile {
       }
     });
 
-    // Watch for user updates to clear loading state
-    effect(() => {
-      const user: User | null = this.userService.user();
-      const updatingId = this.updatingUserId();
-      
-      if (this.isLoading() && updatingId !== null && user?.id === updatingId) {
-        this.isLoading.set(false);
-        this.updatingUserId.set(null);
-        this.errorMessage.set(null);
-      }
-    });
+  }
+
+  onLoadingComplete(): void {
+    this.isLoading.set(false);
+    this.updatingUserId.set(null);
+    this.errorMessage.set(null);
   }
 
   onSubmit(): void {

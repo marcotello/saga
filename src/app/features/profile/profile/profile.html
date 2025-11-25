@@ -1,7 +1,13 @@
-<div class="profile-page">
+<div class="profile-page"
+  withLoadingState
+  [isLoading]="isLoading()"
+  [trackingId]="updatingUserId()"
+  (loadingComplete)="onLoadingComplete()"
+>
+  
   <div class="container">
     <h1>My Profile</h1>
-    <article class="profile-section">
+    <article class="profile-section" >
       <h2>General Information</h2>
 
       <div class="profile-header">
@@ -23,7 +29,12 @@
         </div>
       }
 
-      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profile-form" novalidate>
+      <form
+        [formGroup]="profileForm"
+        (ngSubmit)="onSubmit()"
+        class="profile-form"
+        novalidate
+      >
         <div class="form-row">
           <div class="form-group">
             <label for="firstName">First Name</label>
