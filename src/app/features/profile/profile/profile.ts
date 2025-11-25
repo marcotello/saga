@@ -17,6 +17,7 @@ export class Profile {
 
   readonly isLoading = signal(false);
   readonly errorMessage = signal<string | null>(null);
+  private readonly updatingUserId = signal<number | null>(null);
 
   readonly profileForm = this.fb.group({
     firstName: ['', [Validators.required]],
@@ -36,6 +37,18 @@ export class Profile {
           email: user.email,
           bio: user.bio || null
         });
+      }
+    });
+
+    // Watch for user updates to clear loading state
+    effect(() => {
+      const user: User | null = this.userService.user();
+      const updatingId = this.updatingUserId();
+      
+      if (this.isLoading() && updatingId !== null && user?.id === updatingId) {
+        this.isLoading.set(false);
+        this.updatingUserId.set(null);
+        this.errorMessage.set(null);
       }
     });
   }
@@ -60,6 +73,7 @@ export class Profile {
     }
 
     this.isLoading.set(true);
+    this.updatingUserId.set(currentUser.id);
 
     const { firstName, lastName, email, bio } = this.profileForm.getRawValue();
 
@@ -71,18 +85,15 @@ export class Profile {
       bio: bio?.trim() || null
     };
 
-    this.userService.updateProfileById(updatedUser).subscribe({
-      next: (user: User) => {
-        this.userService.setUser(user);
+    // Fallback timeout to clear loading state (in case of error)
+    setTimeout(() => {
+      if (this.isLoading() && this.updatingUserId() === currentUser.id) {
         this.isLoading.set(false);
-        this.errorMessage.set(null);
-        // Optionally show success message
-      },
-      error: (error: unknown) => {
-        this.isLoading.set(false);
-        this.handleUpdateError(error);
+        this.updatingUserId.set(null);
       }
-    });
+    }, 5000);
+
+    this.userService.updateProfileById(updatedUser);
   }
 
   getFirstNameError(): string | null {
