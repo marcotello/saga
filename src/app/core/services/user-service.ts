@@ -1,6 +1,6 @@
 import { Injectable, inject, signal } from "@angular/core";
 import { User } from "../models/models";
-import { UserHttpMockService } from "../mock-api/user-http-mock-service";
+import { UserHttpMockService } from "../mock-api/mock-http-services/user-http-mock-service";
 
 
 @Injectable({

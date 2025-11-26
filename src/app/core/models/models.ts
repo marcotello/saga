@@ -6,4 +6,5 @@ export interface User {
     email: string;
     bio?: string | null;
     role: string;
+    profilePicture: string;
   }

@@ -2,7 +2,7 @@ import { Injectable, signal, computed, inject } from '@angular/core';
 import { ErrorEnvelope, AuthSuccessEnvelope } from '../models/login-models';
 import { Subscription } from 'rxjs';
 import { User } from '../../../../core/models/models';
-import { UserHttpMockService } from '../../../../core/mock-api/user-http-mock-service';
+import { UserHttpMockService } from '../../../../core/mock-api/mock-http-services/user-http-mock-service';
 import { UserService } from '../../../../core/services/user-service';
 
 @Injectable({

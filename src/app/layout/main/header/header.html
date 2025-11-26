@@ -12,7 +12,7 @@
     } @else {
       <a routerLink="/my-books" class="my-books-link">My Books</a>
       <div class="avatar-container" (mouseenter)="showMenu()" (mouseleave)="hideMenu()">
-        <img src="/images/avatar3.svg" alt="User Avatar" class="avatar">
+        <img [src]="userService.user()?.profilePicture || '/images/avatar4.svg'" alt="User Avatar" class="avatar">
         @if (isMenuVisible()) {
           <div class="user-menu">
             <a href="#" class="menu-item" routerLink="/profile">My Profile</a>

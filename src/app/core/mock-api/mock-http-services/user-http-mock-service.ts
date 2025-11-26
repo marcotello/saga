@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import userData from '../../mocks/users.json';
-import { ErrorEnvelope, AuthSuccessEnvelope } from '../../features/auth/login/models/login-models';
+import userData from '../mocks-data/users.json';
+import { ErrorEnvelope, AuthSuccessEnvelope } from '../../../features/auth/login/models/login-models';
 import { Observable, of, throwError, delay } from 'rxjs';
-import { User } from '../models/models';
+import { User } from '../../models/models';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +30,8 @@ export class UserHttpMockService {
       lastName: foundUser.lastName,
       email: foundUser.email,
       bio: foundUser.bio || null,
-      role: foundUser.role.toString()
+      role: foundUser.role.toString(),
+      profilePicture: foundUser.profilePicture
     };
 
     const accessToken = `mock-token-${foundUser.id}-${Date.now()}`;
@@ -82,7 +83,8 @@ export class UserHttpMockService {
       lastName: updatedUser.lastName,
       email: updatedUser.email,
       bio: updatedUser.bio || null,
-      role: updatedUser.role.toString()
+      role: updatedUser.role.toString(),
+      profilePicture: updatedUser.profilePicture
     };
 
     return of(user).pipe(delay(2000));

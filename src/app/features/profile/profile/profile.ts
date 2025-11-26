@@ -19,6 +19,7 @@ export class Profile {
   readonly isLoading = signal(false);
   readonly errorMessage = signal<string | null>(null);
   readonly updatingUserId = signal<number | null>(null);
+  private previousUser: User | null = null;
 
   readonly profileForm = this.fb.group({
     firstName: ['', [Validators.required]],
@@ -28,9 +29,11 @@ export class Profile {
   });
 
   constructor() {
-    // Load current user data into the form
     effect(() => {
       const user: User | null = this.userService.user();
+      const updatingUserId = this.updatingUserId();
+      const hasUserChanged = user !== this.previousUser;
+      
       if (user) {
         this.profileForm.patchValue({
           firstName: user.name,
@@ -39,12 +42,18 @@ export class Profile {
           bio: user.bio || null
         });
       }
+      
+      if (this.isLoading() && updatingUserId !== null && user?.id === updatingUserId && hasUserChanged) {
+        this.isLoading.set(false);
+        this.updatingUserId.set(null);
+        this.errorMessage.set(null);
+      }
+      
+      this.previousUser = user;
     });
-
   }
 
   onLoadingComplete(): void {
-    this.isLoading.set(false);
     this.updatingUserId.set(null);
     this.errorMessage.set(null);
   }
@@ -81,7 +90,6 @@ export class Profile {
       bio: bio?.trim() || null
     };
 
-    // Fallback timeout to clear loading state (in case of error)
     setTimeout(() => {
       if (this.isLoading() && this.updatingUserId() === currentUser.id) {
         this.isLoading.set(false);

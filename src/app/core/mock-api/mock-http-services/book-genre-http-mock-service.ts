@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import genresData from '../../../mocks/genres.json';
-import { Genre } from '../models/book-genre-model';
-import { SuccessEnvelope, ErrorEnvelope } from '../../../core/models/envelope';
+import genresData from '../mocks-data/genres.json';
+import { Genre } from '../../../features/book-genres/models/book-genre-model';
+import { SuccessEnvelope, ErrorEnvelope } from '../../models/envelope';
 
 @Injectable({
   providedIn: 'root',

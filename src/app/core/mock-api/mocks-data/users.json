@@ -11,7 +11,7 @@
       "isActive": true,
       "createdAt": "2025-01-01",
       "updatedAt": "2025-01-01",
-      "profilePicture": "avatar1.svg"
+      "profilePicture": "/images/avatar3.svg"
     },
     {
       "id": 2,
@@ -25,6 +25,6 @@
       "isActive": true,
       "createdAt": "2025-01-01",
       "updatedAt": "2025-01-01",
-      "profilePicture": "avatar2.svg"
+      "profilePicture": "/images/avatar1.svg"
     }
 ]

@@ -1,7 +1,7 @@
 <div class="profile-page"
   withLoadingState
   [isLoading]="isLoading()"
-  [trackingId]="updatingUserId()"
+  loadingMessage="Saving changes…"
   (loadingComplete)="onLoadingComplete()"
 >
   
@@ -12,7 +12,7 @@
 
       <div class="profile-header">
         <div class="avatar-section">
-          <img src="/images/avatar1.svg" alt="Profile avatar" class="avatar" />
+          <img [src]="userService.user()?.profilePicture || '/images/avatar4.svg'" alt="Profile avatar" class="avatar" />
           <div class="user-info">
             @if (userService.user(); as user) {
               <small>{{ user.username }}</small>

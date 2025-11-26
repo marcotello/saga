@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { LoginService } from '../../../features/auth/login/services/login-service';
+import { UserService } from '../../../core/services/user-service';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,7 @@ export class Header {
   private readonly router = inject(Router);
 
   readonly isLoggedIn = this.loginService.isLoggedIn;
+  readonly userService = inject(UserService);
   readonly isMenuVisible = signal(false);
 
   showMenu(): void {
