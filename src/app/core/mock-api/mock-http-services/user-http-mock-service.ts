@@ -4,6 +4,11 @@ import { ErrorEnvelope, AuthSuccessEnvelope } from '../../../features/auth/login
 import { Observable, of, throwError, delay } from 'rxjs';
 import { User } from '../../models/models';
 
+type UpdatePasswordPayload = {
+  currentPassword: string;
+  newPassword: string;
+};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -85,6 +90,39 @@ export class UserHttpMockService {
       bio: updatedUser.bio || null,
       role: updatedUser.role.toString(),
       profilePicture: updatedUser.profilePicture
+    };
+
+    return of(user).pipe(delay(2000));
+  }
+
+  updatePassword(id: number, payload: UpdatePasswordPayload): Observable<User> {
+    const userIndex = userData.findIndex(user => user.id === id);
+
+    if (userIndex === -1) {
+      const error: ErrorEnvelope = {
+        status: 'error',
+        code: 'INTERNAL_SERVER_ERROR',
+        message: 'User not found'
+      };
+      return throwError(() => error);
+    }
+
+    const existingUser = userData[userIndex];
+
+    userData[userIndex] = {
+      ...existingUser,
+      password: payload.newPassword
+    };
+
+    const user: User = {
+      id: existingUser.id,
+      username: existingUser.username,
+      name: existingUser.name,
+      lastName: existingUser.lastName,
+      email: existingUser.email,
+      bio: existingUser.bio || null,
+      role: existingUser.role.toString(),
+      profilePicture: existingUser.profilePicture
     };
 
     return of(user).pipe(delay(2000));

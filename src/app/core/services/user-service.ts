@@ -27,4 +27,15 @@ import { UserHttpMockService } from "../mock-api/mock-http-services/user-http-mo
             }
         });
     }
+
+  updatePassword(userId: number, currentPassword: string, newPassword: string): void {
+    this.userHttpMockService.updatePassword(userId, { currentPassword, newPassword }).subscribe({
+      next: (updatedUser: User) => {
+        this._user.set(updatedUser);
+      },
+      error: () => {
+        // Error handling will be implemented later with an error service
+      }
+    });
+  }
   }
