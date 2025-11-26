@@ -3,7 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { NgOptimizedImage } from '@angular/common';
 import { LoginService } from '../services/login-service';
-import { passwordStrength, notOnlyWhitespace } from '../../validators/auth-validators';
+import { passwordStrength, notOnlyWhitespace } from '../../../../core/validators/auth-validators';
 import { ErrorEnvelope } from '../models/login-models';
 import { UserService } from '../../../../core/services/user-service';
 

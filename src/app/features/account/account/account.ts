@@ -3,6 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WithLoadingState } from '../../../core/directives/with-loading-state';
 import { UserService } from '../../../core/services/user-service';
 import { User } from '../../../core/models/models';
+import { passwordStrength } from '../../../core/validators/auth-validators';
 
 @Component({
   selector: 'app-account',
@@ -22,7 +23,7 @@ export class Account {
 
   readonly passwordForm = this.fb.group({
     currentPassword: ['', [Validators.required]],
-    newPassword: ['', [Validators.required, Validators.minLength(8)]],
+    newPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(128), passwordStrength()]],
     confirmPassword: ['', [Validators.required]]
   });
 
@@ -120,6 +121,14 @@ export class Account {
 
     if (control.errors['minlength']) {
       return 'Password must be at least 8 characters';
+    }
+
+    if (control.errors['maxlength']) {
+      return 'Password cannot exceed 128 characters';
+    }
+
+    if (control.errors['passwordStrength']) {
+      return control.errors['passwordStrength'].message ?? 'Password must include upper and lower case letters and a number';
     }
 
     return null;
