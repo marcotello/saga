@@ -1,3 +1,5 @@
+import { User } from "../../../../core/models/models";
+
 
 export interface CredentialInput {
   credential: string;
@@ -9,16 +11,6 @@ export interface CredentialOutput {
   tokenType: 'Bearer';
   expiresIn: number;
   user: User;
-}
-
-export interface User {
-  id: number;
-  username: string;
-  name: string;
-  lastName: string;
-  email: string;
-  bio?: string | null;
-  role: string;
 }
 
 export interface AuthSuccessPayload {

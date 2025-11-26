@@ -1,0 +1,67 @@
+.account-page {
+
+    .container {
+  
+      h1 {
+          margin: 0;
+          color: var(--pico-color);
+        }
+    }
+  
+    .password-form {
+      padding: 3rem 3rem;
+
+      @media (max-width: 768px) {
+        padding: 2rem 2rem;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+  
+        @media (max-width: 768px) {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+      }
+  
+      .form-group {
+        margin-bottom: 1rem;
+  
+        label {
+          display: block;
+          font-size: 0.875rem;
+          font-weight: 500;
+          color: #374151;
+          margin-bottom: 0.5rem;
+        }
+  
+        input,
+        textarea {
+          width: 100%;
+          padding: 0.625rem 0.875rem;
+          font-size: 0.9375rem;
+        }
+      }
+
+      .password-input-wrapper {
+        position: relative;
+
+        input {
+          padding-right: 3rem;
+        }
+      }
+  
+      .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 2rem;
+  
+        @media (max-width: 768px) {
+          justify-content: stretch;
+        }
+      }
+    }
+  }
+  

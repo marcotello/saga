@@ -1,0 +1,111 @@
+.profile-page {
+
+  .container {
+
+    h1 {
+        margin: 0;
+        color: var(--pico-color);
+      }
+  }
+
+  .profile-section {
+    padding: 3rem 3rem;
+    
+    @media (max-width: 768px) {
+      padding: 2rem 2rem;
+    }
+   
+    .profile-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 3rem 0 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #e5e5e5;
+  
+      @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: flex-start;
+      }
+
+      .avatar-section {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    
+        .avatar {
+          width: 150px;
+          height: auto;
+          border-radius: 50%;
+          object-fit: cover;
+          background-color: #e5e5e5;
+        }
+    
+        .user-info {
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+          margin-top: 1rem;
+        }
+      }
+
+      .outline {
+        margin-top: 1rem;
+
+        @media (max-width: 768px) {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .profile-form {
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+
+      label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #374151;
+        margin-bottom: 0.5rem;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 0.625rem 0.875rem;
+        font-size: 0.9375rem;
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 100px;
+        font-family: inherit;
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 2rem;
+
+      @media (max-width: 768px) {
+        justify-content: stretch;
+      }
+    }
+  }
+}

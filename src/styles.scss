@@ -3,9 +3,118 @@
 @import '@picocss/pico/css/pico.colors.min.css';
 
 html {
-  background-color: var(--pico-color-slate-50);
+  background-color: #f2f2f2;
 }
 
 body {
-  background-color: var(--pico-color-slate-50);
+  background-color: #f2f2f2;
+}
+
+.container {
+  margin: 2rem auto;
+  padding: 2rem;
+  min-height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.with-loading-state-host {
+  position: relative;
+}
+
+.with-loading-state-spinner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.85);
+  z-index: 100;
+  font-weight: 600;
+  color: var(--pico-color, #1f2933);
+  border-radius: inherit;
+  text-align: center;
+  padding: 1rem;
+  pointer-events: none;
+}
+
+.with-loading-state-image {
+  width: 300px;
+  height: auto;
+  object-fit: contain;
+  margin-top: 3rem;
+}
+
+.with-loading-state-text {
+  display: block;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 1.5rem;
+  top: 38.5%;
+  transform: translateY(-50%);
+  padding: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--pico-muted-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--pico-color-inverse);
+  }
+
+  &:focus, &:active {
+    outline: none;
+    box-shadow: none;
+    border: none;
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: none;
+  }
+
+  svg {
+    display: block;
+  }
+}
+
+.error-message {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--pico-color-red-500, #dc2626);
+  font-size: 0.875rem;
+}
+
+.error-banner {
+  width: 100%;
+  text-align: center;
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+  color: var(--pico-color-red-500);
+  font-size: small;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgb(200.25, 79.25, 72.25)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='12' y1='8' x2='12' y2='12'%3E%3C/line%3E%3Cline x1='12' y1='16' x2='12.01' y2='16'%3E%3C/line%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
 }

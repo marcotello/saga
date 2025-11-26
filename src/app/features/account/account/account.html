@@ -1,0 +1,121 @@
+<div
+  class="account-page"
+  withLoadingState
+  [isLoading]="isLoading()"
+  loadingMessage="Updating password…"
+  (loadingComplete)="onLoadingComplete()"
+>
+  <div class="container">
+    <h1>Password</h1>
+
+    <article class="account-section">
+      @if (errorMessage()) {
+        <div class="error-banner" role="alert" aria-live="polite">
+          {{ errorMessage() }}
+        </div>
+      }
+
+      <form
+        class="password-form"
+        [formGroup]="passwordForm"
+        (ngSubmit)="onSubmit()"
+        novalidate
+      >
+        <div class="form-group">
+          <label for="currentPassword">Current Password</label>
+          <div class="password-input-wrapper">
+            <input
+              #currentPasswordInput
+              type="password"
+              id="currentPassword"
+              name="currentPassword"
+              formControlName="currentPassword"
+              placeholder="Current password"
+              autocomplete="current-password"
+              [attr.aria-invalid]="hasCurrentPasswordError() ? 'true' : null"
+              [attr.aria-describedby]="hasCurrentPasswordError() ? 'currentPassword-error' : null"
+            />
+            <button
+              passwordToggle
+              class="password-toggle"
+              [passwordToggleFor]="currentPasswordInput"
+            ></button>
+          </div>
+          @if (hasCurrentPasswordError()) {
+            <small id="currentPassword-error" class="error-message" role="alert">
+              {{ getCurrentPasswordError() }}
+            </small>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="newPassword">New Password</label>
+          <div class="password-input-wrapper">
+            <input
+              #newPasswordInput
+              type="password"
+              id="newPassword"
+              name="newPassword"
+              formControlName="newPassword"
+              placeholder="Enter new password"
+              autocomplete="new-password"
+              [attr.aria-invalid]="hasNewPasswordError() ? 'true' : null"
+              [attr.aria-describedby]="hasNewPasswordError() ? 'newPassword-error' : null"
+            />
+            <button
+              passwordToggle
+              class="password-toggle"
+              [passwordToggleFor]="newPasswordInput"
+            ></button>
+          </div>
+          @if (hasNewPasswordError()) {
+            <small id="newPassword-error" class="error-message" role="alert">
+              {{ getNewPasswordError() }}
+            </small>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirm New Password</label>
+          <div class="password-input-wrapper">
+            <input
+              #confirmPasswordInput
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              formControlName="confirmPassword"
+              placeholder="Confirm new password"
+              autocomplete="new-password"
+              [attr.aria-invalid]="hasConfirmPasswordError() ? 'true' : null"
+              [attr.aria-describedby]="hasConfirmPasswordError() ? 'confirmPassword-error' : null"
+            />
+            <button
+              passwordToggle
+              class="password-toggle"
+              [passwordToggleFor]="confirmPasswordInput"
+            ></button>
+          </div>
+          @if (hasConfirmPasswordError()) {
+            <small id="confirmPassword-error" class="error-message" role="alert">
+              {{ getConfirmPasswordError() }}
+            </small>
+          }
+        </div>
+
+        <div class="form-actions">
+          <button
+            type="submit"
+            [disabled]="isLoading()"
+            [attr.aria-busy]="isLoading() ? 'true' : null"
+          >
+            @if (isLoading()) {
+              <span>Updating…</span>
+            } @else {
+              <span>Update Password</span>
+            }
+          </button>
+        </div>
+      </form>
+    </article>
+  </div>
+</div>
