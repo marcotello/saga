@@ -4,10 +4,11 @@ import { WithLoadingState } from '../../../core/directives/with-loading-state';
 import { UserService } from '../../../core/services/user-service';
 import { User } from '../../../core/models/models';
 import { passwordStrength } from '../../../core/validators/auth-validators';
+import { PasswordToggleDirective } from '../../../core/directives/password-toggle';
 
 @Component({
   selector: 'app-account',
-  imports: [ReactiveFormsModule, WithLoadingState],
+  imports: [ReactiveFormsModule, WithLoadingState, PasswordToggleDirective],
   templateUrl: './account.html',
   styleUrl: './account.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

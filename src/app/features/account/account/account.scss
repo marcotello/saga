@@ -44,6 +44,14 @@
           font-size: 0.9375rem;
         }
       }
+
+      .password-input-wrapper {
+        position: relative;
+
+        input {
+          padding-right: 3rem;
+        }
+      }
   
       .form-actions {
         display: flex;

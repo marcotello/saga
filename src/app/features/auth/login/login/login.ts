@@ -6,10 +6,11 @@ import { LoginService } from '../services/login-service';
 import { passwordStrength, notOnlyWhitespace } from '../../../../core/validators/auth-validators';
 import { ErrorEnvelope } from '../models/login-models';
 import { UserService } from '../../../../core/services/user-service';
+import { PasswordToggleDirective } from '../../../../core/directives/password-toggle';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, NgOptimizedImage, RouterLink],
+  imports: [ReactiveFormsModule, NgOptimizedImage, RouterLink, PasswordToggleDirective],
   templateUrl: './login.html',
   styleUrl: './login.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,7 +23,6 @@ export class Login {
 
   readonly isLoading = signal(false);
   readonly errorMessage = signal<string | null>(null);
-  readonly passwordVisible = signal(false);
   private readonly isSubmitting = signal(false);
 
   readonly loginForm = this.fb.nonNullable.group({
@@ -52,18 +52,6 @@ export class Login {
         }
       });
     });
-  }
-
-  togglePasswordVisibility(): void {
-    this.passwordVisible.update(visible => !visible);
-  }
-
-  getPasswordType(): 'text' | 'password' {
-    return this.passwordVisible() ? 'text' : 'password';
-  }
-
-  getPasswordToggleLabel(): string {
-    return this.passwordVisible() ? 'Hide password' : 'Show password';
   }
 
   onSubmit(): void {

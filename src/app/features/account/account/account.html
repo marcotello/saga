@@ -23,16 +23,24 @@
       >
         <div class="form-group">
           <label for="currentPassword">Current Password</label>
-          <input
-            type="password"
-            id="currentPassword"
-            name="currentPassword"
-            formControlName="currentPassword"
-            placeholder="Current password"
-            autocomplete="current-password"
-            [attr.aria-invalid]="hasCurrentPasswordError() ? 'true' : null"
-            [attr.aria-describedby]="hasCurrentPasswordError() ? 'currentPassword-error' : null"
-          />
+          <div class="password-input-wrapper">
+            <input
+              #currentPasswordInput
+              type="password"
+              id="currentPassword"
+              name="currentPassword"
+              formControlName="currentPassword"
+              placeholder="Current password"
+              autocomplete="current-password"
+              [attr.aria-invalid]="hasCurrentPasswordError() ? 'true' : null"
+              [attr.aria-describedby]="hasCurrentPasswordError() ? 'currentPassword-error' : null"
+            />
+            <button
+              passwordToggle
+              class="password-toggle"
+              [passwordToggleFor]="currentPasswordInput"
+            ></button>
+          </div>
           @if (hasCurrentPasswordError()) {
             <small id="currentPassword-error" class="error-message" role="alert">
               {{ getCurrentPasswordError() }}
@@ -42,16 +50,24 @@
 
         <div class="form-group">
           <label for="newPassword">New Password</label>
-          <input
-            type="password"
-            id="newPassword"
-            name="newPassword"
-            formControlName="newPassword"
-            placeholder="Enter new password"
-            autocomplete="new-password"
-            [attr.aria-invalid]="hasNewPasswordError() ? 'true' : null"
-            [attr.aria-describedby]="hasNewPasswordError() ? 'newPassword-error' : null"
-          />
+          <div class="password-input-wrapper">
+            <input
+              #newPasswordInput
+              type="password"
+              id="newPassword"
+              name="newPassword"
+              formControlName="newPassword"
+              placeholder="Enter new password"
+              autocomplete="new-password"
+              [attr.aria-invalid]="hasNewPasswordError() ? 'true' : null"
+              [attr.aria-describedby]="hasNewPasswordError() ? 'newPassword-error' : null"
+            />
+            <button
+              passwordToggle
+              class="password-toggle"
+              [passwordToggleFor]="newPasswordInput"
+            ></button>
+          </div>
           @if (hasNewPasswordError()) {
             <small id="newPassword-error" class="error-message" role="alert">
               {{ getNewPasswordError() }}
@@ -61,16 +77,24 @@
 
         <div class="form-group">
           <label for="confirmPassword">Confirm New Password</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            formControlName="confirmPassword"
-            placeholder="Confirm new password"
-            autocomplete="new-password"
-            [attr.aria-invalid]="hasConfirmPasswordError() ? 'true' : null"
-            [attr.aria-describedby]="hasConfirmPasswordError() ? 'confirmPassword-error' : null"
-          />
+          <div class="password-input-wrapper">
+            <input
+              #confirmPasswordInput
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              formControlName="confirmPassword"
+              placeholder="Confirm new password"
+              autocomplete="new-password"
+              [attr.aria-invalid]="hasConfirmPasswordError() ? 'true' : null"
+              [attr.aria-describedby]="hasConfirmPasswordError() ? 'confirmPassword-error' : null"
+            />
+            <button
+              passwordToggle
+              class="password-toggle"
+              [passwordToggleFor]="confirmPasswordInput"
+            ></button>
+          </div>
           @if (hasConfirmPasswordError()) {
             <small id="confirmPassword-error" class="error-message" role="alert">
               {{ getConfirmPasswordError() }}
