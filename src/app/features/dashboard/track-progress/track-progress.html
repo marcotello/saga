@@ -1,0 +1,36 @@
+<section class="track-progress-section">
+  <div class="container">
+    <h1>My Books</h1>
+
+    <div class="books-grid">
+      @for (book of books(); track book.id) {
+      <article class="book-card">
+        <div class="book-cover">
+          <img [ngSrc]="book.coverImage" [alt]="book.title" width="150" height="225" />
+        </div>
+        <div class="book-info">
+          <h3 class="book-title">{{ book.title }}</h3>
+          <div class="progress-container">
+            <progress [value]="book.progressPercentage" max="100" class="progress-bar"></progress>
+            <span class="progress-text">{{ book.progressPercentage }}%</span>
+          </div>
+          <button type="button" class="update-progress-btn" (click)="updateProgress.emit(book)">
+            Update Progress
+          </button>
+        </div>
+      </article>
+      }
+
+      <article class="book-card add-book-card">
+        <button type="button" class="add-book-btn" (click)="addBook.emit()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span>Add a Book</span>
+        </button>
+      </article>
+    </div>
+  </div>
+</section>

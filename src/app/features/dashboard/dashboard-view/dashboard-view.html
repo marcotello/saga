@@ -1,1 +1,7 @@
-<p>dashboard-view works!</p>
+<div class="container">
+  <app-track-progress 
+    [books]="books()"
+    (updateProgress)="onUpdateProgress($event)"
+    (addBook)="onAddBook()"
+  ></app-track-progress>
+</div>
