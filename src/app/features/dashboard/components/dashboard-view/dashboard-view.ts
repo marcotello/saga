@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { BookProgress } from '../../models/track-progress-model';
 import { TrackProgress } from '../track-progress/track-progress';
-import { BookProgress } from '../models/track-progress-model';
 
 @Component({
   selector: 'app-dashboard-view',
@@ -23,12 +23,6 @@ export class DashboardView {
       title: 'To Kill a Mockingbird',
       coverImage: 'https://via.placeholder.com/150x225?text=Book+Cover',
       progressPercentage: 78
-    },
-    {
-      id: 3,
-      title: '1984',
-      coverImage: 'https://via.placeholder.com/150x225?text=Book+Cover',
-      progressPercentage: 23
     }
   ]);
 
