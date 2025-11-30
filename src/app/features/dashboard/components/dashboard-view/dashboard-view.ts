@@ -14,14 +14,14 @@ export class DashboardView {
   readonly books = signal<BookProgress[]>([
     {
       id: 1,
-      title: 'The Great Gatsby',
-      coverImage: 'https://via.placeholder.com/150x225?text=Book+Cover',
+      title: 'Pro Angular 9',
+      coverImage: '/images/books/pro-angular.jpg',
       progressPercentage: 45
     },
     {
       id: 2,
-      title: 'To Kill a Mockingbird',
-      coverImage: 'https://via.placeholder.com/150x225?text=Book+Cover',
+      title: 'Reactive Patterns with RxJS and Angular Signals',
+      coverImage: '/images/books/reactive-patterns.jpg',
       progressPercentage: 78
     }
   ]);
