@@ -23,7 +23,7 @@ export class UserService {
     this._user.set(user);
   }
 
-  updateProfileById(user: User): void { 
+  updateProfileById(user: User): void {
     this.userHttpMockService.updateProfileById(user.id, user).subscribe({
       next: (updatedUser: User) => {
         this._user.set(updatedUser);
@@ -51,5 +51,15 @@ export class UserService {
 
   setCurrentlyReadingUserBooks(currentlyReadingUserBooks: UserBook[] | null): void {
     this._currentlyReadingUserBooks.set(currentlyReadingUserBooks);
+  }
+
+  updateUserBook(updatedBook: UserBook): void {
+    this._userBooks.update(books =>
+      books?.map(book => book.id === updatedBook.id ? updatedBook : book) ?? null
+    );
+
+    this._currentlyReadingUserBooks.update(books =>
+      books?.map(book => book.id === updatedBook.id ? updatedBook : book) ?? null
+    );
   }
 }

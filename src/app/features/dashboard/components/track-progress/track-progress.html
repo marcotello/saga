@@ -5,7 +5,7 @@
     @for (book of books(); track book.id) {
     <article class="book-card">
       <div class="book-cover">
-        <img [ngSrc]="book.coverImage" [alt]="book.name" width="150" height="225" />
+        <img [ngSrc]="book.coverImage" [alt]="book.name" priority="high" width="150" height="225" />
       </div>
       <div class="book-info">
         <h3 class="book-title">{{ book.name }}</h3>

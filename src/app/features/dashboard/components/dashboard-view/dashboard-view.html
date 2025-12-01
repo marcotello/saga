@@ -1,4 +1,10 @@
 <div class="container">
-  <app-track-progress [books]="books()" (updateProgress)="onUpdateProgress($event)" (addBook)="onAddBook()">
-  </app-track-progress>
+  <app-track-progress [books]="books()" (updateProgress)="onUpdateProgress($event)"
+    (addBook)="onAddBook()"></app-track-progress>
+
+  @if (selectedBook()) {
+  <app-update-progress [book]="selectedBook()!" [isOpen]="isUpdateProgressOpen()"
+    (saveProgress)="onSaveProgress($event)" (cancelUpdate)="onCancelProgress()">
+  </app-update-progress>
+  }
 </div>
