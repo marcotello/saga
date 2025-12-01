@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { BookProgress } from '../../models/track-progress-model';
+import { UserBook } from '../../../../core/models/user-book';
 
 @Component({
   selector: 'app-track-progress',
@@ -10,9 +10,9 @@ import { BookProgress } from '../../models/track-progress-model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TrackProgress {
-  books = input<BookProgress[]>([]);
+  books = input<UserBook[] | null>([]);
 
-  updateProgress = output<BookProgress>();
+  updateProgress = output<UserBook>();
   addBook = output<void>();
 }
 

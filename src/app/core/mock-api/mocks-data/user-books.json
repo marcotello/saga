@@ -1,0 +1,154 @@
+[
+    {
+        "id": 1,
+        "name": "Pro Angular",
+        "author": "Adam Freeman",
+        "coverImage": "/images/books/pro-angular.jpg",
+        "progressPercentage": 45,
+        "createdAt": "2025-01-01",
+        "updatedAt": "2025-01-01",
+        "userId": 1,
+        "genreId": 31,
+        "status": "Reading",
+        "shelves": [
+            1,
+            3
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Reactive Patterns with RxJS and Angular Signals",
+        "author": "Lamis Chebbi",
+        "coverImage": "/images/books/reactive-patterns.jpg",
+        "progressPercentage": 78,
+        "createdAt": "2025-01-01",
+        "updatedAt": "2025-01-01",
+        "userId": 1,
+        "genreId": 31,
+        "status": "Reading",
+        "shelves": [
+            2
+        ]
+    },
+    {
+        "id": 6,
+        "name": "The Ultimate Guide to Angular Evolution",
+        "author": "Mateusz Stefańczyk",
+        "coverImage": "/images/books/ultimate-guide.png",
+        "progressPercentage": 100,
+        "createdAt": "2025-01-01",
+        "updatedAt": "2025-01-01",
+        "userId": 1,
+        "genreId": 31,
+        "status": "Finished",
+        "shelves": [
+            1
+        ]
+    },
+    {
+        "id": 7,
+        "name": "ng-book: The Complete Guide to Angular",
+        "author": "Nathan Murray",
+        "coverImage": "/images/books/ng-book.jpg",
+        "progressPercentage": 100,
+        "createdAt": "2025-01-01",
+        "updatedAt": "2025-01-01",
+        "userId": 1,
+        "genreId": 31,
+        "status": "Finished",
+        "shelves": [
+            1
+        ]
+    },
+    {
+        "id": 8,
+        "name": "Testing Angular Applications",
+        "author": "Corinna Cohn",
+        "coverImage": "/images/books/testing-angular.jpg",
+        "progressPercentage": 0,
+        "createdAt": "2025-01-01",
+        "updatedAt": "2025-01-01",
+        "userId": 1,
+        "genreId": 31,
+        "status": "Want to Read",
+        "shelves": [
+            1
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Learning Angular",
+        "author": "Aristeidis Bampakos",
+        "coverImage": "/images/books/learning-angular.jpg",
+        "progressPercentage": 35,
+        "createdAt": "2025-01-01",
+        "updatedAt": "2025-01-01",
+        "userId": 2,
+        "genreId": 31,
+        "status": "Reading",
+        "shelves": [
+            1
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Angular Enterprise Architecture",
+        "author": "Tomas Trajan",
+        "coverImage": "/images/books/angular-enterprise-architecture.png",
+        "progressPercentage": 10,
+        "createdAt": "2025-01-01",
+        "updatedAt": "2025-01-01",
+        "userId": 2,
+        "genreId": 31,
+        "status": "Reading",
+        "shelves": [
+            1,
+            3
+        ]
+    },
+    {
+        "id": 5,
+        "name": "Angular: Up and Running",
+        "author": "Shyam Seshadri",
+        "coverImage": "/images/books/angular-up-and-running.jpg",
+        "progressPercentage": 87,
+        "createdAt": "2025-01-01",
+        "updatedAt": "2025-01-01",
+        "userId": 2,
+        "genreId": 31,
+        "status": "Reading",
+        "shelves": [
+            1
+        ]
+    },
+    {
+        "id": 9,
+        "name": "Reactive Programming with Angular and ngrx",
+        "author": "Oren Farhi",
+        "coverImage": "/images/books/reactive-programming.jpg",
+        "progressPercentage": 0,
+        "createdAt": "2025-01-01",
+        "updatedAt": "2025-01-01",
+        "userId": 2,
+        "genreId": 31,
+        "status": "Want to Read",
+        "shelves": [
+            1
+        ]
+    },
+    {
+        "id": 10,
+        "name": "Angular Cookbook",
+        "author": "Muhammad Ahsan Ayaz",
+        "coverImage": "/images/books/angular-cookbook.jpg",
+        "progressPercentage": 100,
+        "createdAt": "2025-01-01",
+        "updatedAt": "2025-01-01",
+        "userId": 2,
+        "genreId": 31,
+        "status": "Finished",
+        "shelves": [
+            1
+        ]
+    }
+]

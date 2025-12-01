@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { BookProgress } from '../../models/track-progress-model';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { UserBook } from '../../../../core/models/user-book';
 import { TrackProgress } from '../track-progress/track-progress';
+import { BooksService } from '../../../../core/services/books.service';
+import { UserService } from '../../../../core/services/user-service';
 
 @Component({
   selector: 'app-dashboard-view',
@@ -10,23 +12,16 @@ import { TrackProgress } from '../track-progress/track-progress';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardView {
-  // Mock data for design purposes - will be replaced with actual data later
-  readonly books = signal<BookProgress[]>([
-    {
-      id: 1,
-      title: 'Pro Angular 9',
-      coverImage: '/images/books/pro-angular.jpg',
-      progressPercentage: 45
-    },
-    {
-      id: 2,
-      title: 'Reactive Patterns with RxJS and Angular Signals',
-      coverImage: '/images/books/reactive-patterns.jpg',
-      progressPercentage: 78
-    }
-  ]);
+  private readonly booksService = inject(BooksService);
+  private readonly userService = inject(UserService);
 
-  onUpdateProgress(book: BookProgress): void {
+  readonly books = this.userService.currentlyReadingUserBooks;
+
+  constructor() {
+    this.booksService.getBooksByUserId(1);
+  }
+
+  onUpdateProgress(book: UserBook): void {
     // Logic will be added later
     console.log('Update progress for:', book);
   }
