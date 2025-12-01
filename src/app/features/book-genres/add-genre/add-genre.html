@@ -1,44 +1,21 @@
 <div class="add-genre">
-  <app-dialog
-    [title]="dialogTitle"
-    [isOpen]="isDialogOpen()"
-    (requestClose)="closeDialog()"
-  >
-    <form
-      body
-      id="addGenreForm"
-      [formGroup]="genreForm"
-      (ngSubmit)="onSave()"
-      class="add-genre__form"
-    >
+  <app-dialog [title]="dialogTitle" [isOpen]="isDialogOpen()" (requestClose)="closeDialog()">
+    <form body id="addGenreForm" [formGroup]="genreForm" (ngSubmit)="onSave()" class="dialog-form">
       <label for="genreName">Genre Name</label>
-      <input
-        id="genreName"
-        type="text"
-        formControlName="name"
-        placeholder="e.g. Mystery"
-        autocomplete="off"
-        required
-      />
+      <input id="genreName" type="text" formControlName="name" placeholder="e.g. Mystery" autocomplete="off" required />
 
       @if (nameHasError()) {
-        <small class="add-genre__error">Name is required.</small>
+      <small class="dialog-error">Name is required.</small>
       }
     </form>
 
-    <div footer class="add-genre__footer">
-      <button type="button" class="add-genre__cancel" (click)="closeDialog()">
+    <div footer class="dialog-footer">
+      <button type="button" class="btn-amber" (click)="closeDialog()">
         Cancel
       </button>
-      <button
-        type="submit"
-        class="add-genre__save"
-        form="addGenreForm"
-        [disabled]="genreForm.invalid"
-      >
+      <button type="submit" form="addGenreForm" [disabled]="genreForm.invalid">
         Save
       </button>
     </div>
   </app-dialog>
 </div>
-

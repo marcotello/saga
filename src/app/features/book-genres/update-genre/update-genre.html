@@ -1,20 +1,20 @@
 <div class="update-genre">
     <app-dialog [title]="dialogTitle" [isOpen]="isDialogOpen()" (requestClose)="closeDialog()">
-        <form body id="updateGenreForm" [formGroup]="genreForm" (ngSubmit)="onSave()" class="update-genre__form">
+        <form body id="updateGenreForm" [formGroup]="genreForm" (ngSubmit)="onSave()" class="dialog-form">
             <label for="genreName">Genre Name</label>
             <input id="genreName" type="text" formControlName="name" placeholder="e.g. Mystery" autocomplete="off"
                 required />
 
             @if (nameHasError()) {
-            <small class="update-genre__error">Name is required.</small>
+            <small class="dialog-error">Name is required.</small>
             }
         </form>
 
-        <div footer class="update-genre__footer">
-            <button type="button" class="update-genre__cancel" (click)="closeDialog()">
+        <div footer class="dialog-footer">
+            <button type="button" class="btn-amber" (click)="closeDialog()">
                 Cancel
             </button>
-            <button type="submit" class="update-genre__save" form="updateGenreForm" [disabled]="genreForm.invalid">
+            <button type="submit" form="updateGenreForm" [disabled]="genreForm.invalid">
                 Save
             </button>
         </div>
