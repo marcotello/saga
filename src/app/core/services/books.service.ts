@@ -26,7 +26,8 @@ export class BooksService {
     }
 
     updateProgress(book: UserBook, progress: number): void {
-        const updatedBook = { ...book, progressPercentage: progress };
+        const status = progress === 100 ? 'Finished' : book.status;
+        const updatedBook = { ...book, progressPercentage: progress, status };
         this.booksServiceHttpMock.updateBook(updatedBook).subscribe({
             next: (book) => {
                 this.userService.updateUserBook(book);

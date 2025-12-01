@@ -59,7 +59,8 @@ export class UserService {
     );
 
     this._currentlyReadingUserBooks.update(books =>
-      books?.map(book => book.id === updatedBook.id ? updatedBook : book) ?? null
+      books?.map(book => book.id === updatedBook.id ? updatedBook : book)
+        .filter(book => book.status === 'Reading') ?? null
     );
   }
 }
