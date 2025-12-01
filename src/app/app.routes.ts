@@ -17,7 +17,7 @@ export const routes: Routes = [
             },
             {
                 path: 'dashboard',
-                loadComponent: () => import('./features/dashboard/dashboard-view/dashboard-view').then(m => m.DashboardView)
+                loadComponent: () => import('./features/dashboard/components/dashboard-view/dashboard-view').then(m => m.DashboardView)
             },
             {
                 path: 'genres',

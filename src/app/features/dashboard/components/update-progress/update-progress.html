@@ -1,0 +1,17 @@
+<app-dialog [title]="'Update Progress for ' + book().name" [isOpen]="isOpen()" (requestClose)="onCancel()">
+    <div body>
+        <label for="progress">
+            <app-dialog [title]="'Update Progress for ' + book().name" [isOpen]="isOpen()" (requestClose)="onCancel()">
+                <div body>
+                    <label for="progress">
+                        Progress: {{ progress() }}%
+                        <input type="range" id="progress" name="progress" min="0" max="100" [value]="progress()"
+                            (input)="onRangeChange($event)" />
+                    </label>
+                </div>
+
+                <div footer class="dialog-footer">
+                    <button class="btn-amber" (click)="onCancel()">Cancel</button>
+                    <button (click)="onSave()">{{ progress() === 100 ? 'Finished!' : 'Save' }}</button>
+                </div>
+            </app-dialog>
