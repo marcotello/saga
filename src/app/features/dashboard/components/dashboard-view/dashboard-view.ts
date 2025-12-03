@@ -29,7 +29,7 @@ export class DashboardView {
     { id: 2, name: 'Science Fiction', imageUrl: 'images/science-fiction.svg' },
     { id: 3, name: 'Angular', imageUrl: 'images/science-fiction.svg' },
     { id: 4, name: 'Food & Cooking', imageUrl: 'images/science-fiction.svg' },
-    { id: 5, name: 'Angular Material', imageUrl: 'images/science-fiction.svg' },
+    { id: 5, name: 'Angular Material with a Super long name that will be cut', imageUrl: 'images/science-fiction.svg' },
   ]);
 
   constructor() {

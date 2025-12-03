@@ -14,7 +14,7 @@ export interface Shelf {
 })
 export class MyShelves {
   shelves = input.required<Shelf[]>();
-  
+
   shelfClicked = output<Shelf>();
   addShelfClicked = output<void>();
 

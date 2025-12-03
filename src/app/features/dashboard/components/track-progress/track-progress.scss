@@ -108,6 +108,11 @@
         border: 2px dashed var(--pico-muted-border-color, #dee2e6);
         padding-top: 1.5rem;
 
+        &:hover {
+          border-color: var(--pico-primary);
+          background: #f0f8ff;
+        }
+
         img {
           width: 100px;
         }
@@ -120,17 +125,6 @@
           cursor: pointer;
           transition: all 0.2s ease;
           padding: 1rem;
-
-          &:hover {
-            color: var(--pico-primary);
-            border-color: var(--pico-primary);
-          }
-
-          &:focus {
-            outline: 2px solid var(--pico-primary);
-            outline-offset: 2px;
-          }
-
         }
       }
     }
