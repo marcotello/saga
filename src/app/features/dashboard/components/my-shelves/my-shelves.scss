@@ -1,0 +1,77 @@
+.my-shelves {
+  margin-bottom: 2rem;
+
+  h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+  }
+
+  .shelves-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1.5rem;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .shelf-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    aspect-ratio: 1;
+    
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .shelf-image {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 1rem;
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+      }
+    }
+
+    .shelf-name {
+      margin-top: auto;
+      padding-top: 0.75rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-align: center;
+      color: #333;
+      width: 100%;
+    }
+  }
+
+  .add-shelf-card {
+    border: 2px dashed #d0d0d0;
+    background: #fafafa;
+
+    &:hover {
+      border-color: #007bff;
+      background: #f0f8ff;
+    }
+
+    .shelf-name {
+      color: #666;
+    }
+  }
+}
+

@@ -3,6 +3,10 @@
     (addBook)="onAddBook()">
   </app-track-progress>
 
+  <app-my-shelves [shelves]="shelves()" (shelfClicked)="onShelfClick($event)"
+    (addShelfClicked)="onAddShelf()">
+  </app-my-shelves>
+
   @if (selectedBook()) {
   <app-update-progress [book]="selectedBook()!" [isOpen]="isUpdateProgressOpen()"
     (saveProgress)="onSaveProgress($event)" (cancelUpdate)="onCancelProgress()">
