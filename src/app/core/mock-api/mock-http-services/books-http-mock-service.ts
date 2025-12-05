@@ -6,7 +6,7 @@ import userBooks from '../mocks-data/user-books.json';
 @Injectable({
     providedIn: 'root'
 })
-export class BooksServiceHttpMock {
+export class BooksHttpMockService {
 
     private readonly books: UserBook[] = [];
 

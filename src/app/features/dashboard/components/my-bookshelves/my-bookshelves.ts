@@ -8,11 +8,11 @@ export interface Shelf {
 
 @Component({
   selector: 'app-my-shelves',
-  templateUrl: './my-shelves.html',
-  styleUrl: './my-shelves.scss',
+  templateUrl: './my-bookshelves.html',
+  styleUrl: './my-bookshelves.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MyShelves {
+export class MyBookshelves {
   shelves = input.required<Shelf[]>();
 
   shelfClicked = output<Shelf>();

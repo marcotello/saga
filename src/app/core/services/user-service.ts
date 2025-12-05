@@ -2,6 +2,7 @@ import { Injectable, inject, signal } from "@angular/core";
 import { User } from "../models/models";
 import { UserHttpMockService } from "../mock-api/mock-http-services/user-http-mock-service";
 import { UserBook } from "../models/user-book";
+import {Bookshelf} from "../models/bookshelf";
 
 
 @Injectable({
@@ -14,10 +15,12 @@ export class UserService {
   private readonly _user = signal<User | null>(null);
   private readonly _userBooks = signal<UserBook[] | null>(null);
   private readonly _currentlyReadingUserBooks = signal<UserBook[] | null>(null);
+  private readonly _userBookshelves = signal<Bookshelf[] | null>(null);
 
   readonly user = this._user.asReadonly();
   readonly userBooks = this._userBooks.asReadonly();
   readonly currentlyReadingUserBooks = this._currentlyReadingUserBooks.asReadonly();
+  readonly userBookshelves = this._userBookshelves.asReadonly();
 
   setUser(user: User | null): void {
     this._user.set(user);

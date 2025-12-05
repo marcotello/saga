@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Angular",
+    "image": "/images/bookshelves/angular.svg",
+    "userId": 1
+  },
+  {
+    "id": 2,
+    "name": "Angular Material",
+    "image": "/images/bookshelves/angular-material.svg",
+    "userId": 1
+  },
+  {
+    "id": 3,
+    "name": "Tech",
+    "image": "/images/bookshelves/tech.svg",
+    "userId": 1
+  },
+  {
+    "id": 4,
+    "name": "Food & Cooking",
+    "image": "/images/bookshelves/cooking.svg",
+    "userId": 1
+  },
+  {
+    "id": 5,
+    "name": "Science Fiction",
+    "image": "/images/bookshelves/fiction.svg",
+    "userId": 1
+  },
+  {
+    "id": 6,
+    "name": "Angular",
+    "image": "/images/bookshelves/angular.svg",
+    "userId": 2
+  },
+  {
+    "id": 7,
+    "name": "Angular Material",
+    "image": "/images/bookshelves/angular-material.svg",
+    "userId": 2
+  },
+  {
+    "id": 8,
+    "name": "Business",
+    "image": "/images/bookshelves/business.svg",
+    "userId": 2
+  }
+]

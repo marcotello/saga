@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { UserBook } from '../../../../core/models/user-book';
 import { TrackProgress } from '../track-progress/track-progress';
-import { BooksService } from '../../../../core/services/books.service';
+import { BooksService } from '../../../../core/services/books-service';
 import { UserService } from '../../../../core/services/user-service';
 import { UpdateProgress } from '../update-progress/update-progress';
-import { MyShelves, Shelf } from '../my-shelves/my-shelves';
+import { MyBookshelves, Shelf } from '../my-bookshelves/my-bookshelves';
 
 @Component({
   selector: 'app-dashboard-view',
-  imports: [TrackProgress, UpdateProgress, MyShelves],
+  imports: [TrackProgress, UpdateProgress, MyBookshelves],
   templateUrl: './dashboard-view.html',
   styleUrl: './dashboard-view.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
