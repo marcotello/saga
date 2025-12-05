@@ -10,7 +10,7 @@ import { NgOptimizedImage } from '@angular/common';
 })
 export class Footer {
   
-  readonly logoSrc = '/images/saga_logo_bottom.png';
+  readonly logoSrc = '/images/saga_logo_bottom.svg';
   readonly illustrationSrc = '/images/reading2.svg';
   readonly angularLogoSrc = '/images/LogoAngularity-Footer-light.png';
   
