@@ -2,7 +2,7 @@
   <h1>My Shelves</h1>
 
   <div class="shelves-grid">
-    @for (shelf of shelves(); track shelf.id) {
+    @for (shelf of bookshelves(); track shelf.id) {
     <article class="shelf-card" (click)="onShelfClick(shelf)">
       <div class="shelf-image">
         <img [src]="shelf.image" [alt]="shelf.name" />

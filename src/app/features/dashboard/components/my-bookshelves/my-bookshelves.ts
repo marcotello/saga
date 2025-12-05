@@ -8,17 +8,17 @@ import { Bookshelf } from '../../../../core/models/bookshelf';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MyBookshelves {
-  shelves = input.required<Bookshelf[] | null>();
+  bookshelves = input.required<Bookshelf[] | null>();
 
-  shelfClicked = output<Bookshelf>();
-  addShelfClicked = output<void>();
+  bookshelfClicked = output<Bookshelf>();
+  addBookshelfClicked = output<void>();
 
   onShelfClick(shelf: Bookshelf): void {
-    this.shelfClicked.emit(shelf);
+    this.bookshelfClicked.emit(shelf);
   }
 
   onAddShelfClick(): void {
-    this.addShelfClicked.emit();
+    this.addBookshelfClicked.emit();
   }
 }
 

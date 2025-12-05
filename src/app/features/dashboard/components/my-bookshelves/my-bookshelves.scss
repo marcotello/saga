@@ -19,7 +19,6 @@
         padding: 1rem;
         cursor: pointer;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
-        aspect-ratio: 1;
 
         &:hover {
             transform: translateY(-4px);
@@ -34,6 +33,7 @@
             justify-content: center;
             width: 100%;
             padding: 1rem;
+            max-height: 150px;
 
             img {
                 max-width: 100%;

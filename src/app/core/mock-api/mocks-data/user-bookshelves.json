@@ -31,14 +31,14 @@
   },
   {
     "id": 6,
-    "name": "Angular",
-    "image": "/images/bookshelves/angular.svg",
+    "name": "Angular Material",
+    "image": "/images/bookshelves/angular-material.svg",
     "userId": 2
   },
   {
     "id": 7,
-    "name": "Angular Material",
-    "image": "/images/bookshelves/angular-material.svg",
+    "name": "Angular",
+    "image": "/images/bookshelves/angular.svg",
     "userId": 2
   },
   {
