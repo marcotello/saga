@@ -66,4 +66,8 @@ export class UserService {
         .filter(book => book.status === 'Reading') ?? null
     );
   }
+
+  setUserBookshelves(bookshelves: Bookshelf[] | null): void {
+    this._userBookshelves.set(bookshelves);
+  }
 }

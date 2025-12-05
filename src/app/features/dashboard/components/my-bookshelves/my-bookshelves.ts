@@ -1,10 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
-
-export interface Shelf {
-  id: number;
-  name: string;
-  imageUrl: string;
-}
+import { Bookshelf } from '../../../../core/models/bookshelf';
 
 @Component({
   selector: 'app-my-shelves',
@@ -13,12 +8,12 @@ export interface Shelf {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MyBookshelves {
-  shelves = input.required<Shelf[]>();
+  shelves = input.required<Bookshelf[] | null>();
 
-  shelfClicked = output<Shelf>();
+  shelfClicked = output<Bookshelf>();
   addShelfClicked = output<void>();
 
-  onShelfClick(shelf: Shelf): void {
+  onShelfClick(shelf: Bookshelf): void {
     this.shelfClicked.emit(shelf);
   }
 

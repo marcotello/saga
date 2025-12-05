@@ -5,7 +5,7 @@
     @for (shelf of shelves(); track shelf.id) {
     <article class="shelf-card" (click)="onShelfClick(shelf)">
       <div class="shelf-image">
-        <img [src]="shelf.imageUrl" [alt]="shelf.name" />
+        <img [src]="shelf.image" [alt]="shelf.name" />
       </div>
       <div class="shelf-name">{{ shelf.name }}</div>
     </article>

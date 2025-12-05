@@ -2,9 +2,10 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { UserBook } from '../../../../core/models/user-book';
 import { TrackProgress } from '../track-progress/track-progress';
 import { BooksService } from '../../../../core/services/books-service';
+import { BookshelfService } from '../../../../core/services/bookshelf-service';
 import { UserService } from '../../../../core/services/user-service';
 import { UpdateProgress } from '../update-progress/update-progress';
-import { MyBookshelves, Shelf } from '../my-bookshelves/my-bookshelves';
+import { MyBookshelves } from '../my-bookshelves/my-bookshelves';
 
 @Component({
   selector: 'app-dashboard-view',
@@ -15,25 +16,20 @@ import { MyBookshelves, Shelf } from '../my-bookshelves/my-bookshelves';
 })
 export class DashboardView {
   private readonly booksService = inject(BooksService);
+  private readonly bookshelfService = inject(BookshelfService);
   private readonly userService = inject(UserService);
 
   private readonly userId = this.userService.user()?.id ?? 1;
 
   protected readonly books = this.userService.currentlyReadingUserBooks;
+  protected readonly bookshelves = this.userService.userBookshelves;
 
   protected readonly isUpdateProgressOpen = signal<boolean>(false);
   protected readonly selectedBook = signal<UserBook | null>(null);
 
-  protected readonly shelves = signal<Shelf[]>([
-    { id: 1, name: 'Tech', imageUrl: 'images/science-fiction.svg' },
-    { id: 2, name: 'Science Fiction', imageUrl: 'images/science-fiction.svg' },
-    { id: 3, name: 'Angular', imageUrl: 'images/science-fiction.svg' },
-    { id: 4, name: 'Food & Cooking', imageUrl: 'images/science-fiction.svg' },
-    { id: 5, name: 'Angular Material with a Super long name that will be cut', imageUrl: 'images/science-fiction.svg' },
-  ]);
-
   constructor() {
     this.booksService.getBooksByUserId(this.userId);
+    this.bookshelfService.getBookshelvesUserId(this.userId);
   }
 
   onUpdateProgress(book: UserBook): void {
@@ -63,9 +59,8 @@ export class DashboardView {
     console.log('Add book clicked');
   }
 
-  onShelfClick(shelf: Shelf): void {
-    // Navigation logic will be added later
-    console.log('Shelf clicked:', shelf);
+  onShelfClick(): void {
+    // Navigation logic will be added later (do nothing for now)
   }
 
   onAddShelf(): void {
