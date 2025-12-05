@@ -6,10 +6,11 @@ import { BookshelfService } from '../../../../core/services/bookshelf-service';
 import { UserService } from '../../../../core/services/user-service';
 import { UpdateProgress } from '../update-progress/update-progress';
 import { MyBookshelves } from '../my-bookshelves/my-bookshelves';
+import { BookSuggestions, BookSuggestion } from '../book-suggestions/book-suggestions';
 
 @Component({
   selector: 'app-dashboard-view',
-  imports: [TrackProgress, UpdateProgress, MyBookshelves],
+  imports: [TrackProgress, UpdateProgress, MyBookshelves, BookSuggestions],
   templateUrl: './dashboard-view.html',
   styleUrl: './dashboard-view.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,6 +27,15 @@ export class DashboardView {
 
   protected readonly isUpdateProgressOpen = signal<boolean>(false);
   protected readonly selectedBook = signal<UserBook | null>(null);
+
+  protected readonly bookSuggestions = signal<BookSuggestion[]>([
+    { id: 1, name: 'Mastering Angular Signals', image: 'images/books/ng-book.jpg' },
+    { id: 2, name: 'Ai Powered App Development', image: 'images/books/ng-book.jpg' },
+    { id: 3, name: 'Effective Angular', image: 'images/books/ng-book.jpg' },
+    { id: 4, name: 'Effective TypeScript', image: 'images/books/ng-book.jpg' },
+    { id: 5, name: 'Angular for Enterprise Applications', image: 'images/books/ng-book.jpg' },
+    { id: 6, name: 'Modern Angular', image: 'images/books/ng-book.jpg' }
+  ]);
 
   constructor() {
     this.booksService.getBooksByUserId(this.userId);
@@ -66,5 +76,10 @@ export class DashboardView {
   onAddShelf(): void {
     // Add shelf logic will be added later
     console.log('Add shelf clicked');
+  }
+
+  onBookSuggestionClick(book: BookSuggestion): void {
+    // Navigation logic will be added later (book details component not created yet)
+    console.log('Book suggestion clicked:', book.name);
   }
 }

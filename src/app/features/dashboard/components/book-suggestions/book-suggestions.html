@@ -1,0 +1,14 @@
+<section class="your-next-read">
+  <h1>Your Next Read</h1>
+
+  <div class="books-grid">
+    @for (book of bookSuggestions(); track book.id) {
+    <article class="book-card" (click)="onBookClick(book)">
+      <div class="book-image">
+        <img [src]="book.image" [alt]="book.name" />
+      </div>
+      <div class="book-name">{{ book.name }}</div>
+    </article>
+    }
+  </div>
+</section>
