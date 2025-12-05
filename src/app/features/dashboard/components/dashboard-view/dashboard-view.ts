@@ -1,30 +1,35 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { UserBook } from '../../../../core/models/user-book';
 import { TrackProgress } from '../track-progress/track-progress';
-import { BooksService } from '../../../../core/services/books.service';
+import { BooksService } from '../../../../core/services/books-service';
+import { BookshelfService } from '../../../../core/services/bookshelf-service';
 import { UserService } from '../../../../core/services/user-service';
 import { UpdateProgress } from '../update-progress/update-progress';
+import { MyBookshelves } from '../my-bookshelves/my-bookshelves';
 
 @Component({
   selector: 'app-dashboard-view',
-  imports: [TrackProgress, UpdateProgress],
+  imports: [TrackProgress, UpdateProgress, MyBookshelves],
   templateUrl: './dashboard-view.html',
   styleUrl: './dashboard-view.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DashboardView {
   private readonly booksService = inject(BooksService);
+  private readonly bookshelfService = inject(BookshelfService);
   private readonly userService = inject(UserService);
 
   private readonly userId = this.userService.user()?.id ?? 1;
 
   protected readonly books = this.userService.currentlyReadingUserBooks;
+  protected readonly bookshelves = this.userService.userBookshelves;
 
   protected readonly isUpdateProgressOpen = signal<boolean>(false);
   protected readonly selectedBook = signal<UserBook | null>(null);
 
   constructor() {
     this.booksService.getBooksByUserId(this.userId);
+    this.bookshelfService.getBookshelvesUserId(this.userId);
   }
 
   onUpdateProgress(book: UserBook): void {
@@ -52,5 +57,14 @@ export class DashboardView {
   onAddBook(): void {
     // Logic will be added later
     console.log('Add book clicked');
+  }
+
+  onShelfClick(): void {
+    // Navigation logic will be added later (do nothing for now)
+  }
+
+  onAddShelf(): void {
+    // Add shelf logic will be added later
+    console.log('Add shelf clicked');
   }
 }

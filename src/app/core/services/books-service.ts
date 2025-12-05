@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { BooksServiceHttpMock } from '../mock-api/mock-http-services/books-service-http-mock';
+import { BooksHttpMockService } from '../mock-api/mock-http-services/books-http-mock-service';
 import { UserService } from './user-service';
 import { UserBook } from '../models/user-book';
 
@@ -7,7 +7,7 @@ import { UserBook } from '../models/user-book';
     providedIn: 'root'
 })
 export class BooksService {
-    private readonly booksServiceHttpMock = inject(BooksServiceHttpMock);
+    private readonly booksServiceHttpMock = inject(BooksHttpMockService);
     private readonly userService = inject(UserService);
 
     getBooksByUserId(userId: number): void {

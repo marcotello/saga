@@ -1,0 +1,21 @@
+<section class="my-shelves">
+  <h1>My Bookshelves</h1>
+
+  <div class="shelves-grid">
+    @for (shelf of bookshelves(); track shelf.id) {
+    <article class="shelf-card" (click)="onShelfClick(shelf)">
+      <div class="shelf-image">
+        <img [src]="shelf.image" [alt]="shelf.name" />
+      </div>
+      <div class="shelf-name">{{ shelf.name }}</div>
+    </article>
+    }
+
+    <article class="shelf-card add-shelf-card" (click)="onAddShelfClick()">
+      <div class="shelf-image">
+        <img src="images/add.svg" alt="Add new shelf" />
+      </div>
+      <div class="shelf-name">Add Shelf</div>
+    </article>
+  </div>
+</section>

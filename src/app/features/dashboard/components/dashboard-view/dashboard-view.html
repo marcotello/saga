@@ -1,6 +1,11 @@
 <div class="container">
   <app-track-progress [books]="books()" (updateProgress)="onUpdateProgress($event)"
-    (addBook)="onAddBook()"></app-track-progress>
+    (addBook)="onAddBook()">
+  </app-track-progress>
+
+  <app-my-shelves [bookshelves]="bookshelves()" (bookshelfClicked)="onShelfClick()"
+    (addBookshelfClicked)="onAddShelf()">
+  </app-my-shelves>
 
   @if (selectedBook()) {
   <app-update-progress [book]="selectedBook()!" [isOpen]="isUpdateProgressOpen()"
