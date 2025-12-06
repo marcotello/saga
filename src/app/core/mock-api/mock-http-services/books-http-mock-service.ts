@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { UserBook } from '../../models/user-book';
+import { BookRecommendation } from '../../models/book-recommendation';
 import userBooks from '../mocks-data/user-books.json';
+import bookSuggestions from '../mocks-data/book-suggestions.json';
 
 @Injectable({
     providedIn: 'root'
@@ -9,9 +11,11 @@ import userBooks from '../mocks-data/user-books.json';
 export class BooksHttpMockService {
 
     private readonly books: UserBook[] = [];
+    private readonly bookRecommendations: BookRecommendation[] = [];
 
     constructor() {
         this.books = [...userBooks] as UserBook[];
+        this.bookRecommendations = [...bookSuggestions] as BookRecommendation[];
     }
 
     getBooksByUserId(userId: number): Observable<UserBook[]> {
@@ -27,4 +31,10 @@ export class BooksHttpMockService {
         this.books[index] = book;
         return of(book);
     }
+
+    getBookRecommendationsByUserId(userId: number): Observable<BookRecommendation[]> {
+        const recommendations = this.bookRecommendations.filter(rec => rec.userId === userId);
+        return of(recommendations);
+    }
+
 }

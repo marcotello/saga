@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { BooksHttpMockService } from '../mock-api/mock-http-services/books-http-mock-service';
 import { UserService } from './user-service';
 import { UserBook } from '../models/user-book';
+import { BookRecommendation } from '../models/book-recommendation';
 
 @Injectable({
     providedIn: 'root'
@@ -18,6 +19,18 @@ export class BooksService {
 
                     const readingBooks = userBooks.filter(book => book.status === 'Reading');
                     this.userService.setCurrentlyReadingUserBooks(readingBooks);
+                },
+                error: () => {
+                    // Error handling will be implemented later with an error service
+                }
+            });
+    }
+
+    getBookRecommendationsByUserId(userId: number): void {
+        this.booksServiceHttpMock.getBookRecommendationsByUserId(userId)
+            .subscribe({
+                next: (recommendations: BookRecommendation[]) => {
+                    this.userService.setRecommendedBooks(recommendations);
                 },
                 error: () => {
                     // Error handling will be implemented later with an error service

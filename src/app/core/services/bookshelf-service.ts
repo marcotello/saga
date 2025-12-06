@@ -10,8 +10,8 @@ export class BookshelfService {
     private readonly bookshelvesHttpMockService = inject(BookshelvesHttpMockService);
     private readonly userService = inject(UserService);
 
-    getBookshelvesUserId(userId: number): void {
-        this.bookshelvesHttpMockService.getBookshelvesUserId(userId)
+    getBookshelvesByUserId(userId: number): void {
+        this.bookshelvesHttpMockService.getBookshelvesByUserId(userId)
             .subscribe({
                 next: (bookshelves: Bookshelf[]) => {
                     this.userService.setUserBookshelves(bookshelves);

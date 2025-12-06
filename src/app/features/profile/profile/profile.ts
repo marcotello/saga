@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, signal, effect } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../../core/services/user-service';
-import { User } from '../../../core/models/models';
+import { User } from '../../../core/models/user';
 import { ErrorEnvelope } from '../../auth/login/models/login-models';
 import { WithLoadingState } from '../../../core/directives/with-loading-state';
 
