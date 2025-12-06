@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { UserBook } from '../../../../core/models/user-book';
+import { BookRecommendation } from '../../../../core/models/book-recommendation';
 import { TrackProgress } from '../track-progress/track-progress';
 import { BooksService } from '../../../../core/services/books-service';
 import { BookshelfService } from '../../../../core/services/bookshelf-service';
 import { UserService } from '../../../../core/services/user-service';
 import { UpdateProgress } from '../update-progress/update-progress';
 import { MyBookshelves } from '../my-bookshelves/my-bookshelves';
-import { BookSuggestions, BookSuggestion } from '../book-suggestions/book-suggestions';
+import { BookSuggestions } from '../book-suggestions/book-suggestions';
 
 @Component({
   selector: 'app-dashboard-view',
@@ -24,22 +25,15 @@ export class DashboardView {
 
   protected readonly books = this.userService.currentlyReadingUserBooks;
   protected readonly bookshelves = this.userService.userBookshelves;
+  protected readonly recommendedBooks = this.userService.recommendedBooks;
 
   protected readonly isUpdateProgressOpen = signal<boolean>(false);
   protected readonly selectedBook = signal<UserBook | null>(null);
 
-  protected readonly bookSuggestions = signal<BookSuggestion[]>([
-    { id: 1, name: 'Mastering Angular Signals', image: 'images/books/ng-book.jpg' },
-    { id: 2, name: 'Ai Powered App Development', image: 'images/books/ng-book.jpg' },
-    { id: 3, name: 'The ultimate Guide to Angular Evolution', image: 'images/books/ultimate-guide.png' },
-    { id: 4, name: 'Effective TypeScript', image: 'images/books/ng-book.jpg' },
-    { id: 5, name: 'Angular for Enterprise Applications', image: 'images/books/ng-book.jpg' },
-    { id: 6, name: 'Modern Angular', image: 'images/books/ng-book.jpg' }
-  ]);
-
   constructor() {
     this.booksService.getBooksByUserId(this.userId);
-    this.bookshelfService.getBookshelvesUserId(this.userId);
+    this.bookshelfService.getBookshelvesByUserId(this.userId);
+    this.booksService.getBookRecommendationsByUserId(this.userId);
   }
 
   onUpdateProgress(book: UserBook): void {
@@ -78,7 +72,7 @@ export class DashboardView {
     console.log('Add shelf clicked');
   }
 
-  onBookSuggestionClick(book: BookSuggestion): void {
+  onBookSuggestionClick(book: BookRecommendation): void {
     // Navigation logic will be added later (book details component not created yet)
     console.log('Book suggestion clicked:', book.name);
   }

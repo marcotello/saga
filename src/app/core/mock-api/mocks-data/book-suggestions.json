@@ -1,65 +1,65 @@
 [
   {
     "id": 1,
-    "name": "ng-book: The Complete Guide to Angular",
-    "author": "Nathan Murray",
-    "coverImage": "images/books/ng-book.jpg",
+    "name": "Ai Powered App Development",
+    "author": "Sonu Kapoor",
+    "coverImage": "images/books/angular-ai.jpg",
     "userId": 1
   },
   {
     "id": 2,
-    "name": "Angular Cookbook",
-    "author": "Muhammad Ahsan Ayaz",
-    "coverImage": "images/books/angular-cookbook.jpg",
+    "name": "The Ultimate Guide to Angular Evolution",
+    "author": "Eric Meyer",
+    "coverImage": "images/books/ultimate-guide.png",
     "userId": 1
   },
   {
     "id": 3,
-    "name": "Pro Angular",
-    "author": "Adam Freeman",
-    "coverImage": "images/books/pro-angular.jpg",
-    "userId": 1
-  },
-  {
-    "id": 4,
-    "name": "Reactive Programming with Angular and ngrx",
-    "author": "Oren Farhi",
-    "coverImage": "images/books/reactive-programming.jpg",
-    "userId": 1
-  },
-  {
-    "id": 5,
-    "name": "Testing Angular Applications",
-    "author": "Corinna Cohn",
-    "coverImage": "images/books/testing-angular.jpg",
-    "userId": 1
-  },
-  {
-    "id": 6,
     "name": "Mastering Angular Signals",
     "author": "Muhammad Ahsan Ayaz",
     "coverImage": "images/books/mastering-signals.jpg",
     "userId": 1
   },
   {
-    "id": 7,
+    "id": 4,
     "name": "ng-book: The Complete Guide to Angular",
     "author": "Nathan Murray",
     "coverImage": "images/books/ng-book.jpg",
+    "userId": 1
+  },
+  {
+    "id": 5,
+    "name": "Angular Cookbook",
+    "author": "Muhammad Ahsan Ayaz",
+    "coverImage": "images/books/angular-cookbook.jpg",
+    "userId": 1
+  },
+  {
+    "id": 6,
+    "name": "Pro Angular",
+    "author": "Adam Freeman",
+    "coverImage": "images/books/pro-angular.jpg",
+    "userId": 1
+  },
+  {
+    "id": 7,
+    "name": "Effective Angular",
+    "author": "Roberto Heckers",
+    "coverImage": "images/books/effective-angular.jpg",
     "userId": 2
   },
   {
     "id": 8,
-    "name": "Angular Cookbook",
-    "author": "Muhammad Ahsan Ayaz",
-    "coverImage": "images/books/angular-cookbook.jpg",
+    "name": "Testing Angular Applications",
+    "author": "Corinna Cohn",
+    "coverImage": "images/books/testing-angular.jpg",
     "userId": 2
   },
   {
     "id": 9,
-    "name": "Pro Angular",
-    "author": "Adam Freeman",
-    "coverImage": "images/books/pro-angular.jpg",
+    "name": "Mastering Angular Test-Driven Development",
+    "author": "Ezechiel Amen AGBLA",
+    "coverImage": "images/books/test-driven.jpg",
     "userId": 2
   },
   {
@@ -71,16 +71,16 @@
   },
   {
     "id": 11,
-    "name": "Testing Angular Applications",
-    "author": "Corinna Cohn",
-    "coverImage": "images/books/testing-angular.jpg",
+    "name": "Angular Masterclass",
+    "author": "Souvik Basu",
+    "coverImage": "images/books/angular-masterclass.jpg",
     "userId": 2
   },
   {
     "id": 12,
-    "name": "Mastering Angular Signals",
-    "author": "Muhammad Ahsan Ayaz",
-    "coverImage": "images/books/mastering-signals.jpg",
+    "name": "Angular Advocate",
+    "author": "Michael D. Callaghan",
+    "coverImage": "images/books/angular-advocate.jpg",
     "userId": 2
   }
 ]

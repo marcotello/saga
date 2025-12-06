@@ -14,7 +14,7 @@ export class BookshelvesHttpMockService {
         this.bookshelves = [...userBookshelves] as Bookshelf[];
     }
 
-    getBookshelvesUserId(userId: number): Observable<Bookshelf[]> {
+    getBookshelvesByUserId(userId: number): Observable<Bookshelf[]> {
         const bookshelves = this.bookshelves.filter(bookshelf => bookshelf.userId === userId);
         return of(bookshelves);
     }

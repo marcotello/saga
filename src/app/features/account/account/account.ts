@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, effect, inject, signal } from '@ang
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WithLoadingState } from '../../../core/directives/with-loading-state';
 import { UserService } from '../../../core/services/user-service';
-import { User } from '../../../core/models/models';
+import { User } from '../../../core/models/user';
 import { passwordStrength } from '../../../core/validators/auth-validators';
 import { PasswordToggleDirective } from '../../../core/directives/password-toggle';
 

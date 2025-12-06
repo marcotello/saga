@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import userData from '../mocks-data/users.json';
 import { ErrorEnvelope, AuthSuccessEnvelope } from '../../../features/auth/login/models/login-models';
 import { Observable, of, throwError, delay } from 'rxjs';
-import { User } from '../../models/models';
+import { User } from '../../models/user';
 
 type UpdatePasswordPayload = {
   currentPassword: string;

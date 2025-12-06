@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { BookRecommendation } from '../../../../core/models/book-recommendation';
 
 export interface BookSuggestion {
   id: number;
@@ -13,11 +14,11 @@ export interface BookSuggestion {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookSuggestions {
-  bookSuggestions = input.required<BookSuggestion[]>();
+  bookSuggestions = input.required<BookRecommendation[] | null>();
 
-  bookClicked = output<BookSuggestion>();
+  bookClicked = output<BookRecommendation>();
 
-  onBookClick(book: BookSuggestion): void {
+  onBookClick(book: BookRecommendation): void {
     this.bookClicked.emit(book);
   }
 }

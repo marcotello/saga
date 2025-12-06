@@ -1,4 +1,4 @@
-import { User } from "../../../../core/models/models";
+import { User } from "../../../../core/models/user";
 
 
 export interface CredentialInput {

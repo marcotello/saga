@@ -5,7 +5,7 @@
     @for (book of bookSuggestions(); track book.id) {
     <article class="book-card" (click)="onBookClick(book)">
       <div class="book-image">
-        <img [src]="book.image" [alt]="book.name" />
+        <img [src]="book.coverImage" [alt]="book.name" />
       </div>
       <div class="book-name">{{ book.name }}</div>
     </article>
