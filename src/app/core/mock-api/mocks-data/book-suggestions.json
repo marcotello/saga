@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "name": "ng-book: The Complete Guide to Angular",
+    "author": "Nathan Murray",
+    "coverImage": "images/books/ng-book.jpg",
+    "userId": 1
+  },
+  {
+    "id": 2,
+    "name": "Angular Cookbook",
+    "author": "Muhammad Ahsan Ayaz",
+    "coverImage": "images/books/angular-cookbook.jpg",
+    "userId": 1
+  },
+  {
+    "id": 3,
+    "name": "Pro Angular",
+    "author": "Adam Freeman",
+    "coverImage": "images/books/pro-angular.jpg",
+    "userId": 1
+  },
+  {
+    "id": 4,
+    "name": "Reactive Programming with Angular and ngrx",
+    "author": "Oren Farhi",
+    "coverImage": "images/books/reactive-programming.jpg",
+    "userId": 1
+  },
+  {
+    "id": 5,
+    "name": "Testing Angular Applications",
+    "author": "Corinna Cohn",
+    "coverImage": "images/books/testing-angular.jpg",
+    "userId": 1
+  },
+  {
+    "id": 6,
+    "name": "Mastering Angular Signals",
+    "author": "Muhammad Ahsan Ayaz",
+    "coverImage": "images/books/mastering-signals.jpg",
+    "userId": 1
+  },
+  {
+    "id": 7,
+    "name": "ng-book: The Complete Guide to Angular",
+    "author": "Nathan Murray",
+    "coverImage": "images/books/ng-book.jpg",
+    "userId": 2
+  },
+  {
+    "id": 8,
+    "name": "Angular Cookbook",
+    "author": "Muhammad Ahsan Ayaz",
+    "coverImage": "images/books/angular-cookbook.jpg",
+    "userId": 2
+  },
+  {
+    "id": 9,
+    "name": "Pro Angular",
+    "author": "Adam Freeman",
+    "coverImage": "images/books/pro-angular.jpg",
+    "userId": 2
+  },
+  {
+    "id": 10,
+    "name": "Reactive Programming with Angular and ngrx",
+    "author": "Oren Farhi",
+    "coverImage": "images/books/reactive-programming.jpg",
+    "userId": 2
+  },
+  {
+    "id": 11,
+    "name": "Testing Angular Applications",
+    "author": "Corinna Cohn",
+    "coverImage": "images/books/testing-angular.jpg",
+    "userId": 2
+  },
+  {
+    "id": 12,
+    "name": "Mastering Angular Signals",
+    "author": "Muhammad Ahsan Ayaz",
+    "coverImage": "images/books/mastering-signals.jpg",
+    "userId": 2
+  }
+]

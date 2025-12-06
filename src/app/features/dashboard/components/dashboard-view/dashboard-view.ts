@@ -31,7 +31,7 @@ export class DashboardView {
   protected readonly bookSuggestions = signal<BookSuggestion[]>([
     { id: 1, name: 'Mastering Angular Signals', image: 'images/books/ng-book.jpg' },
     { id: 2, name: 'Ai Powered App Development', image: 'images/books/ng-book.jpg' },
-    { id: 3, name: 'Effective Angular', image: 'images/books/ng-book.jpg' },
+    { id: 3, name: 'The ultimate Guide to Angular Evolution', image: 'images/books/ultimate-guide.png' },
     { id: 4, name: 'Effective TypeScript', image: 'images/books/ng-book.jpg' },
     { id: 5, name: 'Angular for Enterprise Applications', image: 'images/books/ng-book.jpg' },
     { id: 6, name: 'Modern Angular', image: 'images/books/ng-book.jpg' }
