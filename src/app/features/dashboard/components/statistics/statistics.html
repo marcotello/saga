@@ -1,6 +1,6 @@
 @if (statisticsData()) {
   <section class="statistics-section">
-    <h2>Reading Statistics</h2>
+    <h2>The Story So Far</h2>
     
     <div class="statistics-container">
       <!-- Line Chart for Books Read per Month -->
@@ -18,7 +18,8 @@
           [scheme]="colorScheme"
           [yAxisTickFormatting]="yAxisTickFormatting"
           [roundDomains]="roundDomains"
-          [yScaleMin]="yScaleMin">
+          [yScaleMin]="yScaleMin"
+          [yScaleMax]="yScaleMax()">
         </ngx-charts-line-chart>
       </div>
       
