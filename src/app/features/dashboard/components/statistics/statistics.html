@@ -1,0 +1,41 @@
+@if (statisticsData()) {
+  <section class="statistics-section">
+    <h2>Reading Statistics</h2>
+    
+    <div class="statistics-container">
+      <!-- Line Chart for Books Read per Month -->
+      <div class="chart-card">
+        <ngx-charts-line-chart
+          [view]="view"
+          [results]="statisticsData()!.monthlyBooks"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [legend]="showLegend"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [autoScale]="autoScale"
+          [timeline]="timeline"
+          [scheme]="colorScheme"
+          [yAxisTickFormatting]="yAxisTickFormatting"
+          [roundDomains]="roundDomains"
+          [yScaleMin]="yScaleMin">
+        </ngx-charts-line-chart>
+      </div>
+      
+      <!-- Stats Cards Container -->
+      <div class="stats-cards-container">
+        <!-- Card for Total Books Read -->
+        <div class="stat-card">
+          <div class="stat-value">{{ statisticsData()!.totalBooksCurrentYear }}</div>
+          <div class="stat-label">Books Read This Year</div>
+        </div>
+        
+        <!-- Card for Total Pages Read -->
+        <div class="stat-card">
+          <div class="stat-value">{{ statisticsData()!.totalPagesCurrentYear }}</div>
+          <div class="stat-label">Pages Read This Year</div>
+        </div>
+      </div>
+    </div>
+  </section>
+}
