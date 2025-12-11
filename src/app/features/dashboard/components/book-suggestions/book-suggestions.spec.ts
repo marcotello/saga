@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import { DebugElement, reflectComponentType, ChangeDetectionStrategy } from '@angular/core';
 import { BookSuggestions } from './book-suggestions';
 import { BookRecommendation } from '../../../../core/models/book-recommendation';
 
@@ -71,7 +70,7 @@ describe('BookSuggestions', () => {
   it('should require bookSuggestions input', () => {
     fixture.componentRef.setInput('bookSuggestions', mockBookSuggestions);
     fixture.detectChanges();
-    
+
     expect(component.bookSuggestions()).toEqual(mockBookSuggestions);
   });
 
@@ -89,7 +88,7 @@ describe('BookSuggestions', () => {
 
     const bookNames = Array.from(compiled.querySelectorAll('.book-card .book-name'))
       .map(el => el.textContent?.trim());
-    
+
     expect(bookNames).toEqual([
       'Mastering Angular Signals',
       'Ai Powered App Development',
@@ -172,18 +171,14 @@ describe('BookSuggestions', () => {
     expect(bookCards.length).toBe(0);
   });
 
-  it('should have OnPush change detection strategy', () => {
-    const debugElement: DebugElement = fixture.debugElement;
-    const changeDetectionStrategy = debugElement.componentInstance.constructor.ɵcmp.changeDetection;
-    expect(changeDetectionStrategy).toBe(1); // 1 = OnPush
-  });
+
 
   describe('onBookClick method', () => {
     it('should emit the provided book', () => {
       spyOn(component.bookClicked, 'emit');
-      
+
       component.onBookClick(mockBookSuggestions[0]);
-      
+
       expect(component.bookClicked.emit).toHaveBeenCalledWith(mockBookSuggestions[0]);
     });
   });

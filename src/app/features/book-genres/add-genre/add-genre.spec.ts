@@ -226,7 +226,7 @@ describe('AddGenre', () => {
       nameControl?.setValue('');
       fixture.detectChanges();
 
-      const errorMessage = fixture.nativeElement.querySelector('.add-genre__error');
+      const errorMessage = fixture.nativeElement.querySelector('.dialog-error');
       expect(errorMessage).toBeTruthy();
       expect(errorMessage.textContent.trim()).toBe('Name is required.');
     });
@@ -237,7 +237,7 @@ describe('AddGenre', () => {
       nameControl?.setValue('Mystery');
       fixture.detectChanges();
 
-      const errorMessage = fixture.nativeElement.querySelector('.add-genre__error');
+      const errorMessage = fixture.nativeElement.querySelector('.dialog-error');
       expect(errorMessage).toBeFalsy();
     });
 
@@ -245,7 +245,7 @@ describe('AddGenre', () => {
       fixture.componentRef.setInput('isDialogOpen', true);
       fixture.detectChanges();
 
-      const cancelButton = fixture.nativeElement.querySelector('.add-genre__cancel');
+      const cancelButton = fixture.nativeElement.querySelector('.btn-amber');
       expect(cancelButton).toBeTruthy();
       expect(cancelButton.textContent.trim()).toBe('Cancel');
     });
@@ -254,7 +254,7 @@ describe('AddGenre', () => {
       fixture.componentRef.setInput('isDialogOpen', true);
       fixture.detectChanges();
 
-      const cancelButton = fixture.nativeElement.querySelector('.add-genre__cancel');
+      const cancelButton = fixture.nativeElement.querySelector('.btn-amber');
       cancelButton.click();
       fixture.detectChanges();
 
@@ -265,7 +265,7 @@ describe('AddGenre', () => {
       fixture.componentRef.setInput('isDialogOpen', true);
       fixture.detectChanges();
 
-      const saveButton = fixture.nativeElement.querySelector('.add-genre__save');
+      const saveButton = fixture.nativeElement.querySelector('button[type="submit"]');
       expect(saveButton).toBeTruthy();
       expect(saveButton.textContent.trim()).toBe('Save');
     });
@@ -274,7 +274,7 @@ describe('AddGenre', () => {
       fixture.componentRef.setInput('isDialogOpen', true);
       fixture.detectChanges();
 
-      const saveButton = fixture.nativeElement.querySelector('.add-genre__save');
+      const saveButton = fixture.nativeElement.querySelector('button[type="submit"]');
       expect(saveButton.disabled).toBe(true);
     });
 
@@ -284,7 +284,7 @@ describe('AddGenre', () => {
       nameControl?.setValue('Mystery');
       fixture.detectChanges();
 
-      const saveButton = fixture.nativeElement.querySelector('.add-genre__save');
+      const saveButton = fixture.nativeElement.querySelector('button[type="submit"]');
       expect(saveButton.disabled).toBe(false);
     });
 
@@ -295,7 +295,7 @@ describe('AddGenre', () => {
       nameControl?.setValue('Mystery');
       fixture.detectChanges();
 
-      const saveButton = fixture.nativeElement.querySelector('.add-genre__save');
+      const saveButton = fixture.nativeElement.querySelector('button[type="submit"]');
       saveButton.click();
       fixture.detectChanges();
 

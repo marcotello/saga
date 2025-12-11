@@ -1,24 +1,13 @@
 <div class="login-container">
   <div class="login-content">
     <div class="illustration-container">
-      <img
-        ngSrc="images/login.svg"
-        alt="Reading illustration"
-        width="900"
-        height="900"
-      />
+      <img ngSrc="images/login.svg" alt="Reading illustration" width="900" height="900" />
     </div>
 
     <div class="form-container">
       <div class="logo-container">
         <a routerLink="/landing">
-          <img
-            ngSrc="images/saga_logo_full.svg"
-            alt="Saga logo"
-            width="300"
-            height="60"
-            [priority]="true"
-          />
+          <img ngSrc="images/saga_logo_full.svg" alt="Saga logo" width="399" height="140" [priority]="true" />
         </a>
       </div>
 
@@ -26,68 +15,47 @@
       <p class="subtitle">Sign in to continue to your account</p>
 
       @if (errorMessage()) {
-        <div class="error-banner" role="alert" aria-live="polite">
-          {{ errorMessage() }}
-        </div>
+      <div class="error-banner" role="alert" aria-live="polite">
+        {{ errorMessage() }}
+      </div>
       }
 
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
         <div class="form-field">
           <label for="credential">Email or Username</label>
-          <input
-            type="text"
-            id="credential"
-            name="credential"
-            formControlName="credential"
-            placeholder="Enter your email or username"
-            autocomplete="off"
+          <input type="text" id="credential" name="credential" formControlName="credential"
+            placeholder="Enter your email or username" autocomplete="off"
             [attr.aria-invalid]="hasCredentialError() ? 'true' : null"
-            [attr.aria-describedby]="hasCredentialError() ? 'credential-error' : null"
-          />
+            [attr.aria-describedby]="hasCredentialError() ? 'credential-error' : null" />
           @if (hasCredentialError()) {
-            <small id="credential-error" class="error-message" role="alert">
-              {{ getCredentialError() }}
-            </small>
+          <small id="credential-error" class="error-message" role="alert">
+            {{ getCredentialError() }}
+          </small>
           }
         </div>
 
         <div class="form-field">
           <label for="password">Password</label>
           <div class="password-input-wrapper">
-            <input
-              #loginPasswordInput
-              type="password"
-              id="password"
-              name="password"
-              formControlName="password"
-              placeholder="Enter your password"
-              autocomplete="off"
+            <input #loginPasswordInput type="password" id="password" name="password" formControlName="password"
+              placeholder="Enter your password" autocomplete="off"
               [attr.aria-invalid]="hasPasswordError() ? 'true' : null"
-              [attr.aria-describedby]="hasPasswordError() ? 'password-error' : null"
-            />
-            <button
-              passwordToggle
-              class="password-toggle"
-              [passwordToggleFor]="loginPasswordInput"
-            ></button>
+              [attr.aria-describedby]="hasPasswordError() ? 'password-error' : null" />
+            <button passwordToggle class="password-toggle" [passwordToggleFor]="loginPasswordInput"></button>
           </div>
           @if (hasPasswordError()) {
-            <small id="password-error" class="error-message" role="alert">
-              {{ getPasswordError() }}
-            </small>
+          <small id="password-error" class="error-message" role="alert">
+            {{ getPasswordError() }}
+          </small>
           }
         </div>
 
-        <button
-          type="submit"
-          class="primary-button"
-          [disabled]="isLoading()"
-          [attr.aria-busy]="isLoading() ? 'true' : null"
-        >
+        <button type="submit" class="primary-button" [disabled]="isLoading()"
+          [attr.aria-busy]="isLoading() ? 'true' : null">
           @if (isLoading()) {
-            <span>Signing in...</span>
+          <span>Signing in...</span>
           } @else {
-            <span>Sign In</span>
+          <span>Sign In</span>
           }
         </button>
       </form>

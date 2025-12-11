@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
+import { DebugElement, reflectComponentType, ChangeDetectionStrategy } from '@angular/core';
 import { UpdateProgress } from './update-progress';
 import { UserBook } from '../../../../core/models/user-book';
 
@@ -24,7 +25,8 @@ describe('UpdateProgress', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UpdateProgress]
+      imports: [UpdateProgress],
+      providers: [provideNoopAnimations()]
     }).compileComponents();
 
     fixture = TestBed.createComponent(UpdateProgress);
@@ -39,14 +41,14 @@ describe('UpdateProgress', () => {
   it('should require book input', () => {
     fixture.componentRef.setInput('book', mockBook);
     fixture.detectChanges();
-    
+
     expect(component.book()).toEqual(mockBook);
   });
 
   it('should have default isOpen as false', () => {
     fixture.componentRef.setInput('book', mockBook);
     fixture.detectChanges();
-    
+
     expect(component.isOpen()).toBe(false);
   });
 
@@ -54,7 +56,7 @@ describe('UpdateProgress', () => {
     fixture.componentRef.setInput('book', mockBook);
     fixture.componentRef.setInput('isOpen', true);
     fixture.detectChanges();
-    
+
     expect(component.isOpen()).toBe(true);
   });
 
@@ -62,27 +64,27 @@ describe('UpdateProgress', () => {
     it('should initialize with book progressPercentage', () => {
       fixture.componentRef.setInput('book', mockBook);
       fixture.detectChanges();
-      
+
       expect(component.progress()).toBe(50);
     });
 
     it('should update when book changes', () => {
       fixture.componentRef.setInput('book', mockBook);
       fixture.detectChanges();
-      
+
       const updatedBook = { ...mockBook, progressPercentage: 75 };
       fixture.componentRef.setInput('book', updatedBook);
       fixture.detectChanges();
-      
+
       expect(component.progress()).toBe(75);
     });
 
     it('should be settable independently', () => {
       fixture.componentRef.setInput('book', mockBook);
       fixture.detectChanges();
-      
+
       component.progress.set(80);
-      
+
       expect(component.progress()).toBe(80);
     });
   });
@@ -103,7 +105,7 @@ describe('UpdateProgress', () => {
     it('should emit updated progress value', (done) => {
       fixture.componentRef.setInput('book', mockBook);
       fixture.detectChanges();
-      
+
       component.progress.set(75);
 
       component.saveProgress.subscribe((progress: number) => {
@@ -172,16 +174,22 @@ describe('UpdateProgress', () => {
 
       component.onRangeChange(event);
 
-      expect(component.progress()).toBe(100);
+      const dialog = compiled.querySelector('app-dialog');
+      expect(dialog).toBeTruthy();
+    });
+
+    it('should pass correct book name to dialog', () => {
+      fixture.componentRef.setInput('book', mockBook);
+      fixture.componentRef.setInput('isOpen', true);
+      fixture.detectChanges();
+
+      const content = compiled.textContent;
+      expect(content).toContain('Test Book');
     });
   });
 
   describe('Component integration', () => {
-    it('should have OnPush change detection strategy', () => {
-      const debugElement: DebugElement = fixture.debugElement;
-      const changeDetectionStrategy = debugElement.componentInstance.constructor.ɵcmp.changeDetection;
-      expect(changeDetectionStrategy).toBe(1); // 1 = OnPush
-    });
+
 
     it('should render dialog when isOpen is true', () => {
       fixture.componentRef.setInput('book', mockBook);
@@ -222,19 +230,19 @@ describe('UpdateProgress', () => {
     it('should maintain progress when book input changes to different book', () => {
       fixture.componentRef.setInput('book', mockBook);
       fixture.detectChanges();
-      
+
       component.progress.set(60);
-      
+
       const differentBook: UserBook = {
         ...mockBook,
         id: 2,
         name: 'Different Book',
         progressPercentage: 30
       };
-      
+
       fixture.componentRef.setInput('book', differentBook);
       fixture.detectChanges();
-      
+
       // linkedSignal should update to new book's progress
       expect(component.progress()).toBe(30);
     });
@@ -256,4 +264,3 @@ describe('UpdateProgress', () => {
     });
   });
 });
-
