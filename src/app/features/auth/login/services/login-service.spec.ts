@@ -1,12 +1,13 @@
 import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { LoginService } from './login-service';
-import { AuthHttpMockService } from '../../services/auth-http-mock-service';
-import { AuthSuccessEnvelope, ErrorEnvelope, User } from '../models/login-models';
+import { UserHttpMockService } from '../../../../core/mock-api/mock-http-services/user-http-mock-service';
+import { AuthSuccessEnvelope, ErrorEnvelope } from '../models/login-models';
+import { User } from '../../../../core/models/user';
 import { of, throwError, delay, Subject } from 'rxjs';
 
 describe('LoginService', () => {
   let service: LoginService;
-  let mockAuthHttpService: jasmine.SpyObj<AuthHttpMockService>;
+  let mockAuthHttpService: jasmine.SpyObj<UserHttpMockService>;
 
   const mockUser: User = {
     id: 1,
@@ -15,7 +16,8 @@ describe('LoginService', () => {
     lastName: 'User',
     email: 'test@example.com',
     bio: 'Test bio',
-    role: '1'
+    role: 'user',
+    profilePicture: 'default.jpg'
   };
 
   const mockSuccessResponse: AuthSuccessEnvelope = {
@@ -36,12 +38,12 @@ describe('LoginService', () => {
   };
 
   beforeEach(() => {
-    mockAuthHttpService = jasmine.createSpyObj('AuthHttpMockService', ['login']);
+    mockAuthHttpService = jasmine.createSpyObj('UserHttpMockService', ['login']);
 
     TestBed.configureTestingModule({
       providers: [
         LoginService,
-        { provide: AuthHttpMockService, useValue: mockAuthHttpService }
+        { provide: UserHttpMockService, useValue: mockAuthHttpService }
       ]
     });
 
@@ -65,9 +67,7 @@ describe('LoginService', () => {
       expect(service.expiresAt()).toBeNull();
     });
 
-    it('should have null user initially', () => {
-      expect(service.user()).toBeNull();
-    });
+    // User is now managed by UserService, not LoginService
 
     it('should have null error initially', () => {
       expect(service.error()).toBeNull();
@@ -132,16 +132,7 @@ describe('LoginService', () => {
       }, 10);
     });
 
-    it('should set user on successful login', (done) => {
-      mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse));
-
-      service.login('test@example.com', 'password123');
-
-      setTimeout(() => {
-        expect(service.user()).toEqual(mockUser);
-        done();
-      }, 10);
-    });
+    // User is now managed by UserService, not LoginService
 
     it('should set isLoggedIn to true on successful login', (done) => {
       mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse));
@@ -180,13 +171,7 @@ describe('LoginService', () => {
       }, 10);
     });
 
-    it('should return user signal', () => {
-      mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse));
-
-      const result = service.login('test@example.com', 'password123');
-
-      expect(result).toBe(service.user);
-    });
+    // User is now managed by UserService, not LoginService
 
     it('should generate correct authHeader on successful login', (done) => {
       mockAuthHttpService.login.and.returnValue(of(mockSuccessResponse));
@@ -212,20 +197,7 @@ describe('LoginService', () => {
       }, 10);
     });
 
-    it('should clear user on login failure', (done) => {
-      // First set a user
-      service['_user'].set(mockUser);
-      expect(service.user()).toBeTruthy();
-
-      mockAuthHttpService.login.and.returnValue(throwError(() => mockErrorResponse));
-
-      service.login('test@example.com', 'wrongpassword');
-
-      setTimeout(() => {
-        expect(service.user()).toBeNull();
-        done();
-      }, 10);
-    });
+    // User is now managed by UserService, not LoginService
 
     it('should set isLoggedIn to false on login failure', (done) => {
       // First set logged in
@@ -296,7 +268,7 @@ describe('LoginService', () => {
         expect(service.accessToken()).toBeNull();
         expect(service.tokenType()).toBeNull();
         expect(service.expiresAt()).toBeNull();
-        expect(service.user()).toBeNull();
+        // User is now managed by UserService
         expect(service.error()).toBeNull();
         expect(service.isLoggedIn()).toBe(false);
         expect(service.isAuthenticated()).toBe(false);
@@ -372,7 +344,7 @@ describe('LoginService', () => {
         service.login('user2@example.com', 'password123');
 
         setTimeout(() => {
-          expect(service.user()?.id).toBe(2);
+          // User is now managed by UserService
           expect(service.accessToken()).toBe('mock-token-456');
           done();
         }, 10);

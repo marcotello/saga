@@ -1,43 +1,56 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { BookSuggestions, BookSuggestion } from './book-suggestions';
+import { BookSuggestions } from './book-suggestions';
+import { BookRecommendation } from '../../../../core/models/book-recommendation';
 
 describe('BookSuggestions', () => {
   let component: BookSuggestions;
   let fixture: ComponentFixture<BookSuggestions>;
   let compiled: HTMLElement;
 
-  const mockBookSuggestions: BookSuggestion[] = [
+  const mockBookSuggestions: BookRecommendation[] = [
     {
       id: 1,
+      userId: 1,
       name: 'Mastering Angular Signals',
-      image: 'images/books/ng-book.jpg'
+      author: 'Author 1',
+      coverImage: 'images/books/ng-book.jpg'
     },
     {
       id: 2,
+      userId: 1,
       name: 'Ai Powered App Development',
-      image: 'images/books/ng-book.jpg'
+      author: 'Author 2',
+      coverImage: 'images/books/ng-book.jpg'
     },
     {
       id: 3,
+      userId: 1,
       name: 'Effective Angular',
-      image: 'images/books/ng-book.jpg'
+      author: 'Author 3',
+      coverImage: 'images/books/ng-book.jpg'
     },
     {
       id: 4,
+      userId: 1,
       name: 'Effective TypeScript',
-      image: 'images/books/ng-book.jpg'
+      author: 'Author 4',
+      coverImage: 'images/books/ng-book.jpg'
     },
     {
       id: 5,
+      userId: 1,
       name: 'Angular for Enterprise Applications',
-      image: 'images/books/ng-book.jpg'
+      author: 'Author 5',
+      coverImage: 'images/books/ng-book.jpg'
     },
     {
       id: 6,
+      userId: 1,
       name: 'Modern Angular',
-      image: 'images/books/ng-book.jpg'
+      author: 'Author 6',
+      coverImage: 'images/books/ng-book.jpg'
     }
   ];
 

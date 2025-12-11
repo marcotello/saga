@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 import { provideHttpClient } from '@angular/common/http';
 import { BookGenres } from './book-genres';
 import { BookGenreService } from '../services/book-genre-service';
-import { BookGenreHttpMockService } from '../services/book-genre-http-mock-service';
+import { BookGenreHttpMockService } from '../../../core/mock-api/mock-http-services/book-genre-http-mock-service';
 import { Genre } from '../models/book-genre-model';
 import { of } from 'rxjs';
 import { SuccessEnvelope } from '../../../core/models/envelope';

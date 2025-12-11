@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { AddGenre } from './add-genre';
 import { BookGenreService } from '../services/book-genre-service';
-import { BookGenreHttpMockService } from '../services/book-genre-http-mock-service';
+import { BookGenreHttpMockService } from '../../../core/mock-api/mock-http-services/book-genre-http-mock-service';
 
 describe('AddGenre', () => {
   let component: AddGenre;
