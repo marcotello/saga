@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, computed, input, Signal} from '@angular/core';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { UserStatistics } from '../../../../core/models/user-statistics';
 
 export interface ChartData {
   name: string;
@@ -25,7 +26,46 @@ export interface StatisticsData {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Statistics {
-  statisticsData = input.required<StatisticsData | null>();
+  statistics = input.required<UserStatistics | null>();
+
+  // Transform UserStatistics to StatisticsData format for the chart
+  statisticsData: Signal<StatisticsData | null> = computed(() => {
+    const stats = this.statistics();
+    if (!stats) {
+      return null;
+    }
+
+    const monthAbbreviations: { [key: string]: string } = {
+      'January': 'Jan',
+      'February': 'Feb',
+      'March': 'Mar',
+      'April': 'Apr',
+      'May': 'May',
+      'June': 'Jun',
+      'July': 'Jul',
+      'August': 'Aug',
+      'September': 'Sep',
+      'October': 'Oct',
+      'November': 'Nov',
+      'December': 'Dec'
+    };
+
+    const series: ChartData[] = stats.monthlyBooks.map(monthData => ({
+      name: monthAbbreviations[monthData.month] || monthData.month,
+      value: monthData.booksRead
+    }));
+
+    return {
+      monthlyBooks: [
+        {
+          name: 'Books Read',
+          series
+        }
+      ],
+      totalBooksCurrentYear: stats.readBooks,
+      totalPagesCurrentYear: stats.totalPages
+    };
+  });
 
     yScaleMax: Signal<number> = computed(() => {
         const maxValueWhenEmpty = 5;

@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import userData from '../mocks-data/users.json';
+import userStatisticsData from '../mocks-data/user-statistics.json';
 import { ErrorEnvelope, AuthSuccessEnvelope } from '../../../features/auth/login/models/login-models';
 import { Observable, of, throwError, delay } from 'rxjs';
 import { User } from '../../models/user';
+import { UserStatistics } from '../../models/user-statistics';
 
 type UpdatePasswordPayload = {
   currentPassword: string;
@@ -126,6 +128,16 @@ export class UserHttpMockService {
     };
 
     return of(user).pipe(delay(2000));
+  }
+
+  getStatisticsByUserId(userId: number): Observable<UserStatistics | null> {
+    const statistics = userStatisticsData.find(stat => stat.userId === userId);
+    
+    if (!statistics) {
+      return of(null);
+    }
+
+    return of(statistics as UserStatistics);
   }
 
 }

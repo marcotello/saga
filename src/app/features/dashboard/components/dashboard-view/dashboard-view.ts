@@ -8,7 +8,7 @@ import { UserService } from '../../../../core/services/user-service';
 import { UpdateProgress } from '../update-progress/update-progress';
 import { MyBookshelves } from '../my-bookshelves/my-bookshelves';
 import { BookSuggestions } from '../book-suggestions/book-suggestions';
-import { Statistics, StatisticsData } from '../statistics/statistics';
+import { Statistics } from '../statistics/statistics';
 
 @Component({
   selector: 'app-dashboard-view',
@@ -27,39 +27,16 @@ export class DashboardView {
   protected readonly books = this.userService.currentlyReadingUserBooks;
   protected readonly bookshelves = this.userService.userBookshelves;
   protected readonly recommendedBooks = this.userService.recommendedBooks;
+  protected readonly statistics = this.userService.userStatistics;
 
   protected readonly isUpdateProgressOpen = signal<boolean>(false);
   protected readonly selectedBook = signal<UserBook | null>(null);
-
-  // Mock statistics data - will be replaced with real data later
-  protected readonly statisticsData = signal<StatisticsData>({
-    monthlyBooks: [
-      {
-        name: 'Books Read',
-        series: [
-          { name: 'Jan', value: 3 },
-          { name: 'Feb', value: 2 },
-          { name: 'Mar', value: 2 },
-          { name: 'Apr', value: 3 },
-          { name: 'May', value: 4 },
-          { name: 'Jun', value: 2 },
-          { name: 'Jul', value: 5 },
-          { name: 'Aug', value: 1 },
-          { name: 'Sep', value: 4 },
-          { name: 'Oct', value: 3 },
-          { name: 'Nov', value: 5 },
-          { name: 'Dec', value: 2 },
-        ],
-      },
-    ],
-    totalBooksCurrentYear: 78,
-    totalPagesCurrentYear: 23450,
-  });
 
   constructor() {
     this.booksService.getBooksByUserId(this.userId);
     this.bookshelfService.getBookshelvesByUserId(this.userId);
     this.booksService.getBookRecommendationsByUserId(this.userId);
+    this.userService.getStatisticsByUserId(this.userId);
   }
 
   onUpdateProgress(book: UserBook): void {

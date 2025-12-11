@@ -1,0 +1,112 @@
+[
+    {
+        "userId": 1,
+        "readBooks": 38,
+        "totalPages": 12345,
+        "monthlyBooks": [
+            {
+                "month": "January",
+                "booksRead": 3
+            },
+            {
+                "month": "February",
+                "booksRead": 2
+            },
+            {
+                "month": "March",
+                "booksRead": 2
+            },
+            {
+                "month": "April",
+                "booksRead": 3
+            },
+            {
+                "month": "May",
+                "booksRead": 5
+            },
+            {
+                "month": "June",
+                "booksRead": 2
+            },
+            {
+                "month": "July",
+                "booksRead": 4
+            },
+            {
+                "month": "August",
+                "booksRead": 3
+            },
+            {
+                "month": "September",
+                "booksRead": 4
+            },
+            {
+                "month": "October",
+                "booksRead": 3
+            },
+            {
+                "month": "November",
+                "booksRead": 5
+            },
+            {
+                "month": "December",
+                "booksRead": 2
+            }
+        ]
+    },
+    {
+        "userId": 2,
+        "readBooks": 45,
+        "totalPages": 21345,
+        "monthlyBooks": [
+            {
+                "month": "January",
+                "booksRead": 4
+            },
+            {
+                "month": "February",
+                "booksRead": 1
+            },
+            {
+                "month": "March",
+                "booksRead": 5
+            },
+            {
+                "month": "April",
+                "booksRead": 3
+            },
+            {
+                "month": "May",
+                "booksRead": 6
+            },
+            {
+                "month": "June",
+                "booksRead": 2
+            },
+            {
+                "month": "July",
+                "booksRead": 5
+            },
+            {
+                "month": "August",
+                "booksRead": 4
+            },
+            {
+                "month": "September",
+                "booksRead": 3
+            },
+            {
+                "month": "October",
+                "booksRead": 6
+            },
+            {
+                "month": "November",
+                "booksRead": 2
+            },
+            {
+                "month": "December",
+                "booksRead": 4
+            }
+        ]
+    }
+]
