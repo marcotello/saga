@@ -2,9 +2,8 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 import { provideHttpClient } from '@angular/common/http';
 import { UpdateGenre } from './update-genre';
 import { BookGenreService } from '../services/book-genre-service';
-import { BookGenreHttpMockService } from '../services/book-genre-http-mock-service';
+import { BookGenreHttpMockService } from '../../../core/mock-api/mock-http-services/book-genre-http-mock-service';
 import { Genre } from '../models/book-genre-model';
-import { SuccessEnvelope } from '../../../core/models/envelope';
 
 describe('UpdateGenre', () => {
   let component: UpdateGenre;
@@ -313,7 +312,7 @@ describe('UpdateGenre', () => {
       nameControl?.setValue('');
       fixture.detectChanges();
 
-      const errorMessage = fixture.nativeElement.querySelector('.update-genre__error');
+      const errorMessage = fixture.nativeElement.querySelector('.dialog-error');
       expect(errorMessage).toBeTruthy();
       expect(errorMessage.textContent.trim()).toBe('Name is required.');
     });
@@ -324,7 +323,7 @@ describe('UpdateGenre', () => {
       nameControl?.setValue('Mystery');
       fixture.detectChanges();
 
-      const errorMessage = fixture.nativeElement.querySelector('.update-genre__error');
+      const errorMessage = fixture.nativeElement.querySelector('.dialog-error');
       expect(errorMessage).toBeFalsy();
     });
 
@@ -332,7 +331,7 @@ describe('UpdateGenre', () => {
       fixture.componentRef.setInput('isDialogOpen', true);
       fixture.detectChanges();
 
-      const cancelButton = fixture.nativeElement.querySelector('.update-genre__cancel');
+      const cancelButton = fixture.nativeElement.querySelector('.btn-amber');
       expect(cancelButton).toBeTruthy();
       expect(cancelButton.textContent.trim()).toBe('Cancel');
     });
@@ -341,7 +340,7 @@ describe('UpdateGenre', () => {
       fixture.componentRef.setInput('isDialogOpen', true);
       fixture.detectChanges();
 
-      const cancelButton = fixture.nativeElement.querySelector('.update-genre__cancel');
+      const cancelButton = fixture.nativeElement.querySelector('.btn-amber');
       cancelButton.click();
       fixture.detectChanges();
 
@@ -352,7 +351,7 @@ describe('UpdateGenre', () => {
       fixture.componentRef.setInput('isDialogOpen', true);
       fixture.detectChanges();
 
-      const saveButton = fixture.nativeElement.querySelector('.update-genre__save');
+      const saveButton = fixture.nativeElement.querySelector('button[type="submit"]');
       expect(saveButton).toBeTruthy();
       expect(saveButton.textContent.trim()).toBe('Save');
     });
@@ -361,7 +360,7 @@ describe('UpdateGenre', () => {
       fixture.componentRef.setInput('isDialogOpen', true);
       fixture.detectChanges();
 
-      const saveButton = fixture.nativeElement.querySelector('.update-genre__save');
+      const saveButton = fixture.nativeElement.querySelector('button[type="submit"]');
       expect(saveButton.disabled).toBe(true);
     });
 
@@ -371,7 +370,7 @@ describe('UpdateGenre', () => {
       fixture.detectChanges();
       tick();
 
-      const saveButton = fixture.nativeElement.querySelector('.update-genre__save');
+      const saveButton = fixture.nativeElement.querySelector('button[type="submit"]');
       expect(saveButton.disabled).toBe(false);
     }));
 
@@ -382,7 +381,7 @@ describe('UpdateGenre', () => {
       fixture.detectChanges();
       tick();
 
-      const saveButton = fixture.nativeElement.querySelector('.update-genre__save');
+      const saveButton = fixture.nativeElement.querySelector('button[type="submit"]');
       saveButton.click();
       fixture.detectChanges();
 

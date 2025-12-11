@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import userData from '../mocks-data/users.json';
+import userStatisticsData from '../mocks-data/user-statistics.json';
 import { ErrorEnvelope, AuthSuccessEnvelope } from '../../../features/auth/login/models/login-models';
 import { Observable, of, throwError, delay } from 'rxjs';
 import { User } from '../../models/user';
+import { UserStatistics } from '../../models/user-statistics';
 
 type UpdatePasswordPayload = {
   currentPassword: string;
@@ -14,8 +16,26 @@ type UpdatePasswordPayload = {
 })
 export class UserHttpMockService {
 
+  private users: any[] = [];
+  private userStatistics: UserStatistics[] = [];
+
+  constructor() {
+    this.users = structuredClone(userData);
+    this.userStatistics = structuredClone(userStatisticsData);
+  }
+
+  getStatisticsByUserId(userId: number): Observable<UserStatistics | null> {
+    const statistics = this.userStatistics.find(stat => stat.userId === userId);
+
+    if (!statistics) {
+      return of(null);
+    }
+
+    return of(statistics);
+  }
+
   login(credential: string, password: string): Observable<AuthSuccessEnvelope> {
-    const foundUser = userData.find(
+    const foundUser = this.users.find(
       user => (user.email === credential || user.username === credential)
         && user.password === password);
 
@@ -58,8 +78,8 @@ export class UserHttpMockService {
   }
 
   updateProfileById(id: number, updatedFields: Partial<User>): Observable<User> {
-    const userIndex = userData.findIndex(user => user.id === id);
-    
+    const userIndex = this.users.findIndex(user => user.id === id);
+
     if (userIndex === -1) {
       const error: ErrorEnvelope = {
         status: 'error',
@@ -70,16 +90,16 @@ export class UserHttpMockService {
     }
 
     // Update the user in the array
-    const existingUser = userData[userIndex];
+    const existingUser = this.users[userIndex];
     const bioValue = updatedFields.bio === undefined ? existingUser.bio : (updatedFields.bio || '');
-    const updatedUser = { 
-      ...existingUser, 
+    const updatedUser = {
+      ...existingUser,
       name: updatedFields.name ?? existingUser.name,
       lastName: updatedFields.lastName ?? existingUser.lastName,
       email: updatedFields.email ?? existingUser.email,
       bio: bioValue
     };
-    userData[userIndex] = updatedUser;
+    this.users[userIndex] = updatedUser;
 
     const user: User = {
       id: updatedUser.id,
@@ -96,7 +116,7 @@ export class UserHttpMockService {
   }
 
   updatePassword(id: number, payload: UpdatePasswordPayload): Observable<User> {
-    const userIndex = userData.findIndex(user => user.id === id);
+    const userIndex = this.users.findIndex(user => user.id === id);
 
     if (userIndex === -1) {
       const error: ErrorEnvelope = {
@@ -107,9 +127,9 @@ export class UserHttpMockService {
       return throwError(() => error);
     }
 
-    const existingUser = userData[userIndex];
+    const existingUser = this.users[userIndex];
 
-    userData[userIndex] = {
+    this.users[userIndex] = {
       ...existingUser,
       password: payload.newPassword
     };
@@ -127,5 +147,7 @@ export class UserHttpMockService {
 
     return of(user).pipe(delay(2000));
   }
+
+
 
 }

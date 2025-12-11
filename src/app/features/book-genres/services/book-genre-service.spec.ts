@@ -1,6 +1,6 @@
 import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { BookGenreService } from './book-genre-service';
-import { BookGenreHttpMockService } from './book-genre-http-mock-service';
+import { BookGenreHttpMockService } from '../../../core/mock-api/mock-http-services/book-genre-http-mock-service';
 import { Genre } from '../models/book-genre-model';
 import { of, throwError } from 'rxjs';
 import { SuccessEnvelope, ErrorEnvelope } from '../../../core/models/envelope';

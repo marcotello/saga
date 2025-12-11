@@ -1,3 +1,4 @@
+/// <reference types="cypress" />
 describe('Book Genres Page', () => {
   beforeEach(() => {
     // Login before each test to access the genres page
@@ -141,14 +142,14 @@ describe('Book Genres Page', () => {
     it('should display Cancel and Save buttons in add genre dialog', () => {
       cy.get('.add-genre__trigger').click();
       cy.get('dialog[open]').should('be.visible');
-      cy.get('.add-genre__cancel').should('be.visible').should('contain', 'Cancel');
-      cy.get('.add-genre__save').should('be.visible').should('contain', 'Save');
+      cy.get('dialog[open] button:contains("Cancel")').should('be.visible').should('contain', 'Cancel');
+      cy.get('dialog[open] button:contains("Save")').should('be.visible').should('contain', 'Save');
     });
 
     it('should close dialog when clicking Cancel', () => {
       cy.get('.add-genre__trigger').click();
       cy.get('dialog[open]').should('be.visible');
-      cy.get('.add-genre__cancel').click();
+      cy.get('dialog[open] button:contains("Cancel")').click();
       cy.wait(300);
       cy.get('dialog[open]').should('not.exist');
     });
@@ -185,36 +186,36 @@ describe('Book Genres Page', () => {
       // Wait for Angular change detection
       cy.wait(200);
       // The error should be visible when field is touched and empty
-      cy.get('.add-genre__error').should('be.visible');
-      cy.get('.add-genre__error').should('contain', 'Name is required');
+      cy.get('dialog[open] .dialog-error').should('be.visible');
+      cy.get('dialog[open] .dialog-error').should('contain', 'Name is required');
     });
 
     it('should disable Save button when form is invalid', () => {
       cy.get('.add-genre__trigger').click();
       cy.get('dialog[open]').should('be.visible');
       cy.get('#genreName').clear();
-      cy.get('.add-genre__save').should('be.disabled');
+      cy.get('dialog[open] button:contains("Save")').should('be.disabled');
     });
 
     it('should enable Save button when form is valid', () => {
       cy.get('.add-genre__trigger').click();
       cy.get('dialog[open]').should('be.visible');
       cy.get('#genreName').type('Test Genre');
-      cy.get('.add-genre__save').should('not.be.disabled');
+      cy.get('dialog[open] button:contains("Save")').should('not.be.disabled');
     });
 
     it('should add a new genre successfully', () => {
       const newGenreName = `Test Genre ${Date.now()}`;
-      
+
       cy.get('.add-genre__trigger').click();
       cy.get('dialog[open]').should('be.visible');
       cy.get('dialog[open] #genreName').type(newGenreName);
-      cy.get('dialog[open] .add-genre__save').click();
-      
+      cy.get('dialog[open] button:contains("Save")').click();
+
       // Dialog should close
       cy.wait(500);
       cy.get('dialog[open]').should('not.exist');
-      
+
       // New genre should appear in the table
       cy.get('table tbody tr .name').should('contain', newGenreName);
     });
@@ -222,8 +223,8 @@ describe('Book Genres Page', () => {
     it('should clear form when dialog is closed', () => {
       cy.get('.add-genre__trigger').click();
       cy.get('#genreName').type('Test Genre');
-      cy.get('.add-genre__cancel').click();
-      
+      cy.get('dialog[open] button:contains("Cancel")').click();
+
       // Reopen dialog
       cy.get('.add-genre__trigger').click();
       cy.get('#genreName').should('have.value', '');
@@ -236,7 +237,7 @@ describe('Book Genres Page', () => {
       cy.get('table tbody tr').first().within(() => {
         cy.get('.update-button').click();
       });
-      
+
       cy.get('dialog[open]').should('be.visible');
       cy.get('dialog[open]').within(() => {
         cy.contains('Update Genre').should('be.visible');
@@ -259,7 +260,7 @@ describe('Book Genres Page', () => {
       cy.get('table tbody tr').first().within(() => {
         cy.get('.update-button').click();
       });
-      
+
       // Wait for dialog to open
       cy.get('dialog[open]').should('be.visible');
       // Wait for form fields to be visible (inside the dialog)
@@ -273,19 +274,19 @@ describe('Book Genres Page', () => {
       cy.get('table tbody tr').first().within(() => {
         cy.get('.update-button').click();
       });
-      
+
       cy.get('dialog[open]').should('be.visible');
-      cy.get('.update-genre__cancel').should('be.visible').should('contain', 'Cancel');
-      cy.get('.update-genre__save').should('be.visible').should('contain', 'Save');
+      cy.get('dialog[open] button:contains("Cancel")').should('be.visible').should('contain', 'Cancel');
+      cy.get('dialog[open] button:contains("Save")').should('be.visible').should('contain', 'Save');
     });
 
     it('should close dialog when clicking Cancel', () => {
       cy.get('table tbody tr').first().within(() => {
         cy.get('.update-button').click();
       });
-      
+
       cy.get('dialog[open]').should('be.visible');
-      cy.get('.update-genre__cancel').click();
+      cy.get('dialog[open] button:contains("Cancel")').click();
       cy.wait(300);
       cy.get('dialog[open]').should('not.exist');
     });
@@ -294,7 +295,7 @@ describe('Book Genres Page', () => {
       cy.get('table tbody tr').first().within(() => {
         cy.get('.update-button').click();
       });
-      
+
       // Wait for dialog to open and form to be populated
       cy.get('dialog[open]').should('be.visible');
       cy.get('dialog[open] #genreName', { timeout: 2000 })
@@ -306,13 +307,13 @@ describe('Book Genres Page', () => {
       // Wait for Angular change detection
       cy.wait(200);
       // The error should be visible
-      cy.get('dialog[open] .update-genre__error').should('be.visible');
-      cy.get('dialog[open] .update-genre__error').should('contain', 'Name is required');
+      cy.get('dialog[open] .dialog-error').should('be.visible');
+      cy.get('dialog[open] .dialog-error').should('contain', 'Name is required');
     });
 
     it('should update genre successfully', () => {
       const updatedName = `Updated Genre ${Date.now()}`;
-      
+
       // Get initial name for verification
       let initialName: string;
       cy.get('table tbody tr').first().within(() => {
@@ -320,11 +321,11 @@ describe('Book Genres Page', () => {
           initialName = text.trim();
         });
       });
-      
+
       cy.get('table tbody tr').first().within(() => {
         cy.get('.update-button').click();
       });
-      
+
       // Wait for dialog to open and form to be populated
       cy.get('dialog[open]').should('be.visible');
       cy.get('dialog[open] #genreName', { timeout: 2000 })
@@ -333,12 +334,12 @@ describe('Book Genres Page', () => {
         .should('match', /.+/);
       // Clear and type new name
       cy.get('dialog[open] #genreName').clear().type(updatedName);
-      cy.get('dialog[open] .update-genre__save').click();
-      
+      cy.get('dialog[open] button:contains("Save")').click();
+
       // Dialog should close
       cy.wait(500);
       cy.get('dialog[open]').should('not.exist');
-      
+
       // Updated genre should appear in the table
       cy.get('table tbody tr .name').should('contain', updatedName);
     });
@@ -349,7 +350,7 @@ describe('Book Genres Page', () => {
       cy.get('table tbody tr').first().within(() => {
         cy.get('.delete-button').click();
       });
-      
+
       cy.get('dialog[open]').should('be.visible');
       cy.get('dialog[open]').within(() => {
         cy.contains('Delete Record').should('be.visible');
@@ -361,7 +362,7 @@ describe('Book Genres Page', () => {
       cy.get('table tbody tr').first().within(() => {
         cy.get('.delete-button').click();
       });
-      
+
       cy.get('dialog[open]').should('be.visible');
       cy.get('.delete-record__cancel-button').should('be.visible').should('contain', 'Cancel');
       cy.get('.delete-record__delete-button').should('be.visible').should('contain', 'Delete');
@@ -371,7 +372,7 @@ describe('Book Genres Page', () => {
       cy.get('table tbody tr').first().within(() => {
         cy.get('.delete-button').click();
       });
-      
+
       cy.get('dialog[open]').should('be.visible');
       cy.get('.delete-record__cancel-button').click();
       cy.wait(300);
@@ -386,22 +387,22 @@ describe('Book Genres Page', () => {
           genreName = text.trim();
         });
       });
-      
+
       // Get initial count
       cy.get('table tbody tr').then(($rows) => {
         const initialCount = $rows.length;
-        
+
         cy.get('table tbody tr').first().within(() => {
           cy.get('.delete-button').click();
         });
-        
+
         cy.get('dialog[open]').should('be.visible');
         cy.get('.delete-record__delete-button').click();
-        
+
         // Dialog should close
         cy.wait(500);
         cy.get('dialog[open]').should('not.exist');
-        
+
         // Genre should be removed from table (soft delete)
         cy.get('table tbody tr').should('have.length', initialCount - 1);
         cy.get('table tbody tr .name').should('not.contain', genreName);
@@ -416,22 +417,22 @@ describe('Book Genres Page', () => {
           genreName = text.trim();
         });
       });
-      
+
       // Get initial count
       cy.get('table tbody tr').then(($rows) => {
         const initialCount = $rows.length;
-        
+
         cy.get('table tbody tr').first().within(() => {
           cy.get('.delete-button').click();
         });
-        
+
         cy.get('dialog[open]').should('be.visible');
         cy.get('.delete-record__cancel-button').click();
-        
+
         // Dialog should close
         cy.wait(500);
         cy.get('dialog[open]').should('not.exist');
-        
+
         // Genre should still be in table
         cy.get('table tbody tr').should('have.length', initialCount);
         cy.get('table tbody tr .name').should('contain', genreName);
@@ -463,10 +464,10 @@ describe('Book Genres Page', () => {
       cy.get('.add-genre__trigger').click();
       cy.get('dialog[open]').should('be.visible');
       cy.get('#genreName').type(newGenreName);
-      cy.get('.add-genre__save').click();
+      cy.get('dialog[open] button:contains("Save")').click();
       cy.wait(500);
       cy.get('dialog[open]').should('not.exist');
-      
+
       // Update the new genre
       cy.get('table tbody tr').contains(newGenreName).parent('tr').within(() => {
         cy.get('.update-button').click();
@@ -479,10 +480,10 @@ describe('Book Genres Page', () => {
         .should('match', /.+/);
       const updatedName = `${newGenreName} Updated`;
       cy.get('dialog[open] #genreName').clear().type(updatedName);
-      cy.get('dialog[open] .update-genre__save').click();
+      cy.get('dialog[open] button:contains("Save")').click();
       cy.wait(500);
       cy.get('dialog[open]').should('not.exist');
-      
+
       // Delete the updated genre
       cy.get('table tbody tr').contains(updatedName).parent('tr').within(() => {
         cy.get('.delete-button').click();
@@ -491,7 +492,7 @@ describe('Book Genres Page', () => {
       cy.get('.delete-record__delete-button').click();
       cy.wait(500);
       cy.get('dialog[open]').should('not.exist');
-      
+
       // Verify it's gone
       cy.get('table tbody tr .name').should('not.contain', updatedName);
     });

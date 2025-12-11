@@ -4,6 +4,7 @@ import { UserHttpMockService } from "../mock-api/mock-http-services/user-http-mo
 import { UserBook } from "../models/user-book";
 import {Bookshelf} from "../models/bookshelf";
 import {BookRecommendation} from "../models/book-recommendation";
+import { UserStatistics } from "../models/user-statistics";
 
 
 @Injectable({
@@ -18,12 +19,14 @@ export class UserService {
   private readonly _currentlyReadingUserBooks = signal<UserBook[] | null>(null);
   private readonly _userBookshelves = signal<Bookshelf[] | null>(null);
   private readonly _recommendedBooks = signal<BookRecommendation[] | null>(null);
+  private readonly _userStatistics = signal<UserStatistics | null>(null);
 
   readonly user = this._user.asReadonly();
   readonly userBooks = this._userBooks.asReadonly();
   readonly currentlyReadingUserBooks = this._currentlyReadingUserBooks.asReadonly();
   readonly userBookshelves = this._userBookshelves.asReadonly();
   readonly recommendedBooks = this._recommendedBooks.asReadonly();
+  readonly userStatistics = this._userStatistics.asReadonly();
 
   setUser(user: User | null): void {
     this._user.set(user);
@@ -76,5 +79,16 @@ export class UserService {
 
   setRecommendedBooks(recommendedBooks: BookRecommendation[] | null): void {
     this._recommendedBooks.set(recommendedBooks);
+  }
+
+  getStatisticsByUserId(userId: number): void {
+    this.userHttpMockService.getStatisticsByUserId(userId).subscribe({
+      next: (statistics: UserStatistics | null) => {
+        this._userStatistics.set(statistics);
+      },
+      error: () => {
+        // Error handling will be implemented later with an error service
+      }
+    });
   }
 }

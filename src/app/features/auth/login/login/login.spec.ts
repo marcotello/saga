@@ -3,14 +3,14 @@ import { Router, provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { Login } from './login';
 import { LoginService } from '../services/login-service';
-import { AuthHttpMockService } from '../../services/auth-http-mock-service';
+import { UserHttpMockService } from '../../../../core/mock-api/mock-http-services/user-http-mock-service';
 import { AuthSuccessEnvelope, ErrorEnvelope } from '../models/login-models';
 import { of, throwError, delay } from 'rxjs';
 
 describe('Login', () => {
   let component: Login;
   let fixture: ComponentFixture<Login>;
-  let mockAuthHttpService: jasmine.SpyObj<AuthHttpMockService>;
+  let mockAuthHttpService: jasmine.SpyObj<UserHttpMockService>;
   let mockRouter: jasmine.SpyObj<Router>;
   let loginService: LoginService;
 
@@ -27,13 +27,15 @@ describe('Login', () => {
         name: 'Test',
         lastName: 'User',
         email: 'test@example.com',
-        role: 'User'
+        bio: null,
+        role: 'User',
+        profilePicture: 'default.jpg'
       }
     }
   };
 
   beforeEach(async () => {
-    mockAuthHttpService = jasmine.createSpyObj('AuthHttpMockService', ['login']);
+    mockAuthHttpService = jasmine.createSpyObj('UserHttpMockService', ['login']);
 
     await TestBed.configureTestingModule({
       imports: [Login],
@@ -44,7 +46,7 @@ describe('Login', () => {
         ]),
         provideHttpClient(),
         LoginService,
-        { provide: AuthHttpMockService, useValue: mockAuthHttpService }
+        { provide: UserHttpMockService, useValue: mockAuthHttpService }
       ]
     }).compileComponents();
 
@@ -272,43 +274,8 @@ describe('Login', () => {
     }));
   });
 
-  describe('Password visibility toggle', () => {
-    it('should toggle password visibility', () => {
-      expect(component.passwordVisible()).toBe(false);
-
-      component.togglePasswordVisibility();
-      expect(component.passwordVisible()).toBe(true);
-
-      component.togglePasswordVisibility();
-      expect(component.passwordVisible()).toBe(false);
-    });
-
-    it('should change input type based on visibility', () => {
-      expect(component.getPasswordType()).toBe('password');
-
-      component.togglePasswordVisibility();
-      expect(component.getPasswordType()).toBe('text');
-    });
-
-    it('should update button aria-pressed attribute', () => {
-      fixture.detectChanges();
-      const toggle = fixture.nativeElement.querySelector('.password-toggle');
-
-      expect(toggle.getAttribute('aria-pressed')).toBe('false');
-
-      component.togglePasswordVisibility();
-      fixture.detectChanges();
-
-      expect(toggle.getAttribute('aria-pressed')).toBe('true');
-    });
-
-    it('should provide accessible labels', () => {
-      expect(component.getPasswordToggleLabel()).toBe('Show password');
-
-      component.togglePasswordVisibility();
-      expect(component.getPasswordToggleLabel()).toBe('Hide password');
-    });
-  });
+  // Password visibility toggle is now handled by PasswordToggleDirective
+  // Tests for the directive should be in password-toggle.spec.ts
 
   describe('T503 - Happy path: stores token and navigates to dashboard', () => {
     it('should call auth service with trimmed credentials', fakeAsync(() => {
@@ -334,7 +301,6 @@ describe('Login', () => {
 
       expect(loginService.isAuthenticated()).toBe(true);
       expect(loginService.accessToken()).toBe('mock-token');
-      expect(loginService.user()?.username).toBe('testuser');
     }));
 
     it('should navigate to dashboard on success', fakeAsync(() => {

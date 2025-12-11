@@ -39,7 +39,7 @@ describe('Footer', () => {
 
       expect(logo).toBeTruthy();
       expect(logo?.getAttribute('alt')).toBe('Saga');
-      expect(logo?.getAttribute('src')).toContain('saga_logo_bottom.png');
+      expect(logo?.getAttribute('src')).toContain('saga_logo_bottom.svg');
     });
 
     it('should display illustration in second column with correct alt text', () => {
@@ -183,7 +183,7 @@ describe('Footer', () => {
 
   describe('Component Properties', () => {
     it('should have correct image source constants', () => {
-      expect(component.logoSrc).toBe('/images/saga_logo_bottom.png');
+      expect(component.logoSrc).toBe('/images/saga_logo_bottom.svg');
       expect(component.illustrationSrc).toBe('/images/reading2.svg');
     });
 

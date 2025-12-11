@@ -146,4 +146,40 @@ body {
     background-color: var(--pico-color-amber-450);
     border-color: var(--pico-color-amber-450);
   }
+
+/* NGX-Charts Line Chart Styles - Force line visibility */
+.ngx-charts {
+  .line-series path {
+    stroke-width: 5px !important;
+    stroke: #1976d2 !important;
+    stroke-opacity: 1 !important;
+  }
+  
+  .line-series circle {
+    r: 7 !important;
+    fill: #1976d2 !important;
+    stroke: #1976d2 !important;
+    fill-opacity: 1 !important;
+    stroke-opacity: 1 !important;
+  }
+  
+  .line-highlight {
+    display: block !important;
+  }
+}
+
+/* Alternative selectors for line chart */
+svg.ngx-charts g.line-series path {
+  stroke-width: 5px !important;
+  stroke: #1976d2 !important;
+  stroke-opacity: 1 !important;
+}
+
+svg.ngx-charts g.line-series circle {
+  r: 7 !important;
+  fill: #1976d2 !important;
+  stroke: #1976d2 !important;
+  fill-opacity: 1 !important;
+  stroke-opacity: 1 !important;
+}
 }

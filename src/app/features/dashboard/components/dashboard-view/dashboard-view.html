@@ -11,6 +11,10 @@
                           (bookClicked)="onBookSuggestionClick($event)">
     </app-book-suggestions>
 
+    <app-statistics [statistics]="statistics()">
+    </app-statistics>
+
+
     @if (selectedBook()) {
         <app-update-progress [book]="selectedBook()!" [isOpen]="isUpdateProgressOpen()"
                              (saveProgress)="onSaveProgress($event)" (cancelUpdate)="onCancelProgress()">

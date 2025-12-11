@@ -8,10 +8,11 @@ import { UserService } from '../../../../core/services/user-service';
 import { UpdateProgress } from '../update-progress/update-progress';
 import { MyBookshelves } from '../my-bookshelves/my-bookshelves';
 import { BookSuggestions } from '../book-suggestions/book-suggestions';
+import { Statistics } from '../statistics/statistics';
 
 @Component({
   selector: 'app-dashboard-view',
-  imports: [TrackProgress, UpdateProgress, MyBookshelves, BookSuggestions],
+  imports: [TrackProgress, UpdateProgress, MyBookshelves, BookSuggestions, Statistics],
   templateUrl: './dashboard-view.html',
   styleUrl: './dashboard-view.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,6 +27,7 @@ export class DashboardView {
   protected readonly books = this.userService.currentlyReadingUserBooks;
   protected readonly bookshelves = this.userService.userBookshelves;
   protected readonly recommendedBooks = this.userService.recommendedBooks;
+  protected readonly statistics = this.userService.userStatistics;
 
   protected readonly isUpdateProgressOpen = signal<boolean>(false);
   protected readonly selectedBook = signal<UserBook | null>(null);
@@ -34,6 +36,7 @@ export class DashboardView {
     this.booksService.getBooksByUserId(this.userId);
     this.bookshelfService.getBookshelvesByUserId(this.userId);
     this.booksService.getBookRecommendationsByUserId(this.userId);
+    this.userService.getStatisticsByUserId(this.userId);
   }
 
   onUpdateProgress(book: UserBook): void {
