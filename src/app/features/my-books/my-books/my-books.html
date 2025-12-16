@@ -1,1 +1,154 @@
-<p>my-books works!</p>
+<div class="container">
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>My Books</h1>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <input
+                type="search"
+                [value]="searchQuery()"
+                (input)="onSearchChange($any($event.target).value)"
+                placeholder="Filter by title, author..."
+                class="search-input"
+        />
+    </div>
+
+    <!-- Status Filter Chips -->
+    <div class="filter-chips">
+        @for (status of statuses; track status.value) {
+            <button
+                    [class.active]="selectedStatus() === status.value"
+                    class="chip"
+                    (click)="selectStatus(status.value)"
+                    type="button"
+            >
+                {{ status.label }}
+                @if (status.count > 0) {
+                    <span class="chip-count">{{ status.count }}</span>
+                }
+            </button>
+        }
+    </div>
+
+    <!-- Books Table -->
+    <div class="table-container">
+        <table class="books-table">
+            <thead>
+            <tr>
+                <th class="cover-column">COVER</th>
+                <th
+                        class="sortable-header"
+                        (click)="toggleSort('title')"
+                >
+            <span class="header-content">
+              TITLE
+                @if (sortColumn() === 'title') {
+                    <span class="sort-icon">
+                  {{ sortDirection() === 'asc' ? '↑' : '↓' }}
+                </span>
+                }
+            </span>
+                </th>
+                <th
+                        class="sortable-header"
+                        (click)="toggleSort('author')"
+                >
+            <span class="header-content">
+              AUTHOR
+                @if (sortColumn() === 'author') {
+                    <span class="sort-icon">
+                  {{ sortDirection() === 'asc' ? '↑' : '↓' }}
+                </span>
+                }
+            </span>
+                </th>
+                <th>SHELVES</th>
+                <th
+                        class="sortable-header"
+                        (click)="toggleSort('dateRead')"
+                >
+            <span class="header-content">
+              DATE READ
+                @if (sortColumn() === 'dateRead') {
+                    <span class="sort-icon">
+                  {{ sortDirection() === 'asc' ? '↑' : '↓' }}
+                </span>
+                }
+            </span>
+                </th>
+                <th
+                        class="sortable-header active-sort"
+                        (click)="toggleSort('dateAdded')"
+                >
+            <span class="header-content">
+              DATE ADDED
+                @if (sortColumn() === 'dateAdded') {
+                    <span class="sort-icon">
+                  {{ sortDirection() === 'asc' ? '↑' : '↓' }}
+                </span>
+                }
+            </span>
+                </th>
+                <th class="actions-column"></th>
+            </tr>
+            </thead>
+            <tbody>
+                @for (book of books; track book.id) {
+                    <tr>
+                        <td class="cover-cell">
+                            <img
+                                    [src]="book.coverImage"
+                                    [alt]="book.name + ' cover'"
+                                    class="book-cover"
+                            />
+                        </td>
+                        <td class="title-cell">
+                            <a href="#" class="book-title">{{ book.name }}</a>
+                        </td>
+                        <td class="author-cell">{{ book.author }}</td>
+                        <td class="shelves-cell">
+                            <div class="shelf-badges">
+                                @for (shelf of getShelfBadges(book.shelves); track shelf.name) {
+                                    <span [class]="'shelf-badge shelf-badge-' + shelf.color">
+                    {{ shelf.name }}
+                  </span>
+                                }
+                            </div>
+                        </td>
+                        <td class="date-cell">
+                            {{ book.status === 'Finished' ? formatDate(book.updatedAt) : '—' }}
+                        </td>
+                        <td class="date-cell">{{ formatDate(book.createdAt) }}</td>
+                        <td class="actions-cell">
+                            <button class="action-btn" type="button" aria-label="More options">
+                                ⋮
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        @if (books.length === 0) {
+            <div class="empty-state">
+                <p>No books found. Start adding books to your collection!</p>
+            </div>
+        }
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <span class="pagination-info">Showing 1 to 5 of {{ books.length }} results</span>
+        <div class="pagination-controls">
+            <button class="pagination-btn" disabled type="button">‹</button>
+            <button class="pagination-btn active" type="button">1</button>
+            <button class="pagination-btn" type="button">2</button>
+            <button class="pagination-btn" type="button">3</button>
+            <span class="pagination-ellipsis">...</span>
+            <button class="pagination-btn" type="button">12</button>
+            <button class="pagination-btn" type="button">›</button>
+        </div>
+    </div>
+</div>

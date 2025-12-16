@@ -1,0 +1,381 @@
+// My Books Page Styles
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--pico-color, #1f2933);
+  }
+}
+
+// Filter Chips
+.filter-chips {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid var(--pico-muted-border-color);
+    background-color: white;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    color: var(--pico-muted-color);
+
+    &:hover {
+      border-color: var(--pico-primary);
+      background-color: var(--pico-primary-background);
+    }
+
+    &.active {
+      background-color: var(--pico-primary);
+      color: white;
+      border-color: var(--pico-primary);
+
+      .chip-count {
+        background-color: rgba(255, 255, 255, 0.3);
+        color: white;
+      }
+    }
+
+    .chip-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 1.5rem;
+      height: 1.5rem;
+      padding: 0 0.4rem;
+      border-radius: 10px;
+      background-color: var(--pico-muted-background-color);
+      color: var(--pico-muted-color);
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+  }
+}
+
+// Search Container
+.search-container {
+  margin-bottom: 1.5rem;
+
+  .search-input {
+    max-width: 400px;
+    padding: 0.65rem 1rem;
+    border: 1px solid var(--pico-muted-border-color);
+    border-radius: 4px;
+    font-size: 0.875rem;
+    background-color: white;
+
+    &:focus {
+      border-color: var(--pico-primary);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(var(--pico-primary-rgb), 0.1);
+    }
+
+    &::placeholder {
+      color: var(--pico-muted-color);
+    }
+  }
+}
+
+// Table Container
+.table-container {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+}
+
+// Books Table
+.books-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+
+  thead {
+    background-color: var(--pico-table-border-color);
+    border-bottom: 2px solid var(--pico-muted-border-color);
+
+    tr th {
+      padding: 1rem;
+      text-align: left;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--pico-muted-color);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      border: none;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid var(--pico-muted-border-color);
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: var(--pico-background-color);
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      td {
+        padding: 1rem;
+        vertical-align: middle;
+        border: none;
+      }
+    }
+  }
+
+  // Column-specific styles
+  .cover-column {
+    width: 80px;
+  }
+
+  .cover-cell {
+    .book-cover {
+      width: 50px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .title-cell {
+    font-weight: 500;
+
+    .book-title {
+      color: var(--pico-primary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--pico-primary-hover);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .author-cell {
+    color: var(--pico-color);
+  }
+
+  .shelves-cell {
+    .shelf-badges {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .shelf-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      white-space: nowrap;
+
+      &.shelf-badge-blue {
+        background-color: var(--pico-color-blue-100);
+        color: var(--pico-color-blue-600);
+      }
+
+      &.shelf-badge-amber {
+        background-color: var(--pico-color-amber-100);
+        color: var(--pico-color-amber-600);
+      }
+
+      &.shelf-badge-purple {
+        background-color: var(--pico-color-purple-100);
+        color: var(--pico-color-purple-600);
+      }
+
+      &.shelf-badge-red {
+        background-color: var(--pico-color-red-100);
+        color: var(--pico-color-red-600);
+      }
+    }
+  }
+
+  .date-cell {
+    color: var(--pico-muted-color);
+    font-size: 0.875rem;
+  }
+
+  .actions-column {
+    width: 40px;
+  }
+
+  .actions-cell {
+    text-align: center;
+
+    .action-btn {
+      background: transparent;
+      border: none;
+      color: var(--pico-muted-color);
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+      font-size: 1.25rem;
+      line-height: 1;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--pico-color);
+      }
+
+      &:focus {
+        outline: none;
+        box-shadow: none;
+      }
+    }
+  }
+
+  // Sortable headers
+  .sortable-header {
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      background-color: var(--pico-muted-background-color);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .sort-icon {
+        font-size: 0.875rem;
+        color: var(--pico-primary);
+      }
+    }
+
+    &.active-sort {
+      color: var(--pico-primary);
+    }
+  }
+}
+
+// Empty State
+.empty-state {
+  padding: 3rem 2rem;
+  text-align: center;
+  color: var(--pico-muted-color);
+
+  p {
+    margin: 0;
+    font-size: 1rem;
+  }
+}
+
+// Pagination
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  .pagination-info {
+    color: var(--pico-muted-color);
+    font-size: 0.875rem;
+  }
+
+  .pagination-controls {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+
+    .pagination-btn {
+      min-width: 2.5rem;
+      height: 2.5rem;
+      padding: 0.5rem;
+      border: 1px solid var(--pico-muted-border-color);
+      border-radius: 4px;
+      background-color: white;
+      color: var(--pico-color);
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover:not(:disabled) {
+        border-color: var(--pico-primary);
+        background-color: var(--pico-primary-background);
+      }
+
+      &.active {
+        background-color: var(--pico-primary);
+        color: white;
+        border-color: var(--pico-primary);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(var(--pico-primary-rgb), 0.1);
+      }
+    }
+
+    .pagination-ellipsis {
+      color: var(--pico-muted-color);
+      padding: 0 0.25rem;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .filter-chips {
+    gap: 0.5rem;
+
+    .chip {
+      font-size: 0.8rem;
+      padding: 0.4rem 0.8rem;
+    }
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .books-table {
+    min-width: 800px;
+  }
+
+  .pagination {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
