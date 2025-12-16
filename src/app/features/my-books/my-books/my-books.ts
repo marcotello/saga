@@ -100,7 +100,7 @@ export class MyBooks {
       updatedAt: '2023-03-05',
       userId: 1,
       genreId: 1,
-      status: 'Reading',
+      status: 'Save It For Later',
       shelves: [1]
     }
   ];
@@ -147,5 +147,12 @@ export class MyBooks {
       day: 'numeric',
       year: 'numeric'
     });
+  }
+
+  // Get status CSS class
+  getStatusClass(status: string): string {
+    const baseClass = 'status-badge';
+    const statusClass = status.toLowerCase().replace(/\s+/g, '-');
+    return `${baseClass} status-${statusClass}`;
   }
 }
