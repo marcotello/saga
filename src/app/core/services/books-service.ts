@@ -1,15 +1,21 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { BooksHttpMockService } from '../mock-api/mock-http-services/books-http-mock-service';
+import { BookStatusMockService } from '../mock-api/mock-http-services/book-status-mock-service';
 import { UserService } from './user-service';
 import { UserBook } from '../models/user-book';
 import { BookRecommendation } from '../models/book-recommendation';
+import { ReadingStatus } from '../models/reading-status';
 
 @Injectable({
     providedIn: 'root'
 })
 export class BooksService {
     private readonly booksServiceHttpMock = inject(BooksHttpMockService);
+    private readonly bookStatusMockService = inject(BookStatusMockService);
     private readonly userService = inject(UserService);
+
+    private readonly _readingStatuses = signal<ReadingStatus[]>([]);
+    readonly readingStatuses = this._readingStatuses.asReadonly();
 
     getBooksByUserId(userId: number): void {
         this.booksServiceHttpMock.getBooksByUserId(userId)
@@ -64,5 +70,17 @@ export class BooksService {
                 // Error handling
             }
         });
+    }
+
+    getReadingStatuses(): void {
+        this.bookStatusMockService.getReadingStatuses()
+            .subscribe({
+                next: (statuses: ReadingStatus[]) => {
+                    this._readingStatuses.set(statuses);
+                },
+                error: () => {
+                    // Error handling will be implemented later with an error service
+                }
+            });
     }
 }

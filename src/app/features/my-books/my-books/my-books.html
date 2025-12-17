@@ -4,7 +4,7 @@
     <!-- Filter Row: Status Chips + Search Bar -->
     <div class="filter-row">
         <div class="filter-chips">
-            @for (status of statuses; track status.value) {
+            @for (status of statuses(); track status.value) {
                 <button
                         [class.active]="selectedStatus() === status.value"
                         class="chip"
@@ -103,7 +103,7 @@
             </tr>
             </thead>
             <tbody>
-                @for (book of books; track book.id) {
+                @for (book of books(); track book.id) {
                     <tr>
                         <td class="cover-cell">
                             <img
@@ -142,7 +142,7 @@
             </tbody>
         </table>
 
-        @if (books.length === 0) {
+        @if (books().length === 0) {
             <div class="empty-state">
                 <p>No books found. Start adding books to your collection!</p>
             </div>
@@ -150,16 +150,39 @@
     </div>
 
     <!-- Pagination -->
-    <div class="pagination">
-        <span class="pagination-info">Showing 1 to 5 of {{ books.length }} results</span>
-        <div class="pagination-controls">
-            <button class="pagination-btn" disabled type="button">‹</button>
-            <button class="pagination-btn active" type="button">1</button>
-            <button class="pagination-btn" type="button">2</button>
-            <button class="pagination-btn" type="button">3</button>
-            <span class="pagination-ellipsis">...</span>
-            <button class="pagination-btn" type="button">12</button>
-            <button class="pagination-btn" type="button">›</button>
+    @if (totalPages() > 0) {
+        <div class="pagination">
+            <span class="pagination-info">
+                Showing {{ paginationInfo().start }} to {{ paginationInfo().end }} of {{ paginationInfo().total }} results
+            </span>
+            <div class="pagination-controls">
+                <button
+                    class="pagination-btn"
+                    [disabled]="currentPage() === 1"
+                    (click)="previousPage()"
+                    type="button"
+                >‹</button>
+                
+                @for (btn of paginationButtons(); track $index) {
+                    @if (btn === '...') {
+                        <span class="pagination-ellipsis">...</span>
+                    } @else {
+                        <button
+                            class="pagination-btn"
+                            [class.active]="currentPage() === btn"
+                            (click)="goToPage(+btn)"
+                            type="button"
+                        >{{ btn }}</button>
+                    }
+                }
+                
+                <button
+                    class="pagination-btn"
+                    [disabled]="currentPage() === totalPages()"
+                    (click)="nextPage()"
+                    type="button"
+                >›</button>
+            </div>
         </div>
-    </div>
+    }
 </div>
