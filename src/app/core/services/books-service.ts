@@ -26,6 +26,21 @@ export class BooksService {
             });
     }
 
+    getBooksByStatusUserId(userId: number, status: string): void {
+        this.booksServiceHttpMock.getBooksByUserId(userId)
+            .subscribe({
+                next: (userBooks: UserBook[]) => {
+                    this.userService.setUserBooks(userBooks);
+
+                    const readingBooks = userBooks.filter(book => book.status === status);
+                    this.userService.setCurrentlyReadingUserBooks(readingBooks);
+                },
+                error: () => {
+                    // Error handling will be implemented later with an error service
+                }
+            });
+    }
+
     getBookRecommendationsByUserId(userId: number): void {
         this.booksServiceHttpMock.getBookRecommendationsByUserId(userId)
             .subscribe({

@@ -33,7 +33,7 @@ export class DashboardView {
   protected readonly selectedBook = signal<UserBook | null>(null);
 
   constructor() {
-    this.booksService.getBooksByUserId(this.userId);
+    this.booksService.getBooksByStatusUserId(this.userId, 'Reading');
     this.bookshelfService.getBookshelvesByUserId(this.userId);
     this.booksService.getBookRecommendationsByUserId(this.userId);
     this.userService.getStatisticsByUserId(this.userId);
