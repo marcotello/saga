@@ -76,7 +76,7 @@ describe('DashboardView', () => {
 
   beforeEach(async () => {
     const booksServiceSpy = jasmine.createSpyObj('BooksService', [
-      'getBooksByUserId',
+      'getBooksByStatusUserId',
       'getBookRecommendationsByUserId',
       'updateProgress'
     ]);
@@ -119,8 +119,8 @@ describe('DashboardView', () => {
   });
 
   describe('Constructor initialization', () => {
-    it('should call getBooksByUserId on initialization', () => {
-      expect(booksService.getBooksByUserId).toHaveBeenCalledWith(1);
+    it('should call getBooksByStatusUserId with Reading status on initialization', () => {
+      expect(booksService.getBooksByStatusUserId).toHaveBeenCalledWith(1, 'Reading');
     });
 
     it('should call getBookshelvesByUserId on initialization', () => {

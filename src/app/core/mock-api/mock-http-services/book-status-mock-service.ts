@@ -15,6 +15,6 @@ export class BookStatusMockService {
     }
 
     getReadingStatuses(): Observable<ReadingStatus[]> {
-        return of(this.statuses);
+        return of([...this.statuses]);
     }
 }
