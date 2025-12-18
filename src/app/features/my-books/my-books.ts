@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { UserBook } from '../../../core/models/user-book';
-import { BooksService } from '../../../core/services/books-service';
-import { UserService } from '../../../core/services/user-service';
+import { UserBook } from '../../core/models/user-book';
+import { BooksService } from '../../core/services/books-service';
+import { UserService } from '../../core/services/user-service';
 
 interface BookStatus {
   label: string;

@@ -2,11 +2,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { signal } from '@angular/core';
 import { MyBooks } from './my-books';
-import { BooksService } from '../../../core/services/books-service';
-import { UserService } from '../../../core/services/user-service';
-import { UserBook } from '../../../core/models/user-book';
-import { ReadingStatus } from '../../../core/models/reading-status';
-import { User } from '../../../core/models/user';
+import { BooksService } from '../../core/services/books-service';
+import { UserService } from '../../core/services/user-service';
+import { UserBook } from '../../core/models/user-book';
+import { ReadingStatus } from '../../core/models/reading-status';
+import { User } from '../../core/models/user';
 
 describe('MyBooks', () => {
   let component: MyBooks;

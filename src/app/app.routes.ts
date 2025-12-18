@@ -25,7 +25,7 @@ export const routes: Routes = [
             },
             {
                 path: 'my-books',
-                loadComponent: () => import('./features/my-books/my-books/my-books').then(m => m.MyBooks)
+                loadComponent: () => import('./features/my-books/my-books').then(m => m.MyBooks)
             },
             {
                 path: 'profile',
