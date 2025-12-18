@@ -161,7 +161,7 @@
         "updatedAt": "2025-10-15",
         "userId": 1,
         "genreId": 31,
-        "status": "Wanted to Read",
+        "status": "Want to Read",
         "shelves": [
             1
         ]
@@ -176,7 +176,7 @@
         "updatedAt": "2024-10-20",
         "userId": 1,
         "genreId": 31,
-        "status": "Wanted to Read",
+        "status": "Want to Read",
         "shelves": [
             1
         ]
@@ -191,7 +191,7 @@
         "updatedAt": "2024-07-15",
         "userId": 2,
         "genreId": 31,
-        "status": "Wanted to Read",
+        "status": "Want to Read",
         "shelves": [
             1
         ]
@@ -206,7 +206,7 @@
         "updatedAt": "2024-06-30",
         "userId": 2,
         "genreId": 31,
-        "status": "Wanted to Read",
+        "status": "Want to Read",
         "shelves": [
             1
         ]

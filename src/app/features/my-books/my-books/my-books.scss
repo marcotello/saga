@@ -38,6 +38,7 @@
         white-space: nowrap;
 
         &:hover {
+          color: white;
           border-color: var(--pico-primary);
           background-color: var(--pico-primary-background);
         }
@@ -304,6 +305,7 @@
         justify-content: center;
 
         &:hover:not(:disabled) {
+          color: white;
           border-color: var(--pico-primary);
           background-color: var(--pico-primary-background);
         }
