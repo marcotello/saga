@@ -24,6 +24,10 @@ export const routes: Routes = [
                 loadComponent: () => import('./features/book-genres/book-genres/book-genres').then(m => m.BookGenres)
             },
             {
+                path: 'my-books',
+                loadComponent: () => import('./features/my-books/my-books/my-books').then(m => m.MyBooks)
+            },
+            {
                 path: 'profile',
                 loadComponent: () => import('./features/profile/profile/profile').then(m => m.Profile)
             },

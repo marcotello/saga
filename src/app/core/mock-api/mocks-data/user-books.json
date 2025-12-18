@@ -5,8 +5,8 @@
         "author": "Adam Freeman",
         "coverImage": "/images/books/pro-angular.jpg",
         "progressPercentage": 45,
-        "createdAt": "2025-01-01",
-        "updatedAt": "2025-01-01",
+        "createdAt": "2024-09-15",
+        "updatedAt": "2025-12-10",
         "userId": 1,
         "genreId": 31,
         "status": "Reading",
@@ -21,8 +21,8 @@
         "author": "Lamis Chebbi",
         "coverImage": "/images/books/reactive-patterns.jpg",
         "progressPercentage": 78,
-        "createdAt": "2025-01-01",
-        "updatedAt": "2025-01-01",
+        "createdAt": "2024-08-22",
+        "updatedAt": "2025-12-15",
         "userId": 1,
         "genreId": 31,
         "status": "Reading",
@@ -31,58 +31,13 @@
         ]
     },
     {
-        "id": 6,
-        "name": "The Ultimate Guide to Angular Evolution",
-        "author": "Mateusz Stefańczyk",
-        "coverImage": "/images/books/ultimate-guide.png",
-        "progressPercentage": 100,
-        "createdAt": "2025-01-01",
-        "updatedAt": "2025-01-01",
-        "userId": 1,
-        "genreId": 31,
-        "status": "Finished",
-        "shelves": [
-            1
-        ]
-    },
-    {
-        "id": 7,
-        "name": "ng-book: The Complete Guide to Angular",
-        "author": "Nathan Murray",
-        "coverImage": "/images/books/ng-book.jpg",
-        "progressPercentage": 100,
-        "createdAt": "2025-01-01",
-        "updatedAt": "2025-01-01",
-        "userId": 1,
-        "genreId": 31,
-        "status": "Finished",
-        "shelves": [
-            1
-        ]
-    },
-    {
-        "id": 8,
-        "name": "Testing Angular Applications",
-        "author": "Corinna Cohn",
-        "coverImage": "/images/books/testing-angular.jpg",
-        "progressPercentage": 0,
-        "createdAt": "2025-01-01",
-        "updatedAt": "2025-01-01",
-        "userId": 1,
-        "genreId": 31,
-        "status": "Want to Read",
-        "shelves": [
-            1
-        ]
-    },
-    {
         "id": 3,
         "name": "Learning Angular",
         "author": "Aristeidis Bampakos",
         "coverImage": "/images/books/learning-angular.jpg",
         "progressPercentage": 35,
-        "createdAt": "2025-01-01",
-        "updatedAt": "2025-01-01",
+        "createdAt": "2024-10-05",
+        "updatedAt": "2025-12-12",
         "userId": 2,
         "genreId": 31,
         "status": "Reading",
@@ -96,8 +51,8 @@
         "author": "Tomas Trajan",
         "coverImage": "/images/books/angular-enterprise-architecture.png",
         "progressPercentage": 10,
-        "createdAt": "2025-01-01",
-        "updatedAt": "2025-01-01",
+        "createdAt": "2025-11-28",
+        "updatedAt": "2025-12-14",
         "userId": 2,
         "genreId": 31,
         "status": "Reading",
@@ -112,11 +67,56 @@
         "author": "Shyam Seshadri",
         "coverImage": "/images/books/angular-up-and-running.jpg",
         "progressPercentage": 87,
-        "createdAt": "2025-01-01",
-        "updatedAt": "2025-01-01",
+        "createdAt": "2024-07-10",
+        "updatedAt": "2025-12-16",
         "userId": 2,
         "genreId": 31,
         "status": "Reading",
+        "shelves": [
+            1
+        ]
+    },
+    {
+        "id": 6,
+        "name": "The Ultimate Guide to Angular Evolution",
+        "author": "Mateusz Stefańczyk",
+        "coverImage": "/images/books/ultimate-guide.png",
+        "progressPercentage": 100,
+        "createdAt": "2024-05-20",
+        "updatedAt": "2024-11-08",
+        "userId": 1,
+        "genreId": 31,
+        "status": "Finished",
+        "shelves": [
+            1
+        ]
+    },
+    {
+        "id": 7,
+        "name": "ng-book: The Complete Guide to Angular",
+        "author": "Nathan Murray",
+        "coverImage": "/images/books/ng-book.jpg",
+        "progressPercentage": 100,
+        "createdAt": "2024-03-15",
+        "updatedAt": "2024-08-22",
+        "userId": 1,
+        "genreId": 31,
+        "status": "Finished",
+        "shelves": [
+            1
+        ]
+    },
+    {
+        "id": 8,
+        "name": "Testing Angular Applications",
+        "author": "Corinna Cohn",
+        "coverImage": "/images/books/testing-angular.jpg",
+        "progressPercentage": 0,
+        "createdAt": "2025-12-05",
+        "updatedAt": "2025-12-05",
+        "userId": 1,
+        "genreId": 31,
+        "status": "Want to Read",
         "shelves": [
             1
         ]
@@ -127,8 +127,8 @@
         "author": "Oren Farhi",
         "coverImage": "/images/books/reactive-programming.jpg",
         "progressPercentage": 0,
-        "createdAt": "2025-01-01",
-        "updatedAt": "2025-01-01",
+        "createdAt": "2025-11-20",
+        "updatedAt": "2025-11-20",
         "userId": 2,
         "genreId": 31,
         "status": "Want to Read",
@@ -142,11 +142,71 @@
         "author": "Muhammad Ahsan Ayaz",
         "coverImage": "/images/books/angular-cookbook.jpg",
         "progressPercentage": 100,
-        "createdAt": "2025-01-01",
-        "updatedAt": "2025-01-01",
+        "createdAt": "2024-04-10",
+        "updatedAt": "2024-09-05",
         "userId": 2,
         "genreId": 31,
         "status": "Finished",
+        "shelves": [
+            1
+        ]
+    },
+    {
+        "id": 11,
+        "name": "Angular for Material Design",
+        "author": "Venkata Keerti Kotaru",
+        "coverImage": "/images/books/material1.jpg",
+        "progressPercentage": 0,
+        "createdAt": "2025-10-15",
+        "updatedAt": "2025-10-15",
+        "userId": 1,
+        "genreId": 31,
+        "status": "Want to Read",
+        "shelves": [
+            1
+        ]
+    },
+    {
+        "id": 12,
+        "name": "Angular Projects",
+        "author": "Aristeidis Bampakos",
+        "coverImage": "/images/books/angular-projects.jpg",
+        "progressPercentage": 100,
+        "createdAt": "2024-06-12",
+        "updatedAt": "2024-10-20",
+        "userId": 1,
+        "genreId": 31,
+        "status": "Want to Read",
+        "shelves": [
+            1
+        ]
+    },
+    {
+        "id": 13,
+        "name": "Angular: From Theory To Practice",
+        "author": "Asim Hussain",
+        "coverImage": "/images/books/angular-theory.jpg",
+        "progressPercentage": 100,
+        "createdAt": "2024-02-28",
+        "updatedAt": "2024-07-15",
+        "userId": 2,
+        "genreId": 31,
+        "status": "Want to Read",
+        "shelves": [
+            1
+        ]
+    },
+    {
+        "id": 14,
+        "name": "Reactive State for Angular with NgRx",
+        "author": "Amit Gharat",
+        "coverImage": "/images/books/reactive-state-ngrx.jpg",
+        "progressPercentage": 100,
+        "createdAt": "2024-01-18",
+        "updatedAt": "2024-06-30",
+        "userId": 2,
+        "genreId": 31,
+        "status": "Want to Read",
         "shelves": [
             1
         ]

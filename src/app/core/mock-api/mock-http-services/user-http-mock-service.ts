@@ -24,16 +24,6 @@ export class UserHttpMockService {
     this.userStatistics = structuredClone(userStatisticsData);
   }
 
-  getStatisticsByUserId(userId: number): Observable<UserStatistics | null> {
-    const statistics = this.userStatistics.find(stat => stat.userId === userId);
-
-    if (!statistics) {
-      return of(null);
-    }
-
-    return of(statistics);
-  }
-
   login(credential: string, password: string): Observable<AuthSuccessEnvelope> {
     const foundUser = this.users.find(
       user => (user.email === credential || user.username === credential)
@@ -148,6 +138,13 @@ export class UserHttpMockService {
     return of(user).pipe(delay(2000));
   }
 
+  getStatisticsByUserId(userId: number): Observable<UserStatistics | null> {
+    const statistics = this.userStatistics.find(stat => stat.userId === userId);
 
+    if (!statistics) {
+      return of(null);
+    }
 
+    return of(statistics);
+  }
 }
