@@ -1,1 +1,67 @@
-<p>my-shelves works!</p>
+<div class="container">
+    <h1>My Shelves</h1>
+
+    <div class="my-shelves-container">
+        <!-- Left Sidebar: Shelves List -->
+        <article class="shelves-sidebar">
+
+            @for (shelf of shelves(); track shelf.id) {
+            <div class="shelf-item" [class.active]="selectedShelf().id === shelf.id" (click)="selectShelf(shelf)">
+                <span class="shelf-icon">{{ shelf.image }}</span>
+                <span class="shelf-name">{{ shelf.name }}</span>
+            </div>
+            }
+            <button class="new-shelf-btn" (click)="createShelf()">
+                + New Shelf
+            </button>
+        </article>
+
+        <!-- Right Content: Books Table -->
+        <main class="books-content">
+            <div class="table-container">
+                <table class="striped">
+                    <thead>
+                        <tr>
+                            <th class="cover-column">Cover</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Date Added</th>
+                            <th>Status</th>
+                            <th class="actions-column">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (book of books(); track book.id) {
+                        <tr>
+                            <td class="cover-cell">
+                                <img [src]="book.coverImage" [alt]="book.name + ' cover'" class="book-cover" />
+                            </td>
+                            <td class="title-cell">
+                                <a href="#" class="book-title">{{ book.name }}</a>
+                            </td>
+                            <td class="author-cell">{{ book.author }}</td>
+                            <td class="date-cell">{{ formatDate(book.createdAt) }}</td>
+                            <td class="status-cell">
+                                <span [class]="getStatusClass(book.status)">{{ book.status }}</span>
+                            </td>
+                            <td class="actions-cell">
+                                <button class="action-btn delete-btn" (click)="removeBookFromShelf(book)"
+                                    title="Remove from shelf">
+                                    🗑️
+                                </button>
+                            </td>
+                        </tr>
+                        }
+                        @if (books().length === 0) {
+                        <tr>
+                            <td colspan="6" class="empty-state-cell">
+                                <p>No books in this shelf yet.</p>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</div>

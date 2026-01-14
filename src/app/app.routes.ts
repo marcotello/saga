@@ -28,6 +28,10 @@ export const routes: Routes = [
                 loadComponent: () => import('./features/my-books/my-books').then(m => m.MyBooks)
             },
             {
+                path: 'my-shelves',
+                loadComponent: () => import('./features/my-shelves/my-shelves/my-shelves').then(m => m.MyShelves)
+            },
+            {
                 path: 'profile',
                 loadComponent: () => import('./features/profile/profile/profile').then(m => m.Profile)
             },
