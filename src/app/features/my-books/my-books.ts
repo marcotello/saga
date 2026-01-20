@@ -1,15 +1,11 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { UserBook } from '../../core/models/user-book';
 import { BooksService } from '../../core/services/books-service';
 import { UserService } from '../../core/services/user-service';
+import { BookStatus } from '../../core/models/book-status';
 
-interface BookStatus {
-  label: string;
-  value: string;
-  count: number;
-}
+
 
 @Component({
   selector: 'app-my-books',
@@ -54,7 +50,7 @@ export class MyBooks {
   }
 
   // Computed signal for all user books from UserService
-  private allBooks = computed(() => this.userService.userBooks() ?? []);
+  private readonly allBooks = computed(() => this.userService.userBooks() ?? []);
 
   // Computed signal for statuses with counts from BooksService
   statuses = computed<BookStatus[]>(() => {
@@ -79,7 +75,7 @@ export class MyBooks {
   });
 
   // Computed signal for filtered books (by status and search)
-  private filteredBooks = computed(() => {
+  private readonly filteredBooks = computed(() => {
     let books = this.allBooks();
     const status = this.selectedStatus();
     const query = this.searchQuery().toLowerCase().trim();
@@ -101,7 +97,7 @@ export class MyBooks {
   });
 
   // Computed signal for sorted books
-  private sortedBooks = computed(() => {
+  private readonly sortedBooks = computed(() => {
     const books = [...this.filteredBooks()];
     const column = this.sortColumn();
     const direction = this.sortDirection();
@@ -151,7 +147,7 @@ export class MyBooks {
   });
 
   // Computed signal for paginated books
-  books = computed(() => {
+  readonly books = computed(() => {
     const sorted = this.sortedBooks();
     const page = this.currentPage();
     const perPage = this.itemsPerPage();
@@ -161,7 +157,7 @@ export class MyBooks {
   });
 
   // Computed signal for pagination info
-  paginationInfo = computed(() => {
+  readonly paginationInfo = computed(() => {
     const total = this.sortedBooks().length;
     const page = this.currentPage();
     const perPage = this.itemsPerPage();
@@ -171,7 +167,7 @@ export class MyBooks {
   });
 
   // Computed signal for pagination buttons
-  paginationButtons = computed(() => {
+  readonly paginationButtons = computed(() => {
     const total = this.totalPages();
     const current = this.currentPage();
     const buttons: (number | string)[] = [];
