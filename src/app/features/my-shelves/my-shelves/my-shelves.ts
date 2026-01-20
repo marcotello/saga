@@ -35,7 +35,7 @@ export class MyShelves {
       userId: 1,
       genreId: 1,
       status: 'Finished',
-      shelves: [1, 4]
+      shelves: [{ id: 1, name: 'Favorites' }, { id: 4, name: 'History' }]
     },
     {
       id: 2,
@@ -48,7 +48,7 @@ export class MyShelves {
       userId: 1,
       genreId: 2,
       status: 'Reading',
-      shelves: [1, 3]
+      shelves: [{ id: 1, name: 'Favorites' }, { id: 3, name: 'Sci-Fi' }]
     },
     {
       id: 3,
@@ -61,7 +61,7 @@ export class MyShelves {
       userId: 1,
       genreId: 2,
       status: 'Want to Read',
-      shelves: [3, 2]
+      shelves: [{ id: 3, name: 'Sci-Fi' }, { id: 2, name: 'To Read' }]
     },
     {
       id: 4,
@@ -74,13 +74,13 @@ export class MyShelves {
       userId: 1,
       genreId: 3,
       status: 'Reading',
-      shelves: [4]
+      shelves: [{ id: 4, name: 'History' }]
     }
   ];
 
   readonly books = computed(() => {
     const currentShelfId = this.selectedShelf().id;
-    return this.allBooks.filter(book => book.shelves.includes(currentShelfId));
+    return this.allBooks.filter(book => book.shelves.some(s => s.id === currentShelfId));
   });
 
   constructor(private readonly datePipe: DatePipe) { }

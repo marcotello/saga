@@ -60,7 +60,7 @@ export class MyBooks {
   statuses = computed<BookStatus[]>(() => {
     const readingStatuses = this.booksService.readingStatuses();
     const books = this.allBooks();
-    
+
     // Create status array with counts
     const statusList: BookStatus[] = [
       { label: 'All', value: 'all', count: books.length }
@@ -91,8 +91,8 @@ export class MyBooks {
 
     // Filter by search query
     if (query) {
-      books = books.filter(book => 
-        book.name.toLowerCase().includes(query) || 
+      books = books.filter(book =>
+        book.name.toLowerCase().includes(query) ||
         book.author.toLowerCase().includes(query)
       );
     }
@@ -256,8 +256,11 @@ export class MyBooks {
   }
 
   // Get shelf badges for a book
-  getShelfBadges(shelves: number[]): { name: string; color: string }[] {
-    return shelves.map(shelfId => this.shelfNames[shelfId]).filter(Boolean);
+  getShelfBadges(shelves: { id: number; name: string }[]): { name: string; color: string }[] {
+    return shelves.map(shelf => ({
+      name: shelf.name,
+      color: this.shelfNames[shelf.id]?.color || 'gray'
+    }));
   }
 
   // Format date for display

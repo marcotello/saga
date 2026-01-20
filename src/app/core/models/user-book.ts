@@ -9,5 +9,5 @@ export interface UserBook {
     userId: number;
     genreId: number;
     status: string;
-    shelves: number[];
+    shelves: { id: number; name: string }[];
 }
