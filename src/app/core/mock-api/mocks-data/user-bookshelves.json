@@ -14,19 +14,19 @@
   {
     "id": 3,
     "name": "AI",
-    "image": "/images/bookshelves/tech.svg",
+    "image": "/images/bookshelves/ai.svg",
     "userId": 1
   },
   {
     "id": 4,
-    "name": "Food & Cooking",
-    "image": "/images/bookshelves/cooking.svg",
+    "name": "JavaScript",
+    "image": "/images/bookshelves/js.svg",
     "userId": 1
   },
   {
     "id": 5,
-    "name": "Science Fiction",
-    "image": "/images/bookshelves/fiction.svg",
+    "name": "Node",
+    "image": "/images/bookshelves/node.svg",
     "userId": 1
   },
   {
@@ -43,8 +43,8 @@
   },
   {
     "id": 8,
-    "name": "Business",
-    "image": "/images/bookshelves/business.svg",
+    "name": "Python",
+    "image": "/images/bookshelves/python.svg",
     "userId": 2
   }
 ]
