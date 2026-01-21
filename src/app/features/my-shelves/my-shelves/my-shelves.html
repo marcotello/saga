@@ -2,7 +2,6 @@
     <h1>My Shelves</h1>
 
     <div class="my-shelves-container">
-        <!-- Left Sidebar: Shelves List -->
         <article class="shelves-sidebar">
 
             @for (shelf of shelves(); track shelf.id) {
@@ -11,12 +10,11 @@
                 <span class="shelf-name">{{ shelf.name }}</span>
             </div>
             }
-            <button class="new-shelf-btn" (click)="createShelf()">
+            <button class="outline new-shelf-btn" (click)="createShelf()">
                 + New Shelf
             </button>
         </article>
 
-        <!-- Right Content: Books Table -->
         <main class="books-content">
             <div class="table-container">
                 <table class="striped">
@@ -40,9 +38,9 @@
                                 <a href="#" class="book-title">{{ book.name }}</a>
                             </td>
                             <td class="author-cell">{{ book.author }}</td>
-                            <td class="date-cell">{{ formatDate(book.createdAt) }}</td>
+                            <td class="date-cell">{{ book.createdAt | date:'mediumDate' }}</td>
                             <td class="status-cell">
-                                <span [class]="getStatusClass(book.status)">{{ book.status }}</span>
+                                <span [appBookStatus]="book.status">{{ book.status }}</span>
                             </td>
                             <td class="actions-cell">
                                 <button class="action-btn delete-btn" (click)="removeBookFromShelf(book)"

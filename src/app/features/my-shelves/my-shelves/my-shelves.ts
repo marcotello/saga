@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, signal, computed } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { UserBook } from '../../../core/models/user-book';
 import { Bookshelf } from '../../../core/models/bookshelf';
+import { BookStatusDirective } from '../../../core/directives/book-status.directive';
 
 @Component({
   selector: 'app-my-shelves',
-  imports: [CommonModule],
-  providers: [DatePipe],
+  imports: [CommonModule, BookStatusDirective],
+
   templateUrl: './my-shelves.html',
   styleUrl: './my-shelves.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -83,31 +84,21 @@ export class MyShelves {
     return this.allBooks.filter(book => book.shelves.some(s => s.id === currentShelfId));
   });
 
-  constructor(private readonly datePipe: DatePipe) { }
+  constructor() { }
 
   selectShelf(shelf: Bookshelf): void {
     this.selectedShelf.set(shelf);
   }
 
   createShelf(): void {
-    alert('Create Shelf functionality to be implemented.');
+    console.log('Create Shelf functionality to be implemented.');
   }
 
   removeBookFromShelf(book: UserBook): void {
-    alert(`Remove "${book.name}" from "${this.selectedShelf().name}" functionality to be implemented.`);
+    console.log(`Remove "${book.name}" from "${this.selectedShelf().name}" functionality to be implemented.`);
   }
 
-  formatDate(date: string): string {
-    return this.datePipe.transform(date, 'mediumDate') || '';
-  }
 
-  getStatusClass(status: string): string {
-    switch (status) {
-      case 'Want to Read': return 'status-badge status-want-to-read';
-      case 'Reading': return 'status-badge status-reading';
-      case 'Finished': return 'status-badge status-finished';
-      case 'Save it for later': return 'status-badge status-save-it-for-later';
-      default: return 'status-badge';
-    }
-  }
+
+
 }

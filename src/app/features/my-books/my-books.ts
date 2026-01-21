@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BooksService } from '../../core/services/books-service';
 import { UserService } from '../../core/services/user-service';
+import { BookStatusDirective } from '../../core/directives/book-status.directive';
 import { BookStatus } from '../../core/models/book-status';
 
 
 
 @Component({
   selector: 'app-my-books',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, BookStatusDirective],
   templateUrl: './my-books.html',
   styleUrl: './my-books.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -270,10 +271,5 @@ export class MyBooks {
     });
   }
 
-  // Get status CSS class
-  getStatusClass(status: string): string {
-    const baseClass = 'status-badge';
-    const statusClass = status.toLowerCase().replace(/\s+/g, '-');
-    return `${baseClass} status-${statusClass}`;
-  }
+
 }

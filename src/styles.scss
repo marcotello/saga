@@ -146,15 +146,41 @@ body {
     background-color: var(--pico-color-amber-450);
     border-color: var(--pico-color-amber-450);
   }
+}
 
-/* NGX-Charts Line Chart Styles - Force line visibility */
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: white;
+
+  &.status-want-to-read {
+    background-color: var(--pico-color-amber-400);
+  }
+
+  &.status-reading {
+    background-color: var(--pico-primary);
+  }
+
+  &.status-finished {
+    background-color: var(--pico-color-green-500);
+  }
+
+  &.status-save-it-for-later {
+    background-color: var(--pico-muted-color);
+  }
+}
+
 .ngx-charts {
   .line-series path {
     stroke-width: 5px !important;
     stroke: #1976d2 !important;
     stroke-opacity: 1 !important;
   }
-  
+
   .line-series circle {
     r: 7 !important;
     fill: #1976d2 !important;
@@ -162,13 +188,12 @@ body {
     fill-opacity: 1 !important;
     stroke-opacity: 1 !important;
   }
-  
+
   .line-highlight {
     display: block !important;
   }
 }
 
-/* Alternative selectors for line chart */
 svg.ngx-charts g.line-series path {
   stroke-width: 5px !important;
   stroke: #1976d2 !important;
@@ -181,5 +206,4 @@ svg.ngx-charts g.line-series circle {
   stroke: #1976d2 !important;
   fill-opacity: 1 !important;
   stroke-opacity: 1 !important;
-}
 }

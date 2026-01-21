@@ -175,33 +175,7 @@
       }
     }
 
-    .status-cell {
-      .status-badge {
-        display: inline-block;
-        padding: 0.25rem 0.75rem;
-        border-radius: 12px;
-        font-size: 0.75rem;
-        font-weight: 500;
-        white-space: nowrap;
-        color: white;
 
-        &.status-want-to-read {
-          background-color: var(--pico-color-amber-400);
-        }
-
-        &.status-reading {
-          background-color: var(--pico-primary);
-        }
-
-        &.status-finished {
-          background-color: var(--pico-color-green-500);
-        }
-
-        &.status-save-it-for-later {
-          background-color: var(--pico-muted-color);
-        }
-      }
-    }
 
     .date-cell {
       color: var(--pico-muted-color);
