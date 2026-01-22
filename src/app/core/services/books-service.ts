@@ -32,8 +32,8 @@ export class BooksService {
             });
     }
 
-    getBooksByBookshelfId(bookshelfId: number): void {
-        this.booksServiceHttpMock.getBooksByBookshelfId(bookshelfId)
+    getBooksByBookshelfId(bookshelfId: number, userId: number): void {
+        this.booksServiceHttpMock.getBooksByBookshelfId(bookshelfId, userId)
             .subscribe({
                 next: (userBooks: UserBook[]) => {
                     this.userService.setUserBooks(userBooks);

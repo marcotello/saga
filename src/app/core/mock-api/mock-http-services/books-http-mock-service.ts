@@ -23,8 +23,8 @@ export class BooksHttpMockService {
         return of(books);
     }
 
-    getBooksByBookshelfId(bookshelfId: number): Observable<UserBook[]> {
-        const books = this.books.filter(book => book.shelves.some(shelf => shelf.id === bookshelfId));
+    getBooksByBookshelfId(bookshelfId: number, userId: number): Observable<UserBook[]> {
+        const books = this.books.filter(book => book.userId === userId && book.shelves.some(shelf => shelf.id === bookshelfId));
         return of(books);
     }
 

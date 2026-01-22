@@ -45,7 +45,7 @@ export class MyBookShelves implements OnInit {
 
   selectShelf(shelf: Bookshelf): void {
     this.selectedShelf.set(shelf);
-    this.booksService.getBooksByBookshelfId(shelf.id);
+    this.booksService.getBooksByBookshelfId(shelf.id, shelf.userId);
   }
 
   createShelf(): void {
