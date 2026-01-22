@@ -1,4 +1,4 @@
-.my-shelves-container {
+.my-bookshelves-container {
     display: flex;
     flex-direction: row;
     gap: 2rem;
@@ -49,10 +49,10 @@
             }
 
             .shelf-icon {
-                font-size: 1.2rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+                width: 24px;
+                height: 24px;
+                object-fit: contain;
+                display: block;
             }
 
             .shelf-name {

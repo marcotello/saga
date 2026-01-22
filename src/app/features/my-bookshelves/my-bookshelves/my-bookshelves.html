@@ -1,12 +1,12 @@
 <div class="container">
-    <h1>My Shelves</h1>
+    <h1>My Bookshelves</h1>
 
-    <div class="my-shelves-container">
+    <div class="my-bookshelves-container">
         <article class="shelves-sidebar">
 
             @for (shelf of shelves(); track shelf.id) {
-            <div class="shelf-item" [class.active]="selectedShelf().id === shelf.id" (click)="selectShelf(shelf)">
-                <span class="shelf-icon">{{ shelf.image }}</span>
+            <div class="shelf-item" [class.active]="selectedShelf()?.id === shelf.id" (click)="selectShelf(shelf)">
+                <img [src]="shelf.image" [alt]="shelf.name" class="shelf-icon" />
                 <span class="shelf-name">{{ shelf.name }}</span>
             </div>
             }
@@ -29,7 +29,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @for (book of books(); track book.id) {
+                        @for (book of books() ?? []; track book.id) {
                         <tr>
                             <td class="cover-cell">
                                 <img [src]="book.coverImage" [alt]="book.name + ' cover'" class="book-cover" />
@@ -50,7 +50,7 @@
                             </td>
                         </tr>
                         }
-                        @if (books().length === 0) {
+                        @if (!books()?.length) {
                         <tr>
                             <td colspan="6" class="empty-state-cell">
                                 <p>No books in this shelf yet.</p>

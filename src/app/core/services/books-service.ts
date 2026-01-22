@@ -32,6 +32,18 @@ export class BooksService {
             });
     }
 
+    getBooksByBookshelfId(bookshelfId: number): void {
+        this.booksServiceHttpMock.getBooksByBookshelfId(bookshelfId)
+            .subscribe({
+                next: (userBooks: UserBook[]) => {
+                    this.userService.setUserBooks(userBooks);
+                },
+                error: () => {
+                    // Error handling will be implemented later with an error service
+                }
+            });
+    }
+
     getBooksByStatusUserId(userId: number, status: string): void {
         this.booksServiceHttpMock.getBooksByUserId(userId)
             .subscribe({
