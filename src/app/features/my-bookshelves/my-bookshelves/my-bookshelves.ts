@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal, computed, inject, OnInit, effect } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal, computed, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserBook } from '../../../core/models/user-book';
 import { Bookshelf } from '../../../core/models/bookshelf';
@@ -15,10 +15,12 @@ import { UserService } from '../../../core/services/user-service';
   styleUrl: './my-bookshelves.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MyBookShelves implements OnInit {
+export class MyBookShelves {
   private readonly bookshelfService = inject(BookshelfService);
   private readonly booksService = inject(BooksService);
   private readonly userService = inject(UserService);
+
+  readonly user = this.userService.user;
 
   readonly shelves = computed(() => {
     const shelves = this.userService.userBookshelves();
@@ -36,16 +38,12 @@ export class MyBookShelves implements OnInit {
         this.selectShelf(shelves[0]);
       }
     }, { allowSignalWrites: true });
-  }
 
-  ngOnInit(): void {
-    // Simulating user ID 1
-    this.bookshelfService.getBookshelvesByUserId(1);
+    this.bookshelfService.getBookshelvesByUserId(this.user()?.id ?? 1);
   }
-
   selectShelf(shelf: Bookshelf): void {
     this.selectedShelf.set(shelf);
-    this.booksService.getBooksByBookshelfId(shelf.id, shelf.userId);
+    this.booksService.getBooksByBookshelfId(shelf.id, this.user()?.id ?? 1);
   }
 
   createShelf(): void {

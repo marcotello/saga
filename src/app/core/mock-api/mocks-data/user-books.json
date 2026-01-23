@@ -14,10 +14,6 @@
             {
                 "id": 1,
                 "name": "Angular"
-            },
-            {
-                "id": 3,
-                "name": "AI"
             }
         ]
     },
@@ -34,8 +30,8 @@
         "status": "Reading",
         "shelves": [
             {
-                "id": 2,
-                "name": "Angular Material"
+                "id": 1,
+                "name": "Angular"
             }
         ]
     },
@@ -70,12 +66,8 @@
         "status": "Reading",
         "shelves": [
             {
-                "id": 1,
+                "id": 7,
                 "name": "Angular"
-            },
-            {
-                "id": 3,
-                "name": "AI"
             }
         ]
     },
@@ -92,7 +84,7 @@
         "status": "Reading",
         "shelves": [
             {
-                "id": 1,
+                "id": 7,
                 "name": "Angular"
             }
         ]
@@ -164,7 +156,7 @@
         "status": "Want to Read",
         "shelves": [
             {
-                "id": 1,
+                "id": 7,
                 "name": "Angular"
             }
         ]
@@ -182,7 +174,7 @@
         "status": "Finished",
         "shelves": [
             {
-                "id": 1,
+                "id": 7,
                 "name": "Angular"
             }
         ]
@@ -195,16 +187,16 @@
         "progressPercentage": 0,
         "createdAt": "2025-10-15",
         "updatedAt": "2025-10-15",
-        "userId": 1,
+        "userId": 2,
         "genreId": 31,
         "status": "Want to Read",
         "shelves": [
             {
-                "id": 1,
+                "id": 7,
                 "name": "Angular"
             },
             {
-                "id": 2,
+                "id": 6,
                 "name": "Angular Material"
             }
         ]
@@ -240,7 +232,7 @@
         "status": "Want to Read",
         "shelves": [
             {
-                "id": 1,
+                "id": 7,
                 "name": "Angular"
             }
         ]
@@ -258,7 +250,7 @@
         "status": "Want to Read",
         "shelves": [
             {
-                "id": 1,
+                "id": 7,
                 "name": "Angular"
             }
         ]
@@ -406,8 +398,8 @@
         "status": "Want to Read",
         "shelves": [
             {
-                "id": 8,
-                "name": "Python"
+                "id": 7,
+                "name": "Angular"
             }
         ]
     },
@@ -416,10 +408,10 @@
         "name": "Learning Python",
         "author": "Mark Lutz",
         "coverImage": "/images/books/learning-python.jpg",
-        "progressPercentage": 0,
+        "progressPercentage": 100,
         "createdAt": "2025-12-29",
         "updatedAt": "2025-12-29",
-        "userId": 1,
+        "userId": 2,
         "genreId": 31,
         "status": "Finished",
         "shelves": [
@@ -431,23 +423,37 @@
     },
     {
         "id": 24,
-        "name": "Angular for Material Design",
-        "author": "Venkata Keerti Kotaru",
+        "name": "Node.js Design Patterns",
+        "author": "Luciano Mammino",
         "coverImage": "/images/books/material1.jpg",
-        "progressPercentage": 0,
+        "progressPercentage": 100,
         "createdAt": "2025-10-15",
         "updatedAt": "2025-10-15",
-        "userId": 2,
+        "userId": 1,
         "genreId": 31,
         "status": "Finished",
         "shelves": [
             {
-                "id": 1,
-                "name": "Angular"
-            },
+                "id": 5,
+                "name": "Node"
+            }
+        ]
+    },
+    {
+        "id": 25,
+        "name": "Python Distilled",
+        "author": "David Beazley",
+        "coverImage": "/images/books/distilled-python.jpg",
+        "progressPercentage": 0,
+        "createdAt": "2026-01-07",
+        "updatedAt": "2026-01-07",
+        "userId": 2,
+        "genreId": 31,
+        "status": "Want to Read",
+        "shelves": [
             {
-                "id": 2,
-                "name": "Angular Material"
+                "id": 8,
+                "name": "Python"
             }
         ]
     }

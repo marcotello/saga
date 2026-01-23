@@ -207,3 +207,16 @@ svg.ngx-charts g.line-series circle {
   fill-opacity: 1 !important;
   stroke-opacity: 1 !important;
 }
+
+.delete-button {
+  background-color: var(--pico-color-amber-400);
+  border-color: var(--pico-color-amber-400);
+  color: white;
+  font-size: 0.875rem;
+  transition: darken 0.2s;
+  padding: 0.5rem 1rem;
+
+  &:hover {
+    background-color: var(--pico-color-amber-450);
+  }
+}

@@ -43,9 +43,9 @@
                                 <span [appBookStatus]="book.status">{{ book.status }}</span>
                             </td>
                             <td class="actions-cell">
-                                <button class="action-btn delete-btn" (click)="removeBookFromShelf(book)"
+                                <button type="button" (click)="removeBookFromShelf(book)" class="delete-button"
                                     title="Remove from shelf">
-                                    🗑️
+                                    Remove
                                 </button>
                             </td>
                         </tr>
