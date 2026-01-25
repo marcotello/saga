@@ -81,7 +81,7 @@
             <tbody>
                 @for (book of books(); track book.id) {
                 <tr>
-                    <td class="cover-cell">
+                    <td class="cover-column">
                         <img [src]="book.coverImage" [alt]="book.name + ' cover'" class="book-cover" />
                     </td>
                     <td class="title-cell">

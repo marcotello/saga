@@ -8,6 +8,11 @@
         flex-direction: column;
     }
 
+    .pagination {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
     .shelves-sidebar {
         width: 300px;
         flex-shrink: 0;
@@ -75,91 +80,16 @@
         flex: 1;
         min-width: 0;
 
-        .table-container {
-            border-radius: var(--pico-border-radius);
-            box-shadow: var(--pico-box-shadow);
-            overflow: hidden;
-            overflow-x: auto;
+
+        .actions-column {
+            width: 60px;
+            text-align: center;
         }
 
-        table.striped {
-            width: 100%;
-            margin: 0;
-            border-collapse: collapse;
-
-            thead {
-                border-bottom: 1px solid var(--pico-muted-border-color);
-
-                th {
-                    text-align: left;
-                    padding: 1rem;
-                    font-weight: 600;
-                    color: var(--pico-color);
-                    white-space: nowrap;
-                }
-            }
-
-            .cover-column {
-                padding: 20px 15px;
-
-                .book-cover {
-                    width: 100px;
-                    height: auto;
-                    object-fit: cover;
-                    border-radius: 4px;
-                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                }
-            }
-
-            .actions-column {
-                width: 60px;
-                text-align: center;
-            }
-
-            .book-cover {
-                width: 40px;
-                height: 60px;
-                object-fit: cover;
-                border-radius: 4px;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            }
-
-            .book-title {
-                color: var(--pico-primary);
-                text-decoration: none;
-                font-weight: 500;
-
-                &:hover {
-                    text-decoration: underline;
-                }
-            }
-
-            .author-cell {
-                color: var(--pico-muted-color);
-            }
-
-            .date-cell {
-                color: var(--pico-muted-color);
-                font-size: 0.9rem;
-                white-space: nowrap;
-            }
-
-
-
-            .actions-cell {
-                text-align: center;
-
-                .delete-button {
-                    margin-top: 20px;
-                }
-            }
-
-            .empty-state-cell {
-                text-align: center;
-                padding: 3rem;
-                color: var(--pico-muted-color);
-            }
+        .empty-state-cell {
+            text-align: center;
+            padding: 3rem;
+            color: var(--pico-muted-color);
         }
-
     }
 }

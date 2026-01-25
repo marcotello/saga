@@ -221,6 +221,13 @@ svg.ngx-charts g.line-series circle {
   }
 }
 
+.table-container {
+  background-color: white;
+  border-radius: var(--pico-border-radius);
+  overflow: hidden;
+  box-shadow: var(--pico-box-shadow);
+}
+
 .saga-table-striped {
   width: 100%;
   margin: 0;
@@ -245,6 +252,69 @@ svg.ngx-charts g.line-series circle {
     td {
       vertical-align: middle;
       padding: 1rem;
+    }
+  }
+
+  .cover-column {
+    width: 120px;
+    padding: 20px 15px;
+
+    .book-cover {
+      width: 100px;
+      height: auto;
+      object-fit: cover;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: block;
+    }
+  }
+
+  .title-cell {
+    font-weight: 500;
+
+    .book-title {
+      color: var(--pico-primary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--pico-primary-hover);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .author-cell {
+    color: var(--pico-color);
+  }
+
+  .date-cell {
+    color: var(--pico-muted-color);
+    font-size: 0.875rem;
+    white-space: nowrap;
+  }
+
+  .actions-cell {
+    text-align: center;
+
+    .action-btn {
+      background: transparent;
+      border: none;
+      color: var(--pico-muted-color);
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+      font-size: 1.25rem;
+      line-height: 1;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--pico-color);
+      }
+
+      &:focus {
+        outline: none;
+        box-shadow: none;
+      }
     }
   }
 }
