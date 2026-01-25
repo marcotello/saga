@@ -17,10 +17,10 @@
 
         <main class="books-content">
             <div class="table-container">
-                <table class="striped">
+                <table class="striped saga-table-striped">
                     <thead>
                         <tr>
-                            <th class="cover-column">Cover</th>
+                            <th>Cover</th>
                             <th>Title</th>
                             <th>Author</th>
                             <th>Date Added</th>
@@ -31,7 +31,7 @@
                     <tbody>
                         @for (book of books() ?? []; track book.id) {
                         <tr>
-                            <td class="cover-cell">
+                            <td class="cover-column">
                                 <img [src]="book.coverImage" [alt]="book.name + ' cover'" class="book-cover" />
                             </td>
                             <td class="title-cell">

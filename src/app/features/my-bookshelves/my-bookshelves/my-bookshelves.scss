@@ -75,19 +75,7 @@
         flex: 1;
         min-width: 0;
 
-
-        .content-header {
-            margin-bottom: 1rem;
-
-            h3 {
-                margin: 0;
-                color: var(--pico-color);
-                font-size: 1.5rem;
-            }
-        }
-
         .table-container {
-            background-color: white;
             border-radius: var(--pico-border-radius);
             box-shadow: var(--pico-box-shadow);
             overflow: hidden;
@@ -100,7 +88,6 @@
             border-collapse: collapse;
 
             thead {
-                background-color: white;
                 border-bottom: 1px solid var(--pico-muted-border-color);
 
                 th {
@@ -112,30 +99,16 @@
                 }
             }
 
-            tbody {
-                tr {
-                    &:nth-child(even) {
-                        background-color: rgba(0, 0, 0, 0.02);
-                    }
-
-                    &:hover {
-                        background-color: rgba(0, 0, 0, 0.04);
-                    }
-
-                    td {
-                        padding: 1rem;
-                        vertical-align: middle;
-                        border-bottom: 1px solid var(--pico-muted-border-color);
-                    }
-
-                    &:last-child td {
-                        border-bottom: none;
-                    }
-                }
-            }
-
             .cover-column {
-                width: 60px;
+                padding: 20px 15px;
+
+                .book-cover {
+                    width: 100px;
+                    height: auto;
+                    object-fit: cover;
+                    border-radius: 4px;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                }
             }
 
             .actions-column {

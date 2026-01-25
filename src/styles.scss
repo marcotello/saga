@@ -220,3 +220,31 @@ svg.ngx-charts g.line-series circle {
     background-color: var(--pico-color-amber-450);
   }
 }
+
+.saga-table-striped {
+  width: 100%;
+  margin: 0;
+
+  thead {
+    background-color: white;
+  }
+
+  tbody {
+    tr {
+      &:nth-child(odd) {
+        background-color: rgba(0, 0, 0, 0.02);
+      }
+
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+    }
+
+    td {
+      vertical-align: middle;
+      padding: 1rem;
+    }
+  }
+}
