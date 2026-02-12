@@ -6,10 +6,11 @@ import { BookStatusDirective } from '../../../core/directives/book-status.direct
 import { BookshelfService } from '../../../core/services/bookshelf-service';
 import { BooksService } from '../../../core/services/books-service';
 import { UserService } from '../../../core/services/user-service';
+import { AddBook } from '../add-book/add-book';
 
 @Component({
   selector: 'app-my-bookshelves',
-  imports: [CommonModule, BookStatusDirective],
+  imports: [CommonModule, BookStatusDirective, AddBook],
 
   templateUrl: './my-bookshelves.html',
   styleUrl: './my-bookshelves.scss',
@@ -28,6 +29,7 @@ export class MyBookShelves {
   });
 
   readonly selectedShelf = signal<Bookshelf | null>(null);
+  protected readonly isAddBookDialogOpen = signal(false);
 
   readonly books = this.userService.userBooks;
 
@@ -47,7 +49,11 @@ export class MyBookShelves {
   }
 
   createShelf(): void {
-    console.log('Create Shelf functionality to be implemented.');
+    this.isAddBookDialogOpen.set(true);
+  }
+
+  onAddBookDialogRequestClose(): void {
+    this.isAddBookDialogOpen.set(false);
   }
 
   removeBookFromShelf(book: UserBook): void {

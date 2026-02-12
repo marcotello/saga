@@ -2,8 +2,8 @@ import { Injectable, inject, signal } from "@angular/core";
 import { User } from "../models/user";
 import { UserHttpMockService } from "../mock-api/mock-http-services/user-http-mock-service";
 import { UserBook } from "../models/user-book";
-import {Bookshelf} from "../models/bookshelf";
-import {BookRecommendation} from "../models/book-recommendation";
+import { Bookshelf } from "../models/bookshelf";
+import { BookRecommendation } from "../models/book-recommendation";
 import { UserStatistics } from "../models/user-statistics";
 
 
@@ -75,6 +75,10 @@ export class UserService {
 
   setUserBookshelves(bookshelves: Bookshelf[] | null): void {
     this._userBookshelves.set(bookshelves);
+  }
+
+  addUserBookshelf(bookshelf: Bookshelf): void {
+    this._userBookshelves.update(shelves => [...(shelves ?? []), bookshelf]);
   }
 
   setRecommendedBooks(recommendedBooks: BookRecommendation[] | null): void {

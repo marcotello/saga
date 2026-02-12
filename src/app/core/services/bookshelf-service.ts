@@ -21,4 +21,16 @@ export class BookshelfService {
                 }
             });
     }
+
+    addBookshelf(name: string, image: string, userId: number): void {
+        this.bookshelvesHttpMockService.addBookshelf(name, image, userId)
+            .subscribe({
+                next: (bookshelf: Bookshelf) => {
+                    this.userService.addUserBookshelf(bookshelf);
+                },
+                error: () => {
+                    // Error handling will be implemented later with an error service
+                }
+            });
+    }
 }

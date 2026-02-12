@@ -43,8 +43,8 @@
                                 <span [appBookStatus]="book.status">{{ book.status }}</span>
                             </td>
                             <td class="actions-cell">
-                                <button type="button" (click)="removeBookFromShelf(book)" class="delete-button"
-                                    title="Remove from shelf">
+                                <button type="button" (click)="removeBookFromShelf(book)"
+                                    class="delete-button action-btn" title="Remove from shelf">
                                     Remove
                                 </button>
                             </td>
@@ -62,4 +62,5 @@
             </div>
         </main>
     </div>
+    <app-add-book [isDialogOpen]="isAddBookDialogOpen()" (requestClose)="onAddBookDialogRequestClose()"></app-add-book>
 </div>

@@ -298,23 +298,7 @@ svg.ngx-charts g.line-series circle {
     text-align: center;
 
     .action-btn {
-      background: transparent;
-      border: none;
-      color: var(--pico-muted-color);
-      cursor: pointer;
-      padding: 0.25rem 0.5rem;
-      font-size: 1.25rem;
-      line-height: 1;
-      transition: color 0.2s ease;
-
-      &:hover {
-        color: var(--pico-color);
-      }
-
-      &:focus {
-        outline: none;
-        box-shadow: none;
-      }
+      margin-top: 20px;
     }
   }
 }
