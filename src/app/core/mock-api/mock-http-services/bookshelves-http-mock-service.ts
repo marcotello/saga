@@ -36,4 +36,8 @@ export class BookshelvesHttpMockService {
 
         return of(newBookshelf).pipe(delay(300));
     }
+
+    removeBookFromShelf(bookshelfId: number, bookId: number): Observable<void> {
+        return of(undefined).pipe(delay(300));
+    }
 }

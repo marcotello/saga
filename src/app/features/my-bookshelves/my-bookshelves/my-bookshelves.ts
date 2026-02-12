@@ -57,6 +57,9 @@ export class MyBookShelves {
   }
 
   removeBookFromShelf(book: UserBook): void {
-    console.log(`Remove "${book.name}" from "${this.selectedShelf()?.name}" functionality to be implemented.`);
+    const shelfId = this.selectedShelf()?.id;
+    if (shelfId) {
+      this.bookshelfService.removeBookFromShelf(shelfId, book.id);
+    }
   }
 }
