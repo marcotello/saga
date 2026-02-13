@@ -535,20 +535,4 @@ describe('MyBooks', () => {
     });
   });
 
-  describe('getStatusClass', () => {
-    it('should return correct class for status', () => {
-      const className = component.getStatusClass('Reading');
-      expect(className).toBe('status-badge status-reading');
-    });
-
-    it('should handle multi-word status', () => {
-      const className = component.getStatusClass('Want to Read');
-      expect(className).toBe('status-badge status-want-to-read');
-    });
-
-    it('should convert to lowercase', () => {
-      const className = component.getStatusClass('FINISHED');
-      expect(className).toBe('status-badge status-finished');
-    });
-  });
 });

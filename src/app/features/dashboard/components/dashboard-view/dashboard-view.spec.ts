@@ -39,7 +39,7 @@ describe('DashboardView', () => {
       status: 'Reading',
       progressPercentage: 50,
       genreId: 1,
-      shelves: [1],
+      shelves: [{ id: 1, name: 'Shelf 1' }],
       createdAt: '2024-01-01',
       updatedAt: '2024-01-01'
     }
