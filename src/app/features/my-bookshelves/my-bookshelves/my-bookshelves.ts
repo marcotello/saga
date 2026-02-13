@@ -31,6 +31,12 @@ export class MyBookShelves {
   readonly selectedShelf = signal<Bookshelf | null>(null);
   protected readonly isAddBookDialogOpen = signal(false);
 
+  readonly bookPluralMapping: { [k: string]: string } = {
+    '=0': 'No books',
+    '=1': '1 book',
+    'other': '# books',
+  };
+
   readonly books = this.userService.userBooks;
 
   constructor() {

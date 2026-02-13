@@ -16,6 +16,17 @@
         </article>
 
         <main class="books-content">
+            <article class="shelf-actions-card">
+                <div class="shelf-info">
+                    <img [src]="selectedShelf()?.image" [alt]="selectedShelf()?.name" class="my-shelf-icon" />
+                    <span class="my-shelf-name">{{ selectedShelf()?.name }}</span>
+                    <span class="book-count">({{ (books() ?? []).length | i18nPlural: bookPluralMapping }})</span>
+                </div>
+                <div class="shelf-actions-buttons">
+                    <button type="button" class="shelf-update-btn">Update</button>
+                    <button type="button" class="delete-button shelf-delete-btn">Delete</button>
+                </div>
+            </article>
             <div class="table-container">
                 <table class="striped saga-table-striped">
                     <thead>
