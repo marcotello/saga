@@ -24,7 +24,7 @@
                 </div>
                 <div class="shelf-actions-buttons">
                     <button type="button" class="shelf-update-btn" (click)="updateShelf()">Update</button>
-                    <button type="button" class="delete-button shelf-delete-btn">Delete</button>
+                    <button type="button" class="delete-button shelf-delete-btn" (click)="deleteShelf()">Delete</button>
                 </div>
             </article>
             <div class="table-container">
@@ -77,4 +77,8 @@
         (requestClose)="onAddBookDialogRequestClose()"></app-add-bookshelf>
     <app-update-bookshelf [isDialogOpen]="isUpdateBookshelfDialogOpen()" [bookshelf]="selectedShelf()"
         (requestClose)="onUpdateBookshelfDialogRequestClose($event)"></app-update-bookshelf>
+    <app-delete-record [isOpen]="isDeleteBookshelfDialogOpen()" (deleteConfirmed)="onDeleteBookshelfConfirmed()"
+        (canceled)="onDeleteBookshelfCanceled()" (closed)="onDeleteBookshelfDialogClosed()"
+        [dialogTitle]="'Delete Bookshelf'" [dialogBody]="'Are you sure you want to delete this bookshelf?'">
+    </app-delete-record>
 </div>

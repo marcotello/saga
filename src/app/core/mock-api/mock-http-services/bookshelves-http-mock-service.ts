@@ -50,6 +50,18 @@ export class BookshelvesHttpMockService {
         return of({ ...bookshelf }).pipe(delay(300));
     }
 
+    deleteBookshelf(bookshelfId: number): Observable<void> {
+        const index = this.bookshelves.findIndex(b => b.id === bookshelfId);
+
+        if (index === -1) {
+            throw new Error(`Bookshelf with id ${bookshelfId} not found`);
+        }
+
+        this.bookshelves.splice(index, 1);
+
+        return of(undefined).pipe(delay(300));
+    }
+
     removeBookFromShelf(bookshelfId: number, bookId: number): Observable<void> {
         return of(undefined).pipe(delay(300));
     }

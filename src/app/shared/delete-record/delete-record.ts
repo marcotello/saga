@@ -15,8 +15,8 @@ export class DeleteRecord {
   readonly deleteConfirmed: OutputEmitterRef<void> = output<void>();
   readonly canceled: OutputEmitterRef<void> = output<void>();
 
-  readonly dialogTitle = 'Delete Record';
-  readonly dialogBody = 'Are you sure you want to delete this record?';
+  readonly dialogTitle: InputSignal<string> = input<string>('Delete Record');
+  readonly dialogBody: InputSignal<string> = input<string>('Are you sure you want to delete this record?');
 
   onRequestClose(): void {
     this.closed.emit();

@@ -87,6 +87,12 @@ export class UserService {
     );
   }
 
+  deleteUserBookshelf(bookshelfId: number): void {
+    this._userBookshelves.update(shelves =>
+      shelves?.filter(shelf => shelf.id !== bookshelfId) ?? null
+    );
+  }
+
   removeBookFromShelf(bookId: number): void {
     this._userBooks.update(books =>
       books?.filter(book => book.id !== bookId) ?? null

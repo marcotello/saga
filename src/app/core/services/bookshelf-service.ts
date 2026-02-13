@@ -46,6 +46,18 @@ export class BookshelfService {
             });
     }
 
+    deleteBookshelf(bookshelfId: number): void {
+        this.bookshelvesHttpMockService.deleteBookshelf(bookshelfId)
+            .subscribe({
+                next: () => {
+                    this.userService.deleteUserBookshelf(bookshelfId);
+                },
+                error: () => {
+                    // Error handling will be implemented later with an error service
+                }
+            });
+    }
+
     removeBookFromShelf(bookshelfId: number, bookId: number): void {
         this.bookshelvesHttpMockService.removeBookFromShelf(bookshelfId, bookId)
             .subscribe({

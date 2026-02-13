@@ -47,5 +47,7 @@
   <app-update-genre [isDialogOpen]="isUpdateGenreDialogOpen()" [genre]="selectedGenre()"
     (requestClose)="onUpdateGenreDialogRequestClose()"></app-update-genre>
   <app-delete-record [isOpen]="isDeleteGenreDialogOpen()" (deleteConfirmed)="onDeleteGenreConfirmed()"
-    (canceled)="onDeleteGenreCanceled()" (closed)="onDeleteGenreDialogClosed()"></app-delete-record>
+    (canceled)="onDeleteGenreCanceled()" (closed)="onDeleteGenreDialogClosed()" [dialogTitle]="'Delete Genre'"
+    [dialogBody]="'Are you sure you want to delete this genre?'">
+  </app-delete-record>
 </div>
