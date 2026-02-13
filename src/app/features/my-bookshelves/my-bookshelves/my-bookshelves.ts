@@ -34,6 +34,8 @@ export class MyBookShelves {
   protected readonly isAddBookDialogOpen = signal(false);
   protected readonly isUpdateBookshelfDialogOpen = signal(false);
   protected readonly isDeleteBookshelfDialogOpen = signal(false);
+  protected readonly isRemoveBookDialogOpen = signal(false);
+  private readonly bookToRemove = signal<UserBook | null>(null);
 
   readonly bookPluralMapping: { [k: string]: string } = {
     '=0': 'No books',
@@ -100,9 +102,25 @@ export class MyBookShelves {
   }
 
   removeBookFromShelf(book: UserBook): void {
+    this.bookToRemove.set(book);
+    this.isRemoveBookDialogOpen.set(true);
+  }
+
+  onRemoveBookConfirmed(): void {
+    const book = this.bookToRemove();
     const shelfId = this.selectedShelf()?.id;
-    if (shelfId) {
+    if (book && shelfId) {
       this.bookshelfService.removeBookFromShelf(shelfId, book.id);
     }
+    this.onRemoveBookDialogClosed();
+  }
+
+  onRemoveBookCanceled(): void {
+    this.onRemoveBookDialogClosed();
+  }
+
+  onRemoveBookDialogClosed(): void {
+    this.isRemoveBookDialogOpen.set(false);
+    this.bookToRemove.set(null);
   }
 }

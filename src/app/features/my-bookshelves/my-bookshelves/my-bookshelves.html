@@ -81,4 +81,8 @@
         (canceled)="onDeleteBookshelfCanceled()" (closed)="onDeleteBookshelfDialogClosed()"
         [dialogTitle]="'Delete Bookshelf'" [dialogBody]="'Are you sure you want to delete this bookshelf?'">
     </app-delete-record>
+    <app-delete-record [isOpen]="isRemoveBookDialogOpen()" (deleteConfirmed)="onRemoveBookConfirmed()"
+        (canceled)="onRemoveBookCanceled()" (closed)="onRemoveBookDialogClosed()" [dialogTitle]="'Remove Book'"
+        [dialogBody]="'Are you sure you want to remove this book from the shelf?'">
+    </app-delete-record>
 </div>
