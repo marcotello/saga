@@ -33,7 +33,7 @@ describe('UserService', () => {
       status: 'Reading',
       progressPercentage: 50,
       genreId: 1,
-      shelves: [1],
+      shelves: [{ id: 1, name: 'Shelf 1' }],
       createdAt: '2024-01-01',
       updatedAt: '2024-01-01'
     }
@@ -111,7 +111,7 @@ describe('UserService', () => {
       service.updateProfileById(updatedUser);
 
       expect(userHttpMockService.updateProfileById).toHaveBeenCalledWith(updatedUser.id, updatedUser);
-      
+
       // Wait for async operation
       setTimeout(() => {
         expect(service.user()).toEqual(updatedUser);
@@ -183,7 +183,7 @@ describe('UserService', () => {
   describe('updateUserBook', () => {
     it('should update book in userBooks signal', () => {
       service.setUserBooks(mockUserBooks);
-      
+
       const updatedBook = { ...mockUserBooks[0], progressPercentage: 75 };
       service.updateUserBook(updatedBook);
 
@@ -192,7 +192,7 @@ describe('UserService', () => {
 
     it('should update book in currentlyReadingUserBooks signal', () => {
       service.setCurrentlyReadingUserBooks(mockUserBooks);
-      
+
       const updatedBook = { ...mockUserBooks[0], progressPercentage: 75 };
       service.updateUserBook(updatedBook);
 
@@ -201,7 +201,7 @@ describe('UserService', () => {
 
     it('should filter out finished books from currentlyReadingUserBooks', () => {
       service.setCurrentlyReadingUserBooks(mockUserBooks);
-      
+
       const finishedBook = { ...mockUserBooks[0], status: 'Finished' as const };
       service.updateUserBook(finishedBook);
 
@@ -210,9 +210,9 @@ describe('UserService', () => {
 
     it('should handle null userBooks', () => {
       service.setUserBooks(null);
-      
+
       const updatedBook = { ...mockUserBooks[0], progressPercentage: 75 };
-      
+
       expect(() => service.updateUserBook(updatedBook)).not.toThrow();
       expect(service.userBooks()).toBeNull();
     });

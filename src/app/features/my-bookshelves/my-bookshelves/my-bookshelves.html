@@ -1,0 +1,88 @@
+<div class="container">
+    <h1>My Bookshelves</h1>
+
+    <div class="my-bookshelves-container">
+        <article class="shelves-sidebar">
+
+            @for (shelf of shelves(); track shelf.id) {
+            <div class="shelf-item" [class.active]="selectedShelf()?.id === shelf.id" (click)="selectShelf(shelf)">
+                <img [src]="shelf.image" [alt]="shelf.name" class="shelf-icon" />
+                <span class="shelf-name">{{ shelf.name }}</span>
+            </div>
+            }
+            <button class="outline new-shelf-btn" (click)="createShelf()">
+                + New Shelf
+            </button>
+        </article>
+
+        <main class="books-content">
+            <article class="shelf-actions-card">
+                <div class="shelf-info">
+                    <img [src]="selectedShelf()?.image" [alt]="selectedShelf()?.name" class="my-shelf-icon" />
+                    <span class="my-shelf-name">{{ selectedShelf()?.name }}</span>
+                    <span class="book-count">({{ (books() ?? []).length | i18nPlural: bookPluralMapping }})</span>
+                </div>
+                <div class="shelf-actions-buttons">
+                    <button type="button" class="shelf-update-btn" (click)="updateShelf()">Update</button>
+                    <button type="button" class="delete-button shelf-delete-btn" (click)="deleteShelf()">Delete</button>
+                </div>
+            </article>
+            <div class="table-container">
+                <table class="striped saga-table-striped">
+                    <thead>
+                        <tr>
+                            <th>Cover</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Date Added</th>
+                            <th>Status</th>
+                            <th class="actions-column">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (book of books() ?? []; track book.id) {
+                        <tr>
+                            <td class="cover-column">
+                                <img [src]="book.coverImage" [alt]="book.name + ' cover'" class="book-cover" />
+                            </td>
+                            <td class="title-cell">
+                                <a href="#" class="book-title">{{ book.name }}</a>
+                            </td>
+                            <td class="author-cell">{{ book.author }}</td>
+                            <td class="date-cell">{{ book.createdAt | date:'mediumDate' }}</td>
+                            <td class="status-cell">
+                                <span [appBookStatus]="book.status">{{ book.status }}</span>
+                            </td>
+                            <td class="actions-cell">
+                                <button type="button" (click)="removeBookFromShelf(book)"
+                                    class="delete-button action-btn" title="Remove from shelf">
+                                    Remove
+                                </button>
+                            </td>
+                        </tr>
+                        }
+                        @if (!books()?.length) {
+                        <tr>
+                            <td colspan="6" class="empty-state-cell">
+                                <p>No books in this shelf yet.</p>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <app-add-bookshelf [isDialogOpen]="isAddBookDialogOpen()"
+        (requestClose)="onAddBookDialogRequestClose()"></app-add-bookshelf>
+    <app-update-bookshelf [isDialogOpen]="isUpdateBookshelfDialogOpen()" [bookshelf]="selectedShelf()"
+        (requestClose)="onUpdateBookshelfDialogRequestClose($event)"></app-update-bookshelf>
+    <app-delete-record [isOpen]="isDeleteBookshelfDialogOpen()" (deleteConfirmed)="onDeleteBookshelfConfirmed()"
+        (canceled)="onDeleteBookshelfCanceled()" (closed)="onDeleteBookshelfDialogClosed()"
+        [dialogTitle]="'Delete Bookshelf'" [dialogBody]="'Are you sure you want to delete this bookshelf?'">
+    </app-delete-record>
+    <app-delete-record [isOpen]="isRemoveBookDialogOpen()" (deleteConfirmed)="onRemoveBookConfirmed()"
+        (canceled)="onRemoveBookCanceled()" (closed)="onRemoveBookDialogClosed()" [dialogTitle]="'Remove Book'"
+        [dialogBody]="'Are you sure you want to remove this book from the shelf?'">
+    </app-delete-record>
+</div>

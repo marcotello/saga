@@ -1,0 +1,145 @@
+.my-bookshelves-container {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: flex-start;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+
+    .pagination {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .shelves-sidebar {
+        width: 300px;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding-right: 1rem;
+
+        @media (max-width: 768px) {
+            width: 100%;
+            padding-right: 0;
+        }
+
+        .shelf-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 5px;
+            color: var(--pico-muted-color);
+            font-weight: 500;
+            text-decoration: none;
+
+            &:hover {
+                background-color: var(--pico-muted-background-color);
+                color: var(--pico-color);
+            }
+
+            &.active {
+                background-color: var(--pico-primary);
+                color: white;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+                .shelf-icon {
+                    opacity: 1;
+                }
+            }
+
+            .shelf-icon {
+                width: 24px;
+                height: 24px;
+                object-fit: contain;
+                display: block;
+            }
+
+            .shelf-name {
+                font-weight: 500;
+            }
+        }
+
+        .new-shelf-btn {
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 0.75rem;
+        }
+    }
+
+    .books-content {
+        flex: 1;
+        min-width: 0;
+
+        .shelf-actions-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 1.25rem;
+            margin-bottom: 1rem;
+
+            .shelf-info {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 0.5rem;
+
+                .my-shelf-icon {
+                    width: 40px;
+                    height: 40px;
+                    object-fit: contain;
+                }
+
+                .my-shelf-name {
+                    font-weight: 600;
+                    font-size: xx-large;
+                    color: var(--pico-color);
+                    margin-left: 0.3rem;
+                }
+
+                .book-count {
+                    font-weight: 400;
+                    font-size: 0.875rem;
+                    color: var(--pico-muted-color);
+                    margin-top: 0.4rem;
+                }
+            }
+
+            .shelf-actions-buttons {
+                display: flex;
+                gap: 0.5rem;
+                margin-top: 1rem;
+
+                .shelf-update-btn {
+                    padding: 0.4rem 1.25rem;
+                    font-size: 0.875rem;
+                }
+
+                .shelf-delete-btn {
+                    padding: 0.4rem 1.25rem;
+                    font-size: 0.875rem;
+                }
+            }
+        }
+
+        .actions-column {
+            width: 60px;
+            text-align: center;
+        }
+
+        .empty-state-cell {
+            text-align: center;
+            padding: 3rem;
+            color: var(--pico-muted-color);
+        }
+    }
+}

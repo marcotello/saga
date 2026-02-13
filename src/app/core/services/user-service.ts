@@ -2,8 +2,8 @@ import { Injectable, inject, signal } from "@angular/core";
 import { User } from "../models/user";
 import { UserHttpMockService } from "../mock-api/mock-http-services/user-http-mock-service";
 import { UserBook } from "../models/user-book";
-import {Bookshelf} from "../models/bookshelf";
-import {BookRecommendation} from "../models/book-recommendation";
+import { Bookshelf } from "../models/bookshelf";
+import { BookRecommendation } from "../models/book-recommendation";
 import { UserStatistics } from "../models/user-statistics";
 
 
@@ -75,6 +75,28 @@ export class UserService {
 
   setUserBookshelves(bookshelves: Bookshelf[] | null): void {
     this._userBookshelves.set(bookshelves);
+  }
+
+  addUserBookshelf(bookshelf: Bookshelf): void {
+    this._userBookshelves.update(shelves => [...(shelves ?? []), bookshelf]);
+  }
+
+  updateUserBookshelf(updatedBookshelf: Bookshelf): void {
+    this._userBookshelves.update(shelves =>
+      shelves?.map(shelf => shelf.id === updatedBookshelf.id ? updatedBookshelf : shelf) ?? null
+    );
+  }
+
+  deleteUserBookshelf(bookshelfId: number): void {
+    this._userBookshelves.update(shelves =>
+      shelves?.filter(shelf => shelf.id !== bookshelfId) ?? null
+    );
+  }
+
+  removeBookFromShelf(bookId: number): void {
+    this._userBooks.update(books =>
+      books?.filter(book => book.id !== bookId) ?? null
+    );
   }
 
   setRecommendedBooks(recommendedBooks: BookRecommendation[] | null): void {

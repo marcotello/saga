@@ -1,27 +1,14 @@
-<app-dialog
-  [title]="dialogTitle"
-  [isOpen]="isOpen()"
-  (requestClose)="onRequestClose()"
->
+<app-dialog [title]="dialogTitle()" [isOpen]="isOpen()" (requestClose)="onRequestClose()">
   <div body>
-    <p>{{ dialogBody }}</p>
+    <p>{{ dialogBody() }}</p>
   </div>
 
   <div footer>
-    <button
-      type="button"
-      class="delete-record__cancel-button"
-      (click)="onCancel()"
-    >
+    <button type="button" class="delete-record__cancel-button" (click)="onCancel()">
       Cancel
     </button>
-    <button
-      type="button"
-      class="delete-record__delete-button"
-      (click)="onDelete()"
-    >
+    <button type="button" class="delete-record__delete-button" (click)="onDelete()">
       Delete
     </button>
   </div>
 </app-dialog>
-

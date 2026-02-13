@@ -1,0 +1,30 @@
+<div class="add-book">
+    <app-dialog [title]="dialogTitle" [isOpen]="isDialogOpen()" (requestClose)="closeDialog()">
+        <form body id="addBookshelfForm" [formGroup]="bookshelfForm" (ngSubmit)="onSave()" class="dialog-form">
+            <label for="bookshelfName">Bookshelf Name</label>
+            <input id="bookshelfName" type="text" formControlName="name" placeholder="e.g. Angular" autocomplete="off"
+                required />
+
+            @if (nameHasError()) {
+            <small class="dialog-error">Bookshelf Name is required.</small>
+            }
+
+            <label for="bookshelfImage">Icon</label>
+            <input id="bookshelfImage" type="text" formControlName="image"
+                placeholder="e.g. /images/bookshelves/angular.svg" autocomplete="off" required />
+
+            @if (imageHasError()) {
+            <small class="dialog-error">Icon is required.</small>
+            }
+        </form>
+
+        <div footer class="dialog-footer">
+            <button type="button" class="btn-amber" (click)="closeDialog()">
+                Cancel
+            </button>
+            <button type="submit" form="addBookshelfForm" [disabled]="bookshelfForm.invalid">
+                Save
+            </button>
+        </div>
+    </app-dialog>
+</div>

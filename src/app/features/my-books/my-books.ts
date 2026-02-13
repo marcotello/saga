@@ -1,19 +1,16 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { UserBook } from '../../core/models/user-book';
 import { BooksService } from '../../core/services/books-service';
 import { UserService } from '../../core/services/user-service';
+import { BookStatusDirective } from '../../core/directives/book-status.directive';
+import { BookStatus } from '../../core/models/book-status';
 
-interface BookStatus {
-  label: string;
-  value: string;
-  count: number;
-}
+
 
 @Component({
   selector: 'app-my-books',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, BookStatusDirective],
   templateUrl: './my-books.html',
   styleUrl: './my-books.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -54,13 +51,13 @@ export class MyBooks {
   }
 
   // Computed signal for all user books from UserService
-  private allBooks = computed(() => this.userService.userBooks() ?? []);
+  private readonly allBooks = computed(() => this.userService.userBooks() ?? []);
 
   // Computed signal for statuses with counts from BooksService
   statuses = computed<BookStatus[]>(() => {
     const readingStatuses = this.booksService.readingStatuses();
     const books = this.allBooks();
-    
+
     // Create status array with counts
     const statusList: BookStatus[] = [
       { label: 'All', value: 'all', count: books.length }
@@ -79,7 +76,7 @@ export class MyBooks {
   });
 
   // Computed signal for filtered books (by status and search)
-  private filteredBooks = computed(() => {
+  private readonly filteredBooks = computed(() => {
     let books = this.allBooks();
     const status = this.selectedStatus();
     const query = this.searchQuery().toLowerCase().trim();
@@ -91,8 +88,8 @@ export class MyBooks {
 
     // Filter by search query
     if (query) {
-      books = books.filter(book => 
-        book.name.toLowerCase().includes(query) || 
+      books = books.filter(book =>
+        book.name.toLowerCase().includes(query) ||
         book.author.toLowerCase().includes(query)
       );
     }
@@ -101,7 +98,7 @@ export class MyBooks {
   });
 
   // Computed signal for sorted books
-  private sortedBooks = computed(() => {
+  private readonly sortedBooks = computed(() => {
     const books = [...this.filteredBooks()];
     const column = this.sortColumn();
     const direction = this.sortDirection();
@@ -151,7 +148,7 @@ export class MyBooks {
   });
 
   // Computed signal for paginated books
-  books = computed(() => {
+  readonly books = computed(() => {
     const sorted = this.sortedBooks();
     const page = this.currentPage();
     const perPage = this.itemsPerPage();
@@ -161,7 +158,7 @@ export class MyBooks {
   });
 
   // Computed signal for pagination info
-  paginationInfo = computed(() => {
+  readonly paginationInfo = computed(() => {
     const total = this.sortedBooks().length;
     const page = this.currentPage();
     const perPage = this.itemsPerPage();
@@ -171,7 +168,7 @@ export class MyBooks {
   });
 
   // Computed signal for pagination buttons
-  paginationButtons = computed(() => {
+  readonly paginationButtons = computed(() => {
     const total = this.totalPages();
     const current = this.currentPage();
     const buttons: (number | string)[] = [];
@@ -256,8 +253,11 @@ export class MyBooks {
   }
 
   // Get shelf badges for a book
-  getShelfBadges(shelves: number[]): { name: string; color: string }[] {
-    return shelves.map(shelfId => this.shelfNames[shelfId]).filter(Boolean);
+  getShelfBadges(shelves: { id: number; name: string }[]): { name: string; color: string }[] {
+    return shelves.map(shelf => ({
+      name: shelf.name,
+      color: this.shelfNames[shelf.id]?.color || 'gray'
+    }));
   }
 
   // Format date for display
@@ -271,10 +271,5 @@ export class MyBooks {
     });
   }
 
-  // Get status CSS class
-  getStatusClass(status: string): string {
-    const baseClass = 'status-badge';
-    const statusClass = status.toLowerCase().replace(/\s+/g, '-');
-    return `${baseClass} status-${statusClass}`;
-  }
+
 }

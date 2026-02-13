@@ -8,21 +8,21 @@
   <div class="header-right">
     <input type="search" placeholder="Search Books..." class="search-input">
     @if (!isLoggedIn()) {
-      <button routerLink="/auth/login" class="login-btn">Login</button>
+    <button routerLink="/auth/login" class="login-btn">Login</button>
     } @else {
-      <a routerLink="/my-books" class="my-books-link">My Books</a>
-      <div class="avatar-container" (mouseenter)="showMenu()" (mouseleave)="hideMenu()">
-        <img [src]="userService.user()?.profilePicture || '/images/avatar4.svg'" alt="User Avatar" class="avatar">
-        @if (isMenuVisible()) {
-          <div class="user-menu">
-            <a href="#" class="menu-item" routerLink="/profile">My Profile</a>
-            <a href="#" class="menu-item" (click)="$event.preventDefault()">My Shelves</a>
-            <a href="#" class="menu-item" routerLink="/account">Account Settings</a>
-            <div class="menu-divider"></div>
-            <a href="#" class="menu-item" (click)="logout(); $event.preventDefault()">Logout</a>
-          </div>
-        }
+    <a routerLink="/my-books" class="my-books-link">My Books</a>
+    <div class="avatar-container" (mouseenter)="showMenu()" (mouseleave)="hideMenu()">
+      <img [src]="userService.user()?.profilePicture || '/images/avatar4.svg'" alt="User Avatar" class="avatar">
+      @if (isMenuVisible()) {
+      <div class="user-menu">
+        <a class="menu-item" routerLink="/profile">My Profile</a>
+        <a class="menu-item" routerLink="/my-bookshelves">My Bookshelves</a>
+        <a class="menu-item" routerLink="/account">Account Settings</a>
+        <div class="menu-divider"></div>
+        <a href="#" class="menu-item" (click)="logout(); $event.preventDefault()">Logout</a>
       </div>
+      }
+    </div>
     }
   </div>
 </header>

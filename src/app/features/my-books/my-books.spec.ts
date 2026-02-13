@@ -35,7 +35,7 @@ describe('MyBooks', () => {
       status: 'Reading',
       progressPercentage: 50,
       genreId: 1,
-      shelves: [1, 2],
+      shelves: [{ id: 1, name: 'Sci-Fi' }, { id: 2, name: 'Favorites' }],
       createdAt: '2024-01-01',
       updatedAt: '2024-01-15'
     },
@@ -48,7 +48,7 @@ describe('MyBooks', () => {
       status: 'Finished',
       progressPercentage: 100,
       genreId: 2,
-      shelves: [1],
+      shelves: [{ id: 1, name: 'Sci-Fi' }],
       createdAt: '2024-01-02',
       updatedAt: '2024-01-20'
     },
@@ -61,7 +61,7 @@ describe('MyBooks', () => {
       status: 'Want to Read',
       progressPercentage: 0,
       genreId: 1,
-      shelves: [3],
+      shelves: [{ id: 3, name: 'Classic' }],
       createdAt: '2024-01-03',
       updatedAt: '2024-01-03'
     }
@@ -322,7 +322,7 @@ describe('MyBooks', () => {
       it('should go to specified page if valid', () => {
         component.itemsPerPage.set(2); // With 3 books, this creates 2 pages
         fixture.detectChanges();
-        
+
         component.goToPage(2);
         expect(component.currentPage()).toBe(2);
       });
@@ -450,7 +450,7 @@ describe('MyBooks', () => {
           status: 'Reading',
           progressPercentage: 0,
           genreId: 1,
-          shelves: [1],
+          shelves: [{ id: 1, name: 'Sci-Fi' }],
           createdAt: '2024-01-01',
           updatedAt: '2024-01-01'
         }));
@@ -473,7 +473,7 @@ describe('MyBooks', () => {
 
         const newFixture = TestBed.createComponent(MyBooks);
         const newComponent = newFixture.componentInstance;
-        
+
         newComponent.itemsPerPage.set(2); // 20 books / 2 per page = 10 pages
         newComponent.currentPage.set(5);
         newFixture.detectChanges();
@@ -487,8 +487,11 @@ describe('MyBooks', () => {
   });
 
   describe('getShelfBadges', () => {
-    it('should return shelf badges for given shelf IDs', () => {
-      const badges = component.getShelfBadges([1, 2]);
+    it('should return shelf badges for given shelf objects', () => {
+      const badges = component.getShelfBadges([
+        { id: 1, name: 'Sci-Fi' },
+        { id: 2, name: 'Favorites' }
+      ]);
 
       expect(badges.length).toBe(2);
       expect(badges[0].name).toBe('Sci-Fi');
@@ -497,11 +500,16 @@ describe('MyBooks', () => {
       expect(badges[1].color).toBe('amber');
     });
 
-    it('should filter out invalid shelf IDs', () => {
-      const badges = component.getShelfBadges([1, 999]);
+    it('should handle unknown shelf IDs with default color', () => {
+      const badges = component.getShelfBadges([
+        { id: 1, name: 'Sci-Fi' },
+        { id: 999, name: 'Unknown' }
+      ]);
 
-      expect(badges.length).toBe(1);
+      expect(badges.length).toBe(2);
       expect(badges[0].name).toBe('Sci-Fi');
+      expect(badges[1].name).toBe('Unknown');
+      expect(badges[1].color).toBe('gray');
     });
 
     it('should return empty array for empty input', () => {
@@ -527,20 +535,4 @@ describe('MyBooks', () => {
     });
   });
 
-  describe('getStatusClass', () => {
-    it('should return correct class for status', () => {
-      const className = component.getStatusClass('Reading');
-      expect(className).toBe('status-badge status-reading');
-    });
-
-    it('should handle multi-word status', () => {
-      const className = component.getStatusClass('Want to Read');
-      expect(className).toBe('status-badge status-want-to-read');
-    });
-
-    it('should convert to lowercase', () => {
-      const className = component.getStatusClass('FINISHED');
-      expect(className).toBe('status-badge status-finished');
-    });
-  });
 });

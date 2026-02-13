@@ -1,0 +1,12 @@
+.add-book {
+    &__trigger {
+        background-color: var(--pico-primary);
+        border-color: var(--pico-primary);
+        color: white;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+            opacity: 0.9;
+        }
+    }
+}

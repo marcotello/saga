@@ -21,7 +21,7 @@ describe('TrackProgress', () => {
       userId: 1,
       genreId: 1,
       status: 'reading',
-      shelves: [1, 2]
+      shelves: [{ id: 1, name: 'Shelf 1' }, { id: 2, name: 'Shelf 2' }]
     },
     {
       id: 2,
@@ -34,7 +34,7 @@ describe('TrackProgress', () => {
       userId: 1,
       genreId: 1,
       status: 'reading',
-      shelves: [1]
+      shelves: [{ id: 1, name: 'Shelf 1' }]
     }
   ];
 

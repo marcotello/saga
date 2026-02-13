@@ -146,15 +146,41 @@ body {
     background-color: var(--pico-color-amber-450);
     border-color: var(--pico-color-amber-450);
   }
+}
 
-/* NGX-Charts Line Chart Styles - Force line visibility */
+.status-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: white;
+
+  &.status-want-to-read {
+    background-color: var(--pico-color-amber-400);
+  }
+
+  &.status-reading {
+    background-color: var(--pico-primary);
+  }
+
+  &.status-finished {
+    background-color: var(--pico-color-green-500);
+  }
+
+  &.status-save-it-for-later {
+    background-color: var(--pico-muted-color);
+  }
+}
+
 .ngx-charts {
   .line-series path {
     stroke-width: 5px !important;
     stroke: #1976d2 !important;
     stroke-opacity: 1 !important;
   }
-  
+
   .line-series circle {
     r: 7 !important;
     fill: #1976d2 !important;
@@ -162,13 +188,12 @@ body {
     fill-opacity: 1 !important;
     stroke-opacity: 1 !important;
   }
-  
+
   .line-highlight {
     display: block !important;
   }
 }
 
-/* Alternative selectors for line chart */
 svg.ngx-charts g.line-series path {
   stroke-width: 5px !important;
   stroke: #1976d2 !important;
@@ -182,4 +207,98 @@ svg.ngx-charts g.line-series circle {
   fill-opacity: 1 !important;
   stroke-opacity: 1 !important;
 }
+
+.delete-button {
+  background-color: var(--pico-color-amber-400);
+  border-color: var(--pico-color-amber-400);
+  color: white;
+  font-size: 0.875rem;
+  transition: darken 0.2s;
+  padding: 0.5rem 1rem;
+
+  &:hover {
+    background-color: var(--pico-color-amber-450);
+  }
+}
+
+.table-container {
+  background-color: white;
+  border-radius: var(--pico-border-radius);
+  overflow: hidden;
+  box-shadow: var(--pico-box-shadow);
+}
+
+.saga-table-striped {
+  width: 100%;
+  margin: 0;
+
+  thead {
+    background-color: white;
+  }
+
+  tbody {
+    tr {
+      &:nth-child(odd) {
+        background-color: rgba(0, 0, 0, 0.02);
+      }
+
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+      }
+    }
+
+    td {
+      vertical-align: middle;
+      padding: 1rem;
+    }
+  }
+
+  .cover-column {
+    width: 120px;
+    padding: 20px 15px;
+
+    .book-cover {
+      width: 100px;
+      height: auto;
+      object-fit: cover;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: block;
+    }
+  }
+
+  .title-cell {
+    font-weight: 500;
+
+    .book-title {
+      color: var(--pico-primary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--pico-primary-hover);
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .author-cell {
+    color: var(--pico-color);
+  }
+
+  .date-cell {
+    color: var(--pico-muted-color);
+    font-size: 0.875rem;
+    white-space: nowrap;
+  }
+
+  .actions-cell {
+    text-align: center;
+
+    .action-btn {
+      margin-top: 20px;
+    }
+  }
 }

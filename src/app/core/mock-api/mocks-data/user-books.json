@@ -11,8 +11,10 @@
         "genreId": 31,
         "status": "Reading",
         "shelves": [
-            1,
-            3
+            {
+                "id": 1,
+                "name": "Angular"
+            }
         ]
     },
     {
@@ -27,7 +29,10 @@
         "genreId": 31,
         "status": "Reading",
         "shelves": [
-            2
+            {
+                "id": 1,
+                "name": "Angular"
+            }
         ]
     },
     {
@@ -42,7 +47,10 @@
         "genreId": 31,
         "status": "Reading",
         "shelves": [
-            1
+            {
+                "id": 1,
+                "name": "Angular"
+            }
         ]
     },
     {
@@ -57,8 +65,10 @@
         "genreId": 31,
         "status": "Reading",
         "shelves": [
-            1,
-            3
+            {
+                "id": 7,
+                "name": "Angular"
+            }
         ]
     },
     {
@@ -73,7 +83,10 @@
         "genreId": 31,
         "status": "Reading",
         "shelves": [
-            1
+            {
+                "id": 7,
+                "name": "Angular"
+            }
         ]
     },
     {
@@ -88,7 +101,10 @@
         "genreId": 31,
         "status": "Finished",
         "shelves": [
-            1
+            {
+                "id": 1,
+                "name": "Angular"
+            }
         ]
     },
     {
@@ -103,7 +119,10 @@
         "genreId": 31,
         "status": "Finished",
         "shelves": [
-            1
+            {
+                "id": 1,
+                "name": "Angular"
+            }
         ]
     },
     {
@@ -118,7 +137,10 @@
         "genreId": 31,
         "status": "Want to Read",
         "shelves": [
-            1
+            {
+                "id": 1,
+                "name": "Angular"
+            }
         ]
     },
     {
@@ -133,7 +155,10 @@
         "genreId": 31,
         "status": "Want to Read",
         "shelves": [
-            1
+            {
+                "id": 7,
+                "name": "Angular"
+            }
         ]
     },
     {
@@ -148,7 +173,10 @@
         "genreId": 31,
         "status": "Finished",
         "shelves": [
-            1
+            {
+                "id": 7,
+                "name": "Angular"
+            }
         ]
     },
     {
@@ -159,11 +187,18 @@
         "progressPercentage": 0,
         "createdAt": "2025-10-15",
         "updatedAt": "2025-10-15",
-        "userId": 1,
+        "userId": 2,
         "genreId": 31,
         "status": "Want to Read",
         "shelves": [
-            1
+            {
+                "id": 7,
+                "name": "Angular"
+            },
+            {
+                "id": 6,
+                "name": "Angular Material"
+            }
         ]
     },
     {
@@ -178,7 +213,10 @@
         "genreId": 31,
         "status": "Want to Read",
         "shelves": [
-            1
+            {
+                "id": 1,
+                "name": "Angular"
+            }
         ]
     },
     {
@@ -193,7 +231,10 @@
         "genreId": 31,
         "status": "Want to Read",
         "shelves": [
-            1
+            {
+                "id": 7,
+                "name": "Angular"
+            }
         ]
     },
     {
@@ -208,7 +249,212 @@
         "genreId": 31,
         "status": "Want to Read",
         "shelves": [
-            1
+            {
+                "id": 7,
+                "name": "Angular"
+            }
+        ]
+    },
+    {
+        "id": 15,
+        "name": "Angular for Material Design",
+        "author": "Venkata Keerti Kotaru",
+        "coverImage": "/images/books/material1.jpg",
+        "progressPercentage": 0,
+        "createdAt": "2025-10-15",
+        "updatedAt": "2025-10-15",
+        "userId": 1,
+        "genreId": 31,
+        "status": "Finished",
+        "shelves": [
+            {
+                "id": 1,
+                "name": "Angular"
+            },
+            {
+                "id": 2,
+                "name": "Angular Material"
+            }
+        ]
+    },
+    {
+        "id": 16,
+        "name": "Mastering Angular Material",
+        "author": "Haider Koele",
+        "coverImage": "/images/books/mastering-angular-material.jpg",
+        "progressPercentage": 0,
+        "createdAt": "2023-04-30",
+        "updatedAt": "2023-05-26",
+        "userId": 1,
+        "genreId": 31,
+        "status": "Finished",
+        "shelves": [
+            {
+                "id": 2,
+                "name": "Angular Material"
+            }
+        ]
+    },
+    {
+        "id": 17,
+        "name": "Ai Powered App Development",
+        "author": "Sonu Kapoor",
+        "coverImage": "/images/books/angular-ai.jpg",
+        "progressPercentage": 0,
+        "createdAt": "2023-03-08",
+        "updatedAt": "2023-03-08",
+        "userId": 1,
+        "genreId": 31,
+        "status": "Want to Read",
+        "shelves": [
+            {
+                "id": 3,
+                "name": "AI"
+            }
+        ]
+    },
+    {
+        "id": 18,
+        "name": "JavaScript (7th Edition): The Definitive Guide",
+        "author": "David Flanagan ",
+        "coverImage": "/images/books/js-definitive.jpg",
+        "progressPercentage": 0,
+        "createdAt": "2022-05-02",
+        "updatedAt": "2022-06-13",
+        "userId": 1,
+        "genreId": 31,
+        "status": "Finished",
+        "shelves": [
+            {
+                "id": 4,
+                "name": "JavaScript"
+            }
+        ]
+    },
+    {
+        "id": 19,
+        "name": "Node: Up and Running",
+        "author": "Tom Hughes-Croucher",
+        "coverImage": "/images/books/node-up.jpg",
+        "progressPercentage": 0,
+        "createdAt": "2021-03-22",
+        "updatedAt": "2021-04-25",
+        "userId": 1,
+        "genreId": 31,
+        "status": "Finished",
+        "shelves": [
+            {
+                "id": 5,
+                "name": "Node"
+            }
+        ]
+    },
+    {
+        "id": 20,
+        "name": "Head First JavaScript Programming",
+        "author": "Eric Freeman",
+        "coverImage": "/images/books/js-head.jpg",
+        "progressPercentage": 0,
+        "createdAt": "2021-09-07",
+        "updatedAt": "2021-09-29",
+        "userId": 1,
+        "genreId": 31,
+        "status": "Finished",
+        "shelves": [
+            {
+                "id": 4,
+                "name": "JavaScript"
+            }
+        ]
+    },
+    {
+        "id": 21,
+        "name": "Eloquent JavaScript, 4th Edition",
+        "author": "Marijn Haverbeke",
+        "coverImage": "/images/books/eloquent-js.jpg",
+        "progressPercentage": 0,
+        "createdAt": "2021-09-22",
+        "updatedAt": "2021-10-29",
+        "userId": 1,
+        "genreId": 31,
+        "status": "Finished",
+        "shelves": [
+            {
+                "id": 4,
+                "name": "JavaScript"
+            }
+        ]
+    },
+    {
+        "id": 22,
+        "name": "Ai Powered App Development",
+        "author": "Sonu Kapoor",
+        "coverImage": "/images/books/angular-ai.jpg",
+        "progressPercentage": 0,
+        "createdAt": "2025-12-29",
+        "updatedAt": "2025-12-29",
+        "userId": 2,
+        "genreId": 31,
+        "status": "Want to Read",
+        "shelves": [
+            {
+                "id": 7,
+                "name": "Angular"
+            }
+        ]
+    },
+    {
+        "id": 23,
+        "name": "Learning Python",
+        "author": "Mark Lutz",
+        "coverImage": "/images/books/learning-python.jpg",
+        "progressPercentage": 100,
+        "createdAt": "2025-12-29",
+        "updatedAt": "2025-12-29",
+        "userId": 2,
+        "genreId": 31,
+        "status": "Finished",
+        "shelves": [
+            {
+                "id": 8,
+                "name": "Python"
+            }
+        ]
+    },
+    {
+        "id": 24,
+        "name": "Node.js Design Patterns",
+        "author": "Luciano Mammino",
+        "coverImage": "/images/books/node-design-patterns.jpg",
+        "progressPercentage": 100,
+        "createdAt": "2025-10-15",
+        "updatedAt": "2025-10-15",
+        "userId": 1,
+        "genreId": 31,
+        "status": "Finished",
+        "shelves": [
+            {
+                "id": 5,
+                "name": "Node"
+            }
+        ]
+    },
+    {
+        "id": 25,
+        "name": "Python Distilled",
+        "author": "David Beazley",
+        "coverImage": "/images/books/distilled-python.jpg",
+        "progressPercentage": 0,
+        "createdAt": "2026-01-07",
+        "updatedAt": "2026-01-07",
+        "userId": 2,
+        "genreId": 31,
+        "status": "Want to Read",
+        "shelves": [
+            {
+                "id": 8,
+                "name": "Python"
+            }
         ]
     }
 ]

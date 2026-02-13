@@ -49,19 +49,6 @@
         margin: 0.9rem 0.5rem 0 0;
       }
 
-      .delete-button {
-        background-color: var(--pico-color-amber-400);
-        border-color: var(--pico-color-amber-400);
-        color: white;
-        padding: 0.5rem 1rem;
-        font-size: 0.875rem;
-        transition: darken 0.2s;
-
-        &:hover {
-          background-color: var(--pico-color-amber-450);
-        }
-      }
-
       &.name {
         padding-left: 2rem;
       }

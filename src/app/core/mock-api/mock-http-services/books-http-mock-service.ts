@@ -23,6 +23,11 @@ export class BooksHttpMockService {
         return of(books);
     }
 
+    getBooksByBookshelfId(bookshelfId: number, userId: number): Observable<UserBook[]> {
+        const books = this.books.filter(book => book.userId === userId && book.shelves.some(shelf => shelf.id === bookshelfId));
+        return of(books);
+    }
+
     updateBook(book: UserBook): Observable<UserBook> {
         const index = this.books.findIndex(b => b.id === book.id);
         if (index === -1) {
