@@ -23,7 +23,7 @@
                     <span class="book-count">({{ (books() ?? []).length | i18nPlural: bookPluralMapping }})</span>
                 </div>
                 <div class="shelf-actions-buttons">
-                    <button type="button" class="shelf-update-btn">Update</button>
+                    <button type="button" class="shelf-update-btn" (click)="updateShelf()">Update</button>
                     <button type="button" class="delete-button shelf-delete-btn">Delete</button>
                 </div>
             </article>
@@ -75,4 +75,6 @@
     </div>
     <app-add-bookshelf [isDialogOpen]="isAddBookDialogOpen()"
         (requestClose)="onAddBookDialogRequestClose()"></app-add-bookshelf>
+    <app-update-bookshelf [isDialogOpen]="isUpdateBookshelfDialogOpen()" [bookshelf]="selectedShelf()"
+        (requestClose)="onUpdateBookshelfDialogRequestClose($event)"></app-update-bookshelf>
 </div>

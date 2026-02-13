@@ -34,6 +34,18 @@ export class BookshelfService {
             });
     }
 
+    updateBookshelf(bookshelfId: number, name: string, image: string): void {
+        this.bookshelvesHttpMockService.updateBookshelf(bookshelfId, name, image)
+            .subscribe({
+                next: (bookshelf: Bookshelf) => {
+                    this.userService.updateUserBookshelf(bookshelf);
+                },
+                error: () => {
+                    // Error handling will be implemented later with an error service
+                }
+            });
+    }
+
     removeBookFromShelf(bookshelfId: number, bookId: number): void {
         this.bookshelvesHttpMockService.removeBookFromShelf(bookshelfId, bookId)
             .subscribe({

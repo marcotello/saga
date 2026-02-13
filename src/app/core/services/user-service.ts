@@ -81,6 +81,12 @@ export class UserService {
     this._userBookshelves.update(shelves => [...(shelves ?? []), bookshelf]);
   }
 
+  updateUserBookshelf(updatedBookshelf: Bookshelf): void {
+    this._userBookshelves.update(shelves =>
+      shelves?.map(shelf => shelf.id === updatedBookshelf.id ? updatedBookshelf : shelf) ?? null
+    );
+  }
+
   removeBookFromShelf(bookId: number): void {
     this._userBooks.update(books =>
       books?.filter(book => book.id !== bookId) ?? null

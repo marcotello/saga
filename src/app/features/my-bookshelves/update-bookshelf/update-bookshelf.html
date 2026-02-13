@@ -1,0 +1,30 @@
+<div class="update-bookshelf">
+    <app-dialog [title]="dialogTitle" [isOpen]="isDialogOpen()" (requestClose)="closeDialog()">
+        <form body id="updateBookshelfForm" [formGroup]="bookshelfForm" (ngSubmit)="onSave()" class="dialog-form">
+            <label for="updateBookshelfName">Bookshelf Name</label>
+            <input id="updateBookshelfName" type="text" formControlName="name" placeholder="e.g. Angular"
+                autocomplete="off" required />
+
+            @if (nameHasError()) {
+            <small class="dialog-error">Bookshelf Name is required.</small>
+            }
+
+            <label for="updateBookshelfImage">Icon</label>
+            <input id="updateBookshelfImage" type="text" formControlName="image"
+                placeholder="e.g. /images/bookshelves/angular.svg" autocomplete="off" required />
+
+            @if (imageHasError()) {
+            <small class="dialog-error">Icon is required.</small>
+            }
+        </form>
+
+        <div footer class="dialog-footer">
+            <button type="button" class="btn-amber" (click)="closeDialog()">
+                Cancel
+            </button>
+            <button type="submit" form="updateBookshelfForm" [disabled]="bookshelfForm.invalid">
+                Update
+            </button>
+        </div>
+    </app-dialog>
+</div>

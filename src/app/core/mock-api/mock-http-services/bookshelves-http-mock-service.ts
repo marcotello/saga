@@ -37,6 +37,19 @@ export class BookshelvesHttpMockService {
         return of(newBookshelf).pipe(delay(300));
     }
 
+    updateBookshelf(bookshelfId: number, name: string, image: string): Observable<Bookshelf> {
+        const bookshelf = this.bookshelves.find(b => b.id === bookshelfId);
+
+        if (!bookshelf) {
+            throw new Error(`Bookshelf with id ${bookshelfId} not found`);
+        }
+
+        bookshelf.name = name.trim();
+        bookshelf.image = image.trim();
+
+        return of({ ...bookshelf }).pipe(delay(300));
+    }
+
     removeBookFromShelf(bookshelfId: number, bookId: number): Observable<void> {
         return of(undefined).pipe(delay(300));
     }

@@ -7,10 +7,11 @@ import { BookshelfService } from '../../../core/services/bookshelf-service';
 import { BooksService } from '../../../core/services/books-service';
 import { UserService } from '../../../core/services/user-service';
 import { AddBookshelf } from "../add-book/add-bookshelf";
+import { UpdateBookshelf } from "../update-bookshelf/update-bookshelf";
 
 @Component({
   selector: 'app-my-bookshelves',
-  imports: [CommonModule, BookStatusDirective, AddBookshelf],
+  imports: [CommonModule, BookStatusDirective, AddBookshelf, UpdateBookshelf],
 
   templateUrl: './my-bookshelves.html',
   styleUrl: './my-bookshelves.scss',
@@ -30,6 +31,7 @@ export class MyBookShelves {
 
   readonly selectedShelf = signal<Bookshelf | null>(null);
   protected readonly isAddBookDialogOpen = signal(false);
+  protected readonly isUpdateBookshelfDialogOpen = signal(false);
 
   readonly bookPluralMapping: { [k: string]: string } = {
     '=0': 'No books',
@@ -60,6 +62,17 @@ export class MyBookShelves {
 
   onAddBookDialogRequestClose(): void {
     this.isAddBookDialogOpen.set(false);
+  }
+
+  updateShelf(): void {
+    this.isUpdateBookshelfDialogOpen.set(true);
+  }
+
+  onUpdateBookshelfDialogRequestClose(updatedShelf: Bookshelf | null): void {
+    this.isUpdateBookshelfDialogOpen.set(false);
+    if (updatedShelf) {
+      this.selectedShelf.set(updatedShelf);
+    }
   }
 
   removeBookFromShelf(book: UserBook): void {
