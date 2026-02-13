@@ -6,13 +6,13 @@ import { UserService } from '../../../core/services/user-service';
 import { Dialog } from '../../../shared/dialog/dialog';
 
 @Component({
-    selector: 'app-add-book',
+    selector: 'app-add-bookshelf',
     imports: [CommonModule, ReactiveFormsModule, Dialog],
-    templateUrl: './add-book.html',
-    styleUrl: './add-book.scss',
+    templateUrl: './add-bookshelf.html',
+    styleUrl: './add-bookshelf.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddBook {
+export class AddBookshelf {
     private readonly fb = inject(NonNullableFormBuilder);
     private readonly bookshelfService = inject(BookshelfService);
     private readonly userService = inject(UserService);

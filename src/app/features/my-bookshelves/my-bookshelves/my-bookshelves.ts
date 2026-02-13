@@ -6,11 +6,11 @@ import { BookStatusDirective } from '../../../core/directives/book-status.direct
 import { BookshelfService } from '../../../core/services/bookshelf-service';
 import { BooksService } from '../../../core/services/books-service';
 import { UserService } from '../../../core/services/user-service';
-import { AddBook } from '../add-book/add-book';
+import { AddBookshelf } from "../add-book/add-bookshelf";
 
 @Component({
   selector: 'app-my-bookshelves',
-  imports: [CommonModule, BookStatusDirective, AddBook],
+  imports: [CommonModule, BookStatusDirective, AddBookshelf],
 
   templateUrl: './my-bookshelves.html',
   styleUrl: './my-bookshelves.scss',
