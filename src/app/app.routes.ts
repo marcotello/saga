@@ -39,6 +39,10 @@ export const routes: Routes = [
                 path: 'account',
                 loadComponent: () => import('./features/account/account/account').then(m => m.Account)
             },
+            {
+                path: 'search-results',
+                loadComponent: () => import('./features/search/search-results/search-results').then(m => m.SearchResults)
+            },
         ]
     },
     {
