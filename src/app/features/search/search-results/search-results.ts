@@ -4,7 +4,6 @@ import { BookStatusDirective } from '../../../core/directives/book-status.direct
 interface SearchResultBook {
   id: number;
   title: string;
-  subtitle: string;
   author: string;
   publishedYear: number;
   coverImage: string;
@@ -28,7 +27,6 @@ export class SearchResults {
     {
       id: 1,
       title: 'The Martian',
-      subtitle: 'Survival, Sci-Fi',
       author: 'Andy Weir',
       publishedYear: 2011,
       coverImage: 'https://covers.openlibrary.org/b/id/8701891-M.jpg',
@@ -39,7 +37,6 @@ export class SearchResults {
     {
       id: 2,
       title: 'Project Hail Mary',
-      subtitle: 'Space Opera, Sci-Fi',
       author: 'Andy Weir',
       publishedYear: 2021,
       coverImage: 'https://covers.openlibrary.org/b/id/10389354-M.jpg',
@@ -50,7 +47,6 @@ export class SearchResults {
     {
       id: 3,
       title: 'Dune',
-      subtitle: 'Classic, Sci-Fi',
       author: 'Frank Herbert',
       publishedYear: 1965,
       coverImage: 'https://covers.openlibrary.org/b/id/11153217-M.jpg',
@@ -61,7 +57,6 @@ export class SearchResults {
     {
       id: 4,
       title: '1984',
-      subtitle: 'Dystopian, Politics',
       author: 'George Orwell',
       publishedYear: 1949,
       coverImage: 'https://covers.openlibrary.org/b/id/12648894-M.jpg',
@@ -72,7 +67,6 @@ export class SearchResults {
     {
       id: 5,
       title: 'Foundation',
-      subtitle: 'Sci-Fi, Series',
       author: 'Isaac Asimov',
       publishedYear: 1951,
       coverImage: 'https://covers.openlibrary.org/b/id/6524554-M.jpg',
@@ -83,7 +77,6 @@ export class SearchResults {
     {
       id: 6,
       title: 'Brave New World',
-      subtitle: 'Dystopian, Classic',
       author: 'Aldous Huxley',
       publishedYear: 1932,
       coverImage: 'https://covers.openlibrary.org/b/id/12645169-M.jpg',
@@ -94,7 +87,6 @@ export class SearchResults {
     {
       id: 7,
       title: 'Neuromancer',
-      subtitle: 'Cyberpunk, Sci-Fi',
       author: 'William Gibson',
       publishedYear: 1984,
       coverImage: 'https://covers.openlibrary.org/b/id/12746288-M.jpg',
@@ -105,7 +97,6 @@ export class SearchResults {
     {
       id: 8,
       title: 'Ender\'s Game',
-      subtitle: 'Military Sci-Fi',
       author: 'Orson Scott Card',
       publishedYear: 1985,
       coverImage: 'https://covers.openlibrary.org/b/id/8572925-M.jpg',
@@ -116,7 +107,6 @@ export class SearchResults {
     {
       id: 9,
       title: 'Fahrenheit 451',
-      subtitle: 'Dystopian, Classic',
       author: 'Ray Bradbury',
       publishedYear: 1953,
       coverImage: 'https://covers.openlibrary.org/b/id/12818862-M.jpg',
@@ -127,7 +117,6 @@ export class SearchResults {
     {
       id: 10,
       title: 'The Hitchhiker\'s Guide to the Galaxy',
-      subtitle: 'Comedy, Sci-Fi',
       author: 'Douglas Adams',
       publishedYear: 1979,
       coverImage: 'https://covers.openlibrary.org/b/id/12686014-M.jpg',
@@ -138,7 +127,6 @@ export class SearchResults {
     {
       id: 11,
       title: 'Snow Crash',
-      subtitle: 'Cyberpunk, Sci-Fi',
       author: 'Neal Stephenson',
       publishedYear: 1992,
       coverImage: 'https://covers.openlibrary.org/b/id/12763375-M.jpg',
@@ -149,7 +137,6 @@ export class SearchResults {
     {
       id: 12,
       title: 'The Left Hand of Darkness',
-      subtitle: 'Sci-Fi, Classic',
       author: 'Ursula K. Le Guin',
       publishedYear: 1969,
       coverImage: 'https://covers.openlibrary.org/b/id/12750583-M.jpg',
@@ -160,7 +147,6 @@ export class SearchResults {
     {
       id: 13,
       title: 'Hyperion',
-      subtitle: 'Space Opera, Sci-Fi',
       author: 'Dan Simmons',
       publishedYear: 1989,
       coverImage: 'https://covers.openlibrary.org/b/id/12648227-M.jpg',
@@ -171,7 +157,6 @@ export class SearchResults {
     {
       id: 14,
       title: 'Rendezvous with Rama',
-      subtitle: 'Hard Sci-Fi',
       author: 'Arthur C. Clarke',
       publishedYear: 1973,
       coverImage: 'https://covers.openlibrary.org/b/id/12697648-M.jpg',
@@ -182,7 +167,6 @@ export class SearchResults {
     {
       id: 15,
       title: 'Ringworld',
-      subtitle: 'Hard Sci-Fi',
       author: 'Larry Niven',
       publishedYear: 1970,
       coverImage: 'https://covers.openlibrary.org/b/id/451613-M.jpg',
@@ -193,7 +177,6 @@ export class SearchResults {
     {
       id: 16,
       title: 'Solaris',
-      subtitle: 'Philosophical Sci-Fi',
       author: 'Stanisław Lem',
       publishedYear: 1961,
       coverImage: 'https://covers.openlibrary.org/b/id/12697724-M.jpg',
@@ -204,7 +187,6 @@ export class SearchResults {
     {
       id: 17,
       title: 'The Forever War',
-      subtitle: 'Military Sci-Fi',
       author: 'Joe Haldeman',
       publishedYear: 1974,
       coverImage: 'https://covers.openlibrary.org/b/id/12781697-M.jpg',
@@ -215,7 +197,6 @@ export class SearchResults {
     {
       id: 18,
       title: 'Contact',
-      subtitle: 'Hard Sci-Fi',
       author: 'Carl Sagan',
       publishedYear: 1985,
       coverImage: 'https://covers.openlibrary.org/b/id/461772-M.jpg',
@@ -226,7 +207,6 @@ export class SearchResults {
     {
       id: 19,
       title: 'Do Androids Dream of Electric Sheep?',
-      subtitle: 'Cyberpunk, Classic',
       author: 'Philip K. Dick',
       publishedYear: 1968,
       coverImage: 'https://covers.openlibrary.org/b/id/11429735-M.jpg',
@@ -237,7 +217,6 @@ export class SearchResults {
     {
       id: 20,
       title: 'Slaughterhouse-Five',
-      subtitle: 'Satirical Sci-Fi',
       author: 'Kurt Vonnegut',
       publishedYear: 1969,
       coverImage: 'https://covers.openlibrary.org/b/id/12700487-M.jpg',
@@ -248,7 +227,6 @@ export class SearchResults {
     {
       id: 21,
       title: 'The War of the Worlds',
-      subtitle: 'Classic Sci-Fi',
       author: 'H.G. Wells',
       publishedYear: 1898,
       coverImage: 'https://covers.openlibrary.org/b/id/12648134-M.jpg',
@@ -259,7 +237,6 @@ export class SearchResults {
     {
       id: 22,
       title: '2001: A Space Odyssey',
-      subtitle: 'Hard Sci-Fi',
       author: 'Arthur C. Clarke',
       publishedYear: 1968,
       coverImage: 'https://covers.openlibrary.org/b/id/12648266-M.jpg',
@@ -270,7 +247,6 @@ export class SearchResults {
     {
       id: 23,
       title: 'The Expanse: Leviathan Wakes',
-      subtitle: 'Space Opera',
       author: 'James S.A. Corey',
       publishedYear: 2011,
       coverImage: 'https://covers.openlibrary.org/b/id/12649025-M.jpg',
@@ -281,7 +257,6 @@ export class SearchResults {
     {
       id: 24,
       title: 'Children of Time',
-      subtitle: 'Evolutionary Sci-Fi',
       author: 'Adrian Tchaikovsky',
       publishedYear: 2015,
       coverImage: 'https://covers.openlibrary.org/b/id/12811795-M.jpg',

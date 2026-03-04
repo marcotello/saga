@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="header-right">
-    <input type="search" placeholder="Search Books..." class="search-input">
+    <app-search-input />
     @if (!isLoggedIn()) {
     <button routerLink="/auth/login" class="login-btn">Login</button>
     } @else {
