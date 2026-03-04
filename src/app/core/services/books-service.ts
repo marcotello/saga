@@ -5,6 +5,7 @@ import { UserService } from './user-service';
 import { UserBook } from '../models/user-book';
 import { BookRecommendation } from '../models/book-recommendation';
 import { ReadingStatus } from '../models/reading-status';
+import { SearchResultBook } from '../models/search-result-book';
 
 @Injectable({
     providedIn: 'root'
@@ -16,6 +17,12 @@ export class BooksService {
 
     private readonly _readingStatuses = signal<ReadingStatus[]>([]);
     readonly readingStatuses = this._readingStatuses.asReadonly();
+
+    private readonly _searchBooksResult = signal<SearchResultBook[]>([]);
+    readonly searchBooksResult = this._searchBooksResult.asReadonly();
+
+    private readonly _isSearching = signal(false);
+    readonly isSearching = this._isSearching.asReadonly();
 
     getBooksByUserId(userId: number): void {
         this.booksServiceHttpMock.getBooksByUserId(userId)
@@ -92,6 +99,21 @@ export class BooksService {
                 },
                 error: () => {
                     // Error handling will be implemented later with an error service
+                }
+            });
+    }
+
+    searchBooks(query: string, userId: number): void {
+        this._isSearching.set(true);
+        this._searchBooksResult.set([]);
+        this.booksServiceHttpMock.searchBooks(query, userId)
+            .subscribe({
+                next: (results: SearchResultBook[]) => {
+                    this._searchBooksResult.set(results);
+                    this._isSearching.set(false);
+                },
+                error: () => {
+                    this._isSearching.set(false);
                 }
             });
     }

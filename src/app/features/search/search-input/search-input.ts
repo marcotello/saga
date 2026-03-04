@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-input',
@@ -8,5 +9,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchInput {
+  private readonly router = inject(Router);
 
+  onSearch(event: Event): void {
+    const query = (event.target as HTMLInputElement).value.trim();
+    if (query) {
+      this.router.navigate(['/search-results'], { queryParams: { q: query } });
+    }
+  }
 }
