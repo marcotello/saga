@@ -2,12 +2,15 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { ActivatedRoute } from '@angular/router';
 import { BookStatusDirective } from '../../../core/directives/book-status.directive';
 import { BooksService } from '../../../core/services/books-service';
+import { BookshelfService } from '../../../core/services/bookshelf-service';
 import { UserService } from '../../../core/services/user-service';
 import { WithLoadingState } from '../../../core/directives/with-loading-state';
+import { SearchResultBook } from '../../../core/models/search-result-book';
+import { AddToShelf } from '../add-to-shelf/add-to-shelf';
 
 @Component({
   selector: 'app-search-results',
-  imports: [BookStatusDirective, WithLoadingState],
+  imports: [BookStatusDirective, WithLoadingState, AddToShelf],
   templateUrl: './search-results.html',
   styleUrl: './search-results.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,10 +18,14 @@ import { WithLoadingState } from '../../../core/directives/with-loading-state';
 export class SearchResults {
   private readonly route = inject(ActivatedRoute);
   private readonly userService = inject(UserService);
+  private readonly bookshelfService = inject(BookshelfService);
   readonly booksService = inject(BooksService);
 
   readonly currentPage = signal(1);
   readonly itemsPerPage = signal(5);
+
+  protected readonly isAddToShelfDialogOpen = signal(false);
+  protected readonly selectedBook = signal<SearchResultBook | null>(null);
 
   private readonly sortedBooks = computed(() => {
     const books = [...this.booksService.searchBooksResult()];
@@ -97,5 +104,19 @@ export class SearchResults {
     if (this.currentPage() < this.totalPages()) {
       this.currentPage.set(this.currentPage() + 1);
     }
+  }
+
+  openAddToShelfDialog(book: SearchResultBook): void {
+    const userId = this.userService.user()?.id ?? 0;
+    if (userId) {
+      this.bookshelfService.getBookshelvesByUserId(userId);
+    }
+    this.selectedBook.set(book);
+    this.isAddToShelfDialogOpen.set(true);
+  }
+
+  onAddToShelfDialogRequestClose(): void {
+    this.isAddToShelfDialogOpen.set(false);
+    this.selectedBook.set(null);
   }
 }

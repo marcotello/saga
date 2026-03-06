@@ -79,4 +79,37 @@ export class BooksHttpMockService {
         return of(results).pipe(delay(500));
     }
 
+    addBookToShelf(book: SearchResultBook, bookshelfId: number, bookshelfName: string, userId: number): Observable<UserBook> {
+        const existing = this.books.find(b => b.name === book.name && b.userId === userId);
+
+        if (existing) {
+            const alreadyOnShelf = existing.shelves.some(s => s.id === bookshelfId);
+            if (!alreadyOnShelf) {
+                existing.shelves.push({ id: bookshelfId, name: bookshelfName });
+            }
+            return of({ ...existing }).pipe(delay(300));
+        }
+
+        const maxId = this.books.length > 0
+            ? Math.max(...this.books.map(b => b.id))
+            : 0;
+
+        const newUserBook: UserBook = {
+            id: maxId + 1,
+            name: book.name,
+            author: book.author,
+            coverImage: book.coverImage,
+            progressPercentage: 0,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+            userId,
+            genreId: 0,
+            status: 'Want to Read',
+            shelves: [{ id: bookshelfId, name: bookshelfName }],
+        };
+
+        this.books.push(newUserBook);
+        return of(newUserBook).pipe(delay(300));
+    }
+
 }

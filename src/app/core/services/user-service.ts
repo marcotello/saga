@@ -62,6 +62,10 @@ export class UserService {
     this._currentlyReadingUserBooks.set(currentlyReadingUserBooks);
   }
 
+  addUserBook(book: UserBook): void {
+    this._userBooks.update(books => [...(books ?? []), book]);
+  }
+
   updateUserBook(updatedBook: UserBook): void {
     this._userBooks.update(books =>
       books?.map(book => book.id === updatedBook.id ? updatedBook : book) ?? null

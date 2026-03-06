@@ -117,4 +117,21 @@ export class BooksService {
                 }
             });
     }
+
+    addBookToShelf(book: SearchResultBook, bookshelfId: number, bookshelfName: string, userId: number): void {
+        this.booksServiceHttpMock.addBookToShelf(book, bookshelfId, bookshelfName, userId)
+            .subscribe({
+                next: (userBook) => {
+                    this._searchBooksResult.update(results =>
+                        results.map(r => r.id === book.id
+                            ? { ...r, inLibrary: true, shelves: [...r.shelves, { id: bookshelfId, name: bookshelfName }] }
+                            : r
+                        )
+                    );
+                    this.userService.addUserBook(userBook);
+                },
+                error: () => {
+                }
+            });
+    }
 }

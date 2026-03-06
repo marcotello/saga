@@ -1,0 +1,26 @@
+<div class="add-to-shelf">
+  <app-dialog [title]="dialogTitle" [isOpen]="isDialogOpen()" (requestClose)="closeDialog()">
+    <div body class="dialog-form">
+      @if (book(); as selectedBook) {
+        <p class="add-to-shelf__book-name">{{ selectedBook.name }}</p>
+      }
+
+      <label for="bookshelfSelect">Bookshelf</label>
+      <select id="bookshelfSelect" (change)="onShelfChange($event)" required>
+        <option value="">Choose a bookshelf…</option>
+        @for (shelf of bookshelves(); track shelf.id) {
+          <option [value]="shelf.id">{{ shelf.name }}</option>
+        }
+      </select>
+    </div>
+
+    <div footer class="dialog-footer">
+      <button type="button" class="btn-amber" (click)="closeDialog()">
+        Cancel
+      </button>
+      <button type="button" [disabled]="!selectedShelfId()" (click)="onAdd()">
+        Add
+      </button>
+    </div>
+  </app-dialog>
+</div>

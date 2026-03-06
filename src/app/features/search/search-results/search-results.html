@@ -41,7 +41,7 @@
                             @if (book.inLibrary) {
                             <button class="btn-in-library" type="button">In Library</button>
                             } @else {
-                            <button class="btn-add-to-shelf" type="button">Add to Shelf</button>
+                            <button class="btn-add-to-shelf" type="button" (click)="openAddToShelfDialog(book)">Add to Shelf</button>
                             }
                         </td>
                     </tr>
@@ -80,4 +80,10 @@
         </div>
         }
     </div>
+
+    <app-add-to-shelf
+        [isDialogOpen]="isAddToShelfDialogOpen()"
+        [book]="selectedBook()"
+        (requestClose)="onAddToShelfDialogRequestClose()">
+    </app-add-to-shelf>
 </div>
