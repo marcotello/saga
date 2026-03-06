@@ -1,0 +1,198 @@
+[
+    {
+        "id": 1,
+        "name": "Pro Angular",
+        "author": "Adam Freeman",
+        "coverImage": "images/books/pro-angular.jpg",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
+    },
+    {
+        "id": 2,
+        "name": "Reactive Patterns with RxJS and Angular Signals",
+        "author": "Lamis Chebbi",
+        "coverImage": "images/books/reactive-patterns.jpg",
+        "description": "Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Curabitur aliquet quam id dui posuere blandit. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus."
+    },
+    {
+        "id": 3,
+        "name": "Learning Angular",
+        "author": "Aristeidis Bampakos",
+        "coverImage": "images/books/learning-angular.jpg",
+        "description": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula."
+    },
+    {
+        "id": 4,
+        "name": "Angular Enterprise Architecture",
+        "author": "Tomas Trajan",
+        "coverImage": "images/books/angular-enterprise-architecture.png",
+        "description": "Nulla quis lorem ut libero malesuada feugiat. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Proin eget tortor risus."
+    },
+    {
+        "id": 5,
+        "name": "Angular: Up and Running",
+        "author": "Shyam Seshadri",
+        "coverImage": "images/books/angular-up-and-running.jpg",
+        "description": "Pellentesque in ipsum id orci porta dapibus. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a."
+    },
+    {
+        "id": 6,
+        "name": "The Ultimate Guide to Angular Evolution",
+        "author": "Mateusz Stefańczyk",
+        "coverImage": "images/books/ultimate-guide.png",
+        "description": "Cras ultricies ligula sed magna dictum porta. Vivamus suscipit tortor eget felis porttitor volutpat. Sed porttitor lectus nibh."
+    },
+    {
+        "id": 7,
+        "name": "ng-book: The Complete Guide to Angular",
+        "author": "Nathan Murray",
+        "coverImage": "images/books/ng-book.jpg",
+        "description": "Donec sollicitudin molestie malesuada. Nulla porttitor accumsan tincidunt. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui."
+    },
+    {
+        "id": 8,
+        "name": "Testing Angular Applications",
+        "author": "Corinna Cohn",
+        "coverImage": "images/books/testing-angular.jpg",
+        "description": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Donec rutrum congue leo eget malesuada. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem."
+    },
+    {
+        "id": 9,
+        "name": "Reactive Programming with Angular and ngrx",
+        "author": "Oren Farhi",
+        "coverImage": "images/books/reactive-programming.jpg",
+        "description": "Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Nulla porttitor accumsan tincidunt. Sed porttitor lectus nibh."
+    },
+    {
+        "id": 10,
+        "name": "Angular Cookbook",
+        "author": "Muhammad Ahsan Ayaz",
+        "coverImage": "images/books/angular-cookbook.jpg",
+        "description": "Proin eget tortor risus. Donec rutrum congue leo eget malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae."
+    },
+    {
+        "id": 11,
+        "name": "Angular for Material Design",
+        "author": "Venkata Keerti Kotaru",
+        "coverImage": "images/books/material1.jpg",
+        "description": "Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Nulla quis lorem ut libero malesuada feugiat. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi."
+    },
+    {
+        "id": 12,
+        "name": "Angular Projects",
+        "author": "Aristeidis Bampakos",
+        "coverImage": "images/books/angular-projects.jpg",
+        "description": "Quisque velit nisi, pretium ut lacinia in, elementum id enim. Pellentesque in ipsum id orci porta dapibus. Vivamus suscipit tortor eget felis porttitor volutpat."
+    },
+    {
+        "id": 13,
+        "name": "Angular: From Theory To Practice",
+        "author": "Asim Hussain",
+        "coverImage": "images/books/angular-theory.jpg",
+        "description": "Sed porttitor lectus nibh. Cras ultricies ligula sed magna dictum porta. Donec sollicitudin molestie malesuada."
+    },
+    {
+        "id": 14,
+        "name": "Reactive State for Angular with NgRx",
+        "author": "Amit Gharat",
+        "coverImage": "images/books/reactive-state-ngrx.jpg",
+        "description": "Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Nulla porttitor accumsan tincidunt. Curabitur aliquet quam id dui posuere blandit."
+    },
+    {
+        "id": 15,
+        "name": "Mastering Angular Material",
+        "author": "Haider Koele",
+        "coverImage": "images/books/mastering-angular-material.jpg",
+        "description": "Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus."
+    },
+    {
+        "id": 16,
+        "name": "Ai Powered App Development",
+        "author": "Sonu Kapoor",
+        "coverImage": "images/books/angular-ai.jpg",
+        "description": "Nulla quis lorem ut libero malesuada feugiat. Proin eget tortor risus. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus."
+    },
+    {
+        "id": 17,
+        "name": "JavaScript (7th Edition): The Definitive Guide",
+        "author": "David Flanagan",
+        "coverImage": "images/books/js-definitive.jpg",
+        "description": "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Sed porttitor lectus nibh. Cras ultricies ligula sed magna dictum porta."
+    },
+    {
+        "id": 18,
+        "name": "Node: Up and Running",
+        "author": "Tom Hughes-Croucher",
+        "coverImage": "images/books/node-up.jpg",
+        "description": "Pellentesque in ipsum id orci porta dapibus. Donec sollicitudin molestie malesuada. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae."
+    },
+    {
+        "id": 19,
+        "name": "Head First JavaScript Programming",
+        "author": "Eric Freeman",
+        "coverImage": "images/books/js-head.jpg",
+        "description": "Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Praesent sapien massa, convallis a pellentesque nec."
+    },
+    {
+        "id": 20,
+        "name": "Eloquent JavaScript, 4th Edition",
+        "author": "Marijn Haverbeke",
+        "coverImage": "images/books/eloquent-js.jpg",
+        "description": "Vivamus suscipit tortor eget felis porttitor volutpat. Donec rutrum congue leo eget malesuada. Nulla porttitor accumsan tincidunt."
+    },
+    {
+        "id": 21,
+        "name": "Learning Python",
+        "author": "Mark Lutz",
+        "coverImage": "images/books/learning-python.jpg",
+        "description": "Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Curabitur aliquet quam id dui posuere blandit. Sed porttitor lectus nibh."
+    },
+    {
+        "id": 22,
+        "name": "Node.js Design Patterns",
+        "author": "Luciano Mammino",
+        "coverImage": "images/books/node-design-patterns.jpg",
+        "description": "Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Nulla quis lorem ut libero malesuada feugiat. Proin eget tortor risus."
+    },
+    {
+        "id": 23,
+        "name": "Python Distilled",
+        "author": "David Beazley",
+        "coverImage": "images/books/distilled-python.jpg",
+        "description": "Cras ultricies ligula sed magna dictum porta. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Donec sollicitudin molestie malesuada."
+    },
+    {
+        "id": 24,
+        "name": "Mastering Angular Signals",
+        "author": "Muhammad Ahsan Ayaz",
+        "coverImage": "images/books/mastering-signals.jpg",
+        "description": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    },
+    {
+        "id": 25,
+        "name": "Effective Angular",
+        "author": "Roberto Heckers",
+        "coverImage": "images/books/effective-angular.jpg",
+        "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident."
+    },
+    {
+        "id": 26,
+        "name": "Mastering Angular Test-Driven Development",
+        "author": "Ezechiel Amen AGBLA",
+        "coverImage": "images/books/test-driven.jpg",
+        "description": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur."
+    },
+    {
+        "id": 27,
+        "name": "Angular Masterclass",
+        "author": "Souvik Basu",
+        "coverImage": "images/books/angular-masterclass.jpg",
+        "description": "Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat."
+    },
+    {
+        "id": 28,
+        "name": "Angular Advocate",
+        "author": "Michael D. Callaghan",
+        "coverImage": "images/books/angular-advocate.jpg",
+        "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+    }
+]

@@ -2,10 +2,11 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { Router, RouterLink } from '@angular/router';
 import { LoginService } from '../../../features/auth/login/services/login-service';
 import { UserService } from '../../../core/services/user-service';
+import { SearchInput } from '../../../features/search/search-input/search-input';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink],
+  imports: [RouterLink, SearchInput],
   templateUrl: './header.html',
   styleUrl: './header.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

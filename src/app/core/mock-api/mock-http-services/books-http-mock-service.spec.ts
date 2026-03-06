@@ -1,7 +1,8 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { BooksHttpMockService } from './books-http-mock-service';
 import { UserBook } from '../../models/user-book';
 import { BookRecommendation } from '../../models/book-recommendation';
+import { SearchResultBook } from '../../models/search-result-book';
 
 describe('BooksHttpMockService', () => {
   let service: BooksHttpMockService;
@@ -236,6 +237,186 @@ describe('BooksHttpMockService', () => {
         }
       });
     });
+  });
+
+  describe('searchBooks', () => {
+    it('should return results matching the query (case-insensitive)', fakeAsync(() => {
+      let results: SearchResultBook[] = [];
+      service.searchBooks('angular', 1).subscribe({
+        next: (books) => { results = books; }
+      });
+      tick(500);
+
+      expect(results.length).toBeGreaterThan(0);
+      expect(results.every(book =>
+        book.name.toLowerCase().includes('angular')
+      )).toBe(true);
+    }));
+
+    it('should return results with correct structure', fakeAsync(() => {
+      let results: SearchResultBook[] = [];
+      service.searchBooks('Pro Angular', 1).subscribe({
+        next: (books) => { results = books; }
+      });
+      tick(500);
+
+      expect(results.length).toBeGreaterThan(0);
+      const book = results[0];
+      expect(book.id).toBeDefined();
+      expect(book.name).toBeDefined();
+      expect(book.author).toBeDefined();
+      expect(book.coverImage).toBeDefined();
+      expect(book.description).toBeDefined();
+      expect(book.status).toBeDefined();
+      expect(book.shelves).toBeDefined();
+      expect(book.inLibrary).toBeDefined();
+    }));
+
+    it('should return empty array when no books match', fakeAsync(() => {
+      let results: SearchResultBook[] = [];
+      service.searchBooks('xyznonexistentbook', 1).subscribe({
+        next: (books) => { results = books; }
+      });
+      tick(500);
+
+      expect(results).toEqual([]);
+    }));
+
+    it('should perform case-insensitive search', fakeAsync(() => {
+      let lowerResults: SearchResultBook[] = [];
+      let upperResults: SearchResultBook[] = [];
+
+      service.searchBooks('angular', 1).subscribe({
+        next: (books) => { lowerResults = books; }
+      });
+      tick(500);
+
+      service.searchBooks('ANGULAR', 1).subscribe({
+        next: (books) => { upperResults = books; }
+      });
+      tick(500);
+
+      expect(lowerResults.length).toBe(upperResults.length);
+      expect(lowerResults.map(b => b.id)).toEqual(upperResults.map(b => b.id));
+    }));
+
+    it('should mark books in user library as inLibrary true', fakeAsync(() => {
+      let results: SearchResultBook[] = [];
+      service.searchBooks('Pro Angular', 1).subscribe({
+        next: (books) => { results = books; }
+      });
+      tick(500);
+
+      const proAngular = results.find(b => b.name === 'Pro Angular');
+      expect(proAngular).toBeTruthy();
+      expect(proAngular!.inLibrary).toBe(true);
+    }));
+
+    it('should mark books not in user library as inLibrary false', fakeAsync(() => {
+      let results: SearchResultBook[] = [];
+      service.searchBooks('Python', 1).subscribe({
+        next: (books) => { results = books; }
+      });
+      tick(500);
+
+      const learningPython = results.find(b => b.name === 'Learning Python');
+      expect(learningPython).toBeTruthy();
+      expect(learningPython!.inLibrary).toBe(false);
+    }));
+
+    it('should populate shelves from user books when in library', fakeAsync(() => {
+      let results: SearchResultBook[] = [];
+      service.searchBooks('Pro Angular', 1).subscribe({
+        next: (books) => { results = books; }
+      });
+      tick(500);
+
+      const proAngular = results.find(b => b.name === 'Pro Angular');
+      expect(proAngular).toBeTruthy();
+      expect(proAngular!.shelves.length).toBeGreaterThan(0);
+      expect(proAngular!.shelves[0].id).toBeDefined();
+      expect(proAngular!.shelves[0].name).toBeDefined();
+    }));
+
+    it('should return empty shelves for books not in user library', fakeAsync(() => {
+      let results: SearchResultBook[] = [];
+      service.searchBooks('Python', 1).subscribe({
+        next: (books) => { results = books; }
+      });
+      tick(500);
+
+      const learningPython = results.find(b => b.name === 'Learning Python');
+      expect(learningPython).toBeTruthy();
+      expect(learningPython!.shelves).toEqual([]);
+    }));
+
+    it('should populate status from user books when in library', fakeAsync(() => {
+      let results: SearchResultBook[] = [];
+      service.searchBooks('Pro Angular', 1).subscribe({
+        next: (books) => { results = books; }
+      });
+      tick(500);
+
+      const proAngular = results.find(b => b.name === 'Pro Angular');
+      expect(proAngular).toBeTruthy();
+      expect(proAngular!.status).toBe('Reading');
+    }));
+
+    it('should return empty status for books not in user library', fakeAsync(() => {
+      let results: SearchResultBook[] = [];
+      service.searchBooks('Python', 1).subscribe({
+        next: (books) => { results = books; }
+      });
+      tick(500);
+
+      const learningPython = results.find(b => b.name === 'Learning Python');
+      expect(learningPython).toBeTruthy();
+      expect(learningPython!.status).toBe('');
+    }));
+
+    it('should return different results for different users', fakeAsync(() => {
+      let resultsUser1: SearchResultBook[] = [];
+      let resultsUser2: SearchResultBook[] = [];
+
+      service.searchBooks('Pro Angular', 1).subscribe({
+        next: (books) => { resultsUser1 = books; }
+      });
+      tick(500);
+
+      service.searchBooks('Pro Angular', 2).subscribe({
+        next: (books) => { resultsUser2 = books; }
+      });
+      tick(500);
+
+      const user1Book = resultsUser1.find(b => b.name === 'Pro Angular');
+      const user2Book = resultsUser2.find(b => b.name === 'Pro Angular');
+
+      expect(user1Book!.inLibrary).toBe(true);
+      expect(user2Book!.inLibrary).toBe(false);
+    }));
+
+    it('should match partial book names', fakeAsync(() => {
+      let results: SearchResultBook[] = [];
+      service.searchBooks('Angul', 1).subscribe({
+        next: (books) => { results = books; }
+      });
+      tick(500);
+
+      expect(results.length).toBeGreaterThan(0);
+      expect(results.every(book =>
+        book.name.toLowerCase().includes('angul')
+      )).toBe(true);
+    }));
+
+    it('should complete the observable after emission', fakeAsync(() => {
+      let completed = false;
+      service.searchBooks('angular', 1).subscribe({
+        complete: () => { completed = true; }
+      });
+      tick(500);
+
+      expect(completed).toBe(true);
+    }));
   });
 });
 

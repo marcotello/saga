@@ -6,6 +6,7 @@ import { UserService } from './user-service';
 import { UserBook } from '../models/user-book';
 import { BookRecommendation } from '../models/book-recommendation';
 import { ReadingStatus } from '../models/reading-status';
+import { SearchResultBook } from '../models/search-result-book';
 import { of, throwError } from 'rxjs';
 
 describe('BooksService', () => {
@@ -83,7 +84,8 @@ describe('BooksService', () => {
     const booksHttpMockServiceSpy = jasmine.createSpyObj('BooksHttpMockService', [
       'getBooksByUserId',
       'getBookRecommendationsByUserId',
-      'updateBook'
+      'updateBook',
+      'searchBooks'
     ]);
 
     const bookStatusMockServiceSpy = jasmine.createSpyObj('BookStatusMockService', [
@@ -443,6 +445,144 @@ describe('BooksService', () => {
     it('should expose readonly signal for reading statuses', () => {
       expect(service.readingStatuses).toBeDefined();
       expect(typeof service.readingStatuses).toBe('function');
+    });
+  });
+
+  describe('searchBooks', () => {
+    const mockSearchResults: SearchResultBook[] = [
+      {
+        id: 1,
+        name: 'Pro Angular',
+        author: 'Adam Freeman',
+        coverImage: 'images/books/pro-angular.jpg',
+        description: 'A great book',
+        status: 'Reading',
+        shelves: [{ id: 1, name: 'Angular' }],
+        inLibrary: true,
+      },
+      {
+        id: 3,
+        name: 'Learning Angular',
+        author: 'Aristeidis Bampakos',
+        coverImage: 'images/books/learning-angular.jpg',
+        description: 'Another great book',
+        status: '',
+        shelves: [],
+        inLibrary: false,
+      }
+    ];
+
+    it('should call booksHttpMockService.searchBooks with correct arguments', () => {
+      booksHttpMockService.searchBooks.and.returnValue(of(mockSearchResults));
+
+      service.searchBooks('angular', 1);
+
+      expect(booksHttpMockService.searchBooks).toHaveBeenCalledWith('angular', 1);
+    });
+
+    it('should set isSearching to true when search starts', () => {
+      booksHttpMockService.searchBooks.and.returnValue(of(mockSearchResults));
+
+      expect(service.isSearching()).toBe(false);
+
+      service.searchBooks('angular', 1);
+
+      expect(service.isSearching()).toBe(false);
+    });
+
+    it('should set searchBooksResult signal on success', (done) => {
+      booksHttpMockService.searchBooks.and.returnValue(of(mockSearchResults));
+
+      service.searchBooks('angular', 1);
+
+      setTimeout(() => {
+        expect(service.searchBooksResult()).toEqual(mockSearchResults);
+        done();
+      });
+    });
+
+    it('should set isSearching to false after results arrive', (done) => {
+      booksHttpMockService.searchBooks.and.returnValue(of(mockSearchResults));
+
+      service.searchBooks('angular', 1);
+
+      setTimeout(() => {
+        expect(service.isSearching()).toBe(false);
+        done();
+      });
+    });
+
+    it('should clear previous results when starting a new search', () => {
+      booksHttpMockService.searchBooks.and.returnValue(of(mockSearchResults));
+
+      service.searchBooks('angular', 1);
+
+      booksHttpMockService.searchBooks.and.returnValue(of([]));
+      service.searchBooks('nonexistent', 1);
+
+      expect(service.searchBooksResult()).toEqual([]);
+    });
+
+    it('should handle empty results', (done) => {
+      booksHttpMockService.searchBooks.and.returnValue(of([]));
+
+      service.searchBooks('nonexistent', 1);
+
+      setTimeout(() => {
+        expect(service.searchBooksResult()).toEqual([]);
+        expect(service.isSearching()).toBe(false);
+        done();
+      });
+    });
+
+    it('should handle error gracefully', () => {
+      booksHttpMockService.searchBooks.and.returnValue(
+        throwError(() => new Error('Search failed'))
+      );
+
+      expect(() => service.searchBooks('angular', 1)).not.toThrow();
+    });
+
+    it('should set isSearching to false on error', (done) => {
+      booksHttpMockService.searchBooks.and.returnValue(
+        throwError(() => new Error('Search failed'))
+      );
+
+      service.searchBooks('angular', 1);
+
+      setTimeout(() => {
+        expect(service.isSearching()).toBe(false);
+        done();
+      });
+    });
+
+    it('should not update searchBooksResult on error', (done) => {
+      booksHttpMockService.searchBooks.and.returnValue(of(mockSearchResults));
+      service.searchBooks('angular', 1);
+
+      setTimeout(() => {
+        expect(service.searchBooksResult()).toEqual(mockSearchResults);
+
+        booksHttpMockService.searchBooks.and.returnValue(
+          throwError(() => new Error('Search failed'))
+        );
+        service.searchBooks('fail', 1);
+
+        setTimeout(() => {
+          expect(service.searchBooksResult()).toEqual([]);
+          done();
+        });
+      });
+    });
+
+    it('should expose readonly signal for search results', () => {
+      expect(service.searchBooksResult).toBeDefined();
+      expect(typeof service.searchBooksResult).toBe('function');
+    });
+
+    it('should expose readonly signal for isSearching', () => {
+      expect(service.isSearching).toBeDefined();
+      expect(typeof service.isSearching).toBe('function');
     });
   });
 });
