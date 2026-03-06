@@ -85,7 +85,8 @@ describe('BooksService', () => {
       'getBooksByUserId',
       'getBookRecommendationsByUserId',
       'updateBook',
-      'searchBooks'
+      'searchBooks',
+      'addBookToShelf'
     ]);
 
     const bookStatusMockServiceSpy = jasmine.createSpyObj('BookStatusMockService', [
@@ -96,7 +97,8 @@ describe('BooksService', () => {
       'setUserBooks',
       'setCurrentlyReadingUserBooks',
       'setRecommendedBooks',
-      'updateUserBook'
+      'updateUserBook',
+      'addUserBook'
     ]);
 
     TestBed.configureTestingModule({
@@ -583,6 +585,112 @@ describe('BooksService', () => {
     it('should expose readonly signal for isSearching', () => {
       expect(service.isSearching).toBeDefined();
       expect(typeof service.isSearching).toBe('function');
+    });
+  });
+
+  describe('addBookToShelf', () => {
+    const mockSearchResults: SearchResultBook[] = [
+      {
+        id: 3, name: 'Learning Angular', author: 'Aristeidis Bampakos',
+        coverImage: 'img2.jpg', description: 'Another great book',
+        status: '', shelves: [], inLibrary: false,
+      },
+      {
+        id: 1, name: 'Pro Angular', author: 'Adam Freeman',
+        coverImage: 'img1.jpg', description: 'A great book',
+        status: 'Reading', shelves: [{ id: 1, name: 'Angular' }], inLibrary: true,
+      }
+    ];
+
+    const mockReturnedUserBook: UserBook = {
+      id: 50, name: 'Learning Angular', author: 'Aristeidis Bampakos',
+      coverImage: 'img2.jpg', progressPercentage: 0,
+      createdAt: '2024-06-01', updatedAt: '2024-06-01',
+      userId: 1, genreId: 0, status: 'Want to Read',
+      shelves: [{ id: 5, name: 'JavaScript' }],
+    };
+
+    const bookToAdd = mockSearchResults[0];
+
+    it('should call booksHttpMockService.addBookToShelf with correct arguments', () => {
+      booksHttpMockService.addBookToShelf.and.returnValue(of(mockReturnedUserBook));
+
+      service.addBookToShelf(bookToAdd, 5, 'JavaScript', 1);
+
+      expect(booksHttpMockService.addBookToShelf).toHaveBeenCalledWith(bookToAdd, 5, 'JavaScript', 1);
+    });
+
+    it('should update searchBooksResult to mark book as inLibrary on success', (done) => {
+      booksHttpMockService.searchBooks.and.returnValue(of(mockSearchResults));
+      service.searchBooks('angular', 1);
+
+      setTimeout(() => {
+        booksHttpMockService.addBookToShelf.and.returnValue(of(mockReturnedUserBook));
+        service.addBookToShelf(bookToAdd, 5, 'JavaScript', 1);
+
+        setTimeout(() => {
+          const results = service.searchBooksResult();
+          const updated = results.find(r => r.id === bookToAdd.id);
+          expect(updated).toBeTruthy();
+          expect(updated!.inLibrary).toBe(true);
+          done();
+        });
+      });
+    });
+
+    it('should add new shelf to book shelves in search results on success', (done) => {
+      booksHttpMockService.searchBooks.and.returnValue(of(mockSearchResults));
+      service.searchBooks('angular', 1);
+
+      setTimeout(() => {
+        booksHttpMockService.addBookToShelf.and.returnValue(of(mockReturnedUserBook));
+        service.addBookToShelf(bookToAdd, 5, 'JavaScript', 1);
+
+        setTimeout(() => {
+          const results = service.searchBooksResult();
+          const updated = results.find(r => r.id === bookToAdd.id);
+          expect(updated!.shelves).toContain(jasmine.objectContaining({ id: 5, name: 'JavaScript' }));
+          done();
+        });
+      });
+    });
+
+    it('should call userService.addUserBook with the returned UserBook on success', (done) => {
+      booksHttpMockService.addBookToShelf.and.returnValue(of(mockReturnedUserBook));
+
+      service.addBookToShelf(bookToAdd, 5, 'JavaScript', 1);
+
+      setTimeout(() => {
+        expect(userService.addUserBook).toHaveBeenCalledWith(mockReturnedUserBook);
+        done();
+      });
+    });
+
+    it('should not update search results for other books', (done) => {
+      booksHttpMockService.searchBooks.and.returnValue(of(mockSearchResults));
+      service.searchBooks('angular', 1);
+
+      setTimeout(() => {
+        booksHttpMockService.addBookToShelf.and.returnValue(of(mockReturnedUserBook));
+        service.addBookToShelf(bookToAdd, 5, 'JavaScript', 1);
+
+        setTimeout(() => {
+          const results = service.searchBooksResult();
+          const unchanged = results.find(r => r.id === 1);
+          expect(unchanged!.inLibrary).toBe(true);
+          expect(unchanged!.shelves).toEqual([{ id: 1, name: 'Angular' }]);
+          done();
+        });
+      });
+    });
+
+    it('should handle error gracefully', () => {
+      booksHttpMockService.addBookToShelf.and.returnValue(
+        throwError(() => new Error('Failed to add book'))
+      );
+
+      expect(() => service.addBookToShelf(bookToAdd, 5, 'JavaScript', 1)).not.toThrow();
+      expect(userService.addUserBook).not.toHaveBeenCalled();
     });
   });
 });

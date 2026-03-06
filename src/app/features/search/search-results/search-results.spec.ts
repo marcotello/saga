@@ -4,14 +4,17 @@ import { Subject } from 'rxjs';
 import { signal } from '@angular/core';
 import { SearchResults } from './search-results';
 import { BooksService } from '../../../core/services/books-service';
+import { BookshelfService } from '../../../core/services/bookshelf-service';
 import { UserService } from '../../../core/services/user-service';
 import { SearchResultBook } from '../../../core/models/search-result-book';
+import { Bookshelf } from '../../../core/models/bookshelf';
 import { User } from '../../../core/models/user';
 
 describe('SearchResults', () => {
   let component: SearchResults;
   let fixture: ComponentFixture<SearchResults>;
   let mockBooksService: jasmine.SpyObj<BooksService>;
+  let mockBookshelfService: jasmine.SpyObj<BookshelfService>;
   let queryParamsSubject: Subject<Record<string, string>>;
 
   const mockUser: User = {
@@ -66,26 +69,32 @@ describe('SearchResults', () => {
   const searchBooksResultSignal = signal<SearchResultBook[]>([]);
   const isSearchingSignal = signal(false);
   const userSignal = signal<User | null>(mockUser);
+  const userBookshelvesSignal = signal<Bookshelf[] | null>(null);
 
   beforeEach(async () => {
     queryParamsSubject = new Subject<Record<string, string>>();
     searchBooksResultSignal.set([]);
     isSearchingSignal.set(false);
     userSignal.set(mockUser);
+    userBookshelvesSignal.set(null);
 
-    mockBooksService = jasmine.createSpyObj('BooksService', ['searchBooks'], {
+    mockBooksService = jasmine.createSpyObj('BooksService', ['searchBooks', 'addBookToShelf'], {
       searchBooksResult: searchBooksResultSignal,
       isSearching: isSearchingSignal,
     });
 
+    mockBookshelfService = jasmine.createSpyObj('BookshelfService', ['getBookshelvesByUserId']);
+
     const mockUserService = jasmine.createSpyObj('UserService', [], {
       user: userSignal,
+      userBookshelves: userBookshelvesSignal,
     });
 
     await TestBed.configureTestingModule({
       imports: [SearchResults],
       providers: [
         { provide: BooksService, useValue: mockBooksService },
+        { provide: BookshelfService, useValue: mockBookshelfService },
         { provide: UserService, useValue: mockUserService },
         { provide: ActivatedRoute, useValue: { queryParams: queryParamsSubject.asObservable() } },
       ]
@@ -353,6 +362,51 @@ describe('SearchResults', () => {
 
       const paginationInfo = fixture.nativeElement.querySelector('.pagination-info');
       expect(paginationInfo.textContent).toContain('Showing 1 to 5 of 7 results');
+    });
+  });
+
+  describe('add to shelf dialog', () => {
+    const notInLibraryBook = mockSearchResults[1];
+
+    it('should fetch bookshelves when dialog opens', () => {
+      component.openAddToShelfDialog(notInLibraryBook);
+
+      expect(mockBookshelfService.getBookshelvesByUserId).toHaveBeenCalledWith(1);
+    });
+
+    it('should not fetch bookshelves when user is null', () => {
+      userSignal.set(null);
+      component.openAddToShelfDialog(notInLibraryBook);
+
+      expect(mockBookshelfService.getBookshelvesByUserId).not.toHaveBeenCalled();
+    });
+
+    it('should render add-to-shelf component in template', () => {
+      fixture.detectChanges();
+
+      const addToShelf = fixture.nativeElement.querySelector('app-add-to-shelf');
+      expect(addToShelf).toBeTruthy();
+    });
+
+    it('should open dialog when "Add to Shelf" button is clicked', () => {
+      const notInLibrary = mockSearchResults.filter(b => !b.inLibrary);
+      searchBooksResultSignal.set(notInLibrary.slice(0, 1));
+      fixture.detectChanges();
+
+      const btn = fixture.nativeElement.querySelector('.btn-add-to-shelf');
+      expect(btn).toBeTruthy();
+      btn.click();
+      fixture.detectChanges();
+
+      expect(mockBookshelfService.getBookshelvesByUserId).toHaveBeenCalled();
+    });
+
+    it('should close dialog state when onAddToShelfDialogRequestClose is called', () => {
+      component.openAddToShelfDialog(notInLibraryBook);
+      component.onAddToShelfDialogRequestClose();
+      fixture.detectChanges();
+
+      expect(mockBookshelfService.getBookshelvesByUserId).toHaveBeenCalledTimes(1);
     });
   });
 });

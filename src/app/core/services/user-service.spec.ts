@@ -180,6 +180,46 @@ describe('UserService', () => {
     });
   });
 
+  describe('addUserBook', () => {
+    const newBook: UserBook = {
+      id: 99,
+      userId: 1,
+      name: 'New Book',
+      author: 'New Author',
+      coverImage: 'new.jpg',
+      status: 'Want to Read',
+      progressPercentage: 0,
+      genreId: 0,
+      shelves: [{ id: 5, name: 'New Shelf' }],
+      createdAt: '2024-06-01',
+      updatedAt: '2024-06-01'
+    };
+
+    it('should append book to existing userBooks', () => {
+      service.setUserBooks(mockUserBooks);
+      service.addUserBook(newBook);
+
+      const books = service.userBooks();
+      expect(books?.length).toBe(mockUserBooks.length + 1);
+      expect(books?.[books.length - 1]).toEqual(newBook);
+    });
+
+    it('should create a new array with book when userBooks is null', () => {
+      service.setUserBooks(null);
+      service.addUserBook(newBook);
+
+      expect(service.userBooks()).toEqual([newBook]);
+    });
+
+    it('should not modify existing books in the list', () => {
+      service.setUserBooks(mockUserBooks);
+      service.addUserBook(newBook);
+
+      const books = service.userBooks()!;
+      expect(books[0]).toEqual(mockUserBooks[0]);
+    });
+  });
+
   describe('updateUserBook', () => {
     it('should update book in userBooks signal', () => {
       service.setUserBooks(mockUserBooks);

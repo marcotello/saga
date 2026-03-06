@@ -239,6 +239,128 @@ describe('BooksHttpMockService', () => {
     });
   });
 
+  describe('addBookToShelf', () => {
+    const mockSearchBook: SearchResultBook = {
+      id: 99,
+      name: 'Learning Python',
+      author: 'Mark Lutz',
+      coverImage: 'images/books/learning-python.jpg',
+      description: 'A great Python book',
+      status: '',
+      shelves: [],
+      inLibrary: false,
+    };
+
+    it('should create a new UserBook when book is not in library', fakeAsync(() => {
+      let result: UserBook | undefined;
+      service.addBookToShelf(mockSearchBook, 10, 'Python', 1).subscribe({
+        next: (book) => { result = book; }
+      });
+      tick(300);
+
+      expect(result).toBeTruthy();
+      expect(result!.name).toBe('Learning Python');
+      expect(result!.author).toBe('Mark Lutz');
+      expect(result!.status).toBe('Want to Read');
+      expect(result!.progressPercentage).toBe(0);
+      expect(result!.shelves).toEqual([{ id: 10, name: 'Python' }]);
+      expect(result!.userId).toBe(1);
+    }));
+
+    it('should assign a new unique id to the created book', fakeAsync(() => {
+      let result: UserBook | undefined;
+      service.addBookToShelf(mockSearchBook, 10, 'Python', 1).subscribe({
+        next: (book) => { result = book; }
+      });
+      tick(300);
+
+      expect(result!.id).toBeGreaterThan(0);
+    }));
+
+    it('should persist the new book so it appears in getBooksByUserId', fakeAsync(() => {
+      service.addBookToShelf(mockSearchBook, 10, 'Python', 1).subscribe();
+      tick(300);
+
+      let books: UserBook[] = [];
+      service.getBooksByUserId(1).subscribe({
+        next: (b) => { books = b; }
+      });
+
+      const added = books.find(b => b.name === 'Learning Python');
+      expect(added).toBeTruthy();
+      expect(added!.shelves).toEqual([{ id: 10, name: 'Python' }]);
+    }));
+
+    it('should add shelf to existing book when book is already in library', fakeAsync(() => {
+      let existingBooks: UserBook[] = [];
+      service.getBooksByUserId(1).subscribe({
+        next: (b) => { existingBooks = b; }
+      });
+
+      const existingBook = existingBooks[0];
+      const searchBook: SearchResultBook = {
+        id: existingBook.id,
+        name: existingBook.name,
+        author: existingBook.author,
+        coverImage: existingBook.coverImage,
+        description: '',
+        status: existingBook.status,
+        shelves: existingBook.shelves,
+        inLibrary: true,
+      };
+      const originalShelvesCount = existingBook.shelves.length;
+
+      let result: UserBook | undefined;
+      service.addBookToShelf(searchBook, 999, 'New Shelf', 1).subscribe({
+        next: (book) => { result = book; }
+      });
+      tick(300);
+
+      expect(result).toBeTruthy();
+      expect(result!.shelves.length).toBe(originalShelvesCount + 1);
+      expect(result!.shelves.some(s => s.id === 999 && s.name === 'New Shelf')).toBe(true);
+    }));
+
+    it('should not duplicate shelf when adding same shelf to existing book', fakeAsync(() => {
+      let existingBooks: UserBook[] = [];
+      service.getBooksByUserId(1).subscribe({
+        next: (b) => { existingBooks = b; }
+      });
+
+      const existingBook = existingBooks[0];
+      const existingShelf = existingBook.shelves[0];
+      const searchBook: SearchResultBook = {
+        id: existingBook.id,
+        name: existingBook.name,
+        author: existingBook.author,
+        coverImage: existingBook.coverImage,
+        description: '',
+        status: existingBook.status,
+        shelves: existingBook.shelves,
+        inLibrary: true,
+      };
+      const originalShelvesCount = existingBook.shelves.length;
+
+      let result: UserBook | undefined;
+      service.addBookToShelf(searchBook, existingShelf.id, existingShelf.name, 1).subscribe({
+        next: (book) => { result = book; }
+      });
+      tick(300);
+
+      expect(result!.shelves.length).toBe(originalShelvesCount);
+    }));
+
+    it('should complete the observable after emission', fakeAsync(() => {
+      let completed = false;
+      service.addBookToShelf(mockSearchBook, 10, 'Python', 1).subscribe({
+        complete: () => { completed = true; }
+      });
+      tick(300);
+
+      expect(completed).toBe(true);
+    }));
+  });
+
   describe('searchBooks', () => {
     it('should return results matching the query (case-insensitive)', fakeAsync(() => {
       let results: SearchResultBook[] = [];
