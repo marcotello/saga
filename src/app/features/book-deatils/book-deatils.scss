@@ -58,7 +58,7 @@
   }
 
   &__value {
-    font-size: 0.95rem;
+    font-size: 0.8rem;
     font-weight: 500;
     color: var(--pico-color);
 
@@ -70,6 +70,8 @@
 }
 
 .book-status {
+  margin-top: 25px;
+
   &__label {
     display: block;
     font-size: 0.7rem;
@@ -217,7 +219,7 @@
 
 // ── Progress card ──
 
-.book-details-card {
+.progress-card {
   padding: 1.5rem;
   margin-top: auto;
 
