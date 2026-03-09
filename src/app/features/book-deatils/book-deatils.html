@@ -1,0 +1,83 @@
+<div class="book-details">
+  <div class="book-details__left">
+    <div class="book-cover-wrapper">
+      <img src="https://placehold.co/280x400" alt="Project Hail Mary cover" class="book-cover-image" />
+    </div>
+
+    <article class="book-details-card">
+      <div class="book-dates">
+        <div class="book-dates__item">
+          <span class="book-dates__label">Date Added</span>
+          <span class="book-dates__value">Oct 12, 2023</span>
+        </div>
+        <div class="book-dates__item">
+          <span class="book-dates__label">Date Read</span>
+          <span class="book-dates__value book-dates__value--italic">In Progress</span>
+        </div>
+      </div>
+
+      <div class="book-status">
+        <label for="readingStatus" class="book-status__label">Reading Status</label>
+        <select id="readingStatus">
+          <option value="">Select a status…</option>
+          <option value="want-to-read">Want to Read</option>
+          <option value="reading" selected>Currently Reading</option>
+          <option value="finished">Finished</option>
+          <option value="save-it-for-later">Save It For Later</option>
+        </select>
+      </div>
+
+      <div class="book-shelves">
+        <span class="book-shelves__label">Bookshelves</span>
+        <div class="book-shelves__chips">
+          <span class="shelf-badge shelf-badge-blue">Sci-fi</span>
+          <span class="shelf-badge shelf-badge-purple">Technology</span>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div class="book-details__right">
+    <div class="book-meta">
+      <span class="book-meta__category">SCI-FI</span>
+      <span class="book-meta__separator">&bull;</span>
+      <span class="book-meta__pages">480 Pages</span>
+    </div>
+
+    <h1 class="book-title">Project Hail Mary</h1>
+    <p class="book-author">by <a href="#">Andy Weir</a></p>
+
+    <h2 class="book-about-heading">About the book</h2>
+
+    <div class="book-description">
+      <p>
+        Ryland Grace is the sole survivor on a desperate, last-chance mission—and if he
+        fails, humanity and the earth itself will perish. Except that right now, he doesn't
+        know that. He can't even remember his own name, let alone the nature of his
+        assignment or how to complete it.
+      </p>
+      <p>
+        All he knows is that he's been asleep for a very, very long time. And he's just been
+        awakened to find himself millions of miles from home, with nothing but two corpses
+        for company.
+      </p>
+      <p>
+        With the hazard of humanity's extinction looming, Grace must use his scientific
+        knowledge and survival skills to solve an impossible puzzle. But he might not have
+        to do it alone…
+      </p>
+    </div>
+
+    <article class="book-details-card">
+      <h3 class="progress-card__title">Your Progress</h3>
+      <progress value="65" max="100" class="progress-card__bar"></progress>
+      <div class="progress-card__info">
+        <span class="progress-card__percentage">65% Completed</span>
+        <span class="progress-card__pages">Page 312 of 480</span>
+      </div>
+      <button type="button" class="update-progress-btn">
+        Update Progress
+      </button>
+    </article>
+  </div>
+</div>
