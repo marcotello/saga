@@ -44,7 +44,7 @@ export const routes: Routes = [
                 loadComponent: () => import('./features/search/search-results/search-results').then(m => m.SearchResults)
             },
             {
-                path: 'book-details',
+                path: 'book-details/:id',
                 loadComponent: () => import('./features/book-deatils/book-deatils').then(m => m.BookDeatils)
             },
         ]

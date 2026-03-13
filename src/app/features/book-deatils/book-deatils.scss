@@ -1,3 +1,31 @@
+.book-details-page {
+  position: relative;
+  min-height: 400px;
+}
+
+.book-not-found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 2rem;
+
+  &__card {
+    text-align: center;
+    max-width: 480px;
+    padding: 3rem;
+
+    h2 {
+      margin-bottom: 0.75rem;
+      color: var(--pico-color);
+    }
+
+    p {
+      color: var(--pico-muted-color);
+      margin-bottom: 0;
+    }
+  }
+}
+
 .book-details {
   display: grid;
   grid-template-columns: 320px 1fr;

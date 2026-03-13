@@ -3,6 +3,7 @@ import { Observable, of, throwError, delay } from 'rxjs';
 import { UserBook } from '../../models/user-book';
 import { BookRecommendation } from '../../models/book-recommendation';
 import { SearchResultBook } from '../../models/search-result-book';
+import { BookDetail } from '../../models/book-detail';
 import userBooks from '../mocks-data/user-books.json';
 import bookSuggestions from '../mocks-data/book-suggestions.json';
 import booksData from '../mocks-data/books.json';
@@ -13,6 +14,7 @@ interface BookCatalogEntry {
     author: string;
     coverImage: string;
     description: string;
+    pages: number;
 }
 
 @Injectable({
@@ -110,6 +112,34 @@ export class BooksHttpMockService {
 
         this.books.push(newUserBook);
         return of(newUserBook).pipe(delay(300));
+    }
+
+    getBookDetails(bookId: number, userId: number): Observable<BookDetail | null> {
+        const catalogEntry = this.bookCatalog.find(b => b.id === bookId);
+        if (!catalogEntry) {
+            return of(null).pipe(delay(300));
+        }
+
+        const userBook = this.books.find(
+            ub => ub.name === catalogEntry.name && ub.userId === userId
+        );
+
+        const bookDetail: BookDetail = {
+            id: catalogEntry.id,
+            name: catalogEntry.name,
+            author: catalogEntry.author,
+            coverImage: catalogEntry.coverImage,
+            description: catalogEntry.description,
+            pages: catalogEntry.pages,
+            progressPercentage: userBook?.progressPercentage ?? 0,
+            createdAt: userBook?.createdAt ?? '',
+            updatedAt: userBook?.updatedAt ?? '',
+            status: userBook?.status ?? '',
+            shelves: userBook?.shelves ?? [],
+            inLibrary: !!userBook,
+        };
+
+        return of(bookDetail).pipe(delay(500));
     }
 
 }

@@ -24,7 +24,7 @@
                             <img [src]="book.coverImage" [alt]="book.name + ' cover'" class="book-cover" />
                         </td>
                         <td class="title-cell">
-                            <a href="#" class="book-title">{{ book.name }}</a>
+                            <a [routerLink]="['/book-details', book.id]" class="book-title">{{ book.name }}</a>
                         </td>
                         <td class="author-cell">{{ book.author }}</td>
                         <td class="shelves-cell">
