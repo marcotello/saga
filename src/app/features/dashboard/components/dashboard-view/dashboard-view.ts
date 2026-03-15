@@ -9,10 +9,11 @@ import { UpdateProgress } from '../../../../shared/update-progress/update-progre
 import { MyBookshelves } from '../my-bookshelves/my-bookshelves';
 import { BookSuggestions } from '../book-suggestions/book-suggestions';
 import { Statistics } from '../statistics/statistics';
+import { AddBookshelf } from '../../../../shared/add-bookshelf/add-bookshelf';
 
 @Component({
   selector: 'app-dashboard-view',
-  imports: [TrackProgress, UpdateProgress, MyBookshelves, BookSuggestions, Statistics],
+  imports: [TrackProgress, UpdateProgress, MyBookshelves, BookSuggestions, Statistics, AddBookshelf],
   templateUrl: './dashboard-view.html',
   styleUrl: './dashboard-view.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,6 +32,7 @@ export class DashboardView {
 
   protected readonly isUpdateProgressOpen = signal<boolean>(false);
   protected readonly selectedBook = signal<UserBook | null>(null);
+  protected readonly isAddShelfDialogOpen = signal<boolean>(false);
 
   constructor() {
     this.booksService.getBooksByStatusUserId(this.userId, 'Reading');
@@ -71,8 +73,11 @@ export class DashboardView {
   }
 
   onAddShelf(): void {
-    // Add shelf logic will be added later
-    console.log('Add shelf clicked');
+    this.isAddShelfDialogOpen.set(true);
+  }
+
+  onAddShelfDialogClose(): void {
+    this.isAddShelfDialogOpen.set(false);
   }
 
   onBookSuggestionClick(book: BookRecommendation): void {

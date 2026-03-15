@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject, input, InputSignal, output, OutputEmitterRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { BookshelfService } from '../../../core/services/bookshelf-service';
-import { UserService } from '../../../core/services/user-service';
-import { Dialog } from '../../../shared/dialog/dialog';
+import { BookshelfService } from '../../core/services/bookshelf-service';
+import { UserService } from '../../core/services/user-service';
+import { Dialog } from '../dialog/dialog';
 
 @Component({
     selector: 'app-add-bookshelf',
