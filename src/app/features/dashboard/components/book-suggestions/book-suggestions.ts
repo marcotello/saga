@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { BookRecommendation } from '../../../../core/models/book-recommendation';
 
 export interface BookSuggestion {
@@ -11,6 +12,7 @@ export interface BookSuggestion {
   selector: 'app-book-suggestions',
   templateUrl: './book-suggestions.html',
   styleUrl: './book-suggestions.scss',
+  imports: [RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookSuggestions {

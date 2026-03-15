@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { UserBook } from '../../../../core/models/user-book';
 
 @Component({
   selector: 'app-track-progress',
-  imports: [CommonModule, NgOptimizedImage],
+  imports: [CommonModule, NgOptimizedImage, RouterLink],
   templateUrl: './track-progress.html',
   styleUrl: './track-progress.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

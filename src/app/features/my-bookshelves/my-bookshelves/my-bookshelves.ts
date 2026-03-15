@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, signal, computed, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { UserBook } from '../../../core/models/user-book';
 import { Bookshelf } from '../../../core/models/bookshelf';
 import { BookStatusDirective } from '../../../core/directives/book-status.directive';
@@ -12,7 +13,7 @@ import { DeleteRecord } from "../../../shared/delete-record/delete-record";
 
 @Component({
   selector: 'app-my-bookshelves',
-  imports: [CommonModule, BookStatusDirective, AddBookshelf, UpdateBookshelf, DeleteRecord],
+  imports: [CommonModule, RouterLink, BookStatusDirective, AddBookshelf, UpdateBookshelf, DeleteRecord],
 
   templateUrl: './my-bookshelves.html',
   styleUrl: './my-bookshelves.scss',

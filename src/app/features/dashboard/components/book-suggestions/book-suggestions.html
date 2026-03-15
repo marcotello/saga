@@ -3,7 +3,7 @@
 
   <div class="books-grid">
     @for (book of bookSuggestions(); track book.id) {
-    <article class="book-card" (click)="onBookClick(book)">
+    <article class="book-card" [routerLink]="['/book-details', book.id]">
       <div class="book-image">
         <img [src]="book.coverImage" [alt]="book.name" />
       </div>

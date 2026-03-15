@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
-import { DebugElement, reflectComponentType, ChangeDetectionStrategy } from '@angular/core';
 import { UpdateProgress } from './update-progress';
 import { UserBook } from '../../core/models/user-book';
 
