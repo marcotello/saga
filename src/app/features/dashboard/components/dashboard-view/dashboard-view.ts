@@ -5,7 +5,7 @@ import { TrackProgress } from '../track-progress/track-progress';
 import { BooksService } from '../../../../core/services/books-service';
 import { BookshelfService } from '../../../../core/services/bookshelf-service';
 import { UserService } from '../../../../core/services/user-service';
-import { UpdateProgress } from '../update-progress/update-progress';
+import { UpdateProgress } from '../../../../shared/update-progress/update-progress';
 import { MyBookshelves } from '../my-bookshelves/my-bookshelves';
 import { BookSuggestions } from '../book-suggestions/book-suggestions';
 import { Statistics } from '../statistics/statistics';

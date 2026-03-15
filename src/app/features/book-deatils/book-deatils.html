@@ -89,10 +89,18 @@
                     <span class="progress-card__percentage">{{ book.progressPercentage }}% Completed</span>
                     <span class="progress-card__pages">Page {{ currentPage() }} of {{ book.pages }}</span>
                 </div>
-                <button type="button" class="update-progress-btn">
+                <button type="button" class="update-progress-btn" (click)="onUpdateProgress()">
                     Update Progress
                 </button>
             </article>
+
+            @if (bookAsUserBook(); as userBook) {
+            <app-update-progress
+                [book]="userBook"
+                [isOpen]="isUpdateProgressOpen()"
+                (saveProgress)="onSaveProgress($event)"
+                (cancelUpdate)="onCancelProgress()" />
+            }
             }
         </div>
     </div>

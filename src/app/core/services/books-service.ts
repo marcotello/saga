@@ -94,6 +94,16 @@ export class BooksService {
         this.booksServiceHttpMock.updateBook(updatedBook).subscribe({
             next: (book) => {
                 this.userService.updateUserBook(book);
+
+                const currentDetail = this._bookDetail();
+                if (currentDetail && currentDetail.id === book.id) {
+                    this._bookDetail.set({
+                        ...currentDetail,
+                        progressPercentage: book.progressPercentage,
+                        status: book.status,
+                        updatedAt: book.updatedAt,
+                    });
+                }
             },
             error: () => {
                 // Error handling
