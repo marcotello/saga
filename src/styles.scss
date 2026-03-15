@@ -302,3 +302,11 @@ svg.ngx-charts g.line-series circle {
     }
   }
 }
+
+a {
+  --pico-text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}

@@ -7,7 +7,7 @@ import { BookStatusDirective } from '../../../core/directives/book-status.direct
 import { BookshelfService } from '../../../core/services/bookshelf-service';
 import { BooksService } from '../../../core/services/books-service';
 import { UserService } from '../../../core/services/user-service';
-import { AddBookshelf } from "../add-book/add-bookshelf";
+import { AddBookshelf } from "../add-bookshelf/add-bookshelf";
 import { UpdateBookshelf } from "../update-bookshelf/update-bookshelf";
 import { DeleteRecord } from "../../../shared/delete-record/delete-record";
 
