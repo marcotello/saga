@@ -159,6 +159,18 @@ export class BooksService {
                             : r
                         )
                     );
+
+                    const currentDetail = this._bookDetail();
+                    if (currentDetail && currentDetail.id === book.id) {
+                        this._bookDetail.set({
+                            ...currentDetail,
+                            inLibrary: true,
+                            shelves: [...currentDetail.shelves, { id: bookshelfId, name: bookshelfName }],
+                            createdAt: userBook.createdAt ?? new Date().toISOString(),
+                            status: userBook.status ?? currentDetail.status,
+                        });
+                    }
+
                     this.userService.addUserBook(userBook);
                 },
                 error: () => {

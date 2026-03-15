@@ -1,91 +1,100 @@
-<div class="book-details-page"
-    withLoadingState
-    [isLoading]="isLoading()"
-    loadingMessage="Loading book details…"
->
+<div class="book-details-page" withLoadingState [isLoading]="isLoading()" loadingMessage="Loading book details…">
     @if (notFound()) {
-        <div class="book-not-found">
-            <article class="book-not-found__card">
-                <h2>Book Not Found</h2>
-                <p>The book you are looking for does not exist or may have been removed.</p>
-            </article>
-        </div>
+    <div class="book-not-found">
+        <article class="book-not-found__card">
+            <h2>Book Not Found</h2>
+            <p>The book you are looking for does not exist or may have been removed.</p>
+        </article>
+    </div>
     }
 
     @if (book(); as book) {
-        <div class="book-details">
-            <div class="book-details__left">
-                <div class="book-cover-wrapper">
-                    <img [src]="book.coverImage" [alt]="book.name + ' cover'" class="book-cover-image" />
-                </div>
-
-                <article class="book-details-card">
-                    @if (book.inLibrary) {
-                        <div class="book-dates">
-                            <div class="book-dates__item">
-                                <span class="book-dates__label">Date Added</span>
-                                <span class="book-dates__value">{{ book.createdAt | date:'mediumDate' }}</span>
-                            </div>
-                            <div class="book-dates__item">
-                                <span class="book-dates__label">Date Read</span>
-                                @if (dateReadDisplay() === 'In Progress') {
-                                    <span class="book-dates__value book-dates__value--italic">In Progress</span>
-                                } @else {
-                                    <span class="book-dates__value">{{ dateReadDisplay() | date:'mediumDate' }}</span>
-                                }
-                            </div>
-                        </div>
-
-                        <div class="book-status">
-                            <label for="readingStatus" class="book-status__label">Reading Status</label>
-                            <select id="readingStatus" [value]="book.status">
-                                <option value="">Select a status…</option>
-                                <option value="Want to Read">Want to Read</option>
-                                <option value="Reading">Currently Reading</option>
-                                <option value="Finished">Finished</option>
-                                <option value="Save It For Later">Save It For Later</option>
-                            </select>
-                        </div>
-
-                        <div class="book-shelves">
-                            <span class="book-shelves__label">Bookshelves</span>
-                            <div class="book-shelves__chips">
-                                @for (shelf of book.shelves; track shelf.id) {
-                                    <span class="shelf-badge shelf-badge-blue">{{ shelf.name }}</span>
-                                }
-                            </div>
-                        </div>
-                    }
-                </article>
+    <div class="book-details">
+        <div class="book-details__left">
+            <div class="book-cover-wrapper">
+                <img [src]="book.coverImage" [alt]="book.name + ' cover'" class="book-cover-image" />
             </div>
 
-            <div class="book-details__right">
-                <div class="book-meta">
-                    <span class="book-meta__pages">{{ book.pages }} Pages</span>
-                </div>
-                <h1 class="book-title">{{ book.name }}</h1>
-                <p class="book-author">by <a href="#">{{ book.author }}</a></p>
-
-                <h2 class="book-about-heading">About the book</h2>
-
-                <div class="book-description">
-                    <p>{{ book.description }}</p>
-                </div>
-
+            <article class="book-details-card">
                 @if (book.inLibrary) {
-                    <article class="progress-card">
-                        <h3 class="progress-card__title">Your Progress</h3>
-                        <progress [value]="book.progressPercentage" max="100" class="progress-card__bar"></progress>
-                        <div class="progress-card__info">
-                            <span class="progress-card__percentage">{{ book.progressPercentage }}% Completed</span>
-                            <span class="progress-card__pages">Page {{ currentPage() }} of {{ book.pages }}</span>
-                        </div>
-                        <button type="button" class="update-progress-btn">
-                            Update Progress
-                        </button>
-                    </article>
+                <div class="book-dates">
+                    <div class="book-dates__item">
+                        <span class="book-dates__label">Date Added</span>
+                        <span class="book-dates__value">{{ book.createdAt | date:'mediumDate' }}</span>
+                    </div>
+                    <div class="book-dates__item">
+                        <span class="book-dates__label">Date Read</span>
+                        @if (dateReadDisplay() === 'In Progress') {
+                        <span class="book-dates__value book-dates__value--italic">In Progress</span>
+                        } @else {
+                        <span class="book-dates__value">{{ dateReadDisplay() | date:'mediumDate' }}</span>
+                        }
+                    </div>
+                </div>
+
+                <div class="book-status">
+                    <label for="readingStatus" class="book-status__label">Reading Status</label>
+                    <select id="readingStatus" [value]="book.status">
+                        <option value="">Select a status…</option>
+                        <option value="Want to Read">Want to Read</option>
+                        <option value="Reading">Currently Reading</option>
+                        <option value="Finished">Finished</option>
+                        <option value="Save It For Later">Save It For Later</option>
+                    </select>
+                </div>
+
+                <div class="book-shelves">
+                    <span class="book-shelves__label">Bookshelves</span>
+                    <div class="book-shelves__chips">
+                        @for (shelf of book.shelves; track shelf.id) {
+                        <span class="shelf-badge shelf-badge-blue">{{ shelf.name }}</span>
+                        }
+                    </div>
+                </div>
+                } @else {
+                <div class="add-to-shelf-section">
+                    <h3 class="add-to-shelf-section__title">Add to Bookshelf</h3>
+                    <p class="add-to-shelf-section__description">This book is not in your library yet. Select a bookshelf to add it.</p>
+                    <label for="bookshelfSelect" class="add-to-shelf-section__label">Bookshelf</label>
+                    <select id="bookshelfSelect" (change)="onShelfChange($event)" required>
+                        <option value="">Choose a bookshelf…</option>
+                        @for (shelf of bookshelves(); track shelf.id) {
+                        <option [value]="shelf.id">{{ shelf.name }}</option>
+                        }
+                    </select>
+                </div>
                 }
-            </div>
+            </article>
         </div>
+
+        <div class="book-details__right">
+            <h1 class="book-title">{{ book.name }}</h1>
+            <p class="book-author">by <a href="#">{{ book.author }}</a></p>
+
+            <h2 class="book-about-heading">About the book</h2>
+
+            <div class="book-description">
+                <p>{{ book.description }}</p>
+            </div>
+
+            <div class="book-meta">
+                <span class="book-meta__pages">{{ book.pages }} Pages</span>
+            </div>
+
+            @if (book.inLibrary) {
+            <article class="progress-card">
+                <h3 class="progress-card__title">Your Progress</h3>
+                <progress [value]="book.progressPercentage" max="100" class="progress-card__bar"></progress>
+                <div class="progress-card__info">
+                    <span class="progress-card__percentage">{{ book.progressPercentage }}% Completed</span>
+                    <span class="progress-card__pages">Page {{ currentPage() }} of {{ book.pages }}</span>
+                </div>
+                <button type="button" class="update-progress-btn">
+                    Update Progress
+                </button>
+            </article>
+            }
+        </div>
+    </div>
     }
 </div>

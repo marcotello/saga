@@ -134,6 +134,37 @@
   }
 }
 
+.add-to-shelf-section {
+  &__title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    color: var(--pico-color);
+  }
+
+  &__description {
+    font-size: 0.85rem;
+    color: var(--pico-muted-color);
+    margin: 0 0 1rem;
+    line-height: 1.5;
+  }
+
+  &__label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--pico-muted-color);
+    margin-bottom: 0.5rem;
+  }
+
+  select {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
 .shelf-badge {
   display: inline-block;
   padding: 0.25rem 0.75rem;

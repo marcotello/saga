@@ -3,6 +3,7 @@ import { BooksService } from '../../core/services/books-service';
 import { UserService } from '../../core/services/user-service';
 import { WithLoadingState } from '../../core/directives/with-loading-state';
 import { DatePipe } from '@angular/common';
+import { SearchResultBook } from '../../core/models/search-result-book';
 
 @Component({
   selector: 'app-book-deatils',
@@ -20,6 +21,8 @@ export class BookDeatils {
   readonly book = this.booksService.bookDetail;
   readonly isLoading = this.booksService.isLoadingBookDetail;
   readonly notFound = this.booksService.bookDetailNotFound;
+
+  readonly bookshelves = computed(() => this.userService.userBookshelves() ?? []);
 
   readonly currentPage = computed(() => {
     const detail = this.book();
@@ -43,5 +46,31 @@ export class BookDeatils {
         this.booksService.getBookDetails(bookId, userId);
       }
     });
+  }
+
+  onShelfChange(event: Event): void {
+    const value = (event.target as HTMLSelectElement).value;
+    if (!value) return;
+
+    const shelfId = +value;
+    const currentBook = this.book();
+    if (!currentBook) return;
+
+    const shelf = this.bookshelves().find(s => s.id === shelfId);
+    if (!shelf) return;
+
+    const searchResultBook: SearchResultBook = {
+      id: currentBook.id,
+      name: currentBook.name,
+      author: currentBook.author,
+      coverImage: currentBook.coverImage,
+      description: currentBook.description,
+      status: currentBook.status,
+      shelves: currentBook.shelves,
+      inLibrary: currentBook.inLibrary,
+    };
+
+    const userId = this.userService.user()?.id ?? 0;
+    this.booksService.addBookToShelf(searchResultBook, shelf.id, shelf.name, userId);
   }
 }

@@ -1,8 +1,5 @@
-<div class="search-results-page"
-    withLoadingState
-    [isLoading]="booksService.isSearching()"
-    loadingMessage="Searching books…"
->
+<div class="search-results-page" withLoadingState [isLoading]="booksService.isSearching()"
+    loadingMessage="Searching books…">
     <div class="container">
         <h1>Search Results</h1>
 
@@ -41,7 +38,8 @@
                             @if (book.inLibrary) {
                             <button class="btn-in-library" type="button">In Library</button>
                             } @else {
-                            <button class="btn-add-to-shelf" type="button" (click)="openAddToShelfDialog(book)">Add to Shelf</button>
+                            <button class="btn-add-to-shelf" type="button" (click)="openAddToShelfDialog(book)">Add to a
+                                Bookshelf</button>
                             }
                         </td>
                     </tr>
@@ -59,7 +57,8 @@
         @if (totalPages() > 0) {
         <div class="pagination">
             <span class="pagination-info">
-                Showing {{ paginationInfo().start }} to {{ paginationInfo().end }} of {{ paginationInfo().total }} results
+                Showing {{ paginationInfo().start }} to {{ paginationInfo().end }} of {{ paginationInfo().total }}
+                results
             </span>
             <div class="pagination-controls">
                 <button class="pagination-btn" [disabled]="currentPage() === 1" (click)="previousPage()"
@@ -81,9 +80,7 @@
         }
     </div>
 
-    <app-add-to-shelf
-        [isDialogOpen]="isAddToShelfDialogOpen()"
-        [book]="selectedBook()"
+    <app-add-to-shelf [isDialogOpen]="isAddToShelfDialogOpen()" [book]="selectedBook()"
         (requestClose)="onAddToShelfDialogRequestClose()">
     </app-add-to-shelf>
 </div>
