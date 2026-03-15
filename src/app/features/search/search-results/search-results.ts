@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BookStatusDirective } from '../../../core/directives/book-status.directive';
 import { BooksService } from '../../../core/services/books-service';
 import { BookshelfService } from '../../../core/services/bookshelf-service';
@@ -10,7 +10,7 @@ import { AddToShelf } from '../add-to-shelf/add-to-shelf';
 
 @Component({
   selector: 'app-search-results',
-  imports: [BookStatusDirective, WithLoadingState, AddToShelf],
+  imports: [BookStatusDirective, WithLoadingState, AddToShelf, RouterLink],
   templateUrl: './search-results.html',
   styleUrl: './search-results.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

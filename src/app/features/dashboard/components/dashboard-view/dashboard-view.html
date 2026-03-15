@@ -20,4 +20,8 @@
                              (saveProgress)="onSaveProgress($event)" (cancelUpdate)="onCancelProgress()">
         </app-update-progress>
     }
+
+    <app-add-bookshelf [isDialogOpen]="isAddShelfDialogOpen()"
+                       (requestClose)="onAddShelfDialogClose()">
+    </app-add-bookshelf>
 </div>

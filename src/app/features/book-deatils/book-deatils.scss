@@ -1,0 +1,323 @@
+.book-details-page {
+  position: relative;
+  min-height: 400px;
+}
+
+.book-not-found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 2rem;
+
+  &__card {
+    text-align: center;
+    max-width: 480px;
+    padding: 3rem;
+
+    h2 {
+      margin-bottom: 0.75rem;
+      color: var(--pico-color);
+    }
+
+    p {
+      color: var(--pico-muted-color);
+      margin-bottom: 0;
+    }
+  }
+}
+
+.book-details {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 3rem;
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+// ── Left column ──
+
+.book-details__left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.book-cover-wrapper {
+  background: linear-gradient(135deg, #e8f0fe 0%, #d4e4f7 100%);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+
+  .book-cover-image {
+    width: 100%;
+    max-width: 240px;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    display: block;
+  }
+}
+
+.book-dates {
+  display: flex;
+  gap: 2rem;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  &__label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--pico-muted-color);
+  }
+
+  &__value {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--pico-color);
+
+    &--italic {
+      font-style: italic;
+      color: var(--pico-primary);
+    }
+  }
+}
+
+.book-status {
+  margin-top: 25px;
+
+  &__label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--pico-muted-color);
+    margin-bottom: 0.5rem;
+  }
+
+  select {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+.book-shelves {
+  &__label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--pico-muted-color);
+    margin-bottom: 0.5rem;
+  }
+
+  &__chips {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+}
+
+.add-to-shelf-section {
+  &__title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+    color: var(--pico-color);
+  }
+
+  &__description {
+    font-size: 0.85rem;
+    color: var(--pico-muted-color);
+    margin: 0 0 1rem;
+    line-height: 1.5;
+  }
+
+  &__label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--pico-muted-color);
+    margin-bottom: 0.5rem;
+  }
+
+  select {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+.shelf-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+
+  &.shelf-badge-blue {
+    background-color: var(--pico-color-blue-100);
+    color: var(--pico-color-blue-600);
+  }
+
+  &.shelf-badge-amber {
+    background-color: var(--pico-color-amber-100);
+    color: var(--pico-color-amber-600);
+  }
+
+  &.shelf-badge-purple {
+    background-color: var(--pico-color-purple-100);
+    color: var(--pico-color-purple-600);
+  }
+
+  &.shelf-badge-red {
+    background-color: var(--pico-color-red-100);
+    color: var(--pico-color-red-600);
+  }
+}
+
+// ── Right column ──
+
+.book-details__right {
+  display: flex;
+  flex-direction: column;
+}
+
+.book-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+
+  &__category {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background-color: var(--pico-primary);
+    color: white;
+  }
+
+  &__separator {
+    color: var(--pico-muted-color);
+    font-size: 0.8rem;
+  }
+
+  &__pages {
+    font-size: 0.85rem;
+    color: var(--pico-muted-color);
+  }
+}
+
+.book-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+  line-height: 1.2;
+  color: var(--pico-color);
+}
+
+.book-author {
+  font-size: 1rem;
+  color: var(--pico-muted-color);
+  margin: 0 0 1.5rem;
+
+  a {
+    color: var(--pico-primary);
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.book-about-heading {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+  color: var(--pico-color);
+}
+
+.book-description {
+  margin-bottom: 2rem;
+
+  p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--pico-muted-color);
+    margin: 0 0 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// ── Progress card ──
+
+.progress-card {
+  padding: 1.5rem;
+  margin-top: auto;
+
+  &__title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 1rem;
+    color: var(--pico-color);
+  }
+
+  &__bar {
+    width: 100%;
+    height: 0.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+  }
+
+  &__percentage {
+    font-size: 0.85rem;
+    color: var(--pico-muted-color);
+    font-weight: 500;
+  }
+
+  &__pages {
+    font-size: 0.85rem;
+    color: var(--pico-muted-color);
+  }
+
+  .update-progress-btn {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}

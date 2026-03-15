@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { BooksService } from '../../core/services/books-service';
 import { UserService } from '../../core/services/user-service';
@@ -10,7 +11,7 @@ import { BookStatus } from '../../core/models/book-status';
 
 @Component({
   selector: 'app-my-books',
-  imports: [CommonModule, FormsModule, BookStatusDirective],
+  imports: [CommonModule, FormsModule, BookStatusDirective, RouterLink],
   templateUrl: './my-books.html',
   styleUrl: './my-books.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

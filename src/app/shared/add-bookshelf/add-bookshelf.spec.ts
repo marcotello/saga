@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { AddBookshelf } from './add-bookshelf';
-import { BookshelfService } from '../../../core/services/bookshelf-service';
-import { BookshelvesHttpMockService } from '../../../core/mock-api/mock-http-services/bookshelves-http-mock-service';
+import { BookshelfService } from '../../core/services/bookshelf-service';
+import { BookshelvesHttpMockService } from '../../core/mock-api/mock-http-services/bookshelves-http-mock-service';
 
 describe('AddBookshelf', () => {
     let component: AddBookshelf;

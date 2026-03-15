@@ -4,11 +4,11 @@
   <div class="books-grid">
     @for (book of books(); track book.id) {
     <article class="book-card">
-      <div class="book-cover">
+      <a class="book-cover" [routerLink]="['/book-details', book.id]">
         <img [ngSrc]="book.coverImage" [alt]="book.name" priority="high" width="150" height="225" />
-      </div>
+      </a>
       <div class="book-info">
-        <h3 class="book-title">{{ book.name }}</h3>
+        <a class="book-title" [routerLink]="['/book-details', book.id]">{{ book.name }}</a>
         <div class="progress-container">
           <progress [value]="book.progressPercentage" max="100" class="progress-bar"></progress>
           <span class="progress-text">{{ book.progressPercentage }}%</span>

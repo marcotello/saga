@@ -82,10 +82,12 @@
                 @for (book of books(); track book.id) {
                 <tr>
                     <td class="cover-column">
-                        <img [src]="book.coverImage" [alt]="book.name + ' cover'" class="book-cover" />
+                        <a [routerLink]="['/book-details', book.id]">
+                            <img [src]="book.coverImage" [alt]="book.name + ' cover'" class="book-cover" />
+                        </a>
                     </td>
                     <td class="title-cell">
-                        <a href="#" class="book-title">{{ book.name }}</a>
+                        <a [routerLink]="['/book-details', book.id]" class="book-title">{{ book.name }}</a>
                     </td>
                     <td class="author-cell">{{ book.author }}</td>
                     <td class="shelves-cell">

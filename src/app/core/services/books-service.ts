@@ -6,6 +6,7 @@ import { UserBook } from '../models/user-book';
 import { BookRecommendation } from '../models/book-recommendation';
 import { ReadingStatus } from '../models/reading-status';
 import { SearchResultBook } from '../models/search-result-book';
+import { BookDetail } from '../models/book-detail';
 
 @Injectable({
     providedIn: 'root'
@@ -23,6 +24,15 @@ export class BooksService {
 
     private readonly _isSearching = signal(false);
     readonly isSearching = this._isSearching.asReadonly();
+
+    private readonly _bookDetail = signal<BookDetail | null>(null);
+    readonly bookDetail = this._bookDetail.asReadonly();
+
+    private readonly _isLoadingBookDetail = signal(false);
+    readonly isLoadingBookDetail = this._isLoadingBookDetail.asReadonly();
+
+    private readonly _bookDetailNotFound = signal(false);
+    readonly bookDetailNotFound = this._bookDetailNotFound.asReadonly();
 
     getBooksByUserId(userId: number): void {
         this.booksServiceHttpMock.getBooksByUserId(userId)
@@ -84,6 +94,16 @@ export class BooksService {
         this.booksServiceHttpMock.updateBook(updatedBook).subscribe({
             next: (book) => {
                 this.userService.updateUserBook(book);
+
+                const currentDetail = this._bookDetail();
+                if (currentDetail && currentDetail.id === book.id) {
+                    this._bookDetail.set({
+                        ...currentDetail,
+                        progressPercentage: book.progressPercentage,
+                        status: book.status,
+                        updatedAt: book.updatedAt,
+                    });
+                }
             },
             error: () => {
                 // Error handling
@@ -118,6 +138,27 @@ export class BooksService {
             });
     }
 
+    getBookDetails(bookId: number, userId: number): void {
+        this._isLoadingBookDetail.set(true);
+        this._bookDetail.set(null);
+        this._bookDetailNotFound.set(false);
+        this.booksServiceHttpMock.getBookDetails(bookId, userId)
+            .subscribe({
+                next: (detail: BookDetail | null) => {
+                    if (detail) {
+                        this._bookDetail.set(detail);
+                    } else {
+                        this._bookDetailNotFound.set(true);
+                    }
+                    this._isLoadingBookDetail.set(false);
+                },
+                error: () => {
+                    this._isLoadingBookDetail.set(false);
+                    this._bookDetailNotFound.set(true);
+                }
+            });
+    }
+
     addBookToShelf(book: SearchResultBook, bookshelfId: number, bookshelfName: string, userId: number): void {
         this.booksServiceHttpMock.addBookToShelf(book, bookshelfId, bookshelfName, userId)
             .subscribe({
@@ -128,6 +169,18 @@ export class BooksService {
                             : r
                         )
                     );
+
+                    const currentDetail = this._bookDetail();
+                    if (currentDetail && currentDetail.id === book.id) {
+                        this._bookDetail.set({
+                            ...currentDetail,
+                            inLibrary: true,
+                            shelves: [...currentDetail.shelves, { id: bookshelfId, name: bookshelfName }],
+                            createdAt: userBook.createdAt ?? new Date().toISOString(),
+                            status: userBook.status ?? currentDetail.status,
+                        });
+                    }
+
                     this.userService.addUserBook(userBook);
                 },
                 error: () => {

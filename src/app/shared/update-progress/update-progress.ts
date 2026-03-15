@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, input, linkedSignal, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Dialog } from '../../../../shared/dialog/dialog';
-import { UserBook } from '../../../../core/models/user-book';
+import { Dialog } from '../dialog/dialog';
+import { UserBook } from '../../core/models/user-book';
 
 @Component({
     selector: 'app-update-progress',
