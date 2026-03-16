@@ -10,10 +10,11 @@ import { MyBookshelves } from '../my-bookshelves/my-bookshelves';
 import { BookSuggestions } from '../book-suggestions/book-suggestions';
 import { Statistics } from '../statistics/statistics';
 import { AddBookshelf } from '../../../../shared/add-bookshelf/add-bookshelf';
+import { SearchBookDialog } from '../../../../shared/search-book-dialog/search-book-dialog';
 
 @Component({
   selector: 'app-dashboard-view',
-  imports: [TrackProgress, UpdateProgress, MyBookshelves, BookSuggestions, Statistics, AddBookshelf],
+  imports: [TrackProgress, UpdateProgress, MyBookshelves, BookSuggestions, Statistics, AddBookshelf, SearchBookDialog],
   templateUrl: './dashboard-view.html',
   styleUrl: './dashboard-view.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -33,6 +34,7 @@ export class DashboardView {
   protected readonly isUpdateProgressOpen = signal<boolean>(false);
   protected readonly selectedBook = signal<UserBook | null>(null);
   protected readonly isAddShelfDialogOpen = signal<boolean>(false);
+  protected readonly isSearchBookDialogOpen = signal<boolean>(false);
 
   constructor() {
     this.booksService.getBooksByStatusUserId(this.userId, 'Reading');
@@ -64,8 +66,11 @@ export class DashboardView {
   }
 
   onAddBook(): void {
-    // Logic will be added later
-    console.log('Add book clicked');
+    this.isSearchBookDialogOpen.set(true);
+  }
+
+  onSearchBookDialogClose(): void {
+    this.isSearchBookDialogOpen.set(false);
   }
 
   onShelfClick(): void {

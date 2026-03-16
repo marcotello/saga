@@ -1,0 +1,20 @@
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--pico-form-element-border-color, #ccc);
+  border-radius: var(--pico-border-radius);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+
+  &:focus {
+    border-color: var(--pico-primary, #1e88e5);
+    box-shadow: 0 0 0 2px rgba(30, 136, 229, 0.15);
+  }
+}
+
+label {
+  font-size: 0.9rem;
+  color: var(--pico-color, #555);
+  margin-bottom: 0.25rem;
+}

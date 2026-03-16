@@ -24,4 +24,8 @@
     <app-add-bookshelf [isDialogOpen]="isAddShelfDialogOpen()"
                        (requestClose)="onAddShelfDialogClose()">
     </app-add-bookshelf>
+
+    <app-search-book-dialog [isDialogOpen]="isSearchBookDialogOpen()"
+                            (requestClose)="onSearchBookDialogClose()">
+    </app-search-book-dialog>
 </div>

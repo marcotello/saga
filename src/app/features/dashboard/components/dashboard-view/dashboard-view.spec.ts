@@ -229,12 +229,20 @@ describe('DashboardView', () => {
   });
 
   describe('onAddBook', () => {
-    it('should log message to console', () => {
-      spyOn(console, 'log');
-
+    it('should open search book dialog', () => {
       component.onAddBook();
 
-      expect(console.log).toHaveBeenCalledWith('Add book clicked');
+      expect(component['isSearchBookDialogOpen']()).toBe(true);
+    });
+  });
+
+  describe('onSearchBookDialogClose', () => {
+    it('should close search book dialog', () => {
+      component['isSearchBookDialogOpen'].set(true);
+
+      component.onSearchBookDialogClose();
+
+      expect(component['isSearchBookDialogOpen']()).toBe(false);
     });
   });
 
@@ -245,12 +253,10 @@ describe('DashboardView', () => {
   });
 
   describe('onAddShelf', () => {
-    it('should log message to console', () => {
-      spyOn(console, 'log');
-
+    it('should open add shelf dialog', () => {
       component.onAddShelf();
 
-      expect(console.log).toHaveBeenCalledWith('Add shelf clicked');
+      expect(component['isAddShelfDialogOpen']()).toBe(true);
     });
   });
 

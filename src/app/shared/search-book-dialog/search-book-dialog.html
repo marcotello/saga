@@ -1,0 +1,11 @@
+<app-dialog [title]="dialogTitle" [isOpen]="isDialogOpen()" (requestClose)="closeDialog()">
+  <div body>
+    <label for="search-book-input">Enter a book title, author, or keyword</label>
+    <input id="search-book-input" type="text" class="search-input" placeholder="e.g. The Great Gatsby"
+      [(ngModel)]="searchQuery" (keyup.enter)="onSearch()" />
+  </div>
+  <div footer>
+    <button type="button" class="btn-amber" (click)="closeDialog()">Cancel</button>
+    <button type="button" (click)="onSearch()">Search</button>
+  </div>
+</app-dialog>
