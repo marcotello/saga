@@ -75,7 +75,6 @@
                             }
                         </span>
                     </th>
-                    <th class="actions-column"></th>
                 </tr>
             </thead>
             <tbody>
@@ -106,11 +105,6 @@
                         {{ book.status === 'Finished' ? formatDate(book.updatedAt) : '—' }}
                     </td>
                     <td class="date-cell">{{ formatDate(book.createdAt) }}</td>
-                    <td class="actions-cell">
-                        <button class="action-btn" type="button" aria-label="More options">
-                            ⋮
-                        </button>
-                    </td>
                 </tr>
                 }
             </tbody>
