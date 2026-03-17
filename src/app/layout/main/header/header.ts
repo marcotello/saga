@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { LoginService } from '../../../features/auth/login/services/login-service';
 import { UserService } from '../../../core/services/user-service';
@@ -18,6 +18,7 @@ export class Header {
   readonly isLoggedIn = this.loginService.isLoggedIn;
   readonly userService = inject(UserService);
   readonly isMenuVisible = signal(false);
+  readonly isAdmin = computed(() => this.userService.user()?.role === '1');
 
   showMenu(): void {
     this.isMenuVisible.set(true);

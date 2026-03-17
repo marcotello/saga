@@ -6,10 +6,10 @@
     </div>
   </div>
   <div class="header-right">
-    <app-search-input />
     @if (!isLoggedIn()) {
     <button routerLink="/auth/login" class="login-btn">Login</button>
     } @else {
+    <app-search-input />
     <a routerLink="/my-books" class="my-books-link">My Books</a>
     <div class="avatar-container" (mouseenter)="showMenu()" (mouseleave)="hideMenu()">
       <img [src]="userService.user()?.profilePicture || '/images/avatar4.svg'" alt="User Avatar" class="avatar">
@@ -18,6 +18,9 @@
         <a class="menu-item" routerLink="/profile">My Profile</a>
         <a class="menu-item" routerLink="/my-bookshelves">My Bookshelves</a>
         <a class="menu-item" routerLink="/account">Account Settings</a>
+        @if (isAdmin()) {
+        <a class="menu-item" routerLink="/genres">Genres</a>
+        }
         <div class="menu-divider"></div>
         <a href="#" class="menu-item" (click)="logout(); $event.preventDefault()">Logout</a>
       </div>
